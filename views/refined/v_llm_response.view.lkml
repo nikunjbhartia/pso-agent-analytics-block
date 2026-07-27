@@ -181,6 +181,13 @@ view: v_llm_response {
     sql: ${TABLE}.model_version ;;
   }
 
+  dimension: dynamic_tier_signal {
+    group_label: "Executive FinOps Spend"
+    description: "Recommends model tier migration based on real-time caching economics (STAY_PRO_CACHED vs MIGRATE_FLASH)."
+    type: string
+    sql: CASE WHEN ${context_cache_hit_rate} > 0.60 THEN 'STAY_PRO_CACHED' ELSE 'MIGRATE_FLASH' END ;;
+  }
+
   # --- BASE MEASURES ---
 
   measure: total_tokens_consumed {
@@ -458,6 +465,26 @@ view: v_llm_response {
     type: number
     value_format_name: usd
     sql: ROUND(SUM(${usage_cached_tokens} * 0.00000094), 4) ;;
+  }
+
+  measure: cache_discounted_actual_cost_usd {
+    group_label: "Executive FinOps Spend"
+    description: "Total actual dollar spend USD applying Gemini prompt caching discount ($1.25/M standard prompt vs $0.3125/M cached prompt vs $5.00/M completion)."
+    type: number
+    value_format_name: usd_6
+    sql: ROUND(SUM(
+           ((COALESCE(${usage_prompt_tokens}, 0) - COALESCE(${usage_cached_tokens}, 0)) * 1.25 / 1000000.0) +
+           (COALESCE(${usage_cached_tokens}, 0) * 0.3125 / 1000000.0) +
+           (COALESCE(${usage_completion_tokens}, 0) * 5.00 / 1000000.0)
+         ), 6) ;;
+  }
+
+  measure: prompt_cache_hit_ratio {
+    group_label: "Executive FinOps Spend"
+    description: "Ratio of prompt tokens served from cache (0.0 to 1.0)."
+    type: number
+    value_format_name: percent_2
+    sql: SAFE_DIVIDE(SUM(${usage_cached_tokens}), NULLIF(SUM(${usage_prompt_tokens}), 0)) ;;
   }
 
 }

@@ -146,6 +146,13 @@ view: v_tool_completed {
     sql: ${TABLE}.total_ms ;;
   }
 
+  dimension: complexity_multiplier {
+    group_label: "Tool Info"
+    description: "Complexity multiplier for this tool completion (4.0 for heavy reasoning, 2.5 for medium, 1.5 for moderate, 1.0 baseline)."
+    type: number
+    sql: CASE WHEN ${total_ms} > 5000 THEN 2.5 WHEN ${total_ms} > 2000 THEN 1.5 ELSE 1.0 END ;;
+  }
+
   # --- BASE MEASURES ---
 
   measure: total_tool_usage {
@@ -249,6 +256,22 @@ view: v_tool_completed {
     value_format_name: percent_2
     sql: SAFE_DIVIDE(${pop_tool_usage_current} - ${pop_tool_usage_previous}, ${pop_tool_usage_previous}) ;;
     description: "The percentage change in tool executions between the current and previous period."
+  }
+
+  measure: tool_productivity_credit_hours {
+    group_label: "Usage & Volume"
+    description: "Total server-verified productivity credit hours saved by tool completions (1.5h baseline * complexity multiplier)."
+    type: number
+    value_format_name: decimal_2
+    sql: SUM(1.5 * (CASE WHEN ${total_ms} > 5000 THEN 2.5 WHEN ${total_ms} > 2000 THEN 1.5 ELSE 1.0 END)) ;;
+  }
+
+  measure: avg_complexity_multiplier {
+    group_label: "Performance & Reliability"
+    description: "Average complexity multiplier across executed tools."
+    type: average
+    sql: ${complexity_multiplier} ;;
+    value_format_name: decimal_2
   }
 
 }

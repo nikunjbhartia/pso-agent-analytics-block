@@ -37,10 +37,10 @@
     # --- ROW 1: EXECUTIVE HEADLINE SCORECARDS ("Verifiable & Real-Time") ---
 
     - name: total_hours_saved_card
-      title: "Total Hours Saved"
+      title: "CWPM Verifiable Hours Saved"
       type: single_value
       explore: agent_events
-      measures: [agent_events.server_verified_hours_saved]
+      measures: [agent_events.cwpm_verifiable_hours_saved]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -52,11 +52,11 @@
       width: 4
       height: 3
 
-    - name: total_pilot_projects_card
-      title: "Pilot Projects"
+    - name: fte_weeks_saved_card
+      title: "FTE Weeks Saved Equivalent"
       type: single_value
       explore: agent_events
-      measures: [agent_events.total_pilot_projects]
+      measures: [agent_events.fte_weeks_saved_equivalent]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -65,54 +65,6 @@
         agent_name_filter: agent_events.canonical_agent_name
       row: 0
       col: 4
-      width: 4
-      height: 3
-
-    - name: total_agents_used_card
-      title: "Agents Used"
-      type: single_value
-      explore: agent_events
-      measures: [agent_events.total_invocations]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 0
-      col: 8
-      width: 4
-      height: 3
-
-    - name: total_sub_regions_card
-      title: "Sub-Regions"
-      type: single_value
-      explore: agent_events
-      measures: [agent_events.total_sub_regions]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 0
-      col: 12
-      width: 4
-      height: 3
-
-    - name: fte_weeks_saved_card
-      title: "FTE Weeks Saved"
-      type: single_value
-      explore: agent_events
-      measures: [agent_events.fte_weeks_saved]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 0
-      col: 16
       width: 4
       height: 3
 
@@ -128,7 +80,7 @@
         pilot_project_filter: agent_events.pilot_project
         agent_name_filter: agent_events.canonical_agent_name
       row: 0
-      col: 20
+      col: 8
       width: 4
       height: 3
 
@@ -136,7 +88,23 @@
       title: "Self-Healing Resilience Rate (%)"
       type: single_value
       explore: agent_events
-      measures: [agent_events.resilience_rate_pct]
+      measures: [agent_events.self_healing_resilience_rate_pct]
+      listen:
+        date_filter: agent_events.timestamp_date
+        practice_area_filter: agent_events.practice_area
+        sub_region_filter: agent_events.sub_region
+        pilot_project_filter: agent_events.pilot_project
+        agent_name_filter: agent_events.canonical_agent_name
+      row: 0
+      col: 12
+      width: 4
+      height: 3
+
+    - name: total_pilot_projects_card
+      title: "Pilot Projects"
+      type: single_value
+      explore: agent_events
+      measures: [agent_events.total_pilot_projects]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -145,6 +113,22 @@
         agent_name_filter: agent_events.canonical_agent_name
       row: 0
       col: 16
+      width: 4
+      height: 3
+
+    - name: total_agents_used_card
+      title: "Agents Used"
+      type: single_value
+      explore: agent_events
+      measures: [agent_events.total_invocations]
+      listen:
+        date_filter: agent_events.timestamp_date
+        practice_area_filter: agent_events.practice_area
+        sub_region_filter: agent_events.sub_region
+        pilot_project_filter: agent_events.pilot_project
+        agent_name_filter: agent_events.canonical_agent_name
+      row: 0
+      col: 20
       width: 4
       height: 3
 
@@ -264,3 +248,89 @@
       col: 8
       width: 16
       height: 7
+
+    # --- ROW 5: FINOPS CACHE DISCOUNT, RESILIENCE & GRAPH-DERIVED METRICS ---
+
+    - name: cache_discount_spend_card
+      title: "75% Cache-Discount Actual Spend ($ USD)"
+      type: single_value
+      explore: agent_events
+      measures: [v_llm_response.cache_discounted_actual_cost_usd]
+      listen:
+        date_filter: agent_events.timestamp_date
+        practice_area_filter: agent_events.practice_area
+        sub_region_filter: agent_events.sub_region
+        pilot_project_filter: agent_events.pilot_project
+        agent_name_filter: agent_events.canonical_agent_name
+      row: 24
+      col: 0
+      width: 6
+      height: 4
+
+    - name: prompt_cache_hit_ratio_card
+      title: "Prompt Cache Hit Ratio (%)"
+      type: single_value
+      explore: agent_events
+      measures: [v_llm_response.prompt_cache_hit_ratio]
+      listen:
+        date_filter: agent_events.timestamp_date
+        practice_area_filter: agent_events.practice_area
+        sub_region_filter: agent_events.sub_region
+        pilot_project_filter: agent_events.pilot_project
+        agent_name_filter: agent_events.canonical_agent_name
+      row: 24
+      col: 6
+      width: 6
+      height: 4
+
+    - name: tool_productivity_credit_card
+      title: "Tool Productivity Credit Hours (CWPM)"
+      type: single_value
+      explore: agent_events
+      measures: [v_tool_completed.tool_productivity_credit_hours]
+      listen:
+        date_filter: agent_events.timestamp_date
+        practice_area_filter: agent_events.practice_area
+        sub_region_filter: agent_events.sub_region
+        pilot_project_filter: agent_events.pilot_project
+        agent_name_filter: agent_events.canonical_agent_name
+      row: 24
+      col: 12
+      width: 6
+      height: 4
+
+    - name: sla_error_rate_gate_card
+      title: "CI/CD SLA Gate Assertion"
+      type: single_value
+      explore: agent_events
+      measures: [agent_events.sla_error_rate_gating]
+      listen:
+        date_filter: agent_events.timestamp_date
+        practice_area_filter: agent_events.practice_area
+        sub_region_filter: agent_events.sub_region
+        pilot_project_filter: agent_events.pilot_project
+        agent_name_filter: agent_events.canonical_agent_name
+      row: 24
+      col: 18
+      width: 6
+      height: 4
+
+    - name: graph_trace_dag_and_sla_gate_table
+      title: "Trace DAG & CI/CD SLA Gate Performance by Agent"
+      type: looker_grid
+      explore: agent_events
+      dimensions: [agent_events.canonical_agent_name, agent_events.sla_error_rate_gating]
+      measures: [agent_events.total_invocations, agent_events.self_healing_resilience_rate_pct, agent_events.cwpm_verifiable_hours_saved, v_llm_response.cache_discounted_actual_cost_usd]
+      sorts: [agent_events.cwpm_verifiable_hours_saved desc]
+      limit: 15
+      listen:
+        date_filter: agent_events.timestamp_date
+        practice_area_filter: agent_events.practice_area
+        sub_region_filter: agent_events.sub_region
+        pilot_project_filter: agent_events.pilot_project
+        agent_name_filter: agent_events.canonical_agent_name
+      row: 28
+      col: 0
+      width: 24
+      height: 7
+

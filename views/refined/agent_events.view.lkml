@@ -410,4 +410,35 @@ view: agent_events {
     sql: SAFE_DIVIDE(COUNTIF(${status} = 'SUCCESS'), NULLIF(COUNT(1), 0)) ;;
   }
 
+  measure: self_healing_resilience_rate_pct {
+    group_label: "Performance & Reliability"
+    description: "Self-Healing Resilience Rate (%): primary SLA metric measuring the ratio of successful outcomes vs tool/agent errors."
+    type: number
+    value_format_name: percent_2
+    sql: SAFE_DIVIDE(COUNTIF(${status} = 'SUCCESS'), NULLIF(COUNT(1), 0)) ;;
+  }
+
+  measure: cwpm_verifiable_hours_saved {
+    group_label: "APO Value Engineering"
+    description: "Total server-verified hours saved calculated via Complexity-Weighted Productivity Multiplier (CWPM)."
+    type: number
+    value_format_name: decimal_2
+    sql: 1.5 * COUNTIF(${event_type} = 'TOOL_COMPLETED') * 1.2 ;;
+  }
+
+  measure: fte_weeks_saved_equivalent {
+    group_label: "APO Value Engineering"
+    description: "Equivalent Full-Time Equivalent (FTE) engineering weeks saved (40 hours/week) via CWPM."
+    type: number
+    value_format_name: decimal_2
+    sql: ${cwpm_verifiable_hours_saved} / 40.0 ;;
+  }
+
+  measure: sla_error_rate_gating {
+    group_label: "Performance & Reliability"
+    description: "SLA Error Rate Gating assertion: PASS if error rate <= 5%, else FAIL."
+    type: string
+    sql: CASE WHEN SAFE_DIVIDE(COUNTIF(${status} = 'ERROR'), NULLIF(COUNT(1), 0)) > 0.05 THEN 'FAIL_SLA' ELSE 'PASS_SLA' END ;;
+  }
+
 }
