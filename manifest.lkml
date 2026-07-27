@@ -1,12 +1,12 @@
-project_name: "agent-analytics"
+project_name: "agent-analytics-v2"
 
 constant: CONNECTION_NAME {
-  value: "bq-conection"
+  value: "japac_pso_agent_analytics"
   export: override_optional
 }
 
 constant: PROJECT_ID {
-  value: "project-id"
+  value: "nikunjbhartia-test-clients"
   export: override_optional
 }
 
