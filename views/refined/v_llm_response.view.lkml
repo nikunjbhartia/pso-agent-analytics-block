@@ -430,10 +430,10 @@ view: v_llm_response {
 
   measure: total_spend_usd {
     group_label: "Executive FinOps Spend"
-    description: "Total dollar spend USD calculated from input prompt tokens ($1.25/M) and output completion tokens ($5.00/M)."
+    description: "Total actual dollar spend USD applying a 75% discount for Gemini Prompt Caching ($1.25/M standard prompt, $0.3125/M cached prompt, $5.00/M completion)."
     type: number
     value_format_name: usd
-    sql: ROUND(SUM(${usage_prompt_tokens} * 0.00000125 + ${usage_completion_tokens} * 0.00000500), 4) ;;
+    sql: ROUND(SUM((${usage_prompt_tokens} - IFNULL(${usage_cached_tokens}, 0)) * 0.00000125 + (IFNULL(${usage_cached_tokens}, 0) * 0.0000003125) + (${usage_completion_tokens} * 0.00000500)), 4) ;;
   }
 
   measure: cost_per_session_usd {

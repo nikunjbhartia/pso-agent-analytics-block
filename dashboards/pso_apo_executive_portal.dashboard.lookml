@@ -132,6 +132,22 @@
       width: 4
       height: 3
 
+    - name: resilience_rate_pct_card
+      title: "Self-Healing Resilience Rate (%)"
+      type: single_value
+      explore: agent_events
+      measures: [agent_events.resilience_rate_pct]
+      listen:
+        date_filter: agent_events.timestamp_date
+        practice_area_filter: agent_events.practice_area
+        sub_region_filter: agent_events.sub_region
+        pilot_project_filter: agent_events.pilot_project
+        agent_name_filter: agent_events.canonical_agent_name
+      row: 0
+      col: 16
+      width: 4
+      height: 3
+
     # --- ROW 2: PRACTICE AREA & PILOT PROJECT ATTRIBUTION ---
 
     - name: hours_saved_by_pilot_project

@@ -402,4 +402,12 @@ view: agent_events {
     sql: ${sub_region} ;;
   }
 
+  measure: resilience_rate_pct {
+    group_label: "Performance & Reliability"
+    description: "Self-Healing Resilience Rate (%): primary SLA metric measuring the ratio of successful outcomes vs tool/agent errors."
+    type: number
+    value_format_name: percent_2
+    sql: SAFE_DIVIDE(COUNTIF(${status} = 'SUCCESS'), NULLIF(COUNT(1), 0)) ;;
+  }
+
 }
