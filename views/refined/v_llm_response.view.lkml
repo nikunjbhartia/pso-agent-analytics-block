@@ -471,7 +471,7 @@ view: v_llm_response {
     group_label: "Executive FinOps Spend"
     description: "Total actual dollar spend USD applying Gemini prompt caching discount ($1.25/M standard prompt vs $0.3125/M cached prompt vs $5.00/M completion)."
     type: number
-    value_format_name: usd_6
+    value_format_name: usd
     sql: ROUND(SUM(
            ((COALESCE(${usage_prompt_tokens}, 0) - COALESCE(${usage_cached_tokens}, 0)) * 1.25 / 1000000.0) +
            (COALESCE(${usage_cached_tokens}, 0) * 0.3125 / 1000000.0) +

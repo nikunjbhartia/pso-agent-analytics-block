@@ -4,11 +4,6 @@
   preferred_viewer: dashboards-next
   description: ''
   layout: newspaper
-  tabs:
-  - name: Latency
-    label: Latency
-  - name: Errors
-    label: Errors
   elements:
   - title: Average Tool Latency (ms)
     name: Average Tool Latency (ms)

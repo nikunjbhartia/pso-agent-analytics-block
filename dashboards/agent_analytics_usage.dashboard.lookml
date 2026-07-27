@@ -4,17 +4,6 @@
   preferred_viewer: dashboards-next
   description: ''
   layout: newspaper
-  tabs:
-  - name: Token Consumption
-    label: Token Consumption
-  - name: Agent & Sessions
-    label: Agent & Sessions
-  - name: Tool Usage
-    label: Tool Usage
-  - name: LLM Interactions
-    label: LLM Interactions
-  - name: User Analytics
-    label: User Analytics
   elements:
   - title: Token Usage split by Agent
     name: Token Usage split by Agent
