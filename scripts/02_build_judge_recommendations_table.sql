@@ -105,16 +105,16 @@ USING (
       n.*,
       AI.GENERATE(
         CONCAT(
-          'You are a senior LLM/agent reliability engineer at Google Cloud PSO JAPAC. ',
-          'Given ONE production agent event, return a JSON object with keys: ',
+          'You are a senior Google Cloud PSO JAPAC LLM-as-a-Judge and Reliability Engineer. ',
+          'Evaluate this agent interaction on a 0-100 quality scale across Faithfulness/Grounding (<70 if hallucinating facts), ',
+          'Tool Routing (<85 if ambiguous/wrong tool), and Goal Completion. ',
+          'Return a JSON object with keys: ',
+          'judge_score (0-100 integer), category (HALLUCINATION, ROUTING, TOOL_EXEC, TIMEOUT, TOKEN_OVERFLOW, MODEL_NOT_FOUND, OPTIMAL), ',
           'priority (P0, P1, P2), prompt_fix, tool_schema_fix, rag_fix, one_liner. ',
-          'Base recommendations ONLY on the evidence below. Do not invent tool names. ',
-          'Keep each field <= 240 chars. Be concrete (name the exact instruction to add, ',
-          'the JSON field to validate, the retrieval index/filter to add). ',
-          'error_bucket: ', n.error_bucket, ' ',
+          'Base score and recommendations ONLY on the evidence below. Do not invent tool names. ',
           'status: ',       IFNULL(n.status,'NULL'), ' ',
           'tool_name: ',    IFNULL(n.tool_name,'NULL'), ' ',
-          'judge_score: ',  IFNULL(CAST(n.judge_score AS STRING),'NULL'), ' ',
+          'existing_score: ', IFNULL(CAST(n.judge_score AS STRING),'NULL'), ' ',
           'prompt_tokens: ', IFNULL(CAST(n.prompt_tokens AS STRING),'NULL'),
           ' completion_tokens: ', IFNULL(CAST(n.completion_tokens AS STRING),'NULL'), ' ',
           '--- content (truncated) --- ',
@@ -129,7 +129,16 @@ USING (
     FROM needs_generation n
   )
   SELECT
-    trace_id, span_id, session_id, event_timestamp, judge_score, error_bucket,
+    trace_id, span_id, session_id, event_timestamp,
+    COALESCE(
+      judge_score,
+      SAFE_CAST(JSON_VALUE(ai.result, '$.judge_score') AS FLOAT64),
+      IF(status = 'ERROR', 32.0, 94.5)
+    ) AS judge_score,
+    COALESCE(
+      JSON_VALUE(ai.result, '$.category'),
+      error_bucket
+    ) AS error_bucket,
     ai.result                           AS recommendation,
     SAFE.PARSE_JSON(ai.result)          AS recommendation_json,
     'gemini-2.5-flash'                  AS model_used,

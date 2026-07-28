@@ -12,6 +12,7 @@ view: v_agent_evaluation {
 
         COALESCE(
           CAST(JSON_VALUE(e1.attributes, '$.adk.evaluation.judge_score') AS FLOAT64),
+          r.judge_score,
           CASE
             WHEN e1.status = 'SUCCESS' THEN 94.5
             WHEN e1.status = 'ERROR'   THEN 32.0
