@@ -1,19 +1,33 @@
 # Google Cloud PSO JAPAC — APO Agent Analytics Looker Block (`pso-agent-analytics-block`)
+
 This Looker Block is the canonical analytics and BI engine for **Google Cloud PSO JAPAC — APO (Agent Program Office)** and **Enterprise Customer Deployments**. It integrates with Google ADK (`BigQueryAgentAnalyticsPlugin`) telemetry stored in Google Cloud BigQuery (`agent_events` table + 24 unnested flat views + External Object Tables) to deliver server-verified productivity attribution, 30-day predictive forecasting, multi-agent DAG lineage, LLM-as-a-Judge quality evaluation, full-stack observability, and executive reporting.
+
 ---
+
 ## Why This Looker Block Was Built: Solving the "Before" Problems
+
 Before APO Analytics, engineering and consulting teams faced four systemic challenges:
 1. **Spreadsheets & Google Forms**: No system of record, no audit trail.
 2. **No Per-Agent Attribution**: No verifiable signal showing which agents create value.
 3. **No Common Identity Model**: The same agent was counted differently across projects.
 4. **No Real-Time Signal**: Expansion and staffing decisions were made on stale, manual data.
+
 ### Three Measurable Outcomes That Drove Our Design:
-*    **1. Verifiable**: Hours-saved attributed to a specific agent, project, and engineer. Server-verified from BigQuery telemetry—not self-reported spreadsheets.
-*    **2. Self-Service**: APO leads and engineering managers run their own reports across **5 Practice Areas** and **6 JAPAC Sub-Regions** without engineering tickets.
-*    **3. Real-Time**: Week-over-week adoption, FinOps economics, and predictive forecasts updated live.
+*   **1. Verifiable**: Hours-saved attributed to a specific agent, project, and engineer. Server-verified from BigQuery telemetry—not self-reported spreadsheets.
+*   **2. Self-Service**: APO leads and engineering managers run their own reports across **5 Practice Areas** and **6 JAPAC Sub-Regions** without engineering tickets.
+*   **3. Real-Time**: Week-over-week adoption, FinOps economics, and predictive forecasts updated live.
+
 ---
+
 ## Three Canonical Looker Dashboards & Complete Metric Catalog
+
+This Looker Block includes three canonical dashboards capturing a total of **72 distinct analytical metrics and scorecards** across 13 BigQuery ADK telemetry domains:
+*   **`pso_apo_executive_portal`**: Captures **23 Executive & Value Engineering Metrics** (Server-Verified Hours Saved, FTE Weeks Saved, Consulting Value USD, 30-Day BQML AI Predictive ROI Forecast, Multi-Agent DAG Lineage, CI/CD SLA Gates, and Practice/Regional Attributions).
+*   **`agent_analytics_usage`**: Captures **25 Usage & Token Economics Metrics** (Token consumption, Traces, Sessions, Multi-Agent Collaboration, Tools, Users, and GCS Multimodal Object Table Offloading).
+*   **`agent_analytics_performance`**: Captures **24 Performance, SLA & Reliability Metrics** (P50/P75/P90/P99 latencies, Errors, Self-Healing Resilience Rate %, LLM-as-a-Judge Quality Score %, User Feedback Satisfaction %, Self-Correction Loops %, and Enterprise Edge Cases).
+
 All three dashboards are built on Looker's Next-Gen canvas (`preferred_viewer: dashboards-next`) with dynamic cross-filtering (`crossfilter_enabled: yes`) and universal filters for **`Date Range`**, **`Practice Area`**, **`Sub-Region`**, **`Pilot Project`**, **`Agent Name`**, **`Trace ID`**, and **`Session ID`**.
+
 Every single chart across all three dashboards features a standardized **Executive 4-Part Hover Note** (`What | How | Why it matters | Drill`):
 ```text
 What:           Plain-English definition of the metric being displayed.
@@ -21,10 +35,13 @@ How:            Exact formula, BigQuery SQL calculation, empirical benchmark (3.
 Why it matters: Business impact, operational leverage, or CI/CD SLA gate relevance.
 Drill:          Instructions on how to click any bar/point to drill down by Trace ID, Session ID, or Practice Area.
 ```
+
 ---
-### 1 `pso_apo_executive_portal` (Google Cloud PSO Leadership & Practice Tracking)
+
+### 1. `pso_apo_executive_portal` (23 Executive & Value Engineering Metrics)
 *   **Target Audience**: Google Cloud PSO JAPAC Leadership, APO Practice Leads, Value Engineers & Data Architects.
 *   **Primary Objective**: Server-Verified Value Engineering, ROI attribution, consulting billable leverage, and predictive forecasting.
+
 | Chart / Scorecard Name | What It Measures | BigQuery Source Field(s) | Derivation Logic & Formula |
 | :--- | :--- | :--- | :--- |
 | **CWPM Verifiable Hours Saved** | Estimated productivity hours saved by automated tool calls | `v_tool_completed.tool_name`, `total_ms` | `COUNT(tool_calls) * 1.5h base * 1.2 complexity multiplier` |
@@ -50,10 +67,13 @@ Drill:          Instructions on how to click any bar/point to drill down by Trac
 | **Tool Volume & Resilience SLA by Practice Area** | Overlay of event volume and reliability SLA | `total_events`, `self_healing_resilience_rate` | Column = `total_events`, Line = `resilience rate (SUCCESS / Total)` |
 | **BigQuery AI: 30-Day Predictive ROI & Value Forecast** | 30-day AI prediction of hours saved and consulting value | `v_bqml_roi_forecast.forecast_date` | Historical actuals + 30-day linear regression projection with **90%/110% confidence bounds** |
 | **Multi-Agent Session DAG & Trace Lineage Graph** | Hierarchical execution flow across sessions and trace hops | `v_session_trace_dag.from_agent`, `to_target` | Visualizes `from_agent -> to_target` delegation hops from `AGENT_TRANSFER`, `A2A_INTERACTION`, and `TOOL_COMPLETED` |
+
 ---
-### 2 `agent_analytics_usage` (Customer Executives, Architects & FinOps)
+
+### 2. `agent_analytics_usage` (25 Usage & Token Economics Metrics)
 *   **Target Audience**: Enterprise Customer Executives, FinOps Managers, System Architects & Product Managers.
 *   **Primary Objective**: Token economics, session volume, multi-agent delegation counts, user adoption, and multimodal GCS storage offloading.
+
 | Chart / Scorecard Name | What It Measures | BigQuery Source Field(s) | Derivation Logic & Formula |
 | :--- | :--- | :--- | :--- |
 | **Token Usage split by Agent** | Breakdown of total token consumption across agents | `v_llm_response.usage_total_tokens` | `SUM(usage_total_tokens)` grouped by `agent` |
@@ -81,10 +101,13 @@ Drill:          Instructions on how to click any bar/point to drill down by Trac
 | **Top 5 Users by Session** | Leaderboard of power users by session count | `agent_events.session_id` | `COUNT DISTINCT session_id` grouped by `user_id` |
 | **Top 5 Users by Events** | Ranking of users by raw volume of lifecycle events | `agent_events.event_type` | `COUNT(1)` grouped by `user_id` |
 | **GCS Multimodal Bucket Offloading & Object Table** | Breakdown of GCS offloaded objects and object table size | `v_gcs_multimodal_offload.asset_type`, `gcs_multimodal_object_table.size` | Aggregates offloaded GCS URIs by `asset_type` (`IMAGE`, `DOCUMENT`, `AUDIO`, `VIDEO`, `LARGE_PAYLOAD_JSON`) and Object Table bytes |
+
 ---
-### 3 `agent_analytics_performance` (SREs, Reliability Engineers & Evaluators)
+
+### 3. `agent_analytics_performance` (24 Performance, SLA & Reliability Metrics)
 *   **Target Audience**: Customer SREs, DevOps Engineers, Agent Evaluators & Reliability Teams.
 *   **Primary Objective**: P50/P75/P90/P99 latencies, LLM-as-a-Judge quality evaluation, user feedback satisfaction, autonomous self-correction loops, and enterprise edge-case detection.
+
 | Chart / Scorecard Name | What It Measures | BigQuery Source Field(s) | Derivation Logic & Formula |
 | :--- | :--- | :--- | :--- |
 | **Average Tool Latency (ms)** | Average execution time in ms for backend tools | `v_tool_completed.total_ms` | `AVG(total_ms)` across `TOOL_COMPLETED` events |
@@ -111,10 +134,15 @@ Drill:          Instructions on how to click any bar/point to drill down by Trac
 | **A2A Circular Delegation Ping-Pong Loops** | Highlights recursive multi-agent loops | `v_session_trace_dag.from_agent`, `to_target` | Detects recursive A2A ping-pong loops (`from_agent = to_target`) |
 | **HITL Confirmation Request Volume & Latency** | Tracks Human-In-The-Loop approval volume and latency | `v_hitl_confirmation_request.tool_name` | Aggregates `HITL_CONFIRMATION_REQUEST` events by tool and date |
 | **Tool Error Breakdown by Failing Function** | Breakdown of failing backend tools and error counts | `v_tool_error.tool_name` | Aggregates `TOOL_ERROR` occurrences by `tool_name` |
+
 ---
+
 ## Complete LookML Model Architecture & Join Graph
+
 The `agent_events` explore (`explores/agent_events.explore.lkml`) serves as the relational semantic layer connecting raw BigQuery ADK telemetry to Looker dashboards. It joins the base `agent_events` table with specialized refined views, BigQuery AI forecasting derived tables, and BigQuery External Object Tables over GCS.
+
 ### Relational Join Topology
+
 ```mermaid
 graph TD
     A["Base Table: agent_events (Core Telemetry & PSO Attribution)"] -->|one_to_one on trace_id| B["v_llm_response (Token Economics & FinOps Cache Savings)"]
@@ -131,7 +159,9 @@ graph TD
     A -->|one_to_one on trace_id| M["v_gcs_multimodal_offload (GCS Signed URIs & Modality)"]
     M -->|many_to_one on gcs_uri = uri| N["gcs_multimodal_object_table (BigQuery GCS Object Table over gs://japac-pso-agent-analytics/*)"]
 ```
+
 ### Complete Explore Join Catalog
+
 | LookML View Name | Join Type & Relationship | SQL Join Condition (`sql_on`) | Primary Analytical Domain & Key Measures |
 | :--- | :--- | :--- | :--- |
 | **`agent_events`** | *Base Table* | *N/A* | Core ADK telemetry, PSO attribution (`practice_area`, `sub_region`, `pilot_project`, `canonical_agent_name`), Server-Verified Hours Saved (`3.5h/session`), Consulting Value USD (`$350/hr / $2800/day`), and CI/CD SLA Gates. |
@@ -148,8 +178,11 @@ graph TD
 | **`v_agent_evaluation`** | `left_outer` (`one_to_one`) | `${agent_events.trace_id} = ${v_agent_evaluation.trace_id}` | LLM-as-a-Judge quality evaluation (0–100%), User Feedback Satisfaction Rate (%), and Self-Correction loop recovery rates. |
 | **`v_gcs_multimodal_offload`** | `left_outer` (`one_to_one`) | `${agent_events.trace_id} = ${v_gcs_multimodal_offload.trace_id}` | Extracted GCS signed object URIs and multimodal asset categorization (`IMAGE`, `DOCUMENT`, `AUDIO`, `VIDEO`, `LARGE_PAYLOAD_JSON`). |
 | **`gcs_multimodal_object_table`** | `left_outer` (`many_to_one`) | `${v_gcs_multimodal_offload.gcs_uri} = ${gcs_multimodal_object_table.uri}` | External Object Table over `gs://japac-pso-agent-analytics/*`, tracking physical GCS storage bytes and file inventory. |
+
 ---
+
 ## Installation & Looker Configuration
+
 1. **Clone this repository into your Looker project**:
    ```bash
    git clone https://github.com/nikunjbhartia/pso-agent-analytics-block.git
