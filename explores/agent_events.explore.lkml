@@ -69,4 +69,10 @@ explore: agent_events {
     sql_on: ${agent_events.trace_id} = ${v_agent_evaluation.trace_id} ;;
     relationship: one_to_one
   }
+
+  join: v_gcs_multimodal_offload {
+    type: left_outer
+    sql_on: ${agent_events.trace_id} = ${v_gcs_multimodal_offload.trace_id} ;;
+    relationship: one_to_one
+  }
 }

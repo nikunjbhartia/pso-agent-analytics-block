@@ -1567,6 +1567,21 @@
     width: 21
     height: 1
     tab_name: User Analytics
+  - name: gcs_multimodal_offload_breakdown
+    title: "GCS Multimodal Bucket Offloading & Object Table Content"
+    type: looker_column
+    note_state: collapsed
+    note_display: hover
+    note_text: What: Breakdown of multimodal payloads and large objects offloaded to GCS bucket japac-pso-agent-analytics. | How: Aggregates offloaded GCS URIs by asset_type (IMAGE, DOCUMENT, AUDIO, VIDEO, LARGE_PAYLOAD_JSON) and event_type. | Why it matters: Monitors multimodal storage footprint and BigQuery object table ingestion. | Drill: Click asset type bar to inspect specific GCS URIs and traces.
+    explore: agent_events
+    dimensions: [v_gcs_multimodal_offload.asset_type, agent_events.event_type]
+    measures: [v_gcs_multimodal_offload.total_gcs_offloaded_assets]
+    sorts: [v_gcs_multimodal_offload.total_gcs_offloaded_assets desc]
+    row: 17
+    col: 0
+    width: 24
+    height: 7
+    tab_name: Tool Usage
   filters:
   - name: Date
     title: Date
