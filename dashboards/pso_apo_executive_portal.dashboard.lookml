@@ -1,6 +1,8 @@
 - dashboard: pso_apo_executive_portal
   title: "APO Portal: Google Cloud PSO JAPAC Agent Program Office"
   layout: newspaper
+  preferred_viewer: dashboards-next
+  crossfilter_enabled: yes
   description: "Canonical Executive Dashboard for Google Cloud PSO JAPAC APO (Agent Program Office) — Server-Verified Hours Saved, Practice Area Attribution, Pilot Projects, and FTE Value Creation."
 
   filters:
@@ -32,6 +34,18 @@
       explore: agent_events
       field: agent_events.canonical_agent_name
       default_value: ""
+    - name: trace_id_filter
+      title: "Trace ID"
+      type: field_filter
+      explore: agent_events
+      field: agent_events.trace_id
+      default_value: ""
+    - name: session_id_filter
+      title: "Session ID"
+      type: field_filter
+      explore: agent_events
+      field: agent_events.session_id
+      default_value: ""
 
   elements:
     # --- ROW 1: EXECUTIVE HEADLINE SCORECARDS ("Verifiable & Real-Time") ---
@@ -41,7 +55,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Estimated productivity hours saved by automated tool calls. How derived: Count of completed tool executions * 1.5 hours baseline * 1.2 complexity multiplier.
+      note_text: What: Estimated productivity hours saved by automated tool calls. | How: Count of completed tool executions * 1.5 hours baseline * 1.2 complexity multiplier. | Why it matters: Evaluates automated engineering leverage. | Drill: Click tile to filter by practice area.
       explore: agent_events
       measures: [agent_events.cwpm_verifiable_hours_saved]
       listen:
@@ -60,7 +74,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Equivalent Full-Time Equivalent engineering weeks saved. How derived: CWPM Verifiable Hours Saved / 40.0 hours per standard engineering work week.
+      note_text: What: Equivalent Full-Time Equivalent engineering weeks saved. | How: CWPM Verifiable Hours Saved / 40.0 hours per standard engineering work week. | Why it matters: Anchors workforce capacity planning. | Drill: Click tile to inspect pilot project contribution.
       explore: agent_events
       measures: [agent_events.fte_weeks_saved_equivalent]
       listen:
@@ -79,7 +93,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Estimated dollar value of automated engineering work. How derived: Estimated Manual Hours Saved (total_sessions * 3.5 hrs, based on PSO JAPAC pilot benchmarks where automation replaces ~3.5h of manual coding/debugging) * $350/hr Google Cloud PSO billable rate (assuming $2,800/day PSO Consultant rate for an 8-hour day, or $1,225/session).
+      note_text: What: Estimated dollar value of automated engineering work. | How: Estimated Manual Hours Saved (total_sessions * 3.5 hrs, PSO pilot benchmark) * $350/hr Google Cloud PSO billable rate ($2,800/day Consultant rate). | Why it matters: Quantifies executive ROI and billable consulting creation ($1,225/session). | Drill: Click tile to break down by practice area.
       explore: agent_events
       measures: [agent_events.consulting_value_usd]
       listen:
@@ -98,7 +112,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Reliability SLA metric measuring system stability. How derived: Ratio of SUCCESS outcomes vs total executions (COUNTIF(status = SUCCESS) / COUNT(1)).
+      note_text: What: Reliability SLA metric measuring system stability. | How: Ratio of SUCCESS outcomes vs total executions (COUNTIF(status = SUCCESS) / COUNT(1)). | Why it matters: Asserts production stability and CI/CD readiness. | Drill: Click tile to inspect failing tool tracebacks.
       explore: agent_events
       measures: [agent_events.self_healing_resilience_rate_pct]
       listen:
@@ -117,7 +131,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Count of distinct Google Cloud PSO JAPAC customer pilot engagements. How derived: COUNT DISTINCT of pilot_project attribute.
+      note_text: What: Count of distinct Google Cloud PSO JAPAC customer pilot engagements. | How: COUNT DISTINCT of pilot_project attribute (DBS Bank, Dyson, Myntra, etc.). | Why it matters: Tracks regional customer penetration. | Drill: Click tile to view active pilots.
       explore: agent_events
       measures: [agent_events.total_pilot_projects]
       listen:
@@ -136,7 +150,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Total number of distinct AI agents deployed across JAPAC engagements. How derived: COUNT DISTINCT of canonical_agent_name.
+      note_text: What: Total number of distinct AI agents deployed across JAPAC engagements. | How: COUNT DISTINCT of canonical_agent_name. | Why it matters: Measures reuse of canonical agent templates. | Drill: Click tile to see agent leaderboard.
       explore: agent_events
       measures: [agent_events.total_invocations]
       listen:
@@ -157,7 +171,7 @@
       type: looker_column
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Estimated manual engineering hours saved broken down by pilot project and practice area. How derived: total_sessions * 3.5 hours per session (based on PSO pilot benchmarks where an automated agent session replaces ~3.5h of manual work).
+      note_text: What: Estimated manual engineering hours saved broken down by pilot project and practice area. | How: total_sessions * 3.5 hours per session (empirical PSO pilot benchmark). | Why it matters: Demonstrates which pilot engagements generate the highest automation savings. | Drill: Filter by Pilot Project or Practice Area.
       explore: agent_events
       dimensions: [agent_events.pilot_project, agent_events.practice_area]
       measures: [agent_events.server_verified_hours_saved]
@@ -179,7 +193,7 @@
       type: looker_bar
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Estimated manual engineering hours saved aggregated by practice area. How derived: total_sessions * 3.5 hours per session (based on PSO pilot benchmarks where an automated agent session replaces ~3.5h of manual work).
+      note_text: What: Estimated manual engineering hours saved aggregated by practice area. | How: total_sessions * 3.5 hours per session (empirical PSO pilot benchmark). | Why it matters: Guides practice leadership on where AI automation delivers the most leverage. | Drill: Click any bar to cross-filter dashboard.
       explore: agent_events
       dimensions: [agent_events.practice_area]
       measures: [agent_events.server_verified_hours_saved]
@@ -202,7 +216,7 @@
       type: looker_grid
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Comprehensive leaderboard of agent ROI and volume. How derived: Hours = total_sessions * 3.5 hrs (PSO pilot benchmark), FTE Weeks = Hours / 40.0, Consulting Value = Hours * $350/hr ($2,800/day PSO Consultant rate).
+      note_text: What: Comprehensive leaderboard of agent ROI and volume. | How: Hours = total_sessions * 3.5 hrs, FTE Weeks = Hours / 40.0, Consulting Value = Hours * $350/hr ($2,800/day PSO rate). | Why it matters: Ranks top-performing agents for executive funding and promotion. | Drill: Click any row to inspect agent traces.
       explore: agent_events
       dimensions: [agent_events.canonical_agent_name, agent_events.practice_area]
       measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved, agent_events.consulting_value_usd]
@@ -224,7 +238,7 @@
       type: looker_line
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Time-series trend of automation adoption across JAPAC sub-regions. How derived: Estimated manual hours saved (total_sessions * 3.5 hrs from PSO pilot benchmarks) over timestamp_date.
+      note_text: What: Time-series trend of automation adoption across JAPAC sub-regions. | How: Estimated manual hours saved (total_sessions * 3.5 hrs) over timestamp_date. | Why it matters: Reveals sub-region velocity (ANZ, SEA, India, Japan, Korea). | Drill: Click any date/region to filter time series.
       explore: agent_events
       dimensions: [agent_events.timestamp_date, agent_events.sub_region]
       measures: [agent_events.server_verified_hours_saved]
@@ -247,7 +261,7 @@
       type: looker_pie
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Actual LLM API spend in USD by Gemini model version. How derived: Applies Google Cloud Gemini 2.5 Pro 75 percent cache discount ($1.25/M standard input, $0.3125/M cached input, $5.00/M completion).
+      note_text: What: Actual LLM API spend in USD by Gemini model version. | How: Applies Google Cloud Gemini 2.5 Pro 75 percent cache discount ($1.25/M standard input, $0.3125/M cached input, $5.00/M completion). | Why it matters: Tracks FinOps economics across model tiers. | Drill: Click model bar to inspect token breakdown.
       explore: agent_events
       dimensions: [v_llm_response.model_version]
       measures: [v_llm_response.total_spend_usd]
@@ -268,7 +282,7 @@
       type: looker_grid
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Qualitative engineering feedback and verified savings testimonials. How derived: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs benchmark).
+      note_text: What: Qualitative engineering feedback and verified savings testimonials. | How: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs). | Why it matters: Provides peer-verified qualitative proof of automation impact. | Drill: Inspect specific win feedback records.
       explore: agent_events
       dimensions: [agent_events.pilot_project, agent_events.canonical_agent_name, agent_events.win_feedback]
       measures: [agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved]
@@ -292,7 +306,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Total actual LLM API dollar spend USD. How derived: Applies 75 percent discount for cached input tokens ($0.3125/M cached vs $1.25/M standard input for Gemini 2.5 Pro).
+      note_text: What: Total actual LLM API dollar spend USD. | How: Applies 75 percent discount for cached input tokens ($0.3125/M cached vs $1.25/M standard input for Gemini 2.5 Pro). | Why it matters: Monitors net FinOps expenditure. | Drill: Click tile to view cost by agent.
       explore: agent_events
       measures: [v_llm_response.cache_discounted_actual_cost_usd]
       listen:
@@ -311,7 +325,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Percentage of input prompt tokens served from prompt cache. How derived: SUM(cached_tokens) / SUM(prompt_tokens).
+      note_text: What: Percentage of input prompt tokens served from prompt cache. | How: SUM(cached_tokens) / SUM(prompt_tokens). | Why it matters: High cache hit ratio maximizes the 75% pricing discount and reduces TTFT latency. | Drill: Click tile to see cache hit rate by agent.
       explore: agent_events
       measures: [v_llm_response.prompt_cache_hit_ratio]
       listen:
@@ -330,7 +344,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Estimated manual engineering hours saved by automated tool calls. How derived: SUM of 1.5 base hours * latency complexity weight (1.0x standard, 1.5x over 2s, 2.5x over 5s).
+      note_text: What: Estimated manual engineering hours saved by automated tool calls. | How: SUM of 1.5 base hours * latency complexity weight (1.0x standard, 1.5x over 2s, 2.5x over 5s). | Why it matters: Rewards agents executing complex, high-latency tool workflows. | Drill: Click tile to inspect tool calls.
       explore: agent_events
       measures: [v_tool_completed.tool_productivity_credit_hours]
       listen:
@@ -349,7 +363,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: CI/CD SLA Gate asserting deployment readiness. How derived: Evaluates error rate; PASS if error rate is 5.0 percent or lower, otherwise FAIL.
+      note_text: What: CI/CD SLA Gate asserting deployment readiness. | How: Evaluates error rate; PASS if error rate is 5.0 percent or lower, otherwise FAIL. | Why it matters: Protects customer production environments from unstable agent builds. | Drill: Click tile to inspect error logs.
       explore: agent_events
       measures: [agent_events.sla_error_rate_gating]
       listen:
@@ -368,7 +382,7 @@
       type: looker_grid
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Combined ROI leaderboard and CI/CD SLA Gate status table. How derived: CWPM Hours = tool calls * 1.5 * 1.2, SLA Gate = PASS if error rate <= 5 percent.
+      note_text: What: Combined ROI leaderboard and CI/CD SLA Gate status table. | How: CWPM Hours = tool calls * 1.5 * 1.2, SLA Gate = PASS if error rate <= 5 percent. | Why it matters: Unifies financial ROI with technical deployment readiness. | Drill: Click any agent to drill into DAG lineage.
       explore: agent_events
       dimensions: [agent_events.canonical_agent_name, agent_events.sla_error_rate_gating]
       measures: [agent_events.total_invocations, agent_events.self_healing_resilience_rate_pct, agent_events.cwpm_verifiable_hours_saved, v_llm_response.cache_discounted_actual_cost_usd]
@@ -392,7 +406,7 @@
       type: looker_area
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Comparison of dollar savings from prompt caching vs actual spend over time. How derived: Savings = cached_tokens * $0.9375/M ($1.25 - $0.3125).
+      note_text: What: Comparison of dollar savings from prompt caching vs actual spend over time. | How: Savings = cached_tokens * $0.9375/M ($1.25 - $0.3125). | Why it matters: Demonstrates compounding FinOps savings over time. | Drill: Click date point to see daily token usage.
       explore: agent_events
       dimensions: [agent_events.timestamp_date]
       measures: [v_llm_response.cache_savings_usd, v_llm_response.cache_discounted_actual_cost_usd]
@@ -414,7 +428,7 @@
       type: looker_scatter
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Multi-dimensional scatter plot comparing agent volume against ROI. How derived: X-axis = invocations, Y-axis = hours saved (sessions * 3.5 hrs), size = consulting value ($350/hr PSO rate).
+      note_text: What: Multi-dimensional scatter plot comparing agent volume against ROI. | How: X-axis = invocations, Y-axis = hours saved (sessions * 3.5 hrs), size = consulting value ($350/hr PSO rate). | Why it matters: Highlights high-value outlier agents. | Drill: Click any bubble to filter by agent.
       explore: agent_events
       dimensions: [agent_events.canonical_agent_name]
       measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.consulting_value_usd]
@@ -437,7 +451,7 @@
       type: looker_pie
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Distribution of estimated consulting dollar value across practice areas. How derived: Hours saved (sessions * 3.5 hrs) * $350 per hour ($2,800/day PSO Consultant rate).
+      note_text: What: Distribution of estimated consulting dollar value across practice areas. | How: Hours saved (sessions * 3.5 hrs) * $350 per hour ($2,800/day PSO Consultant rate). | Why it matters: Visualizes share of consulting value by practice area. | Drill: Click slice to filter practice area.
       explore: agent_events
       dimensions: [agent_events.practice_area]
       measures: [agent_events.consulting_value_usd]
@@ -458,7 +472,7 @@
       type: looker_column
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Overlay of event volume and reliability SLA across practice areas. How derived: Columns = total_events, Line = self-healing resilience rate (SUCCESS / Total).
+      note_text: What: Overlay of event volume and reliability SLA across practice areas. | How: Columns = total_events, Line = self-healing resilience rate (SUCCESS / Total). | Why it matters: Ensures high-traffic practices maintain >=95% SLA. | Drill: Click practice column to inspect reliability.
       explore: agent_events
       dimensions: [agent_events.practice_area]
       measures: [agent_events.total_events, agent_events.self_healing_resilience_rate_pct]
@@ -479,7 +493,7 @@
       type: looker_area
       note_state: collapsed
       note_display: hover
-      note_text: What it is: 30-day predictive forecast of automation hours saved and consulting dollar value. How derived: Historical actuals use total_sessions * 3.5h ($350/hr PSO rate); future 30-day predictions use linear growth trend projection with 90%/110% confidence bounds.
+      note_text: What: 30-day predictive forecast of automation hours saved and consulting dollar value. | How: Historical actuals use total_sessions * 3.5h ($350/hr PSO rate); future 30-day predictions use linear growth trend projection with 90%/110% confidence bounds. | Why it matters: Anchors quarterly capacity planning and financial projections. | Drill: Filter by Practice Area or Date Range.
       explore: agent_events
       dimensions: [v_bqml_roi_forecast.forecast_date, v_bqml_roi_forecast.data_type]
       measures: [v_bqml_roi_forecast.predicted_hours_saved, v_bqml_roi_forecast.confidence_lower_bound_hours, v_bqml_roi_forecast.confidence_upper_bound_hours]
@@ -500,7 +514,7 @@
       type: looker_column
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Hierarchical DAG execution flow across session IDs and trace hops. How derived: Extracts from_agent -> to_target delegation hops from agent_events where event_type is AGENT_TRANSFER, A2A_INTERACTION, or TOOL_COMPLETED.
+      note_text: What: Hierarchical DAG execution flow across session IDs and trace hops. | How: Extracts from_agent -> to_target delegation hops from agent_events where event_type is AGENT_TRANSFER, A2A_INTERACTION, or TOOL_COMPLETED. | Why it matters: Maps multi-agent orchestration paths and latency bottlenecks. | Drill: Filter by Session ID or Trace ID to inspect specific DAGs.
       explore: agent_events
       dimensions: [v_session_trace_dag.session_id, v_session_trace_dag.from_agent, v_session_trace_dag.to_target]
       measures: [v_session_trace_dag.total_dag_hops, v_session_trace_dag.avg_dag_hop_latency_ms]

@@ -72,9 +72,26 @@ view: v_session_trace_dag {
   measure: avg_dag_hop_latency_ms {
     label: "Average DAG Hop Latency (ms)"
     group_label: "Session & Trace DAG Lineage"
-    description: "Average execution latency in milliseconds per DAG hop or edge transfer."
+    description: "What: Average execution latency per DAG hop. How: AVG(total_ms). Why: Identifies slow orchestration hops."
     type: average
     value_format_name: decimal_1
     sql: ${TABLE}.total_ms ;;
   }
+
+  dimension: is_circular_delegation {
+    label: "Is Circular A2A Delegation Loop (Ping-Pong)"
+    group_label: "Session & Trace DAG Lineage"
+    description: "What: Flags circular ping-pong delegation loops between agents. How: Evaluates if from_agent equals to_target. Why: Detects infinite orchestration loops and wasted token spend."
+    type: string
+    sql: CASE WHEN ${TABLE}.from_agent = ${TABLE}.to_target THEN 'YES - CIRCULAR LOOP' ELSE 'NO' END ;;
+  }
+
+  measure: circular_loop_count {
+    label: "Circular A2A Delegation Loop Count"
+    group_label: "Session & Trace DAG Lineage"
+    description: "What: Total count of circular delegation ping-pong hops detected. How: SUM of is_circular_delegation flags. Why: Prioritizes debugging of recursive agent loops."
+    type: sum
+    sql: CASE WHEN ${TABLE}.from_agent = ${TABLE}.to_target THEN 1 ELSE 0 END ;;
+  }
 }
+
