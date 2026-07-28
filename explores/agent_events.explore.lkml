@@ -51,4 +51,22 @@ explore: agent_events {
     sql_on: ${agent_events.trace_id} = ${v_agent_error.trace_id} AND ${agent_events.span_id} = ${v_agent_error.span_id} AND ${agent_events.event_type} = ${v_agent_error.event_type} ;;
     relationship: one_to_one
   }
+
+  join: v_bqml_roi_forecast {
+    type: left_outer
+    sql_on: ${agent_events.timestamp_date} = ${v_bqml_roi_forecast.forecast_date} ;;
+    relationship: many_to_one
+  }
+
+  join: v_session_trace_dag {
+    type: left_outer
+    sql_on: ${agent_events.trace_id} = ${v_session_trace_dag.trace_id} ;;
+    relationship: one_to_one
+  }
+
+  join: v_agent_evaluation {
+    type: left_outer
+    sql_on: ${agent_events.trace_id} = ${v_agent_evaluation.trace_id} ;;
+    relationship: one_to_one
+  }
 }

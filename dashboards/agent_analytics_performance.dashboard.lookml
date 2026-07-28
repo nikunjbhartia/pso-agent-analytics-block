@@ -1508,6 +1508,75 @@
     width: 12
     height: 4
     tab_name: Errors
+  - title: LLM-as-a-Judge Avg Quality Score (%)
+    name: LLM-as-a-Judge Avg Quality Score (%)
+    model: agent-analytics
+    explore: agent_events
+    type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Qualitative LLM-as-a-Judge evaluation score (0-100%). How derived: Evaluates response accuracy, relevance, and tool faithfulness.
+    fields: [v_agent_evaluation.avg_judge_quality_score]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    listen:
+      Date: agent_events.timestamp_date
+      Agent: agent_events.agent
+      Span ID: agent_events.span_id
+      Trace ID: agent_events.trace_id
+      User ID: agent_events.user_id
+    row: 18
+    col: 0
+    width: 8
+    height: 4
+    tab_name: Errors
+  - title: User Feedback Satisfaction Rate (%)
+    name: User Feedback Satisfaction Rate (%)
+    model: agent-analytics
+    explore: agent_events
+    type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Percentage of positive user feedback ratings. How derived: COUNTIF(user_feedback_rating = 'THUMBS_UP') / COUNT(1) * 100.0.
+    fields: [v_agent_evaluation.feedback_satisfaction_rate_pct]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    listen:
+      Date: agent_events.timestamp_date
+      Agent: agent_events.agent
+      Span ID: agent_events.span_id
+      Trace ID: agent_events.trace_id
+      User ID: agent_events.user_id
+    row: 18
+    col: 8
+    width: 8
+    height: 4
+    tab_name: Errors
+  - title: Self-Correction Loop Success Rate (%)
+    name: Self-Correction Loop Success Rate (%)
+    model: agent-analytics
+    explore: agent_events
+    type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Rate at which agents successfully self-correct and recover after encountering an error. How derived: Percentage of recovered SUCCESS sessions that followed an ERROR event.
+    fields: [v_agent_evaluation.self_correction_success_rate_pct]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    listen:
+      Date: agent_events.timestamp_date
+      Agent: agent_events.agent
+      Span ID: agent_events.span_id
+      Trace ID: agent_events.trace_id
+      User ID: agent_events.user_id
+    row: 18
+    col: 16
+    width: 8
+    height: 4
+    tab_name: Errors
   filters:
   - name: Date
     title: Date

@@ -474,3 +474,45 @@
       width: 12
       height: 7
 
+    - name: bqml_roi_30day_forecast_chart
+      title: "BigQuery AI: 30-Day Predictive ROI & Consulting Value Forecast"
+      type: looker_area
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: 30-day predictive forecast of automation hours saved and consulting dollar value. How derived: Historical actuals use total_sessions * 3.5h ($350/hr PSO rate); future 30-day predictions use linear growth trend projection with 90%/110% confidence bounds.
+      explore: agent_events
+      dimensions: [v_bqml_roi_forecast.forecast_date, v_bqml_roi_forecast.data_type]
+      measures: [v_bqml_roi_forecast.predicted_hours_saved, v_bqml_roi_forecast.confidence_lower_bound_hours, v_bqml_roi_forecast.confidence_upper_bound_hours]
+      sorts: [v_bqml_roi_forecast.forecast_date asc]
+      listen:
+        date_filter: agent_events.timestamp_date
+        practice_area_filter: agent_events.practice_area
+        sub_region_filter: agent_events.sub_region
+        pilot_project_filter: agent_events.pilot_project
+        agent_name_filter: agent_events.canonical_agent_name
+      row: 50
+      col: 0
+      width: 12
+      height: 7
+
+    - name: session_trace_dag_lineage_graph
+      title: "Multi-Agent Session DAG & Trace Delegation Lineage Graph"
+      type: looker_column
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Hierarchical DAG execution flow across session IDs and trace hops. How derived: Extracts from_agent -> to_target delegation hops from agent_events where event_type is AGENT_TRANSFER, A2A_INTERACTION, or TOOL_COMPLETED.
+      explore: agent_events
+      dimensions: [v_session_trace_dag.session_id, v_session_trace_dag.from_agent, v_session_trace_dag.to_target]
+      measures: [v_session_trace_dag.total_dag_hops, v_session_trace_dag.avg_dag_hop_latency_ms]
+      sorts: [v_session_trace_dag.total_dag_hops desc]
+      listen:
+        date_filter: agent_events.timestamp_date
+        practice_area_filter: agent_events.practice_area
+        sub_region_filter: agent_events.sub_region
+        pilot_project_filter: agent_events.pilot_project
+        agent_name_filter: agent_events.canonical_agent_name
+      row: 50
+      col: 12
+      width: 12
+      height: 7
+
