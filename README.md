@@ -255,7 +255,7 @@ You can execute all steps automatically via `./scripts/setup_all.sh` or run them
         `your-project-id.agent_analytics.agent_events` AS TechNode
           KEY (span_id)
           LABEL TechNode
-          PROPERTIES (event_type, agent, timestamp, session_id, invocation_id, content, latency_ms, status, error_message),
+          PROPERTIES (event_type, agent, timestamp, session_id, invocation_id, status, error_message),
         `your-project-id.agent_analytics.extracted_biz_nodes` AS BizNode
           KEY (biz_node_id)
           LABEL BizNode
@@ -274,7 +274,8 @@ You can execute all steps automatically via `./scripts/setup_all.sh` or run them
           KEY (span_id)
           SOURCE KEY (parent_span_id) REFERENCES TechNode (span_id)
           DESTINATION KEY (span_id) REFERENCES TechNode (span_id)
-          LABEL Caused,
+          LABEL Caused
+          PROPERTIES (event_type, agent, timestamp, session_id, invocation_id, status, error_message),
         `your-project-id.agent_analytics.context_cross_links` AS Evaluated
           KEY (link_id)
           SOURCE KEY (span_id) REFERENCES TechNode (span_id)
@@ -311,6 +312,14 @@ You can execute all steps automatically via `./scripts/setup_all.sh` or run them
     4.  `FinOps & Model Analytics` (75% prompt cache discount savings and token consumption)
     5.  `Looker BI Block Usage & Provenance` (Dashboard adoption and query latency by user)
     6.  **`Conversation & Lineage`** (Turn-by-turn interaction flows, token latency, and multi-agent DAG delegation decision paths)
+
+---
+
+## Enterprise Troubleshooting Guide & Upstream SDK Documentation Gaps
+
+For a complete technical post-mortem of every error encountered during deployment (including schema type mismatches, missing checkpoint metadata columns, and AI extraction behaviors), as well as a detailed analysis of upstream SDK documentation gaps, see the dedicated troubleshooting guide:
+
+*   **[Enterprise Troubleshooting & SDK Doc Gaps Post-Mortem (TROUBLESHOOTING.md)](file:///Users/nikunjbhartia/Desktop/projects/agents/agent-analytics/pso-agent-analytics-block/TROUBLESHOOTING.md)**
 
 ---
 
