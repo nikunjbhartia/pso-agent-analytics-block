@@ -221,50 +221,77 @@ You can execute all steps automatically via `./scripts/setup_all.sh` or run them
     ```
 
 #### Step 6: Materializing Agent Context Graphs (`bqaa context-graph`) via SQL & CLI
-*   **What it does**: Creates the 5 domain backing tables with required audit metadata columns (`session_id STRING`, `extracted_at TIMESTAMP`), deploys the canonical BigQuery Property Graph (`agent_decisions_graph`) via SQL, and invokes `bqaa context-graph` to extract decision entities (`DecisionRequest`, `DecisionOption`, `DecisionOutcome`) from `agent_events`.
-*   **1. SQL DDL to Create Backing Tables & Property Graph**:
+*   **What it does**: Creates the 6 canonical Context Graph V3 backing tables with required audit metadata columns (`session_id STRING`, `extracted_at TIMESTAMP`), deploys the 6-Pillar BigQuery Property Graph (`agent_context_graph`) via SQL, and invokes `bqaa context-graph` to extract business entities and decision lineage (`BizNode`, `DecisionPoint`, `CandidateNode`) from `agent_events`.
+*   **1. SQL DDL to Create Backing Tables & 6-Pillar Property Graph (`agent_context_graph`)**:
     ```sql
-    -- 1. Create backing tables with mandatory session_id and extracted_at columns
-    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.decision_request` (
-      request_id STRING, request_text STRING, requested_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP
+    -- 1. Create canonical Context Graph V3 backing tables with mandatory session_id and extracted_at columns
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.extracted_biz_nodes` (
+      biz_node_id STRING, node_type STRING, node_value STRING, confidence FLOAT64,
+      session_id STRING, span_id STRING, artifact_uri STRING, extracted_at TIMESTAMP
     );
-    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.decision_option` (
-      option_id STRING, option_label STRING, confidence FLOAT64, session_id STRING, extracted_at TIMESTAMP
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.decision_points` (
+      decision_id STRING, session_id STRING, span_id STRING, decision_type STRING,
+      description STRING, extracted_at TIMESTAMP
     );
-    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.decision_outcome` (
-      outcome_id STRING, status STRING, rationale STRING, decided_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.candidates` (
+      candidate_id STRING, decision_id STRING, session_id STRING, name STRING,
+      score FLOAT64, status STRING, rejection_rationale STRING, extracted_at TIMESTAMP
     );
-    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.evaluates_option` (
-      request_id STRING, option_id STRING, session_id STRING, extracted_at TIMESTAMP
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.context_cross_links` (
+      link_id STRING, span_id STRING, biz_node_id STRING, artifact_uri STRING,
+      link_type STRING, created_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP
     );
-    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.resulted_in` (
-      request_id STRING, outcome_id STRING, session_id STRING, extracted_at TIMESTAMP
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.made_decision_edges` (
+      edge_id STRING, span_id STRING, decision_id STRING, session_id STRING, extracted_at TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.candidate_edges` (
+      edge_id STRING, decision_id STRING, candidate_id STRING, edge_type STRING,
+      rejection_rationale STRING, created_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP
     );
 
-    -- 2. Deploy native BigQuery Property Graph schema
-    CREATE OR REPLACE PROPERTY GRAPH `your-project-id.agent_analytics.agent_decisions_graph`
+    -- 2. Deploy canonical 6-Pillar Property Graph schema (agent_context_graph) with explicit scalar property lists
+    CREATE OR REPLACE PROPERTY GRAPH `your-project-id.agent_analytics.agent_context_graph`
       NODE TABLES (
-        `your-project-id.agent_analytics.decision_request` AS decision_request
-          KEY (request_id)
-          LABEL DecisionRequest PROPERTIES (request_id, request_text, requested_at),
-        `your-project-id.agent_analytics.decision_option` AS decision_option
-          KEY (option_id)
-          LABEL DecisionOption PROPERTIES (option_id, option_label, confidence),
-        `your-project-id.agent_analytics.decision_outcome` AS decision_outcome
-          KEY (outcome_id)
-          LABEL DecisionOutcome PROPERTIES (outcome_id, status, rationale, decided_at)
+        `your-project-id.agent_analytics.agent_events` AS TechNode
+          KEY (span_id)
+          LABEL TechNode
+          PROPERTIES (event_type, agent, timestamp, session_id, invocation_id, content, latency_ms, status, error_message),
+        `your-project-id.agent_analytics.extracted_biz_nodes` AS BizNode
+          KEY (biz_node_id)
+          LABEL BizNode
+          PROPERTIES (node_type, node_value, confidence, session_id, span_id, artifact_uri),
+        `your-project-id.agent_analytics.decision_points` AS DecisionPoint
+          KEY (decision_id)
+          LABEL DecisionPoint
+          PROPERTIES (session_id, span_id, decision_type, description),
+        `your-project-id.agent_analytics.candidates` AS CandidateNode
+          KEY (candidate_id)
+          LABEL CandidateNode
+          PROPERTIES (decision_id, session_id, name, score, status, rejection_rationale)
       )
       EDGE TABLES (
-        `your-project-id.agent_analytics.evaluates_option` AS evaluates_option
-          KEY (request_id, option_id)
-          SOURCE KEY (request_id) REFERENCES decision_request (request_id)
-          DESTINATION KEY (option_id) REFERENCES decision_option (option_id)
-          LABEL evaluatesOption,
-        `your-project-id.agent_analytics.resulted_in` AS resulted_in
-          KEY (request_id, outcome_id)
-          SOURCE KEY (request_id) REFERENCES decision_request (request_id)
-          DESTINATION KEY (outcome_id) REFERENCES decision_outcome (outcome_id)
-          LABEL resultedIn
+        `your-project-id.agent_analytics.agent_events` AS Caused
+          KEY (span_id)
+          SOURCE KEY (parent_span_id) REFERENCES TechNode (span_id)
+          DESTINATION KEY (span_id) REFERENCES TechNode (span_id)
+          LABEL Caused,
+        `your-project-id.agent_analytics.context_cross_links` AS Evaluated
+          KEY (link_id)
+          SOURCE KEY (span_id) REFERENCES TechNode (span_id)
+          DESTINATION KEY (biz_node_id) REFERENCES BizNode (biz_node_id)
+          LABEL Evaluated
+          PROPERTIES (artifact_uri, link_type, created_at),
+        `your-project-id.agent_analytics.made_decision_edges` AS MadeDecision
+          KEY (edge_id)
+          SOURCE KEY (span_id) REFERENCES TechNode (span_id)
+          DESTINATION KEY (decision_id) REFERENCES DecisionPoint (decision_id)
+          LABEL MadeDecision,
+        `your-project-id.agent_analytics.candidate_edges` AS CandidateEdge
+          KEY (edge_id)
+          SOURCE KEY (decision_id) REFERENCES DecisionPoint (decision_id)
+          DESTINATION KEY (candidate_id) REFERENCES CandidateNode (candidate_id)
+          LABEL CandidateEdge
+          PROPERTIES (edge_type, rejection_rationale, created_at)
       );
     ```
 *   **2. CLI Command to Populate Graph from Traces**:
@@ -272,7 +299,7 @@ You can execute all steps automatically via `./scripts/setup_all.sh` or run them
     bqaa context-graph \
       --project-id="$PROJECT_ID" \
       --dataset-id="$DATASET_NAME" \
-      --graph="agent_decisions_graph" \
+      --graph="agent_context_graph" \
       --lookback-hours=24
     ```
 

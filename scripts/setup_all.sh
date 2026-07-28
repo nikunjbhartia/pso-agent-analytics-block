@@ -124,59 +124,97 @@ else
   echo "   Table 'agent_events' already populated."
 fi
 
-# 7. Create Backing Tables and Deploy Property Graph (agent_decisions_graph) via SQL
-echo "7. Creating backing tables and deploying CREATE PROPERTY GRAPH agent_decisions_graph..."
+# 7. Create Backing Tables and Deploy Canonical Property Graph (agent_context_graph) via SQL
+echo "7. Creating Context Graph V3 backing tables and deploying CREATE PROPERTY GRAPH agent_context_graph..."
 python3 - <<EOF || echo "   Note: Could not automatically deploy Property Graph DDL."
 import sys
 try:
     from google.cloud import bigquery
     client = bigquery.Client(project="${PROJECT_ID}")
     
-    # Define backing tables with required session_id and extracted_at metadata columns
+    # 1. Create canonical Context Graph V3 backing tables with required session_id and extracted_at columns
     tables_ddl = [
-        "CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.decision_request\` (request_id STRING, request_text STRING, requested_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP);",
-        "CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.decision_option\` (option_id STRING, option_label STRING, confidence FLOAT64, session_id STRING, extracted_at TIMESTAMP);",
-        "CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.decision_outcome\` (outcome_id STRING, status STRING, rationale STRING, decided_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP);",
-        "CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.evaluates_option\` (request_id STRING, option_id STRING, session_id STRING, extracted_at TIMESTAMP);",
-        "CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.resulted_in\` (request_id STRING, outcome_id STRING, session_id STRING, extracted_at TIMESTAMP);"
+        """CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.extracted_biz_nodes\` (
+          biz_node_id STRING, node_type STRING, node_value STRING, confidence FLOAT64,
+          session_id STRING, span_id STRING, artifact_uri STRING, extracted_at TIMESTAMP
+        );""",
+        """CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.decision_points\` (
+          decision_id STRING, session_id STRING, span_id STRING, decision_type STRING,
+          description STRING, extracted_at TIMESTAMP
+        );""",
+        """CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.candidates\` (
+          candidate_id STRING, decision_id STRING, session_id STRING, name STRING,
+          score FLOAT64, status STRING, rejection_rationale STRING, extracted_at TIMESTAMP
+        );""",
+        """CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.context_cross_links\` (
+          link_id STRING, span_id STRING, biz_node_id STRING, artifact_uri STRING,
+          link_type STRING, created_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP
+        );""",
+        """CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.made_decision_edges\` (
+          edge_id STRING, span_id STRING, decision_id STRING, session_id STRING, extracted_at TIMESTAMP
+        );""",
+        """CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.candidate_edges\` (
+          edge_id STRING, decision_id STRING, candidate_id STRING, edge_type STRING,
+          rejection_rationale STRING, created_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP
+        );"""
     ]
     for ddl in tables_ddl:
         client.query(ddl).result()
         
+    # 2. Deploy canonical 6-Pillar Property Graph (agent_context_graph) with scalar property lists
     graph_ddl = """
-    CREATE OR REPLACE PROPERTY GRAPH \`${PROJECT_ID}.${DATASET_NAME}.agent_decisions_graph\`
+    CREATE OR REPLACE PROPERTY GRAPH \`${PROJECT_ID}.${DATASET_NAME}.agent_context_graph\`
       NODE TABLES (
-        \`${PROJECT_ID}.${DATASET_NAME}.decision_request\` AS decision_request
-          KEY (request_id)
-          LABEL DecisionRequest PROPERTIES (request_id, request_text, requested_at),
-        \`${PROJECT_ID}.${DATASET_NAME}.decision_option\` AS decision_option
-          KEY (option_id)
-          LABEL DecisionOption PROPERTIES (option_id, option_label, confidence),
-        \`${PROJECT_ID}.${DATASET_NAME}.decision_outcome\` AS decision_outcome
-          KEY (outcome_id)
-          LABEL DecisionOutcome PROPERTIES (outcome_id, status, rationale, decided_at)
+        \`${PROJECT_ID}.${DATASET_NAME}.agent_events\` AS TechNode
+          KEY (span_id)
+          LABEL TechNode
+          PROPERTIES (event_type, agent, timestamp, session_id, invocation_id, content, latency_ms, status, error_message),
+        \`${PROJECT_ID}.${DATASET_NAME}.extracted_biz_nodes\` AS BizNode
+          KEY (biz_node_id)
+          LABEL BizNode
+          PROPERTIES (node_type, node_value, confidence, session_id, span_id, artifact_uri),
+        \`${PROJECT_ID}.${DATASET_NAME}.decision_points\` AS DecisionPoint
+          KEY (decision_id)
+          LABEL DecisionPoint
+          PROPERTIES (session_id, span_id, decision_type, description),
+        \`${PROJECT_ID}.${DATASET_NAME}.candidates\` AS CandidateNode
+          KEY (candidate_id)
+          LABEL CandidateNode
+          PROPERTIES (decision_id, session_id, name, score, status, rejection_rationale)
       )
       EDGE TABLES (
-        \`${PROJECT_ID}.${DATASET_NAME}.evaluates_option\` AS evaluates_option
-          KEY (request_id, option_id)
-          SOURCE KEY (request_id) REFERENCES decision_request (request_id)
-          DESTINATION KEY (option_id) REFERENCES decision_option (option_id)
-          LABEL evaluatesOption,
-        \`${PROJECT_ID}.${DATASET_NAME}.resulted_in\` AS resulted_in
-          KEY (request_id, outcome_id)
-          SOURCE KEY (request_id) REFERENCES decision_request (request_id)
-          DESTINATION KEY (outcome_id) REFERENCES decision_outcome (outcome_id)
-          LABEL resultedIn
+        \`${PROJECT_ID}.${DATASET_NAME}.agent_events\` AS Caused
+          KEY (span_id)
+          SOURCE KEY (parent_span_id) REFERENCES TechNode (span_id)
+          DESTINATION KEY (span_id) REFERENCES TechNode (span_id)
+          LABEL Caused,
+        \`${PROJECT_ID}.${DATASET_NAME}.context_cross_links\` AS Evaluated
+          KEY (link_id)
+          SOURCE KEY (span_id) REFERENCES TechNode (span_id)
+          DESTINATION KEY (biz_node_id) REFERENCES BizNode (biz_node_id)
+          LABEL Evaluated
+          PROPERTIES (artifact_uri, link_type, created_at),
+        \`${PROJECT_ID}.${DATASET_NAME}.made_decision_edges\` AS MadeDecision
+          KEY (edge_id)
+          SOURCE KEY (span_id) REFERENCES TechNode (span_id)
+          DESTINATION KEY (decision_id) REFERENCES DecisionPoint (decision_id)
+          LABEL MadeDecision,
+        \`${PROJECT_ID}.${DATASET_NAME}.candidate_edges\` AS CandidateEdge
+          KEY (edge_id)
+          SOURCE KEY (decision_id) REFERENCES DecisionPoint (decision_id)
+          DESTINATION KEY (candidate_id) REFERENCES CandidateNode (candidate_id)
+          LABEL CandidateEdge
+          PROPERTIES (edge_type, rejection_rationale, created_at)
       );
     """
     client.query(graph_ddl).result()
-    print("   Property Graph 'agent_decisions_graph' deployed successfully via SQL.")
+    print("   Canonical 6-Pillar Property Graph 'agent_context_graph' deployed successfully via SQL.")
 except Exception as exc:
     print(f"   Skipping Property Graph SQL deployment: {exc}")
 EOF
 
 echo "8. Running incremental graph materialization (bqaa context-graph)..."
-python3 -c "from bigquery_agent_analytics.cli import bqaa_main; import sys; sys.argv=['bqaa','context-graph','--project-id=${PROJECT_ID}','--dataset-id=${DATASET_NAME}','--graph=agent_decisions_graph','--lookback-hours=24']; bqaa_main()" || echo "   Note: Could not materialize graph automatically."
+python3 -c "from bigquery_agent_analytics.cli import bqaa_main; import sys; sys.argv=['bqaa','context-graph','--project-id=${PROJECT_ID}','--dataset-id=${DATASET_NAME}','--graph=agent_context_graph','--lookback-hours=24']; bqaa_main()" || echo "   Note: Could not materialize graph automatically."
 
 echo "----------------------------------------------------------------------"
 echo "Setup & Scheduling Complete!"
@@ -185,7 +223,7 @@ echo "  - GCS Object Table        : ${PROJECT_ID}.${DATASET_NAME}.gcs_multimodal
 echo "  - Recommendations Table   : ${PROJECT_ID}.${DATASET_NAME}.agent_judge_recommendations"
 echo "  - Scheduled Query         : APO Agent Analytics - Incremental AI Recommendations (15m)"
 echo "  - Python UDFs             : 11 analytical scoring & event semantic functions registered"
-echo "  - Agent Context Graph     : Property Graph agent_decisions_graph deployed & materialized via SQL"
+echo "  - Agent Context Graph     : Property Graph agent_context_graph deployed & materialized via SQL"
 echo "----------------------------------------------------------------------"
 echo "All external object tables, connections, and 15-minute scheduled AI"
 echo "recommendation jobs are now deployed in project '${PROJECT_ID}'."
