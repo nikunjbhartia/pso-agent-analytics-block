@@ -124,24 +124,59 @@ else
   echo "   Table 'agent_events' already populated."
 fi
 
-# 7. Materialize Agent Context Graph (bqaa context-graph)
-echo "7. Running periodic graph materialization (Agent Context Graph)..."
-python3 - <<EOF || echo "   Note: Could not run graph materializer automatically (check property graph DDL and IAM roles)."
+# 7. Create Backing Tables and Deploy Property Graph (agent_decisions_graph) via SQL
+echo "7. Creating backing tables and deploying CREATE PROPERTY GRAPH agent_decisions_graph..."
+python3 - <<EOF || echo "   Note: Could not automatically deploy Property Graph DDL."
 import sys
 try:
-    from bigquery_agent_analytics.context_graph import ContextGraphManager
-    mgr = ContextGraphManager(
-        project_id="${PROJECT_ID}",
-        dataset_id="${DATASET_NAME}",
-        table_id="agent_events",
-        location="${LOCATION}"
-    )
-    # Builds canonical property graph and extracts BizNode entities
-    mgr.build_context_graph(use_ai_generate=True, include_decisions=True)
-    print("   Agent Context Graph materialized successfully.")
+    from google.cloud import bigquery
+    client = bigquery.Client(project="${PROJECT_ID}")
+    
+    # Define backing tables with required session_id and extracted_at metadata columns
+    tables_ddl = [
+        "CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.decision_request\` (request_id STRING, request_text STRING, requested_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP);",
+        "CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.decision_option\` (option_id STRING, option_label STRING, confidence FLOAT64, session_id STRING, extracted_at TIMESTAMP);",
+        "CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.decision_outcome\` (outcome_id STRING, status STRING, rationale STRING, decided_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP);",
+        "CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.evaluates_option\` (request_id STRING, option_id STRING, session_id STRING, extracted_at TIMESTAMP);",
+        "CREATE TABLE IF NOT EXISTS \`${PROJECT_ID}.${DATASET_NAME}.resulted_in\` (request_id STRING, outcome_id STRING, session_id STRING, extracted_at TIMESTAMP);"
+    ]
+    for ddl in tables_ddl:
+        client.query(ddl).result()
+        
+    graph_ddl = """
+    CREATE OR REPLACE PROPERTY GRAPH \`${PROJECT_ID}.${DATASET_NAME}.agent_decisions_graph\`
+      NODE TABLES (
+        \`${PROJECT_ID}.${DATASET_NAME}.decision_request\` AS decision_request
+          KEY (request_id)
+          LABEL DecisionRequest PROPERTIES (request_id, request_text, requested_at),
+        \`${PROJECT_ID}.${DATASET_NAME}.decision_option\` AS decision_option
+          KEY (option_id)
+          LABEL DecisionOption PROPERTIES (option_id, option_label, confidence),
+        \`${PROJECT_ID}.${DATASET_NAME}.decision_outcome\` AS decision_outcome
+          KEY (outcome_id)
+          LABEL DecisionOutcome PROPERTIES (outcome_id, status, rationale, decided_at)
+      )
+      EDGE TABLES (
+        \`${PROJECT_ID}.${DATASET_NAME}.evaluates_option\` AS evaluates_option
+          KEY (request_id, option_id)
+          SOURCE KEY (request_id) REFERENCES decision_request (request_id)
+          DESTINATION KEY (option_id) REFERENCES decision_option (option_id)
+          LABEL evaluatesOption,
+        \`${PROJECT_ID}.${DATASET_NAME}.resulted_in\` AS resulted_in
+          KEY (request_id, outcome_id)
+          SOURCE KEY (request_id) REFERENCES decision_request (request_id)
+          DESTINATION KEY (outcome_id) REFERENCES decision_outcome (outcome_id)
+          LABEL resultedIn
+      );
+    """
+    client.query(graph_ddl).result()
+    print("   Property Graph 'agent_decisions_graph' deployed successfully via SQL.")
 except Exception as exc:
-    print(f"   Skipping automatic graph materialization: {exc}")
+    print(f"   Skipping Property Graph SQL deployment: {exc}")
 EOF
+
+echo "8. Running incremental graph materialization (bqaa context-graph)..."
+python3 -c "from bigquery_agent_analytics.cli import bqaa_main; import sys; sys.argv=['bqaa','context-graph','--project-id=${PROJECT_ID}','--dataset-id=${DATASET_NAME}','--graph=agent_decisions_graph','--lookback-hours=24']; bqaa_main()" || echo "   Note: Could not materialize graph automatically."
 
 echo "----------------------------------------------------------------------"
 echo "Setup & Scheduling Complete!"
@@ -150,7 +185,7 @@ echo "  - GCS Object Table        : ${PROJECT_ID}.${DATASET_NAME}.gcs_multimodal
 echo "  - Recommendations Table   : ${PROJECT_ID}.${DATASET_NAME}.agent_judge_recommendations"
 echo "  - Scheduled Query         : APO Agent Analytics - Incremental AI Recommendations (15m)"
 echo "  - Python UDFs             : 11 analytical scoring & event semantic functions registered"
-echo "  - Agent Context Graph     : Property Graph deployed & materialized"
+echo "  - Agent Context Graph     : Property Graph agent_decisions_graph deployed & materialized via SQL"
 echo "----------------------------------------------------------------------"
 echo "All external object tables, connections, and 15-minute scheduled AI"
 echo "recommendation jobs are now deployed in project '${PROJECT_ID}'."

@@ -220,15 +220,60 @@ You can execute all steps automatically via `./scripts/setup_all.sh` or run them
     bq query --use_legacy_sql=false < scripts/02_build_judge_recommendations_table.sql
     ```
 
-#### Step 6: Materializing Agent Context Graphs (`bqaa context-graph`)
-*   **What it does**: Extracts structured business entities (`BizNode` / `DecisionRequest` / `DecisionOption` / `DecisionOutcome`) and decision lineage from raw telemetry and deploys native BigQuery Property Graphs (`CREATE OR REPLACE PROPERTY GRAPH`).
-*   **Commands**:
-    ```bash
-    # Option A: Out-of-the-box SDK graph (extracts BizNode/TechNode entities automatically via AI.GENERATE)
-    python3 -c "from bigquery_agent_analytics.context_graph import ContextGraphManager; mgr = ContextGraphManager(project_id='$PROJECT_ID', dataset_id='$DATASET_NAME', table_id='agent_events', location='$LOCATION'); mgr.build_context_graph(use_ai_generate=True, include_decisions=True)"
+#### Step 6: Materializing Agent Context Graphs (`bqaa context-graph`) via SQL & CLI
+*   **What it does**: Creates the 5 domain backing tables with required audit metadata columns (`session_id STRING`, `extracted_at TIMESTAMP`), deploys the canonical BigQuery Property Graph (`agent_decisions_graph`) via SQL, and invokes `bqaa context-graph` to extract decision entities (`DecisionRequest`, `DecisionOption`, `DecisionOutcome`) from `agent_events`.
+*   **1. SQL DDL to Create Backing Tables & Property Graph**:
+    ```sql
+    -- 1. Create backing tables with mandatory session_id and extracted_at columns
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.decision_request` (
+      request_id STRING, request_text STRING, requested_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.decision_option` (
+      option_id STRING, option_label STRING, confidence FLOAT64, session_id STRING, extracted_at TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.decision_outcome` (
+      outcome_id STRING, status STRING, rationale STRING, decided_at TIMESTAMP, session_id STRING, extracted_at TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.evaluates_option` (
+      request_id STRING, option_id STRING, session_id STRING, extracted_at TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS `your-project-id.agent_analytics.resulted_in` (
+      request_id STRING, outcome_id STRING, session_id STRING, extracted_at TIMESTAMP
+    );
 
-    # Option B: Incremental domain decision graph (e.g., agent_decisions_graph over 24h window)
-    bqaa context-graph --project-id="$PROJECT_ID" --dataset-id="$DATASET_NAME" --graph="agent_decisions_graph" --lookback-hours=24
+    -- 2. Deploy native BigQuery Property Graph schema
+    CREATE OR REPLACE PROPERTY GRAPH `your-project-id.agent_analytics.agent_decisions_graph`
+      NODE TABLES (
+        `your-project-id.agent_analytics.decision_request` AS decision_request
+          KEY (request_id)
+          LABEL DecisionRequest PROPERTIES (request_id, request_text, requested_at),
+        `your-project-id.agent_analytics.decision_option` AS decision_option
+          KEY (option_id)
+          LABEL DecisionOption PROPERTIES (option_id, option_label, confidence),
+        `your-project-id.agent_analytics.decision_outcome` AS decision_outcome
+          KEY (outcome_id)
+          LABEL DecisionOutcome PROPERTIES (outcome_id, status, rationale, decided_at)
+      )
+      EDGE TABLES (
+        `your-project-id.agent_analytics.evaluates_option` AS evaluates_option
+          KEY (request_id, option_id)
+          SOURCE KEY (request_id) REFERENCES decision_request (request_id)
+          DESTINATION KEY (option_id) REFERENCES decision_option (option_id)
+          LABEL evaluatesOption,
+        `your-project-id.agent_analytics.resulted_in` AS resulted_in
+          KEY (request_id, outcome_id)
+          SOURCE KEY (request_id) REFERENCES decision_request (request_id)
+          DESTINATION KEY (outcome_id) REFERENCES decision_outcome (outcome_id)
+          LABEL resultedIn
+      );
+    ```
+*   **2. CLI Command to Populate Graph from Traces**:
+    ```bash
+    bqaa context-graph \
+      --project-id="$PROJECT_ID" \
+      --dataset-id="$DATASET_NAME" \
+      --graph="agent_decisions_graph" \
+      --lookback-hours=24
     ```
 
 #### Step 7: Looker BI Dashboard Deployment & Conversational Lineage
