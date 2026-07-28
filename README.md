@@ -134,35 +134,45 @@ Drill:          Instructions on how to click any bar/point to drill down by Trac
 
 ## 🛠️ Complete LookML Model Architecture & Join Graph
 
-The LookML model (`explores/agent_events.explore.lkml`) joins the base `agent_events` table with Looker refined views, BigQuery unnested views, BigQuery AI forecasting derived tables, and BigQuery External Object Tables over GCS:
+The `agent_events` explore (`explores/agent_events.explore.lkml`) serves as the relational semantic layer connecting raw BigQuery ADK telemetry to Looker dashboards. It joins the base `agent_events` table with specialized refined views, BigQuery AI forecasting derived tables, and BigQuery External Object Tables over GCS.
 
+### Relational Join Topology
+
+```mermaid
+graph TD
+    A["Base Table: agent_events (Core Telemetry & PSO Attribution)"] -->|one_to_one on trace_id| B["v_llm_response (Token Economics & FinOps Cache Savings)"]
+    A -->|one_to_one on span_id| C["v_tool_completed (Latency, Tools & Productivity CWPM)"]
+    A -->|one_to_one on span_id| D["v_tool_error (Tool Failures & API Debugging)"]
+    A -->|many_to_one on session_id| E["session_facts (Session Duration & North Star KPIs)"]
+    A -->|one_to_one on trace_id| F["v_agent_transfer (Multi-Agent Handoffs & Delegation)"]
+    A -->|one_to_one on trace_id| G["v_a2a_interaction (Agent-to-Agent Protocol Events)"]
+    A -->|one_to_one on trace_id| H["v_hitl_confirmation_request (Human-in-the-Loop Latency)"]
+    A -->|one_to_one on trace_id| I["v_agent_error (Agent Tracebacks & Crashes)"]
+    A -->|one_to_one on timestamp_date| J["v_bqml_roi_forecast (30-Day AI Predictive ROI & Value)"]
+    A -->|one_to_one on trace_id| K["v_session_trace_dag (DAG Lineage & Circular Loops)"]
+    A -->|one_to_one on trace_id| L["v_agent_evaluation (LLM Judge Scores & Self-Correction)"]
+    A -->|one_to_one on trace_id| M["v_gcs_multimodal_offload (GCS Signed URIs & Modality)"]
+    M -->|many_to_one on gcs_uri = uri| N["gcs_multimodal_object_table (BigQuery GCS Object Table over gs://japac-pso-agent-analytics/*)"]
 ```
-                                  ┌────────────────────────────────────────────────────────┐
-                                  │     pso-agent-analytics-block (LookML Architecture)    │
-                                  └───────────────────────────┬────────────────────────────┘
-                                                              │
-                    ┌────────────────────────────────────────┼────────────────────────────────────────┐
-                    ▼                                        ▼                                        ▼
-      ┌───────────────────────────┐            ┌───────────────────────────┐            ┌───────────────────────────┐
-      │   Explore: agent_events   │            │   Refined View:           │            │   Refined View:           │
-      │   (agent_events.explore)  │            │   agent_events.view.lkml  │            │   v_llm_response.view.lkml│
-      └─────────────┬─────────────┘            └─────────────┬─────────────┘            └─────────────┬─────────────┘
-                    │                                        │                                        │
-                    ▼                                        ▼                                        ▼
-        Joins: session_facts,                    APO Org Dimensions: practice_area,       Executive FinOps Spend:
-        v_llm_response,                          sub_region, pilot_project,               total_spend_usd,
-        v_tool_completed,                        canonical_agent_name, win_feedback       cost_per_session_usd,
-        v_tool_error,                            APO Value Measures: hours_saved,         cache_hit_ratio_pct,
-        v_agent_transfer,                        fte_weeks_saved, consulting_usd          cache_savings_usd
-        v_a2a_interaction,
-        v_hitl_confirmation_request,
-        v_agent_error,
-        v_bqml_roi_forecast,
-        v_session_trace_dag,
-        v_agent_evaluation,
-        v_gcs_multimodal_offload,
-        gcs_multimodal_object_table (External Object Table over gs://japac-pso-agent-analytics/*)
-```
+
+### Complete Explore Join Catalog
+
+| LookML View Name | Join Type & Relationship | SQL Join Condition (`sql_on`) | Primary Analytical Domain & Key Measures |
+| :--- | :--- | :--- | :--- |
+| **`agent_events`** | *Base Table* | *N/A* | Core ADK telemetry, PSO attribution (`practice_area`, `sub_region`, `pilot_project`, `canonical_agent_name`), Server-Verified Hours Saved (`3.5h/session`), Consulting Value USD (`$350/hr / $2800/day`), and CI/CD SLA Gates. |
+| **`session_facts`** | `left_outer` (`many_to_one`) | `${agent_events.session_id} = ${session_facts.session_id}` | Session-level aggregation, conversational duration, and user stickiness. |
+| **`v_llm_response`** | `left_outer` (`one_to_one`) | `${agent_events.trace_id} = ${v_llm_response.trace_id}` | FinOps token consumption, model tier distributions (`gemini-2.5-pro` vs. `gemini-2.5-flash`), 75% prompt cache discount savings, and P50/P75/P90/P99 LLM latency. |
+| **`v_tool_completed`** | `left_outer` (`one_to_one`) | `${agent_events.span_id} = ${v_tool_completed.span_id}` | Tool execution counts, P50/P75/P90/P99 tool latency, and Tool Productivity Credit Hours (CWPM). |
+| **`v_tool_error`** | `left_outer` (`one_to_one`) | `${agent_events.span_id} = ${v_tool_error.span_id}` | Tool execution failures, API error tracebacks, and error distributions. |
+| **`v_agent_transfer`** | `left_outer` (`one_to_one`) | `${agent_events.trace_id} = ${v_agent_transfer.trace_id}` | Multi-agent delegation, supervisor-worker handoffs, and transfer frequency. |
+| **`v_a2a_interaction`** | `left_outer` (`one_to_one`) | `${agent_events.trace_id} = ${v_a2a_interaction.trace_id}` | Decentralized Agent-to-Agent protocol interactions and communication volume. |
+| **`v_hitl_confirmation_request`** | `left_outer` (`one_to_one`) | `${agent_events.trace_id} = ${v_hitl_confirmation_request.trace_id}` | Human-in-the-Loop confirmation volume and human approval latency bottlenecks. |
+| **`v_agent_error`** | `left_outer` (`one_to_one`) | `${agent_events.trace_id} = ${v_agent_error.trace_id}` | Agent-level execution exceptions, crashes, and error rate SLA monitoring. |
+| **`v_bqml_roi_forecast`** | `left_outer` (`one_to_one`) | `${agent_events.timestamp_date} = ${v_bqml_roi_forecast.forecast_date}` | BigQuery AI 30-day predictive forecasting of hours saved and consulting dollar value with 90%/110% confidence bounds. |
+| **`v_session_trace_dag`** | `left_outer` (`one_to_one`) | `${agent_events.trace_id} = ${v_session_trace_dag.trace_id}` | Multi-agent DAG execution lineage (`from_agent -> to_target`) and A2A circular delegation ping-pong loop alerts. |
+| **`v_agent_evaluation`** | `left_outer` (`one_to_one`) | `${agent_events.trace_id} = ${v_agent_evaluation.trace_id}` | LLM-as-a-Judge quality evaluation (0–100%), User Feedback Satisfaction Rate (%), and Self-Correction loop recovery rates. |
+| **`v_gcs_multimodal_offload`** | `left_outer` (`one_to_one`) | `${agent_events.trace_id} = ${v_gcs_multimodal_offload.trace_id}` | Extracted GCS signed object URIs and multimodal asset categorization (`IMAGE`, `DOCUMENT`, `AUDIO`, `VIDEO`, `LARGE_PAYLOAD_JSON`). |
+| **`gcs_multimodal_object_table`** | `left_outer` (`many_to_one`) | `${v_gcs_multimodal_offload.gcs_uri} = ${gcs_multimodal_object_table.uri}` | External Object Table over `gs://japac-pso-agent-analytics/*`, tracking physical GCS storage bytes and file inventory. |
 
 ---
 
