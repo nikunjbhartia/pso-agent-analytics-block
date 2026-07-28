@@ -75,4 +75,10 @@ explore: agent_events {
     sql_on: ${agent_events.trace_id} = ${v_gcs_multimodal_offload.trace_id} ;;
     relationship: one_to_one
   }
+
+  join: gcs_multimodal_object_table {
+    type: left_outer
+    sql_on: ${v_gcs_multimodal_offload.gcs_uri} = ${gcs_multimodal_object_table.uri} ;;
+    relationship: many_to_one
+  }
 }
