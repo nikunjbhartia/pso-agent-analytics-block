@@ -79,7 +79,7 @@
       type: single_value
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Estimated dollar value of automated engineering work. How derived: Estimated Manual Hours Saved (total_sessions * 3.5 hrs) * $150/hr standard Google Cloud PSO billable rate ($525/session).
+      note_text: What it is: Estimated dollar value of automated engineering work. How derived: Estimated Manual Hours Saved (total_sessions * 3.5 hrs, based on PSO JAPAC pilot benchmarks where automation replaces ~3.5h of manual coding/debugging) * $350/hr Google Cloud PSO billable rate (assuming $2,800/day PSO Consultant rate for an 8-hour day, or $1,225/session).
       explore: agent_events
       measures: [agent_events.consulting_value_usd]
       listen:
@@ -157,7 +157,7 @@
       type: looker_column
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Estimated manual engineering hours saved broken down by pilot project and practice area. How derived: total_sessions * 3.5 hours per session.
+      note_text: What it is: Estimated manual engineering hours saved broken down by pilot project and practice area. How derived: total_sessions * 3.5 hours per session (based on PSO pilot benchmarks where an automated agent session replaces ~3.5h of manual work).
       explore: agent_events
       dimensions: [agent_events.pilot_project, agent_events.practice_area]
       measures: [agent_events.server_verified_hours_saved]
@@ -179,7 +179,7 @@
       type: looker_bar
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Estimated manual engineering hours saved aggregated by practice area. How derived: total_sessions * 3.5 hours per session.
+      note_text: What it is: Estimated manual engineering hours saved aggregated by practice area. How derived: total_sessions * 3.5 hours per session (based on PSO pilot benchmarks where an automated agent session replaces ~3.5h of manual work).
       explore: agent_events
       dimensions: [agent_events.practice_area]
       measures: [agent_events.server_verified_hours_saved]
@@ -202,7 +202,7 @@
       type: looker_grid
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Comprehensive leaderboard of agent ROI and volume. How derived: Hours = total_sessions * 3.5 hrs, FTE Weeks = Hours / 40.0, Consulting Value = Hours * $150/hr.
+      note_text: What it is: Comprehensive leaderboard of agent ROI and volume. How derived: Hours = total_sessions * 3.5 hrs (PSO pilot benchmark), FTE Weeks = Hours / 40.0, Consulting Value = Hours * $350/hr ($2,800/day PSO Consultant rate).
       explore: agent_events
       dimensions: [agent_events.canonical_agent_name, agent_events.practice_area]
       measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved, agent_events.consulting_value_usd]
@@ -224,7 +224,7 @@
       type: looker_line
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Time-series trend of automation adoption across JAPAC sub-regions. How derived: Estimated manual hours saved (total_sessions * 3.5 hrs) over timestamp_date.
+      note_text: What it is: Time-series trend of automation adoption across JAPAC sub-regions. How derived: Estimated manual hours saved (total_sessions * 3.5 hrs from PSO pilot benchmarks) over timestamp_date.
       explore: agent_events
       dimensions: [agent_events.timestamp_date, agent_events.sub_region]
       measures: [agent_events.server_verified_hours_saved]
@@ -268,7 +268,7 @@
       type: looker_grid
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Qualitative engineering feedback and verified savings testimonials. How derived: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs).
+      note_text: What it is: Qualitative engineering feedback and verified savings testimonials. How derived: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs benchmark).
       explore: agent_events
       dimensions: [agent_events.pilot_project, agent_events.canonical_agent_name, agent_events.win_feedback]
       measures: [agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved]
@@ -414,7 +414,7 @@
       type: looker_scatter
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Multi-dimensional scatter plot comparing agent volume against ROI. How derived: X-axis = invocations, Y-axis = hours saved (sessions * 3.5 hrs), size = consulting value ($150/hr).
+      note_text: What it is: Multi-dimensional scatter plot comparing agent volume against ROI. How derived: X-axis = invocations, Y-axis = hours saved (sessions * 3.5 hrs), size = consulting value ($350/hr PSO rate).
       explore: agent_events
       dimensions: [agent_events.canonical_agent_name]
       measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.consulting_value_usd]
@@ -437,7 +437,7 @@
       type: looker_pie
       note_state: collapsed
       note_display: hover
-      note_text: What it is: Distribution of estimated consulting dollar value across practice areas. How derived: Hours saved (sessions * 3.5 hrs) * $150 per hour.
+      note_text: What it is: Distribution of estimated consulting dollar value across practice areas. How derived: Hours saved (sessions * 3.5 hrs) * $350 per hour ($2,800/day PSO Consultant rate).
       explore: agent_events
       dimensions: [agent_events.practice_area]
       measures: [agent_events.consulting_value_usd]

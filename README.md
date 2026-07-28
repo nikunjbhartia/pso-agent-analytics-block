@@ -24,12 +24,12 @@ Before APO Analytics, engineering and consulting teams faced four systemic chall
 ### 1️⃣ `pso_apo_executive_portal` (The APO Portal Dashboard)
 *   **Target Audience**: Google Cloud PSO JAPAC Leadership, APO Leads & Practice Managers.
 *   **Headline Scorecards**:
-    *   **Total Server-Verified Hours Saved** (`server_verified_hours_saved`) — Automated 3.5h/session baseline calculation.
+    *   **Total Server-Verified Hours Saved** (`server_verified_hours_saved`) — Estimated 3.5h/session manual baseline (derived from Google Cloud PSO JAPAC pilot benchmarks where automated agent workflows replace ~3.5h of manual code generation and debugging).
     *   **Pilot Projects** (`total_pilot_projects`) — Count of active customer engagements (`DBS Bank`, `Dyson`, `Myntra`, etc.).
     *   **Agents Used** (`total_invocations`) — Count of distinct canonical agents deployed.
     *   **Sub-Regions** (`total_sub_regions`) — Regional penetration across JAPAC.
     *   **FTE Weeks Saved** (`fte_weeks_saved`) — Equivalent 40h/week engineering savings.
-    *   **Consulting Value Created ($ USD)** (`consulting_value_usd`) — Dollarized at $150/hr consulting rate.
+    *   **Consulting Value Created ($ USD)** (`consulting_value_usd`) — Dollarized at $350/hr Google Cloud PSO billable rate (based on $2,800/day PSO Consultant rate for an 8-hour work day, or $1,225/session).
 *   **Interactive Visualizations**:
     *   `Server-Verified Hours Saved by Pilot Project & Practice Area` (Stacked Column Chart).
     *   `Hours Saved by Practice Area` (Bar Chart: **Data & Analytics**, **AI**, **CP&I**, **Emerging**, **Security**).

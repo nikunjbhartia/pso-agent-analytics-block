@@ -360,7 +360,7 @@ view: agent_events {
   measure: server_verified_hours_saved {
     label: "Estimated Manual Hours Saved (3.5h/Session)"
     group_label: "APO Value Engineering"
-    description: "Estimated manual engineering hours saved by automation. Rationale: Assumes each completed agent session automates a workflow task that would require an average of 3.5 hours of manual engineering effort. Formula: total_sessions * 3.5."
+    description: "Estimated manual engineering hours saved by automation. Rationale for 3.5h stat: Based on Google Cloud PSO JAPAC customer pilot benchmarks (e.g., Cloudera ML migration, data engineering automation), where a single end-to-end agent session automates code generation, debugging, and validation that historically required an estimated average of 3.5 hours of manual engineering effort. Formula: total_sessions * 3.5."
     type: number
     value_format_name: decimal_1
     sql: ROUND(${total_sessions} * 3.5, 1) ;;
@@ -369,7 +369,7 @@ view: agent_events {
   measure: fte_weeks_saved {
     label: "Estimated FTE Weeks Saved (40h/Week)"
     group_label: "APO Value Engineering"
-    description: "Equivalent Full-Time Equivalent (FTE) engineering work weeks saved by automation. Rationale: Converts estimated manual hours saved into standard 40-hour work weeks. Formula: Estimated Manual Hours Saved / 40.0."
+    description: "Equivalent Full-Time Equivalent (FTE) engineering work weeks saved by automation. Rationale: Converts estimated manual hours saved (3.5h per session from PSO pilot benchmarks) into standard 40-hour work weeks. Formula: (total_sessions * 3.5) / 40.0."
     type: number
     value_format_name: decimal_1
     sql: ROUND((${total_sessions} * 3.5) / 40.0, 1) ;;
@@ -378,10 +378,10 @@ view: agent_events {
   measure: consulting_value_usd {
     label: "Estimated Consulting Value Created ($ USD)"
     group_label: "APO Value Engineering"
-    description: "Estimated dollar value of automated work created. Rationale: Values each estimated manual engineering hour saved at a standard Google Cloud PSO JAPAC billable rate of $150/hr ($525 per session). Formula: total_sessions * 3.5 hours * $150.00/hr."
+    description: "Estimated dollar value of automated work created. Rationale: Values each estimated manual engineering hour saved (3.5h per session from PSO pilot benchmarks) at the standard Google Cloud PSO JAPAC billable rate of $350/hr (assuming $2,800/day PSO Consultant rate for an 8-hour day, or $1,225 per automated session). Formula: total_sessions * 3.5 hours * $350.00/hr."
     type: number
     value_format_name: usd
-    sql: ROUND(${total_sessions} * 3.5 * 150.0, 2) ;;
+    sql: ROUND(${total_sessions} * 3.5 * 350.0, 2) ;;
   }
 
   measure: total_pilot_projects {
