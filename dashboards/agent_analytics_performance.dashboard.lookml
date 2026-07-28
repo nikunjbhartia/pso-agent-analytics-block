@@ -10,6 +10,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Average time in milliseconds for tools to execute. How derived: Average of total_ms across all TOOL_COMPLETED events.
     fields: [v_tool_completed.average_tool_latency]
     limit: 500
     column_limit: 50
@@ -50,10 +53,6 @@
     show_silhouette: false
     totals_color: "#808080"
     defaults_version: 1
-    note_state: collapsed
-    note_display: hover
-    note_text: The average time (in milliseconds) it takes for backend tools and functions
-      to execute and return a result.
     listen:
       Trace ID: agent_events.trace_id
       Agent: agent_events.agent
@@ -71,6 +70,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_area
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Historical trend of tool execution latency over time. How derived: Average of total_ms aggregated by timestamp_date.
     fields: [v_tool_completed.timestamp_date, v_tool_completed.average_tool_latency]
     fill_fields: [v_tool_completed.timestamp_date]
     sorts: [v_tool_completed.timestamp_date desc]
@@ -121,10 +123,6 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: An area chart tracking the historical trend of average tool execution
-      times, helping identify backend performance degradation.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -141,6 +139,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Average round-trip time in milliseconds for LLM requests. How derived: Average of total_ms across all LLM_RESPONSE events.
     fields: [v_llm_response.average_llm_latency]
     limit: 500
     column_limit: 50
@@ -198,10 +199,6 @@
     show_title_v_tool_completed.p50_tool_latency: true
     title_placement_v_tool_completed.p50_tool_latency: above
     value_format_v_tool_completed.p50_tool_latency: ''
-    note_state: collapsed
-    note_display: hover
-    note_text: The average round-trip time (in milliseconds) it takes for the LLM
-      to process a prompt and return a response.
     title_hidden: true
     listen:
       Agent: agent_events.agent
@@ -219,6 +216,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_area
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Historical trend of LLM response times over time. How derived: Average of total_ms aggregated by timestamp_date.
     fields: [v_llm_response.average_llm_latency, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     sorts: [agent_events.timestamp_date desc]
@@ -282,10 +282,6 @@
     show_title_v_llm_response.average_llm_latency: true
     title_placement_v_llm_response.average_llm_latency: above
     value_format_v_llm_response.average_llm_latency: ''
-    note_state: collapsed
-    note_display: hover
-    note_text: An area chart tracking historical LLM response times to identify API
-      throttling or model performance issues.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -332,6 +328,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Median (50th percentile) tool execution latency in milliseconds. How derived: 50th percentile of total_ms across TOOL_COMPLETED events.
     fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
       v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
@@ -455,6 +454,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: 75th percentile tool execution latency in milliseconds. How derived: 75th percentile of total_ms across TOOL_COMPLETED events.
     fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
       v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
@@ -578,6 +580,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: 90th percentile tool execution latency in milliseconds. How derived: 90th percentile of total_ms across TOOL_COMPLETED events.
     fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
       v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
@@ -701,6 +706,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: 99th percentile (tail latency) tool execution latency in milliseconds. How derived: 99th percentile of total_ms across TOOL_COMPLETED events.
     fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
       v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
@@ -837,6 +845,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Median (50th percentile) LLM response latency in milliseconds. How derived: 50th percentile of total_ms across LLM_RESPONSE events.
     fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
       v_llm_response.p99_llm_latency]
     filters:
@@ -919,6 +930,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: 75th percentile LLM response latency in milliseconds. How derived: 75th percentile of total_ms across LLM_RESPONSE events.
     fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
       v_llm_response.p99_llm_latency]
     filters:
@@ -1001,6 +1015,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: 90th percentile LLM response latency in milliseconds. How derived: 90th percentile of total_ms across LLM_RESPONSE events.
     fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
       v_llm_response.p99_llm_latency]
     filters:
@@ -1083,6 +1100,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: 99th percentile (tail latency) LLM response latency in milliseconds. How derived: 99th percentile of total_ms across LLM_RESPONSE events.
     fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
       v_llm_response.p99_llm_latency]
     filters:
@@ -1178,6 +1198,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Total count of backend tool execution errors. How derived: COUNT of TOOL_ERROR events.
     fields: [v_tool_error.pop_tool_errors_current, v_tool_error.pop_tool_errors_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -1222,10 +1245,6 @@
     show_silhouette: false
     totals_color: "#808080"
     defaults_version: 1
-    note_state: collapsed
-    note_display: hover
-    note_text: The total number of backend tool executions that resulted in an error
-      status, including the Period-over-Period trend.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -1242,6 +1261,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_area
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Daily time-series tracking volume of tool failures. How derived: COUNT of TOOL_ERROR events aggregated by timestamp_date.
     fields: [agent_events.timestamp_date, v_tool_error.total_tool_errors]
     fill_fields: [agent_events.timestamp_date]
     sorts: [agent_events.timestamp_date desc]
@@ -1291,10 +1313,6 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A daily time-series tracking the volume of tool failures. Click a spike
-      to drill down into the raw error logs.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -1311,6 +1329,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Ranking of agents by number of tool errors encountered. How derived: COUNT of TOOL_ERROR events grouped by agent.
     fields: [v_tool_error.total_tool_errors, agent_events.agent]
     sorts: [v_tool_error.total_tool_errors desc 0]
     limit: 5
@@ -1361,10 +1382,6 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A ranking showing which specific agents are experiencing the highest
-      volume of failures.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -1381,6 +1398,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Leaderboard of the most unstable backend tools. How derived: COUNT of TOOL_ERROR events grouped by tool_name.
     fields: [v_tool_error.total_tool_errors, v_tool_error.tool_name]
     sorts: [v_tool_error.total_tool_errors desc 0]
     limit: 5
@@ -1431,10 +1451,6 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A critical leaderboard of the most unstable backend tools. Focus debugging
-      efforts on the tools at the top of this list
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -1451,13 +1467,13 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Total count of agent-level execution errors and crashes. How derived: COUNT of AGENT_ERROR events from v_agent_error.
     fields: [v_agent_error.total_agent_errors]
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
-    note_state: collapsed
-    note_display: hover
-    note_text: Total number of agent-level execution errors.
     listen:
       Date: agent_events.timestamp_date
       Agent: agent_events.agent
@@ -1474,13 +1490,13 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Reliability SLA metric measuring ratio of SUCCESS outcomes vs total executions. How derived: COUNTIF(status = SUCCESS) / COUNT(1).
     fields: [agent_events.self_healing_resilience_rate_pct]
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
-    note_state: collapsed
-    note_display: hover
-    note_text: Reliability SLA metric measuring ratio of SUCCESS outcomes vs total executions.
     listen:
       Date: agent_events.timestamp_date
       Agent: agent_events.agent

@@ -10,6 +10,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Breakdown of total token consumption across agents. How derived: SUM(usage_total_tokens) grouped by agent.
     fields: [agent_events.agent, v_llm_response.total_tokens_consumed]
     filters:
       v_llm_response.total_tokens_consumed: NOT NULL
@@ -54,10 +57,6 @@
     show_null_points: true
     interpolation: linear
     defaults_version: 1
-    note_state: collapsed
-    note_display: hover
-    note_text: A breakdown of total token consumption distributed across your different
-      agents, highlighting which bots are the most resource-intensive.
     listen:
       Trace ID: agent_events.trace_id
       Agent: agent_events.agent
@@ -73,6 +72,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Leaderboard of top 5 users by token usage. How derived: SUM(usage_total_tokens) grouped by user_id.
     fields: [agent_events.user_id, v_llm_response.total_tokens_consumed]
     filters:
       agent_events.timestamp_date: 7 days
@@ -109,10 +111,6 @@
     interpolation: linear
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A leaderboard of the top 5 individual end-users who have driven the
-      highest token costs.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -128,6 +126,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_area
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Daily time-series area chart tracking token consumption over time. How derived: SUM(usage_total_tokens) aggregated by timestamp_date.
     fields: [v_llm_response.total_tokens_consumed, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     sorts: [agent_events.timestamp_date desc]
@@ -180,10 +181,6 @@
     conditional_formatting_include_nulls: false
     ordering: none
     show_null_labels: false
-    note_state: collapsed
-    note_display: hover
-    note_text: A daily time-series area chart tracking the aggregate volume of tokens
-      burned
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -200,6 +197,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Total aggregate number of tokens consumed across all sessions. How derived: SUM(usage_prompt_tokens + usage_completion_tokens).
     fields: [v_llm_response.pop_total_tokens_current, v_llm_response.pop_total_tokens_change]
     filters:
       agent_events.pop_date_filter: 14 days
@@ -261,10 +261,6 @@
     ordering: none
     show_null_labels: false
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: The total aggregate number of prompt and completion tokens consumed
-      by all LLM requests within the selected timeframe
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -281,6 +277,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Leaderboard of top 5 power users by trace volume. How derived: COUNT DISTINCT of trace_id grouped by user_id.
     fields: [agent_events.user_id, agent_events.total_traces]
     filters:
       agent_events.timestamp_date: 7 days
@@ -318,10 +317,6 @@
     interpolation: linear
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A leaderboard of your most active power-users, ranked by the total
-      number of distinct interactions they have initiated.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -337,6 +332,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Total number of execution traces recorded. How derived: COUNT DISTINCT of trace_id across all sessions.
     fields: [agent_events.pop_total_traces_current, agent_events.pop_total_traces_change]
     filters:
       agent_events.pop_date_filter: 14 days
@@ -398,10 +396,6 @@
     ordering: none
     show_null_labels: false
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: The total number of unique, end-to-end user interactions (journeys)
-      processed by the agents
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -418,6 +412,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Distribution of trace volume across agents. How derived: COUNT DISTINCT of trace_id grouped by agent.
     fields: [agent_events.agent, agent_events.total_traces]
     filters:
       v_llm_response.total_tokens_consumed: NOT NULL
@@ -463,10 +460,6 @@
     show_null_points: true
     interpolation: linear
     defaults_version: 1
-    note_state: collapsed
-    note_display: hover
-    note_text: A distribution of total traffic across your agents, showing which bots
-      are handling the highest volume of user requests.
     listen:
       Trace ID: agent_events.trace_id
       Agent: agent_events.agent
@@ -482,6 +475,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_area
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Daily trend of trace volume generated over time. How derived: COUNT DISTINCT of trace_id aggregated by timestamp_date.
     fields: [agent_events.timestamp_date, agent_events.total_traces]
     fill_fields: [agent_events.timestamp_date]
     sorts: [agent_events.timestamp_date desc]
@@ -535,9 +531,6 @@
     ordering: none
     show_null_labels: false
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A daily time-series area chart showing the volume of unique agent interactions
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -554,6 +547,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Total count of end-to-end user sessions. How derived: COUNT DISTINCT of session_id.
     fields: [agent_events.pop_total_sessions_current, agent_events.pop_total_sessions_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -618,6 +614,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_area
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Daily time-series trend of user session volume over time. How derived: COUNT DISTINCT of session_id aggregated by timestamp_date.
     fields: [agent_events.total_sessions, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     filters:
@@ -691,6 +690,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Leaderboard of top 5 agents by number of sessions. How derived: COUNT DISTINCT of session_id grouped by agent.
     fields: [agent_events.total_sessions, agent_events.agent]
     filters:
       agent_events.agent: ''
@@ -763,13 +765,13 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Total count of multi-agent delegation and handoff events. How derived: COUNT of AGENT_TRANSFER events from v_agent_transfer.
     fields: [v_agent_transfer.total_agent_transfers]
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
-    note_state: collapsed
-    note_display: hover
-    note_text: Total number of multi-agent handoffs or delegation events.
     listen:
       Date: agent_events.timestamp_date
       Agent: agent_events.agent
@@ -786,13 +788,13 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Total count of Agent-to-Agent protocol communication events. How derived: COUNT of A2A_INTERACTION events from v_a2a_interaction.
     fields: [v_a2a_interaction.total_a2a_interactions]
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
-    note_state: collapsed
-    note_display: hover
-    note_text: Total number of Agent-to-Agent (A2A) protocol communication events.
     listen:
       Date: agent_events.timestamp_date
       Agent: agent_events.agent
@@ -809,13 +811,13 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Total count of Human-In-The-Loop confirmation requests. How derived: COUNT of HITL_CONFIRMATION_REQUEST events from v_hitl_confirmation_request.
     fields: [v_hitl_confirmation_request.total_hitl_confirmation_requests]
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
-    note_state: collapsed
-    note_display: hover
-    note_text: Total number of Human-In-The-Loop confirmation requests triggered by agents.
     listen:
       Date: agent_events.timestamp_date
       Agent: agent_events.agent
@@ -854,6 +856,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Ranking of backend tools by invocation frequency. How derived: COUNT of TOOL_COMPLETED events grouped by tool_name.
     fields: [agent_events.total_invocations, v_tool_completed.tool_name]
     filters:
       v_tool_completed.tool_name: "-NULL"
@@ -892,10 +897,6 @@
     series_colors:
       agent_events.total_invocations: "#1e8e3e"
     defaults_version: 1
-    note_state: collapsed
-    note_display: hover
-    note_text: A ranked list showing which specific backend tools and functions are
-      being executed the most frequently by the LLMs.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -912,6 +913,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Breakdown of total lifecycle events across agents. How derived: COUNT of raw event rows grouped by agent.
     fields: [agent_events.total_events, agent_events.agent]
     filters:
       agent_events.event_type: '"TOOL_COMPLETED"'
@@ -952,10 +956,6 @@
       agent_events.total_events: "#e8710a"
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A breakdown of total raw lifecycle events (including tool calls, errors,
-      and LLM requests) distributed across your agents.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -972,6 +972,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_area
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Daily execution trend of specific tools over time. How derived: COUNT of TOOL_COMPLETED events aggregated by timestamp_date and tool_name.
     fields: [agent_events.total_events, v_tool_completed.tool_name, agent_events.timestamp_date]
     pivots: [v_tool_completed.tool_name]
     fill_fields: [agent_events.timestamp_date]
@@ -1018,10 +1021,6 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A stacked area chart tracking the daily execution volume of specific
-      backend tools and functions
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -1038,6 +1037,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Absolute count of requests sent to backend tools. How derived: COUNT of TOOL_COMPLETED events.
     fields: [v_llm_response.pop_llm_calls_current, v_llm_response.pop_llm_calls_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -1091,10 +1093,6 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: The absolute number of individual requests sent to the underlying LLM
-      models.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -1111,6 +1109,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_area
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Granular scatter plot showing frequency and clustering of LLM requests. How derived: Plots individual LLM_RESPONSE events over time.
     fields: [v_llm_response.total_llm_calls, agent_events.timestamp_minute]
     fill_fields: [agent_events.timestamp_minute]
     filters:
@@ -1167,10 +1168,6 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A highly granular scatter plot showing the frequency and clustering
-      of LLM requests over time.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -1187,6 +1184,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Ranking of agents triggering the most LLM calls. How derived: COUNT of LLM_RESPONSE events grouped by agent.
     fields: [v_llm_response.total_llm_calls, agent_events.agent]
     filters:
       agent_events.timestamp_date: 7 days
@@ -1242,10 +1242,6 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A ranking of which agents are triggering the most calls to the LLM
-      backend.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -1262,6 +1258,9 @@
     model: agent-analytics
     explore: agent_events
     type: single_value
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Count of unique end users who interacted with agents. How derived: COUNT DISTINCT of user_id.
     fields: [agent_events.pop_total_users_current, agent_events.pop_total_users_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -1316,10 +1315,6 @@
     comparison_label: V Previous Period
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: The count of unique, distinct end-users who have interacted with any
-      agent during the selected timeframe.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -1336,6 +1331,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_area
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Daily count of active unique users over time. How derived: COUNT DISTINCT of user_id aggregated by timestamp_date.
     fields: [agent_events.total_users, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     filters:
@@ -1393,10 +1391,6 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A smoothed area chart tracking the daily count of active unique users
-      to measure platform adoption and retention.
     listen:
       Agent: agent_events.agent
       Span ID: agent_events.span_id
@@ -1413,6 +1407,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Leaderboard of power users by session count. How derived: COUNT DISTINCT of session_id grouped by user_id.
     fields: [agent_events.user_id, agent_events.total_sessions]
     sorts: [agent_events.total_sessions desc 0]
     limit: 5
@@ -1467,10 +1464,6 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A leaderboard ranking your top power-users by the total number of distinct
-      conversation sessions they have maintained.
     listen:
       Date: agent_events.timestamp_date
       Agent: agent_events.agent
@@ -1487,6 +1480,9 @@
     model: agent-analytics
     explore: agent_events
     type: looker_bar
+    note_state: collapsed
+    note_display: hover
+    note_text: What it is: Ranking of users by raw volume of lifecycle events generated. How derived: COUNT of event rows grouped by user_id.
     fields: [agent_events.user_id, agent_events.total_events]
     sorts: [agent_events.total_events desc 0]
     limit: 5
@@ -1541,10 +1537,6 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    note_state: collapsed
-    note_display: hover
-    note_text: A ranking of users based on the raw volume of lifecycle events they
-      generate, indicating deep, complex usage of the system.
     listen:
       Date: agent_events.timestamp_date
       Agent: agent_events.agent

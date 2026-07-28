@@ -39,11 +39,11 @@
     - name: total_hours_saved_card
       title: "CWPM Verifiable Hours Saved"
       type: single_value
-      explore: agent_events
-      measures: [agent_events.cwpm_verifiable_hours_saved]
       note_state: collapsed
       note_display: hover
-      note_text: "Estimation Formula: SUM(manual_baseline_hours * session_complexity_weight). Assumes 3.5 hrs baseline manual engineering time per automated session * 1.5x complexity weight."
+      note_text: What it is: Estimated productivity hours saved by automated tool calls. How derived: Count of completed tool executions * 1.5 hours baseline * 1.2 complexity multiplier.
+      explore: agent_events
+      measures: [agent_events.cwpm_verifiable_hours_saved]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -58,11 +58,11 @@
     - name: fte_weeks_saved_card
       title: "FTE Weeks Saved Equivalent"
       type: single_value
-      explore: agent_events
-      measures: [agent_events.fte_weeks_saved_equivalent]
       note_state: collapsed
       note_display: hover
-      note_text: "Estimation Formula: CWPM Verifiable Hours Saved / 40.0 hours per standard engineering work week."
+      note_text: What it is: Equivalent Full-Time Equivalent engineering weeks saved. How derived: CWPM Verifiable Hours Saved / 40.0 hours per standard engineering work week.
+      explore: agent_events
+      measures: [agent_events.fte_weeks_saved_equivalent]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -77,11 +77,11 @@
     - name: consulting_value_usd_card
       title: "Consulting Value Created ($ USD)"
       type: single_value
-      explore: agent_events
-      measures: [agent_events.consulting_value_usd]
       note_state: collapsed
       note_display: hover
-      note_text: "Estimation Formula: Server-Verified Hours Saved * $150/hr standard Google Cloud PSO engineering consulting rate."
+      note_text: What it is: Estimated dollar value of automated engineering work. How derived: Estimated Manual Hours Saved (total_sessions * 3.5 hrs) * $150/hr standard Google Cloud PSO billable rate ($525/session).
+      explore: agent_events
+      measures: [agent_events.consulting_value_usd]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -96,11 +96,11 @@
     - name: resilience_rate_pct_card
       title: "Self-Healing Resilience Rate (%)"
       type: single_value
-      explore: agent_events
-      measures: [agent_events.self_healing_resilience_rate_pct]
       note_state: collapsed
       note_display: hover
-      note_text: "Reliability SLA Note: Primary self-healing resilience metric measuring ratio of SUCCESS outcomes vs total executions."
+      note_text: What it is: Reliability SLA metric measuring system stability. How derived: Ratio of SUCCESS outcomes vs total executions (COUNTIF(status = SUCCESS) / COUNT(1)).
+      explore: agent_events
+      measures: [agent_events.self_healing_resilience_rate_pct]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -115,6 +115,9 @@
     - name: total_pilot_projects_card
       title: "Pilot Projects"
       type: single_value
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Count of distinct Google Cloud PSO JAPAC customer pilot engagements. How derived: COUNT DISTINCT of pilot_project attribute.
       explore: agent_events
       measures: [agent_events.total_pilot_projects]
       listen:
@@ -131,6 +134,9 @@
     - name: total_agents_used_card
       title: "Agents Used"
       type: single_value
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Total number of distinct AI agents deployed across JAPAC engagements. How derived: COUNT DISTINCT of canonical_agent_name.
       explore: agent_events
       measures: [agent_events.total_invocations]
       listen:
@@ -149,14 +155,14 @@
     - name: hours_saved_by_pilot_project
       title: "Server-Verified Hours Saved by Pilot Project & Practice Area"
       type: looker_column
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Estimated manual engineering hours saved broken down by pilot project and practice area. How derived: total_sessions * 3.5 hours per session.
       explore: agent_events
       dimensions: [agent_events.pilot_project, agent_events.practice_area]
       measures: [agent_events.server_verified_hours_saved]
       sorts: [agent_events.server_verified_hours_saved desc]
       stacking: normal
-      note_state: collapsed
-      note_display: hover
-      note_text: "Estimation Formula: SUM(manual_baseline_hours) across pilot projects, assuming an average manual baseline of 3.5 hours per automated session."
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -171,13 +177,13 @@
     - name: hours_saved_by_practice_area
       title: "Hours Saved by Practice Area"
       type: looker_bar
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Estimated manual engineering hours saved aggregated by practice area. How derived: total_sessions * 3.5 hours per session.
       explore: agent_events
       dimensions: [agent_events.practice_area]
       measures: [agent_events.server_verified_hours_saved]
       sorts: [agent_events.server_verified_hours_saved desc]
-      note_state: collapsed
-      note_display: hover
-      note_text: "Estimation Formula: SUM(manual_baseline_hours) aggregated by practice area (3.5 hrs baseline per session)."
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -194,14 +200,14 @@
     - name: top_agents_by_hours_saved
       title: "Top Agents by Hours Saved and Events"
       type: looker_grid
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Comprehensive leaderboard of agent ROI and volume. How derived: Hours = total_sessions * 3.5 hrs, FTE Weeks = Hours / 40.0, Consulting Value = Hours * $150/hr.
       explore: agent_events
       dimensions: [agent_events.canonical_agent_name, agent_events.practice_area]
       measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved, agent_events.consulting_value_usd]
       sorts: [agent_events.server_verified_hours_saved desc]
       limit: 15
-      note_state: collapsed
-      note_display: hover
-      note_text: "Estimation Notes: Hours saved = SUM(manual_baseline_hours). FTE weeks = Hours / 40. Consulting Value = Hours * $150/hr."
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -216,6 +222,9 @@
     - name: adoption_velocity_by_sub_region
       title: "JAPAC Sub-Region Adoption Velocity over Time"
       type: looker_line
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Time-series trend of automation adoption across JAPAC sub-regions. How derived: Estimated manual hours saved (total_sessions * 3.5 hrs) over timestamp_date.
       explore: agent_events
       dimensions: [agent_events.timestamp_date, agent_events.sub_region]
       measures: [agent_events.server_verified_hours_saved]
@@ -236,13 +245,13 @@
     - name: model_tier_spend_breakdown
       title: "Model Tier Spend Breakdown ($ USD)"
       type: looker_pie
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Actual LLM API spend in USD by Gemini model version. How derived: Applies Google Cloud Gemini 2.5 Pro 75 percent cache discount ($1.25/M standard input, $0.3125/M cached input, $5.00/M completion).
       explore: agent_events
       dimensions: [v_llm_response.model_version]
       measures: [v_llm_response.total_spend_usd]
       sorts: [v_llm_response.total_spend_usd desc]
-      note_state: collapsed
-      note_display: hover
-      note_text: "FinOps Note: Spend calculated across model tiers incorporating 75% prompt caching discount where applicable."
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -257,14 +266,14 @@
     - name: verifiable_engineer_wins
       title: "Feedback & Wins — Verifiable Engineer Testimonials"
       type: looker_grid
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Qualitative engineering feedback and verified savings testimonials. How derived: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs).
       explore: agent_events
       dimensions: [agent_events.pilot_project, agent_events.canonical_agent_name, agent_events.win_feedback]
       measures: [agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved]
       sorts: [agent_events.server_verified_hours_saved desc]
       limit: 10
-      note_state: collapsed
-      note_display: hover
-      note_text: "Estimation Note: Verifiable Hours Saved estimated via SUM(manual_baseline_hours), defaulting to 3.5 hrs per session."
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -281,11 +290,11 @@
     - name: cache_discount_spend_card
       title: "75% Cache-Discount Actual Spend ($ USD)"
       type: single_value
-      explore: agent_events
-      measures: [v_llm_response.cache_discounted_actual_cost_usd]
       note_state: collapsed
       note_display: hover
-      note_text: "FinOps Note: Applies 75% discount for cached input tokens ($0.25/M cached vs $1.00/M standard for Gemini 2.5 Pro)."
+      note_text: What it is: Total actual LLM API dollar spend USD. How derived: Applies 75 percent discount for cached input tokens ($0.3125/M cached vs $1.25/M standard input for Gemini 2.5 Pro).
+      explore: agent_events
+      measures: [v_llm_response.cache_discounted_actual_cost_usd]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -300,11 +309,11 @@
     - name: prompt_cache_hit_ratio_card
       title: "Prompt Cache Hit Ratio (%)"
       type: single_value
-      explore: agent_events
-      measures: [v_llm_response.prompt_cache_hit_ratio]
       note_state: collapsed
       note_display: hover
-      note_text: "FinOps Note: Percentage of input tokens served from prompt cache (cached tokens / total prompt tokens)."
+      note_text: What it is: Percentage of input prompt tokens served from prompt cache. How derived: SUM(cached_tokens) / SUM(prompt_tokens).
+      explore: agent_events
+      measures: [v_llm_response.prompt_cache_hit_ratio]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -319,11 +328,11 @@
     - name: tool_productivity_credit_card
       title: "Tool Productivity Credit Hours (CWPM)"
       type: single_value
-      explore: agent_events
-      measures: [v_tool_completed.tool_productivity_credit_hours]
       note_state: collapsed
       note_display: hover
-      note_text: "Estimation Formula: Each successful tool completion awards 1.5 hours * complexity weight based on latency (>2s = 1.5x, >5s = 2.5x)."
+      note_text: What it is: Estimated manual engineering hours saved by automated tool calls. How derived: SUM of 1.5 base hours * latency complexity weight (1.0x standard, 1.5x over 2s, 2.5x over 5s).
+      explore: agent_events
+      measures: [v_tool_completed.tool_productivity_credit_hours]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -338,11 +347,11 @@
     - name: sla_error_rate_gate_card
       title: "CI/CD SLA Gate Assertion"
       type: single_value
-      explore: agent_events
-      measures: [agent_events.sla_error_rate_gating]
       note_state: collapsed
       note_display: hover
-      note_text: "SLA Gate Note: Asserts CI/CD deployment readiness; PASS if error rate <= 5.0%, otherwise FAIL."
+      note_text: What it is: CI/CD SLA Gate asserting deployment readiness. How derived: Evaluates error rate; PASS if error rate is 5.0 percent or lower, otherwise FAIL.
+      explore: agent_events
+      measures: [agent_events.sla_error_rate_gating]
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -357,14 +366,14 @@
     - name: graph_trace_dag_and_sla_gate_table
       title: "Trace DAG & CI/CD SLA Gate Performance by Agent"
       type: looker_grid
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Combined ROI leaderboard and CI/CD SLA Gate status table. How derived: CWPM Hours = tool calls * 1.5 * 1.2, SLA Gate = PASS if error rate <= 5 percent.
       explore: agent_events
       dimensions: [agent_events.canonical_agent_name, agent_events.sla_error_rate_gating]
       measures: [agent_events.total_invocations, agent_events.self_healing_resilience_rate_pct, agent_events.cwpm_verifiable_hours_saved, v_llm_response.cache_discounted_actual_cost_usd]
       sorts: [agent_events.cwpm_verifiable_hours_saved desc]
       limit: 15
-      note_state: collapsed
-      note_display: hover
-      note_text: "Estimation & SLA Notes: CWPM Hours = 1.5 * tool completions * 1.2. SLA Gate = PASS if error rate <= 5%."
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -381,14 +390,14 @@
     - name: finops_cache_savings_over_time
       title: "75% Gemini Prompt Cache Savings vs. Actual Spend over Time ($ USD)"
       type: looker_area
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Comparison of dollar savings from prompt caching vs actual spend over time. How derived: Savings = cached_tokens * $0.9375/M ($1.25 - $0.3125).
       explore: agent_events
       dimensions: [agent_events.timestamp_date]
       measures: [v_llm_response.cache_savings_usd, v_llm_response.cache_discounted_actual_cost_usd]
       sorts: [agent_events.timestamp_date desc]
       stacking: normal
-      note_state: collapsed
-      note_display: hover
-      note_text: "Estimation Note: Evaluates 75% prompt cache discount savings based on standard Gemini 2.5 Pro pricing ($1.00/M input vs $0.25/M cached input)."
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -403,13 +412,13 @@
     - name: agent_roi_complexity_scatter
       title: "Agent Complexity & ROI Scatter Plot (Invocations vs. Verifiable Hours Saved)"
       type: looker_scatter
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Multi-dimensional scatter plot comparing agent volume against ROI. How derived: X-axis = invocations, Y-axis = hours saved (sessions * 3.5 hrs), size = consulting value ($150/hr).
       explore: agent_events
       dimensions: [agent_events.canonical_agent_name]
       measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.consulting_value_usd]
       sorts: [agent_events.server_verified_hours_saved desc]
-      note_state: collapsed
-      note_display: hover
-      note_text: "Estimation Note: Plots invocation volume against verifiable hours saved (3.5 hrs baseline per session) and consulting value ($150/hr)."
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -426,13 +435,13 @@
     - name: consulting_value_by_practice_area_donut
       title: "Consulting Value Created by Practice Area ($ USD Donut)"
       type: looker_pie
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Distribution of estimated consulting dollar value across practice areas. How derived: Hours saved (sessions * 3.5 hrs) * $150 per hour.
       explore: agent_events
       dimensions: [agent_events.practice_area]
       measures: [agent_events.consulting_value_usd]
       sorts: [agent_events.consulting_value_usd desc]
-      note_state: collapsed
-      note_display: hover
-      note_text: "Estimation Note: Dollarized value created per practice area assuming $150/hr consulting engineering rate."
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
@@ -447,13 +456,13 @@
     - name: resilience_sla_by_practice_area_column
       title: "Tool Execution Volume & Self-Healing Resilience SLA by Practice Area"
       type: looker_column
+      note_state: collapsed
+      note_display: hover
+      note_text: What it is: Overlay of event volume and reliability SLA across practice areas. How derived: Columns = total_events, Line = self-healing resilience rate (SUCCESS / Total).
       explore: agent_events
       dimensions: [agent_events.practice_area]
       measures: [agent_events.total_events, agent_events.self_healing_resilience_rate_pct]
       sorts: [agent_events.total_events desc]
-      note_state: collapsed
-      note_display: hover
-      note_text: "Reliability SLA Note: Primary self-healing resilience metric measuring ratio of SUCCESS outcomes vs total executions."
       listen:
         date_filter: agent_events.timestamp_date
         practice_area_filter: agent_events.practice_area
