@@ -48,6 +48,7 @@ if ! bq ls --connection --project_id="${PROJECT_ID}" --location="${LOCATION}" | 
 else
   echo "   Connection '${CONNECTION_NAME}' already exists."
 fi
+echo "   NOTE: Ensure the connection's service account is granted 'Vertex AI User' (roles/aiplatform.user) in Google Cloud IAM so AI.GENERATE can invoke Gemini models."
 
 # 2. Deploy External Object Table over GCS multimodal bucket
 echo "2. Deploying GCS Multimodal External Object Table..."
