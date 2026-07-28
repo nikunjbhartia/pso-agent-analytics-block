@@ -1446,6 +1446,52 @@
     width: 12
     height: 7
     tab_name: Errors
+  - title: Total Agent Errors
+    name: Total Agent Errors
+    model: agent-analytics
+    explore: agent_events
+    type: single_value
+    fields: [v_agent_error.total_agent_errors]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    note_state: collapsed
+    note_display: hover
+    note_text: Total number of agent-level execution errors.
+    listen:
+      Date: agent_events.timestamp_date
+      Agent: agent_events.agent
+      Span ID: agent_events.span_id
+      Trace ID: agent_events.trace_id
+      User ID: agent_events.user_id
+    row: 14
+    col: 0
+    width: 12
+    height: 4
+    tab_name: Errors
+  - title: Self-Healing Resilience Rate (%)
+    name: Self-Healing Resilience Rate (%)
+    model: agent-analytics
+    explore: agent_events
+    type: single_value
+    fields: [agent_events.self_healing_resilience_rate_pct]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    note_state: collapsed
+    note_display: hover
+    note_text: Reliability SLA metric measuring ratio of SUCCESS outcomes vs total executions.
+    listen:
+      Date: agent_events.timestamp_date
+      Agent: agent_events.agent
+      Span ID: agent_events.span_id
+      Trace ID: agent_events.trace_id
+      User ID: agent_events.user_id
+    row: 14
+    col: 12
+    width: 12
+    height: 4
+    tab_name: Errors
   filters:
   - name: Date
     title: Date

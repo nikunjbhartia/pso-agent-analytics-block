@@ -358,24 +358,27 @@ view: agent_events {
   # --- APO SERVER-VERIFIED VALUE ENGINEERING MEASURES ---
 
   measure: server_verified_hours_saved {
+    label: "Estimated Manual Hours Saved (3.5h/Session)"
     group_label: "APO Value Engineering"
-    description: "Total automated server-verified hours saved across pilot projects. Estimation Note: Assumes an average manual baseline of 3.5 hours saved per automated session (Formula: total_sessions * 3.5)."
+    description: "Estimated manual engineering hours saved by automation. Rationale: Assumes each completed agent session automates a workflow task that would require an average of 3.5 hours of manual engineering effort. Formula: total_sessions * 3.5."
     type: number
     value_format_name: decimal_1
     sql: ROUND(${total_sessions} * 3.5, 1) ;;
   }
 
   measure: fte_weeks_saved {
+    label: "Estimated FTE Weeks Saved (40h/Week)"
     group_label: "APO Value Engineering"
-    description: "Equivalent Full-Time Equivalent (FTE) engineering weeks saved. Estimation Note: Assumes a standard 40-hour engineering work week (Formula: Server-Verified Hours Saved / 40.0)."
+    description: "Equivalent Full-Time Equivalent (FTE) engineering work weeks saved by automation. Rationale: Converts estimated manual hours saved into standard 40-hour work weeks. Formula: Estimated Manual Hours Saved / 40.0."
     type: number
     value_format_name: decimal_1
     sql: ROUND((${total_sessions} * 3.5) / 40.0, 1) ;;
   }
 
   measure: consulting_value_usd {
+    label: "Estimated Consulting Value Created ($ USD)"
     group_label: "APO Value Engineering"
-    description: "Dollarized consulting value created. Estimation Note: Assumes standard Google Cloud PSO JAPAC billable engineering rate of $150/hr (Formula: Server-Verified Hours Saved * $150.00)."
+    description: "Estimated dollar value of automated work created. Rationale: Values each estimated manual engineering hour saved at a standard Google Cloud PSO JAPAC billable rate of $150/hr ($525 per session). Formula: total_sessions * 3.5 hours * $150.00/hr."
     type: number
     value_format_name: usd
     sql: ROUND(${total_sessions} * 3.5 * 150.0, 2) ;;

@@ -758,6 +758,75 @@
     width: 22
     height: 9
     tab_name: Agent & Sessions
+  - title: Total Agent Transfers
+    name: Total Agent Transfers
+    model: agent-analytics
+    explore: agent_events
+    type: single_value
+    fields: [v_agent_transfer.total_agent_transfers]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    note_state: collapsed
+    note_display: hover
+    note_text: Total number of multi-agent handoffs or delegation events.
+    listen:
+      Date: agent_events.timestamp_date
+      Agent: agent_events.agent
+      Span ID: agent_events.span_id
+      Trace ID: agent_events.trace_id
+      User ID: agent_events.user_id
+    row: 33
+    col: 0
+    width: 8
+    height: 4
+    tab_name: Agent & Sessions
+  - title: Total A2A Interactions
+    name: Total A2A Interactions
+    model: agent-analytics
+    explore: agent_events
+    type: single_value
+    fields: [v_a2a_interaction.total_a2a_interactions]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    note_state: collapsed
+    note_display: hover
+    note_text: Total number of Agent-to-Agent (A2A) protocol communication events.
+    listen:
+      Date: agent_events.timestamp_date
+      Agent: agent_events.agent
+      Span ID: agent_events.span_id
+      Trace ID: agent_events.trace_id
+      User ID: agent_events.user_id
+    row: 33
+    col: 8
+    width: 8
+    height: 4
+    tab_name: Agent & Sessions
+  - title: Total HITL Confirmation Requests
+    name: Total HITL Confirmation Requests
+    model: agent-analytics
+    explore: agent_events
+    type: single_value
+    fields: [v_hitl_confirmation_request.total_hitl_confirmation_requests]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
+    note_state: collapsed
+    note_display: hover
+    note_text: Total number of Human-In-The-Loop confirmation requests triggered by agents.
+    listen:
+      Date: agent_events.timestamp_date
+      Agent: agent_events.agent
+      Span ID: agent_events.span_id
+      Trace ID: agent_events.trace_id
+      User ID: agent_events.user_id
+    row: 33
+    col: 16
+    width: 8
+    height: 4
+    tab_name: Agent & Sessions
   - name: ''
     type: text
     title_text: ''
