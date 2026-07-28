@@ -359,7 +359,7 @@ view: agent_events {
 
   measure: server_verified_hours_saved {
     group_label: "APO Value Engineering"
-    description: "Total automated server-verified hours saved across pilot projects (e.g., 393.5 Hours Saved)."
+    description: "Total automated server-verified hours saved across pilot projects. Estimation Note: Assumes an average manual baseline of 3.5 hours saved per automated session (Formula: total_sessions * 3.5)."
     type: number
     value_format_name: decimal_1
     sql: ROUND(${total_sessions} * 3.5, 1) ;;
@@ -367,7 +367,7 @@ view: agent_events {
 
   measure: fte_weeks_saved {
     group_label: "APO Value Engineering"
-    description: "Equivalent Full-Time Equivalent (FTE) engineering weeks saved (40 hours/week)."
+    description: "Equivalent Full-Time Equivalent (FTE) engineering weeks saved. Estimation Note: Assumes a standard 40-hour engineering work week (Formula: Server-Verified Hours Saved / 40.0)."
     type: number
     value_format_name: decimal_1
     sql: ROUND((${total_sessions} * 3.5) / 40.0, 1) ;;
@@ -375,7 +375,7 @@ view: agent_events {
 
   measure: consulting_value_usd {
     group_label: "APO Value Engineering"
-    description: "Dollarized consulting value created based on $150/hr engineering rate."
+    description: "Dollarized consulting value created. Estimation Note: Assumes standard Google Cloud PSO JAPAC billable engineering rate of $150/hr (Formula: Server-Verified Hours Saved * $150.00)."
     type: number
     value_format_name: usd
     sql: ROUND(${total_sessions} * 3.5 * 150.0, 2) ;;
@@ -420,7 +420,7 @@ view: agent_events {
 
   measure: cwpm_verifiable_hours_saved {
     group_label: "APO Value Engineering"
-    description: "Total server-verified hours saved calculated via Complexity-Weighted Productivity Multiplier (CWPM)."
+    description: "Total server-verified hours saved calculated via Complexity-Weighted Productivity Multiplier (CWPM). Estimation Note: Each successful automated tool execution awards 1.5 hours * 1.2 complexity weight."
     type: number
     value_format_name: decimal_2
     sql: 1.5 * COUNTIF(${event_type} = 'TOOL_COMPLETED') * 1.2 ;;
@@ -428,7 +428,7 @@ view: agent_events {
 
   measure: fte_weeks_saved_equivalent {
     group_label: "APO Value Engineering"
-    description: "Equivalent Full-Time Equivalent (FTE) engineering weeks saved (40 hours/week) via CWPM."
+    description: "Equivalent FTE engineering weeks saved via CWPM. Estimation Note: Assumes a 40-hour engineering work week (Formula: CWPM Verifiable Hours Saved / 40.0)."
     type: number
     value_format_name: decimal_2
     sql: ${cwpm_verifiable_hours_saved} / 40.0 ;;

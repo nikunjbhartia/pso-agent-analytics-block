@@ -260,7 +260,7 @@ view: v_tool_completed {
 
   measure: tool_productivity_credit_hours {
     group_label: "Usage & Volume"
-    description: "Total server-verified productivity credit hours saved by tool completions (1.5h baseline * complexity multiplier)."
+    description: "Total server-verified productivity credit hours saved by tool completions. Estimation Note: Assumes 1.5 hrs baseline manual effort saved per tool call, scaled by latency complexity weight (1.0x standard, 1.5x >2s, 2.5x >5s)."
     type: number
     value_format_name: decimal_2
     sql: SUM(1.5 * (CASE WHEN ${total_ms} > 5000 THEN 2.5 WHEN ${total_ms} > 2000 THEN 1.5 ELSE 1.0 END)) ;;
