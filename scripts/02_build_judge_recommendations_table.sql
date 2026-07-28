@@ -74,9 +74,9 @@ USING (
           THEN 'HALLUCINATION'
         WHEN SAFE_CAST(JSON_VALUE(e.attributes,'$.adk.evaluation.judge_score') AS FLOAT64) < 85
           THEN 'ROUTING'
-        WHEN SAFE_CAST(JSON_VALUE(e.attributes,'$.usage.prompt_tokens') AS INT64) > 5000
-          THEN 'HIGH_TOKEN_COST'
-        ELSE 'OPTIMAL'
+        WHEN SAFE_CAST(JSON_VALUE(e.attributes,'$.usage.prompt_tokens') AS INT64) > 2000 OR SAFE_CAST(JSON_VALUE(e.attributes,'$.usage_prompt_tokens') AS INT64) > 2000
+          THEN 'FINOPS_TOKEN_OPT'
+        ELSE 'BEST_PRACTICE_REINFORCEMENT'
       END AS error_bucket,
       TO_HEX(SHA256(CONCAT(
         IFNULL(e.status,''), '|',
@@ -93,13 +93,12 @@ USING (
     FROM candidates c
     LEFT JOIN `${PROJECT_ID}.${DATASET_NAME}.agent_judge_recommendations` r
       ON r.trace_id = c.trace_id AND r.span_id = c.span_id
-    WHERE c.error_bucket <> 'OPTIMAL'
-      AND (r.trace_id IS NULL OR r.source_fingerprint <> c.source_fingerprint)
+    WHERE (r.trace_id IS NULL OR r.source_fingerprint <> c.source_fingerprint)
     ORDER BY
       CASE c.error_bucket WHEN 'TIMEOUT' THEN 1 WHEN 'SCHEMA' THEN 2 WHEN 'TOOL_EXEC' THEN 3
-                          WHEN 'HALLUCINATION' THEN 4 WHEN 'ROUTING' THEN 5 ELSE 9 END,
+                          WHEN 'HALLUCINATION' THEN 4 WHEN 'ROUTING' THEN 5 WHEN 'FINOPS_TOKEN_OPT' THEN 6 ELSE 9 END,
       c.judge_score ASC
-    LIMIT 500
+    LIMIT 100
   ),
   scored AS (
     SELECT
