@@ -1582,6 +1582,38 @@
     width: 24
     height: 7
     tab_name: Tool Usage
+  - name: conversation_flow_turn_analytics
+    title: "Conversation Analytics: Multi-Turn Interaction Flow & Token Latency"
+    type: looker_grid
+    note_state: collapsed
+    note_display: hover
+    note_text: What: Turn-by-turn breakdown of user prompts, agent responses, tool calls, and token/latency metrics. | How: Queries agent_events joined with v_llm_response, v_tool_completed, and v_agent_evaluation. | Why it matters: Enables granular conversational analytics and turn debugging across sessions. | Drill: Click Session ID to inspect full conversation history.
+    explore: agent_events
+    dimensions: [agent_events.session_id, agent_events.event_type, agent_events.agent, v_tool_completed.tool_name, agent_events.status]
+    measures: [v_llm_response.total_tokens_consumed, agent_events.count]
+    sorts: [agent_events.session_id desc, agent_events.count desc]
+    limit: 50
+    row: 0
+    col: 0
+    width: 24
+    height: 9
+    tab_name: Conversation & Lineage
+  - name: multi_agent_dag_decision_lineage
+    title: "Multi-Agent DAG Delegation & Decision Paths"
+    type: looker_grid
+    note_state: collapsed
+    note_display: hover
+    note_text: What: Maps agent-to-agent delegation sequence and session lineage across supervisor and worker agents. | How: Queries v_agent_transfer and v_a2a_interaction joined with agent_events. | Why it matters: Provides complete DAG visibility and decision lineage tracking for multi-agent architectures. | Drill: Click Source or Target Agent to trace delegation graph.
+    explore: agent_events
+    dimensions: [agent_events.session_id, v_agent_transfer.source_agent, v_agent_transfer.target_agent, v_agent_transfer.transfer_reason]
+    measures: [agent_events.count]
+    sorts: [agent_events.count desc]
+    limit: 50
+    row: 9
+    col: 0
+    width: 24
+    height: 8
+    tab_name: Conversation & Lineage
   filters:
   - name: Date
     title: Date
