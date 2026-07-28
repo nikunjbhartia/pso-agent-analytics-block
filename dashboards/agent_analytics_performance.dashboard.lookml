@@ -1637,9 +1637,24 @@
     sorts: [v_agent_evaluation.avg_judge_quality_score asc]
     row: 36
     col: 0
-    width: 24
+    width: 14
     height: 7
-    tab_name: Evaluation & Quality
+    tab_name: AI Recommendations
+  - name: recommendation_source_breakdown
+    title: "AI Recommendation Provenance: Gemini vs. SDK vs. Diagnostics"
+    type: looker_pie
+    note_state: collapsed
+    note_display: hover
+    note_text: What: Breakdown of where model improvement recommendations originated. | How: Aggregated by recommendation_source (gemini-2.5-flash, gemini-2.5-pro, sdk_evaluator, static_case_fallback). | Why it matters: Monitors share of recommendations backed by real BigQuery AI.GENERATE calls vs. SDK and empirical error diagnostics. | Drill: Click slice to filter recommendations.
+    explore: agent_events
+    dimensions: [v_agent_evaluation.recommendation_source]
+    measures: [agent_events.total_events]
+    sorts: [agent_events.total_events desc]
+    row: 36
+    col: 14
+    width: 10
+    height: 7
+    tab_name: AI Recommendations
   filters:
   - name: Date
     title: Date
