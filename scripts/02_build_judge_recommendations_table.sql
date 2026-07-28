@@ -39,8 +39,6 @@ CLUSTER BY trace_id, span_id;
 -- changed since last generation. Keep the AI call bounded to <= N rows
 -- per run so cost is predictable.
 -- ----------------------------------------------------------------------------
-DECLARE max_rows_per_run INT64 DEFAULT 500;
-
 MERGE `${PROJECT_ID}.${DATASET_NAME}.agent_judge_recommendations` T
 USING (
   WITH candidates AS (
@@ -58,11 +56,26 @@ USING (
       SAFE_CAST(JSON_VALUE(e.attributes, '$.usage.completion_tokens') AS INT64) AS completion_tokens,
       SAFE_CAST(JSON_VALUE(e.attributes, '$.adk.evaluation.judge_score') AS FLOAT64) AS judge_score,
       CASE
-        WHEN e.status = 'ERROR' AND JSON_VALUE(e.attributes,'$.error_traceback') LIKE '%Timeout%'      THEN 'TIMEOUT'
-        WHEN e.status = 'ERROR' AND JSON_VALUE(e.attributes,'$.error_traceback') LIKE '%JSON%'         THEN 'SCHEMA'
-        WHEN e.status = 'ERROR'                                                                        THEN 'TOOL_EXEC'
-        WHEN SAFE_CAST(JSON_VALUE(e.attributes,'$.adk.evaluation.judge_score') AS FLOAT64) < 70        THEN 'HALLUCINATION'
-        WHEN SAFE_CAST(JSON_VALUE(e.attributes,'$.adk.evaluation.judge_score') AS FLOAT64) < 85        THEN 'ROUTING'
+        WHEN e.status = 'ERROR' AND (JSON_VALUE(e.content, '$.error_traceback') LIKE '%exceeds the maximum number of tokens%' OR JSON_VALUE(e.attributes, '$.error_traceback') LIKE '%exceeds the maximum number of tokens%')
+          THEN 'TOKEN_OVERFLOW'
+        WHEN e.status = 'ERROR' AND (JSON_VALUE(e.content, '$.error_traceback') LIKE '%503 UNAVAILABLE%' OR JSON_VALUE(e.attributes, '$.error_traceback') LIKE '%503 UNAVAILABLE%')
+          THEN 'MODEL_UNAVAILABLE'
+        WHEN e.status = 'ERROR' AND (JSON_VALUE(e.content, '$.error_traceback') LIKE '%NOT_FOUND%' OR JSON_VALUE(e.attributes, '$.error_traceback') LIKE '%NOT_FOUND%')
+          THEN 'MODEL_NOT_FOUND'
+        WHEN e.status = 'ERROR' AND (JSON_VALUE(e.content, '$.error_traceback') LIKE '%TransientTimeoutError%' OR JSON_VALUE(e.attributes, '$.error_traceback') LIKE '%TransientTimeoutError%' OR JSON_VALUE(e.content, '$.error_traceback') LIKE '%Timeout%')
+          THEN 'TIMEOUT'
+        WHEN e.status = 'ERROR' AND (JSON_VALUE(e.content, '$.error_traceback') LIKE '%IndexError%' OR JSON_VALUE(e.attributes, '$.error_traceback') LIKE '%IndexError%')
+          THEN 'STATE_INDEX_ERROR'
+        WHEN e.status = 'ERROR' AND JSON_VALUE(e.content,'$.error_traceback') LIKE '%JSON%'
+          THEN 'SCHEMA'
+        WHEN e.status = 'ERROR'
+          THEN 'TOOL_EXEC'
+        WHEN SAFE_CAST(JSON_VALUE(e.attributes,'$.adk.evaluation.judge_score') AS FLOAT64) < 70
+          THEN 'HALLUCINATION'
+        WHEN SAFE_CAST(JSON_VALUE(e.attributes,'$.adk.evaluation.judge_score') AS FLOAT64) < 85
+          THEN 'ROUTING'
+        WHEN SAFE_CAST(JSON_VALUE(e.attributes,'$.usage.prompt_tokens') AS INT64) > 5000
+          THEN 'HIGH_TOKEN_COST'
         ELSE 'OPTIMAL'
       END AS error_bucket,
       TO_HEX(SHA256(CONCAT(
@@ -72,8 +85,8 @@ USING (
         IFNULL(SUBSTR(JSON_VALUE(e.attributes,'$.error_traceback'), 1, 2000),'')
       ))) AS source_fingerprint
     FROM `${PROJECT_ID}.${DATASET_NAME}.agent_events` e
-    WHERE e.event_type IN ('AGENT_COMPLETED','INVOCATION_COMPLETED')
-      AND e.timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY)
+    WHERE e.event_type IN ('AGENT_COMPLETED','INVOCATION_COMPLETED','AGENT_ERROR','INVOCATION_ERROR','TOOL_ERROR','LLM_ERROR')
+      AND e.timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY)
   ),
   needs_generation AS (
     SELECT c.*
@@ -86,7 +99,7 @@ USING (
       CASE c.error_bucket WHEN 'TIMEOUT' THEN 1 WHEN 'SCHEMA' THEN 2 WHEN 'TOOL_EXEC' THEN 3
                           WHEN 'HALLUCINATION' THEN 4 WHEN 'ROUTING' THEN 5 ELSE 9 END,
       c.judge_score ASC
-    LIMIT max_rows_per_run
+    LIMIT 500
   ),
   scored AS (
     SELECT
@@ -94,25 +107,24 @@ USING (
       AI.GENERATE(
         CONCAT(
           'You are a senior LLM/agent reliability engineer at Google Cloud PSO JAPAC. ',
-          'Given ONE production agent event, return a JSON object with keys ',
-          '{"priority":"P0|P1|P2","prompt_fix":"…","tool_schema_fix":"…","rag_fix":"…","one_liner":"…"}. ',
-          'Base recommendations ONLY on the evidence below; do not invent tool names. ',
+          'Given ONE production agent event, return a JSON object with keys: ',
+          'priority (P0, P1, P2), prompt_fix, tool_schema_fix, rag_fix, one_liner. ',
+          'Base recommendations ONLY on the evidence below. Do not invent tool names. ',
           'Keep each field <= 240 chars. Be concrete (name the exact instruction to add, ',
-          'the JSON field to validate, the retrieval index/filter to add).\n\n',
-          'error_bucket: ', n.error_bucket, '\n',
-          'status: ',       IFNULL(n.status,'NULL'), '\n',
-          'tool_name: ',    IFNULL(n.tool_name,'NULL'), '\n',
-          'judge_score: ',  IFNULL(CAST(n.judge_score AS STRING),'NULL'), '\n',
+          'the JSON field to validate, the retrieval index/filter to add). ',
+          'error_bucket: ', n.error_bucket, ' ',
+          'status: ',       IFNULL(n.status,'NULL'), ' ',
+          'tool_name: ',    IFNULL(n.tool_name,'NULL'), ' ',
+          'judge_score: ',  IFNULL(CAST(n.judge_score AS STRING),'NULL'), ' ',
           'prompt_tokens: ', IFNULL(CAST(n.prompt_tokens AS STRING),'NULL'),
-          '  completion_tokens: ', IFNULL(CAST(n.completion_tokens AS STRING),'NULL'), '\n',
-          '--- content (truncated) ---\n',
-          SUBSTR(IFNULL(n.content,''), 1, 4000), '\n',
-          '--- error_traceback (truncated) ---\n',
+          ' completion_tokens: ', IFNULL(CAST(n.completion_tokens AS STRING),'NULL'), ' ',
+          '--- content (truncated) --- ',
+          SUBSTR(IFNULL(n.content,''), 1, 4000), ' ',
+          '--- error_traceback (truncated) --- ',
           SUBSTR(IFNULL(n.error_traceback,''), 1, 4000)
         ),
         connection_id => '${LOCATION}.${CONNECTION_NAME}',
-        endpoint      => IF(n.judge_score < 60 OR n.error_bucket IN ('TIMEOUT','SCHEMA'),
-                            'gemini-2.5-pro', 'gemini-2.5-flash'),
+        endpoint      => 'gemini-2.5-flash',
         model_params  => JSON '{"generation_config":{"temperature":0.2,"response_mime_type":"application/json","max_output_tokens":512}}'
       ) AS ai
     FROM needs_generation n
@@ -121,8 +133,7 @@ USING (
     trace_id, span_id, session_id, event_timestamp, judge_score, error_bucket,
     ai.result                           AS recommendation,
     SAFE.PARSE_JSON(ai.result)          AS recommendation_json,
-    IF(judge_score < 60 OR error_bucket IN ('TIMEOUT','SCHEMA'),
-       'gemini-2.5-pro','gemini-2.5-flash') AS model_used,
+    'gemini-2.5-flash'                  AS model_used,
     SAFE_CAST(JSON_VALUE(ai.full_response,'$.usageMetadata.promptTokenCount') AS INT64)     AS input_tokens,
     SAFE_CAST(JSON_VALUE(ai.full_response,'$.usageMetadata.candidatesTokenCount') AS INT64) AS output_tokens,
     CURRENT_TIMESTAMP() AS generated_at,
