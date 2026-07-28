@@ -1,23 +1,21 @@
 -- ============================================================================
--- build_judge_recommendations.sql
+-- 02_build_judge_recommendations_table.sql
 -- ----------------------------------------------------------------------------
 -- Incrementally MERGE Gemini-generated prompt/tool/RAG recommendations into
--- `agent_analytics.agent_judge_recommendations`, keyed by trace_id+span_id.
+-- `${PROJECT_ID}.${DATASET_NAME}.agent_judge_recommendations`, keyed by trace_id+span_id.
+--
+-- PARAMETERS (replaced automatically by scripts/setup_all.sh):
+--   ${PROJECT_ID}      : Target Google Cloud project
+--   ${DATASET_NAME}    : BigQuery dataset (e.g. agent_analytics)
+--   ${LOCATION}        : BigQuery region (e.g. asia-southeast1)
+--   ${CONNECTION_NAME} : BigQuery Cloud Resource Connection name
 --
 -- Schedule via BigQuery Scheduled Queries (e.g. every 15 min) OR Cloud
--- Composer / Workflows. NEVER call inside a LookML derived_table on every
--- dashboard render — see v_agent_evaluation.view.lkml (COALESCE + LEFT JOIN).
---
--- Uses AI.GENERATE (GA) with the existing Cloud Resource Connection:
---     asia-southeast1.bqaa_ai_connection
---
--- Model selection:
---   Use `gemini-2.5-flash` (fast + cheap; recommendation text ~200 tokens).
---   Bump to `gemini-2.5-pro` only for rows where judge_score < 60 (deep RCA).
+-- Composer / Workflows.
 -- ============================================================================
 
 -- One-time DDL (idempotent). Partition by day, cluster for join locality.
-CREATE TABLE IF NOT EXISTS `nikunjbhartia-test-clients.agent_analytics.agent_judge_recommendations`
+CREATE TABLE IF NOT EXISTS `${PROJECT_ID}.${DATASET_NAME}.agent_judge_recommendations`
 (
   trace_id                STRING NOT NULL,
   span_id                 STRING NOT NULL,
@@ -43,7 +41,7 @@ CLUSTER BY trace_id, span_id;
 -- ----------------------------------------------------------------------------
 DECLARE max_rows_per_run INT64 DEFAULT 500;
 
-MERGE `nikunjbhartia-test-clients.agent_analytics.agent_judge_recommendations` T
+MERGE `${PROJECT_ID}.${DATASET_NAME}.agent_judge_recommendations` T
 USING (
   WITH candidates AS (
     SELECT
@@ -59,7 +57,6 @@ USING (
       SAFE_CAST(JSON_VALUE(e.attributes, '$.usage.prompt_tokens')     AS INT64) AS prompt_tokens,
       SAFE_CAST(JSON_VALUE(e.attributes, '$.usage.completion_tokens') AS INT64) AS completion_tokens,
       SAFE_CAST(JSON_VALUE(e.attributes, '$.adk.evaluation.judge_score') AS FLOAT64) AS judge_score,
-      -- Coarse bucket used both as a filter and as a hint to the model:
       CASE
         WHEN e.status = 'ERROR' AND JSON_VALUE(e.attributes,'$.error_traceback') LIKE '%Timeout%'      THEN 'TIMEOUT'
         WHEN e.status = 'ERROR' AND JSON_VALUE(e.attributes,'$.error_traceback') LIKE '%JSON%'         THEN 'SCHEMA'
@@ -74,19 +71,18 @@ USING (
         IFNULL(SUBSTR(JSON_VALUE(e.attributes,'$.content'), 1, 2000),''), '|',
         IFNULL(SUBSTR(JSON_VALUE(e.attributes,'$.error_traceback'), 1, 2000),'')
       ))) AS source_fingerprint
-    FROM `nikunjbhartia-test-clients.agent_analytics.agent_events` e
+    FROM `${PROJECT_ID}.${DATASET_NAME}.agent_events` e
     WHERE e.event_type IN ('AGENT_COMPLETED','INVOCATION_COMPLETED')
       AND e.timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY)
   ),
-  -- Skip OPTIMAL rows: the static string is fine and Gemini would waste tokens.
   needs_generation AS (
     SELECT c.*
     FROM candidates c
-    LEFT JOIN `nikunjbhartia-test-clients.agent_analytics.agent_judge_recommendations` r
+    LEFT JOIN `${PROJECT_ID}.${DATASET_NAME}.agent_judge_recommendations` r
       ON r.trace_id = c.trace_id AND r.span_id = c.span_id
     WHERE c.error_bucket <> 'OPTIMAL'
       AND (r.trace_id IS NULL OR r.source_fingerprint <> c.source_fingerprint)
-    ORDER BY  -- prioritize worst outcomes first if we hit the budget cap
+    ORDER BY
       CASE c.error_bucket WHEN 'TIMEOUT' THEN 1 WHEN 'SCHEMA' THEN 2 WHEN 'TOOL_EXEC' THEN 3
                           WHEN 'HALLUCINATION' THEN 4 WHEN 'ROUTING' THEN 5 ELSE 9 END,
       c.judge_score ASC
@@ -95,7 +91,6 @@ USING (
   scored AS (
     SELECT
       n.*,
-      -- AI.GENERATE returns STRUCT<result STRING, full_response JSON, status STRING>
       AI.GENERATE(
         CONCAT(
           'You are a senior LLM/agent reliability engineer at Google Cloud PSO JAPAC. ',
@@ -115,7 +110,7 @@ USING (
           '--- error_traceback (truncated) ---\n',
           SUBSTR(IFNULL(n.error_traceback,''), 1, 4000)
         ),
-        connection_id => 'asia-southeast1.bqaa_ai_connection',
+        connection_id => '${LOCATION}.${CONNECTION_NAME}',
         endpoint      => IF(n.judge_score < 60 OR n.error_bucket IN ('TIMEOUT','SCHEMA'),
                             'gemini-2.5-pro', 'gemini-2.5-flash'),
         model_params  => JSON '{"generation_config":{"temperature":0.2,"response_mime_type":"application/json","max_output_tokens":512}}'
@@ -133,7 +128,7 @@ USING (
     CURRENT_TIMESTAMP() AS generated_at,
     source_fingerprint
   FROM scored
-  WHERE ai.status IS NULL OR ai.status = ''  -- keep only successful generations
+  WHERE ai.status IS NULL OR ai.status = ''
 ) S
 ON T.trace_id = S.trace_id AND T.span_id = S.span_id
 WHEN MATCHED THEN UPDATE SET

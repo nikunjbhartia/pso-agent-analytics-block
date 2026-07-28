@@ -183,27 +183,48 @@ graph TD
 
 ---
 
-## Installation & Looker Configuration
+## Installation, BigQuery Setup & Looker Configuration
 
-1. **Clone this repository into your Looker project**:
-   ```bash
-   git clone https://github.com/nikunjbhartia/pso-agent-analytics-block.git
-   ```
-2. **Configure Connection & Dataset Name**:
-   *   In your Looker project settings or `manifest.lkml`, define your BigQuery connection name and dataset containing `agent_events`:
-   ```lookml
-   constant: CONNECTION_NAME {
-     value: "your_bigquery_connection_name"
-   }
-   constant: PROJECT_ID {
-     value: "your_google_cloud_project_id"
-   }
-   constant: DATASET_NAME {
-     value: "agent_analytics"
-   }
-   constant: TABLE_NAME {
-     value: "agent_events"
-   }
-   ```
-3. **Deploy Dashboards**:
-   *   Commit changes to your Looker Git repository and deploy to Production. All three dashboards will appear under LookML Dashboards with full interactive filters and 4-part hover explanations!
+### 1. Clone this repository
+```bash
+git clone https://github.com/nikunjbhartia/pso-agent-analytics-block.git
+cd pso-agent-analytics-block
+```
+
+### 2. Automated BigQuery Infrastructure Setup (`scripts/setup_all.sh`)
+Deploy your BigQuery Cloud Resource Connection, GCS Multimodal Object Table, and AI Judge Recommendations table using our automated, parameterized deployment script:
+
+```bash
+export PROJECT_ID="your-project-id"
+export DATASET_NAME="agent_analytics"
+export LOCATION="asia-southeast1"
+export CONNECTION_NAME="bqaa_ai_connection"
+export GCS_BUCKET="japac-pso-agent-analytics"
+
+./scripts/setup_all.sh
+```
+*   **What this script automates**:
+    *   Creates BigQuery Cloud Resource Connection (`${CONNECTION_NAME}`) in `${LOCATION}` if not present.
+    *   Creates External Object Table `${PROJECT_ID}.${DATASET_NAME}.gcs_multimodal_object_table` over `gs://${GCS_BUCKET}/*`.
+    *   Creates `${PROJECT_ID}.${DATASET_NAME}.agent_judge_recommendations` table and executes incremental `AI.GENERATE` scoring.
+*   **Real-Time AI Scheduling**: To automate AI recommendations every 15 minutes, schedule a BigQuery Scheduled Query using `scripts/02_build_judge_recommendations_table.sql`.
+
+### 3. Configure LookML Constants in `manifest.lkml`
+Define your BigQuery connection name and dataset containing `agent_events`:
+```lookml
+constant: CONNECTION_NAME {
+  value: "your_bigquery_connection_name"
+}
+constant: PROJECT_ID {
+  value: "your_google_cloud_project_id"
+}
+constant: DATASET_NAME {
+  value: "agent_analytics"
+}
+constant: TABLE_NAME {
+  value: "agent_events"
+}
+```
+
+### 4. Deploy Dashboards
+Commit changes to your Looker Git repository and deploy to Production. All three dashboards will appear under LookML Dashboards with full interactive filters and 4-part hover explanations!
