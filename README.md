@@ -127,3 +127,128 @@ constant: TABLE_NAME {
 
 ### 4. Deploy Dashboards
 Commit changes to your Looker Git repository and deploy to Production. All three dashboards will appear under LookML Dashboards with full interactive filters and 4-part hover explanations!
+
+---
+
+## End-to-End Enterprise Setup Guide & Architecture Walkthrough (Manual & Automated Step-by-Step)
+
+This section provides an exhaustive, production-grade reference for all configuration, API enablement, IAM permissions, telemetry seeding, SDK kernel registration, graph materialization, and Looker BI integration steps required to deploy Google Cloud PSO JAPAC Agent Analytics from scratch.
+
+### Prerequisites & GCP API / IAM Enablement Checklist
+
+Before running any script or SQL pipeline, verify that the target Google Cloud project has the following APIs, IAM roles, and Preview features enabled:
+
+1.  **Required GCP APIs**:
+    ```bash
+    gcloud services enable \
+      bigquery.googleapis.com \
+      bigqueryconnection.googleapis.com \
+      bigquerydatatransfer.googleapis.com \
+      aiplatform.googleapis.com \
+      cloudfunctions.googleapis.com \
+      run.googleapis.com \
+      cloudbuild.googleapis.com \
+      artifactregistry.googleapis.com \
+      --project="your-project-id"
+    ```
+2.  **Mandatory IAM Roles for BigQuery Connection Service Accounts**:
+    *   When you create a BigQuery Cloud Resource Connection (e.g., `bqaa_ai_connection` or `analytics-conn`), BigQuery generates a dedicated Google-managed service account (`serviceAccountId`).
+    *   **Vertex AI Access**: You **must** grant `roles/aiplatform.user` to this service account so that `AI.GENERATE` and `AI.CLASSIFY` can invoke Gemini models (`gemini-2.5-flash`):
+        ```bash
+        gcloud projects add-iam-policy-binding "your-project-id" \
+          --member="serviceAccount:YOUR_CONNECTION_SA@gcp-sa-bigqueryconnection.iam.gserviceaccount.com" \
+          --role="roles/aiplatform.user"
+        ```
+    *   **GCS Multimodal Access**: For external object tables over `gs://japac-pso-agent-analytics/*`, grant `roles/storage.objectViewer` to the connection service account.
+3.  **Preview Features**:
+    *   Verify that **BigQuery Python UDF support** is enabled in your target BigQuery location (`asia-southeast1`).
+
+---
+
+### Complete 7-Step Deployment Architecture
+
+You can execute all steps automatically via `./scripts/setup_all.sh` or run them individually as detailed below:
+
+#### Step 1: BigQuery Cloud Resource Connection & GCS Multimodal Object Table
+*   **What it does**: Provisions the Cloud Resource connection and deploys the BigQuery External Object Table (`gcs_multimodal_object_table`) over signed GCS URIs offloaded by `BigQueryAgentAnalyticsPlugin`.
+*   **Command**:
+    ```bash
+    ./scripts/setup_all.sh
+    # Or execute SQL manually:
+    # bq query --use_legacy_sql=false < scripts/01_create_object_table_and_connections.sql
+    ```
+
+#### Step 2: Seeding Synthetic ADK Telemetry across Domain Scenarios
+*   **What it does**: Uses `BigQuery-Agent-Analytics-SDK` (`bqaa seed-events`) to populate `agent_events` with deterministic, production-shaped agent sessions without needing a live Python application.
+*   **Available Scenarios & Commands**:
+    ```bash
+    # 1. Compact smoke-test decision corpus (5 sessions)
+    bqaa seed-events --project-id="$PROJECT_ID" --dataset-id="$DATASET_NAME" --scenario=decision --sessions=5
+
+    # 2. Enterprise decision-lineage corpus (100+ sessions, 70/10/10/10 outcome mix)
+    bqaa seed-events --project-id="$PROJECT_ID" --dataset-id="$DATASET_NAME" --scenario=decision-realistic --sessions=100
+
+    # 3. Conversational analytics & retail customer support corpus (100+ sessions, LLM token/latency telemetry)
+    bqaa seed-events --project-id="$PROJECT_ID" --dataset-id="$DATASET_NAME" --scenario=retail-returns --sessions=100
+    ```
+
+#### Step 3: Registering 11 SDK Analytical Python UDFs in BigQuery
+*   **What it does**: Registers 11 high-performance Python UDF scoring kernels and event semantic classifiers directly into your BigQuery dataset using `udf_sql_templates.generate_all_udfs()`.
+*   **Functions Registered**:
+    *   *Event Semantics*: `bqaa_is_error_event`, `bqaa_tool_outcome`, `bqaa_extract_response_text`, `bqaa_normalize_event_label`
+    *   *Score Kernels (`[0.0, 1.0]`, higher is better)*: `bqaa_score_latency`, `bqaa_score_error_rate`, `bqaa_score_turn_count`, `bqaa_score_token_efficiency`, `bqaa_score_ttft`, `bqaa_score_cost`
+    *   *JSON Summary Envelope*: `bqaa_eval_summary_json`
+*   **Command**:
+    ```bash
+    python3 -c "from google.cloud import bigquery; from bigquery_agent_analytics.udf_sql_templates import generate_all_udfs; client = bigquery.Client(project='$PROJECT_ID'); [client.query(s).result() for s in generate_all_udfs('$PROJECT_ID', '$DATASET_NAME').split(';') if s.strip()]"
+    ```
+
+#### Step 4: Deploying Cloud Function & Registering BigQuery Remote Function
+*   **What it does**: Deploys the SDK as a Cloud Function (gen2) and registers a BigQuery Remote Function (`agent_analytics(operation, params)`) so SQL queries can call SDK trace evaluators and classifiers directly.
+*   **Command**:
+    ```bash
+    cd /path/to/BigQuery-Agent-Analytics-SDK/deploy/remote_function
+    ./deploy.sh "$PROJECT_ID" "asia-southeast1" "$DATASET_NAME" "asia-southeast1"
+    ```
+    *(Note: Our script passes explicit `--project="$PROJECT_ID"` flags to `gcloud functions deploy` and `gcloud functions add-invoker-policy-binding` to prevent deploying to local gcloud default projects).*
+
+#### Step 5: Automated AI Evaluation & Recommendations Table (`02_build_judge_recommendations_table.sql`)
+*   **What it does**: Runs `AI.GENERATE` over `agent_events` across both error sessions (`TOOL_ERROR`, `LLM_ERROR`, `AGENT_ERROR`) and successful sessions (`BEST_PRACTICE_REINFORCEMENT`, `FINOPS_TOKEN_OPT`). Calculates on-the-fly LLM-as-a-Judge quality scores (0–100%) and generates actionable prompt/schema fix recommendations.
+*   **Scheduling**: Automatically registers a BigQuery Scheduled Query via Data Transfer Service to re-evaluate new traces every 15 minutes.
+*   **Command**:
+    ```bash
+    bq query --use_legacy_sql=false < scripts/02_build_judge_recommendations_table.sql
+    ```
+
+#### Step 6: Materializing Agent Context Graphs (`bqaa context-graph`)
+*   **What it does**: Extracts structured business entities (`BizNode` / `DecisionRequest` / `DecisionOption` / `DecisionOutcome`) and decision lineage from raw telemetry and deploys native BigQuery Property Graphs (`CREATE OR REPLACE PROPERTY GRAPH`).
+*   **Commands**:
+    ```bash
+    # Option A: Out-of-the-box SDK graph (extracts BizNode/TechNode entities automatically via AI.GENERATE)
+    python3 -c "from bigquery_agent_analytics.context_graph import ContextGraphManager; mgr = ContextGraphManager(project_id='$PROJECT_ID', dataset_id='$DATASET_NAME', table_id='agent_events', location='$LOCATION'); mgr.build_context_graph(use_ai_generate=True, include_decisions=True)"
+
+    # Option B: Incremental domain decision graph (e.g., agent_decisions_graph over 24h window)
+    bqaa context-graph --project-id="$PROJECT_ID" --dataset-id="$DATASET_NAME" --graph="agent_decisions_graph" --lookback-hours=24
+    ```
+
+#### Step 7: Looker BI Dashboard Deployment & Conversational Lineage
+*   **What it does**: Connects Looker to BigQuery via LookML views and exposes 6 interactive dashboard tabs:
+    1.  `Executive Summary` (Server-Verified Hours Saved, Consulting Value USD, P50/P90 Latency)
+    2.  `Session Trace Inspector` (Trace-level breakdown and tool sequences)
+    3.  `AI Error Analysis & Recommendations` (AI.GENERATE recommendation catalog and empirical fix diffs)
+    4.  `FinOps & Model Analytics` (75% prompt cache discount savings and token consumption)
+    5.  `Looker BI Block Usage & Provenance` (Dashboard adoption and query latency by user)
+    6.  **`Conversation & Lineage`** (Turn-by-turn interaction flows, token latency, and multi-agent DAG delegation decision paths)
+
+---
+
+### Critical Architectural Rules & Lessons Learned
+
+1.  **BigQuery `AI.GENERATE` Constant Literal Requirement**:
+    *   In BigQuery GoogleSQL, the `endpoint` argument to `AI.GENERATE(..., endpoint => 'gemini-2.5-flash')` **must be a literal string or query parameter**. Passing a dynamic expression such as `IF(condition, 'model_a', 'model_b')` throws `400 BadRequest`.
+2.  **Property Graph Audit Metadata Requirement (`session_id` & `extracted_at`)**:
+    *   When defining custom backing tables for BigQuery Property Graphs (`DecisionRequest`, `DecisionOption`, etc.), **every node and edge table must contain `session_id STRING` and `extracted_at TIMESTAMP`**.
+    *   The `bqaa context-graph` materializer relies on these two columns to track session provenance and perform incremental time-window checkpointing (`--lookback-hours`).
+3.  **GQL Scalar Property Constraints vs. Repeated Records**:
+    *   BigQuery Property Graphs (and GQL) do **not** support `ARRAY<STRUCT<...>>` (repeated records) as node or edge properties.
+    *   When authoring `CREATE OR REPLACE PROPERTY GRAPH` statements over tables with complex repeated columns (such as `content_parts` in `agent_events`), you **must explicitly define a scalar property list (`PROPERTIES (...)`)** excluding the repeated structural columns.
