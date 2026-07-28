@@ -21,10 +21,10 @@ Before APO Analytics, engineering and consulting teams faced four systemic chall
 
 ## Three Canonical Looker Dashboards & Complete Metric Catalog
 
-This Looker Block includes three canonical dashboards capturing a total of **72 distinct analytical metrics and scorecards** across 13 BigQuery ADK telemetry domains:
+This Looker Block includes three canonical dashboards capturing a total of **73 distinct analytical metrics and scorecards** across 13 BigQuery ADK telemetry domains:
 *   **`pso_apo_executive_portal`**: Captures **23 Executive & Value Engineering Metrics** (Server-Verified Hours Saved, FTE Weeks Saved, Consulting Value USD, 30-Day BQML AI Predictive ROI Forecast, Multi-Agent DAG Lineage, CI/CD SLA Gates, and Practice/Regional Attributions).
 *   **`agent_analytics_usage`**: Captures **25 Usage & Token Economics Metrics** (Token consumption, Traces, Sessions, Multi-Agent Collaboration, Tools, Users, and GCS Multimodal Object Table Offloading).
-*   **`agent_analytics_performance`**: Captures **24 Performance, SLA & Reliability Metrics** (P50/P75/P90/P99 latencies, Errors, Self-Healing Resilience Rate %, LLM-as-a-Judge Quality Score %, User Feedback Satisfaction %, Self-Correction Loops %, and Enterprise Edge Cases).
+*   **`agent_analytics_performance`**: Captures **25 Performance, SLA & Reliability Metrics** (P50/P75/P90/P99 latencies, Errors, Self-Healing Resilience Rate %, LLM-as-a-Judge Quality Score %, User Feedback Satisfaction %, Self-Correction Loops %, Actionable Model Improvement Recommendations, and Enterprise Edge Cases).
 
 All three dashboards are built on Looker's Next-Gen canvas (`preferred_viewer: dashboards-next`) with dynamic cross-filtering (`crossfilter_enabled: yes`) and universal filters for **`Date Range`**, **`Practice Area`**, **`Sub-Region`**, **`Pilot Project`**, **`Agent Name`**, **`Trace ID`**, and **`Session ID`**.
 
@@ -104,7 +104,7 @@ Drill:          Instructions on how to click any bar/point to drill down by Trac
 
 ---
 
-### 3. `agent_analytics_performance` (24 Performance, SLA & Reliability Metrics)
+### 3. `agent_analytics_performance` (25 Performance, SLA & Reliability Metrics)
 *   **Target Audience**: Customer SREs, DevOps Engineers, Agent Evaluators & Reliability Teams.
 *   **Primary Objective**: P50/P75/P90/P99 latencies, LLM-as-a-Judge quality evaluation, user feedback satisfaction, autonomous self-correction loops, and enterprise edge-case detection.
 
@@ -134,6 +134,7 @@ Drill:          Instructions on how to click any bar/point to drill down by Trac
 | **A2A Circular Delegation Ping-Pong Loops** | Highlights recursive multi-agent loops | `v_session_trace_dag.from_agent`, `to_target` | Detects recursive A2A ping-pong loops (`from_agent = to_target`) |
 | **HITL Confirmation Request Volume & Latency** | Tracks Human-In-The-Loop approval volume and latency | `v_hitl_confirmation_request.tool_name` | Aggregates `HITL_CONFIRMATION_REQUEST` events by tool and date |
 | **Tool Error Breakdown by Failing Function** | Breakdown of failing backend tools and error counts | `v_tool_error.tool_name` | Aggregates `TOOL_ERROR` occurrences by `tool_name` |
+| **LLM-as-a-Judge: Actionable Model Improvement Recommendations** | Actionable engineering recommendations to improve model/prompt accuracy | `v_agent_evaluation.judge_improvement_recommendation` | Extracted from judge recommendation metadata or diagnosed via error traceback and quality score |
 
 ---
 

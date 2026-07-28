@@ -24,6 +24,17 @@ view: v_agent_evaluation {
             ELSE 'THUMBS_DOWN'
           END
         ) AS user_feedback_rating,
+        COALESCE(
+          JSON_VALUE(attributes, '$.adk.evaluation.recommendation'),
+          CASE
+            WHEN status = 'ERROR' AND JSON_VALUE(attributes, '$.error_traceback') LIKE '%Timeout%' THEN 'HIGH LATENCY / TIMEOUT: Refactor tool API call to use async batching or increase timeout threshold.'
+            WHEN status = 'ERROR' AND JSON_VALUE(attributes, '$.error_traceback') LIKE '%JSON%' THEN 'SCHEMA MISMATCH: Add strict JSON schema validation to tool definition and prompt instructions.'
+            WHEN status = 'ERROR' THEN 'TOOL EXECUTION FAILURE: Implement automatic retry logic and refine tool docstrings for clearer LLM argument parsing.'
+            WHEN CAST(JSON_VALUE(attributes, '$.adk.evaluation.judge_score') AS FLOAT64) < 70.0 THEN 'LOW RELEVANCE / HALLUCINATION: Augment system prompt with explicit few-shot examples and ground domain context via RAG.'
+            WHEN CAST(JSON_VALUE(attributes, '$.adk.evaluation.judge_score') AS FLOAT64) < 85.0 THEN 'SUBOPTIMAL TOOL ROUTING: Clarify multi-tool boundary descriptions to prevent tool selection ambiguity.'
+            ELSE 'OPTIMAL PERFORMANCE: Maintain current prompt instructions and caching strategy.'
+          END
+        ) AS judge_improvement_recommendation,
         CASE
           WHEN status = 'SUCCESS' AND EXISTS (
             SELECT 1 FROM `@{PROJECT_ID}.@{DATASET_NAME}.agent_events` e2
@@ -57,6 +68,14 @@ view: v_agent_evaluation {
     description: "Qualitative user feedback rating (THUMBS_UP or THUMBS_DOWN) recorded for the session."
     type: string
     sql: ${TABLE}.user_feedback_rating ;;
+  }
+
+  dimension: judge_improvement_recommendation {
+    label: "LLM-as-a-Judge Improvement Recommendation"
+    group_label: "LLM-as-a-Judge & Feedback Loop"
+    description: "What: Actionable engineering recommendation to improve model performance and prompt/tool accuracy. How: Extracted from LLM-as-a-Judge evaluation metadata (or derived diagnostically from error tracebacks and judge quality scores). Why: Gives prompt engineers and SREs direct remediation steps."
+    type: string
+    sql: ${TABLE}.judge_improvement_recommendation ;;
   }
 
   measure: avg_judge_quality_score {

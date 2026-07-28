@@ -1625,6 +1625,21 @@
     width: 24
     height: 7
     tab_name: Errors
+  - name: judge_improvement_recommendations_table
+    title: "LLM-as-a-Judge: Actionable Model Improvement Recommendations"
+    type: looker_grid
+    note_state: collapsed
+    note_display: hover
+    note_text: What: Diagnostic recommendations on how to improve model performance based on LLM-as-a-Judge evaluation and user interactions. | How: Aggregated from LLM-as-a-Judge recommendation metadata and error diagnostics. | Why it matters: Converts qualitative scores into actionable prompt engineering and tool optimization steps. | Drill: Filter by Agent Name to inspect specific interaction recommendations.
+    explore: agent_events
+    dimensions: [agent_events.canonical_agent_name, v_agent_evaluation.judge_improvement_recommendation]
+    measures: [v_agent_evaluation.avg_judge_quality_score, v_agent_evaluation.feedback_satisfaction_rate_pct]
+    sorts: [v_agent_evaluation.avg_judge_quality_score asc]
+    row: 36
+    col: 0
+    width: 24
+    height: 7
+    tab_name: Evaluation & Quality
   filters:
   - name: Date
     title: Date
