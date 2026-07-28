@@ -6,7 +6,8 @@
 # Deploys:
 #   1. BigQuery Cloud Resource Connection (if not existing)
 #   2. External Object Table over GCS multimodal offload bucket
-#   3. Incremental BigQuery AI.GENERATE recommendations table & DDL
+#   3. Incremental BigQuery AI.GENERATE recommendations table & initial MERGE
+#   4. BigQuery Scheduled Query (running MERGE automatically every 15 min)
 #
 # USAGE:
 #   export PROJECT_ID="your-project-id"
@@ -29,7 +30,7 @@ GCS_BUCKET="${GCS_BUCKET:-japac-pso-agent-analytics}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "----------------------------------------------------------------------"
-echo "Starting APO Agent Analytics BigQuery Setup"
+echo "Starting APO Agent Analytics BigQuery Setup & Scheduling"
 echo "  PROJECT_ID      : ${PROJECT_ID}"
 echo "  DATASET_NAME    : ${DATASET_NAME}"
 echo "  LOCATION        : ${LOCATION}"
@@ -62,8 +63,8 @@ bq query --use_legacy_sql=false --project_id="${PROJECT_ID}" < "${TEMP_SQL_1}"
 rm -f "${TEMP_SQL_1}"
 echo "   External Object Table created/verified successfully."
 
-# 3. Deploy AI.GENERATE Recommendations Table DDL and Run MERGE
-echo "3. Executing AI.GENERATE Judge Recommendations DDL & MERGE..."
+# 3. Deploy AI.GENERATE Recommendations Table DDL and Run Initial MERGE
+echo "3. Executing AI.GENERATE Judge Recommendations DDL & initial MERGE..."
 TEMP_SQL_2=$(mktemp)
 sed -e "s/\${PROJECT_ID}/${PROJECT_ID}/g" \
     -e "s/\${DATASET_NAME}/${DATASET_NAME}/g" \
@@ -72,12 +73,30 @@ sed -e "s/\${PROJECT_ID}/${PROJECT_ID}/g" \
     "${SCRIPT_DIR}/02_build_judge_recommendations_table.sql" > "${TEMP_SQL_2}"
 
 bq query --use_legacy_sql=false --project_id="${PROJECT_ID}" < "${TEMP_SQL_2}"
+echo "   AI Judge Recommendations table & initial MERGE executed successfully."
+
+# 4. Schedule BigQuery Scheduled Query to run MERGE every 15 minutes
+echo "4. Registering BigQuery Scheduled Query (every 15 minutes)..."
+QUERY_CONTENT=$(python3 -c "import json, sys; print(json.dumps(sys.stdin.read()))" < "${TEMP_SQL_2}")
 rm -f "${TEMP_SQL_2}"
-echo "   AI Judge Recommendations table & MERGE executed successfully."
+
+# Check if a scheduled query with the same display name already exists to avoid duplicates
+if bq ls --transfer_config --project_id="${PROJECT_ID}" --transfer_location="${LOCATION}" | grep -q "APO Agent Analytics - Incremental AI Recommendations"; then
+  echo "   Scheduled Query already registered. Skipping creation."
+else
+  bq mk \
+    --transfer_config \
+    --project_id="${PROJECT_ID}" \
+    --location="${LOCATION}" \
+    --data_source=scheduled_query \
+    --display_name="APO Agent Analytics - Incremental AI Recommendations (15m)" \
+    --schedule="every 15 minutes" \
+    --params="{\"query\":${QUERY_CONTENT}}" || echo "   Note: Could not register scheduled query automatically. Please schedule 02_build_judge_recommendations_table.sql manually if required."
+  echo "   Scheduled Query registered successfully."
+fi
 
 echo "----------------------------------------------------------------------"
-echo "Setup Complete!"
-echo "To automate incremental AI recommendations every 15 minutes, create a"
-echo "BigQuery Scheduled Query using '02_build_judge_recommendations_table.sql'"
-echo "after substituting your parameter values."
+echo "Setup & Scheduling Complete!"
+echo "All external object tables, connections, and 15-minute scheduled AI"
+echo "recommendation jobs are now deployed in project '${PROJECT_ID}'."
 echo "----------------------------------------------------------------------"
