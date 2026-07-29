@@ -72,17 +72,7 @@
       explore: agent_events
     model: bigquery_agent_analytics_model
       measures: [agent_events.cwpm_verifiable_hours_saved]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 0
-      col: 0
-      width: 4
-      height: 3
-  - name: fte_weeks_saved_card
+    - name: fte_weeks_saved_card
       title: "FTE Weeks Saved Equivalent"
       type: single_value
       note_state: collapsed
@@ -91,17 +81,7 @@
       explore: agent_events
     model: bigquery_agent_analytics_model
       measures: [agent_events.fte_weeks_saved_equivalent]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 0
-      col: 4
-      width: 4
-      height: 3
-  - name: consulting_value_usd_card
+    - name: consulting_value_usd_card
       title: "Consulting Value Created ($ USD)"
       type: single_value
       note_state: collapsed
@@ -110,17 +90,7 @@
       explore: agent_events
     model: bigquery_agent_analytics_model
       measures: [agent_events.consulting_value_usd]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 0
-      col: 8
-      width: 4
-      height: 3
-  - name: resilience_rate_pct_card
+    - name: resilience_rate_pct_card
       title: "Self-Healing Resilience Rate (%)"
       type: single_value
       note_state: collapsed
@@ -129,17 +99,7 @@
       explore: agent_events
     model: bigquery_agent_analytics_model
       measures: [agent_events.self_healing_resilience_rate_pct]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 0
-      col: 12
-      width: 4
-      height: 3
-  - name: total_pilot_projects_card
+    - name: total_pilot_projects_card
       title: "Pilot Projects"
       type: single_value
       note_state: collapsed
@@ -148,17 +108,7 @@
       explore: agent_events
     model: bigquery_agent_analytics_model
       measures: [agent_events.total_pilot_projects]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 0
-      col: 16
-      width: 4
-      height: 3
-  - name: total_agents_used_card
+    - name: total_agents_used_card
       title: "Agents Used"
       type: single_value
       note_state: collapsed
@@ -167,17 +117,7 @@
       explore: agent_events
     model: bigquery_agent_analytics_model
       measures: [agent_events.total_invocations]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 0
-      col: 20
-      width: 4
-      height: 3
-
+  
     # --- ROW 2: PRACTICE AREA & PILOT PROJECT ATTRIBUTION ---
   - name: hours_saved_by_pilot_project
       title: "Server-Verified Hours Saved by Pilot Project & Practice Area"
@@ -191,17 +131,7 @@
       measures: [agent_events.server_verified_hours_saved]
       sorts: [agent_events.server_verified_hours_saved desc]
       stacking: normal
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 3
-      col: 0
-      width: 14
-      height: 7
-  - name: hours_saved_by_practice_area
+    - name: hours_saved_by_practice_area
       title: "Hours Saved by Practice Area"
       type: looker_bar
       note_state: collapsed
@@ -212,17 +142,7 @@
       dimensions: [agent_events.practice_area]
       measures: [agent_events.server_verified_hours_saved]
       sorts: [agent_events.server_verified_hours_saved desc]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 3
-      col: 14
-      width: 10
-      height: 7
-
+  
     # --- ROW 3: TOP AGENTS LEADERBOARD & SUB-REGION ADOPTION VELOCITY ---
   - name: top_agents_by_hours_saved
       title: "Top Agents by Hours Saved and Events"
@@ -238,17 +158,7 @@
       measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved, agent_events.consulting_value_usd, udf_realtime_scorecard.avg_latency_score, udf_realtime_scorecard.avg_ttft_score]
       sorts: [agent_events.server_verified_hours_saved desc]
       limit: 15
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 10
-      col: 0
-      width: 14
-      height: 7
-  - name: adoption_velocity_by_sub_region
+    - name: adoption_velocity_by_sub_region
       title: "JAPAC Sub-Region Adoption Velocity over Time"
       type: looker_line
       note_state: collapsed
@@ -259,17 +169,7 @@
       dimensions: [agent_events.timestamp_date, agent_events.sub_region]
       measures: [agent_events.server_verified_hours_saved]
       sorts: [agent_events.timestamp_date desc]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 10
-      col: 14
-      width: 10
-      height: 7
-
+  
     # --- ROW 4: EXECUTIVE FINOPS & VERIFIABLE ENGINEER TESTIMONIALS ---
   - name: model_tier_spend_breakdown
       title: "Model Tier Spend Breakdown ($ USD)"
@@ -282,17 +182,7 @@
       dimensions: [v_llm_response.model_version]
       measures: [v_llm_response.total_spend_usd]
       sorts: [v_llm_response.total_spend_usd desc]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 17
-      col: 0
-      width: 8
-      height: 7
-  - name: verifiable_engineer_wins
+    - name: verifiable_engineer_wins
       title: "Feedback & Wins — Verifiable Engineer Testimonials"
       type: looker_grid
     truncate_text: no
@@ -306,17 +196,7 @@
       measures: [agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved]
       sorts: [agent_events.server_verified_hours_saved desc]
       limit: 10
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 17
-      col: 8
-      width: 16
-      height: 7
-
+  
     # --- ROW 5: FINOPS CACHE DISCOUNT, RESILIENCE & GRAPH-DERIVED METRICS ---
   - name: cache_discount_spend_card
       title: "75% Cache-Discount Actual Spend ($ USD)"
@@ -327,17 +207,7 @@
       explore: agent_events
     model: bigquery_agent_analytics_model
       measures: [v_llm_response.cache_discounted_actual_cost_usd]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 24
-      col: 0
-      width: 6
-      height: 4
-  - name: prompt_cache_hit_ratio_card
+    - name: prompt_cache_hit_ratio_card
       title: "Prompt Cache Hit Ratio (%)"
       type: single_value
       note_state: collapsed
@@ -346,17 +216,7 @@
       explore: agent_events
     model: bigquery_agent_analytics_model
       measures: [v_llm_response.prompt_cache_hit_ratio]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 24
-      col: 6
-      width: 6
-      height: 4
-  - name: tool_productivity_credit_card
+    - name: tool_productivity_credit_card
       title: "Tool Productivity Credit Hours (CWPM)"
       type: single_value
       note_state: collapsed
@@ -365,17 +225,7 @@
       explore: agent_events
     model: bigquery_agent_analytics_model
       measures: [v_tool_completed.tool_productivity_credit_hours]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 24
-      col: 12
-      width: 6
-      height: 4
-  - name: sla_error_rate_gate_card
+    - name: sla_error_rate_gate_card
       title: "CI/CD SLA Gate Assertion"
       type: single_value
       note_state: collapsed
@@ -384,17 +234,7 @@
       explore: agent_events
     model: bigquery_agent_analytics_model
       measures: [agent_events.sla_error_rate_gating]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 24
-      col: 18
-      width: 6
-      height: 4
-  - name: graph_trace_dag_and_sla_gate_table
+    - name: graph_trace_dag_and_sla_gate_table
       title: "Trace DAG & CI/CD SLA Gate Performance by Agent"
       type: looker_grid
     truncate_text: no
@@ -408,17 +248,7 @@
       measures: [agent_events.total_invocations, agent_events.self_healing_resilience_rate_pct, agent_events.cwpm_verifiable_hours_saved, v_llm_response.cache_discounted_actual_cost_usd]
       sorts: [agent_events.cwpm_verifiable_hours_saved desc]
       limit: 15
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 28
-      col: 0
-      width: 24
-      height: 7
-
+  
     # --- ROW 6: DIVERSE STACKED AREA & SCATTER PLOT ANALYTICS ---
   - name: finops_cache_savings_over_time
       title: "75% Gemini Prompt Cache Savings vs. Actual Spend over Time ($ USD)"
@@ -432,17 +262,7 @@
       measures: [v_llm_response.cache_savings_usd, v_llm_response.cache_discounted_actual_cost_usd]
       sorts: [agent_events.timestamp_date desc]
       stacking: normal
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 35
-      col: 0
-      width: 12
-      height: 8
-  - name: agent_roi_complexity_scatter
+    - name: agent_roi_complexity_scatter
       title: "Agent Complexity & ROI Scatter Plot (Invocations vs. Verifiable Hours Saved)"
       type: looker_scatter
       note_state: collapsed
@@ -453,17 +273,7 @@
       dimensions: [agent_events.canonical_agent_name]
       measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.consulting_value_usd]
       sorts: [agent_events.server_verified_hours_saved desc]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 35
-      col: 12
-      width: 12
-      height: 8
-
+  
     # --- ROW 7: DIVERSE DONUT & RESILIENCE COLUMN BREAKDOWN ---
   - name: consulting_value_by_practice_area_donut
       title: "Consulting Value Created by Practice Area ($ USD Donut)"
@@ -476,17 +286,7 @@
       dimensions: [agent_events.practice_area]
       measures: [agent_events.consulting_value_usd]
       sorts: [agent_events.consulting_value_usd desc]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 43
-      col: 0
-      width: 12
-      height: 7
-  - name: resilience_sla_by_practice_area_column
+    - name: resilience_sla_by_practice_area_column
       title: "Tool Execution Volume & Self-Healing Resilience SLA by Practice Area"
       type: looker_column
       note_state: collapsed
@@ -497,17 +297,7 @@
       dimensions: [agent_events.practice_area]
       measures: [agent_events.total_events, agent_events.self_healing_resilience_rate_pct]
       sorts: [agent_events.total_events desc]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 43
-      col: 12
-      width: 12
-      height: 7
-  - name: bqml_roi_30day_forecast_chart
+    - name: bqml_roi_30day_forecast_chart
       title: "BigQuery AI: 30-Day Predictive ROI & Consulting Value Forecast"
       type: looker_area
       note_state: collapsed
@@ -518,17 +308,7 @@
       dimensions: [v_bqml_roi_forecast.forecast_date, v_bqml_roi_forecast.data_type]
       measures: [v_bqml_roi_forecast.predicted_hours_saved, v_bqml_roi_forecast.confidence_lower_bound_hours, v_bqml_roi_forecast.confidence_upper_bound_hours]
       sorts: [v_bqml_roi_forecast.forecast_date asc]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 50
-      col: 0
-      width: 12
-      height: 7
-  - name: session_trace_dag_lineage_graph
+    - name: session_trace_dag_lineage_graph
       title: "Multi-Agent Session DAG & Trace Delegation Lineage Graph"
       type: looker_column
       note_state: collapsed
@@ -539,14 +319,4 @@
       dimensions: [v_session_trace_dag.session_id, v_session_trace_dag.from_agent, v_session_trace_dag.to_target]
       measures: [v_session_trace_dag.total_dag_hops, v_session_trace_dag.avg_dag_hop_latency_ms]
       sorts: [v_session_trace_dag.total_dag_hops desc]
-      listen:
-        date_filter: agent_events.timestamp_date
-        practice_area_filter: agent_events.practice_area
-        sub_region_filter: agent_events.sub_region
-        pilot_project_filter: agent_events.pilot_project
-        agent_name_filter: agent_events.canonical_agent_name
-      row: 50
-      col: 12
-      width: 12
-      height: 7
-
+  
