@@ -18,7 +18,7 @@
   - name: nav_header_latency
     type: text
     title_text: ""
-    body_text: "### [🏠 APO Executive Portal](/dashboards/japac_pso_agent_analytics::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_usage)"
+    body_text: "### [🏠 APO Executive Portal](/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_usage)"
     row: 0
     col: 0
     width: 24
@@ -27,7 +27,7 @@
   - name: nav_header_errors
     type: text
     title_text: ""
-    body_text: "### [🏠 APO Executive Portal](/dashboards/japac_pso_agent_analytics::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_usage)"
+    body_text: "### [🏠 APO Executive Portal](/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_usage)"
     row: 0
     col: 0
     width: 24
@@ -36,7 +36,7 @@
   - name: nav_header_recs
     type: text
     title_text: ""
-    body_text: "### [🏠 APO Executive Portal](/dashboards/japac_pso_agent_analytics::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_usage)"
+    body_text: "### [🏠 APO Executive Portal](/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_usage)"
     row: 0
     col: 0
     width: 24
@@ -44,7 +44,7 @@
     tab_name: AI Recommendations
   - title: Average Tool Latency (ms)
     name: Average Tool Latency (ms)
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -104,7 +104,7 @@
     height: 6
     tab_name: Latency  - title: Tool Latency Trend
     name: Tool Latency Trend
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -174,7 +174,7 @@
     height: 6
     tab_name: Latency  - title: Average LLM Latency (in ms)
     name: Average LLM Latency (in ms)
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -252,7 +252,7 @@
     height: 6
     tab_name: Latency  - title: LLM Latency Trend
     name: LLM Latency Trend
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -358,14 +358,14 @@
     tab_name: Latency
   - type: button
     name: button_871
-    rich_content_json: '{"text":"Usage Report","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#E52592","href":"/dashboards/agent-analytics::agent_analytics_usage"}'
+    rich_content_json: '{"text":"Usage Report","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#E52592","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
     col: 19
     width: 5
     height: 2
     tab_name: Latency  - title: P50 Tool Latency
     name: P50 Tool Latency
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -492,7 +492,7 @@
     height: 3
     tab_name: Latency  - title: P75 Tool Latency
     name: P75 Tool Latency
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -619,7 +619,7 @@
     height: 3
     tab_name: Latency  - title: P90 Tool Latency
     name: P90 Tool Latency
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -746,7 +746,7 @@
     height: 3
     tab_name: Latency  - title: P99 Tool Latency
     name: P99 Tool Latency
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -886,7 +886,7 @@
     height: 2
     tab_name: Latency  - title: P50 Llm Latency
     name: P50 Llm Latency
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -972,7 +972,7 @@
     height: 3
     tab_name: Latency  - title: P75 Llm Latency
     name: P75 Llm Latency
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1058,7 +1058,7 @@
     height: 3
     tab_name: Latency  - title: P90 Llm Latency
     name: P90 Llm Latency
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1144,7 +1144,7 @@
     height: 3
     tab_name: Latency  - title: P99 Llm Latency
     name: P99 Llm Latency
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1243,7 +1243,7 @@
     height: 2
     tab_name: Latency  - title: Total Errors
     name: Total Errors
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1307,7 +1307,7 @@
     height: 7
     tab_name: Errors  - title: Tool Errors Trend
     name: Tool Errors Trend
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1376,7 +1376,7 @@
     height: 7
     tab_name: Errors  - title: Top 5 Agents By Errors
     name: Top 5 Agents By Errors
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1446,7 +1446,7 @@
     height: 7
     tab_name: Errors  - title: Top 5 Tools by Errors
     name: Top 5 Tools by Errors
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1516,7 +1516,7 @@
     height: 7
     tab_name: Errors  - title: Total Agent Errors
     name: Total Agent Errors
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1540,7 +1540,7 @@
     height: 4
     tab_name: Errors  - title: Self-Healing Resilience Rate (%)
     name: Self-Healing Resilience Rate (%)
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1564,7 +1564,7 @@
     height: 4
     tab_name: Errors  - title: LLM-as-a-Judge Avg Quality Score (%)
     name: LLM-as-a-Judge Avg Quality Score (%)
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1588,7 +1588,7 @@
     height: 4
     tab_name: Errors  - title: User Feedback Satisfaction Rate (%)
     name: User Feedback Satisfaction Rate (%)
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1612,7 +1612,7 @@
     height: 4
     tab_name: Errors  - title: Self-Correction Loop Success Rate (%)
     name: Self-Correction Loop Success Rate (%)
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1726,7 +1726,7 @@
     ui_config:
       type: relative_timeframes
       display: inline
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listens_to_filters: []
     field: agent_events.timestamp_date
@@ -1739,7 +1739,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listens_to_filters: []
     field: agent_events.trace_id
@@ -1752,7 +1752,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listens_to_filters: []
     field: agent_events.agent
@@ -1765,7 +1765,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listens_to_filters: []
     field: agent_events.user_id
@@ -1778,7 +1778,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listens_to_filters: []
     field: agent_events.span_id
@@ -1791,7 +1791,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: japac_pso_agent_analytics
+    model: bigquery_agent_analytics_model
     explore: agent_events
     listens_to_filters: []
     field: v_tool_completed.tool_name
