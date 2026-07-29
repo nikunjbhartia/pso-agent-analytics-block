@@ -6,11 +6,15 @@
   layout: newspaper
   tabs:
   - name: Agent & Sessions
-  - name: LLM Interactions
-  - name: Tool Usage
-  - name: User Analytics
+    title: Agent & Sessions
+  - name: LLM & Token Economics
+    title: LLM & Token Economics
+  - name: Tool Usage & Provenance
+    title: Tool Usage & Provenance
   - name: Conversation & Lineage
-  - name: Real-Time UDFs & Remote Function Analytics
+    title: Conversation & Lineage
+  - name: Real-Time UDFs & Remote Functions
+    title: Real-Time UDFs & Remote Functions
   elements:
   - title: Token Usage split by Agent
     name: Token Usage split by Agent
@@ -73,7 +77,7 @@
     col: 12
     width: 12
     height: 8
-    tab_name: Token Consumption
+    tab_name: LLM & Token Economics
   - title: Top 5 users with most Tokens consumption
     name: Top 5 users with most Tokens consumption
     model: agent-analytics
@@ -127,7 +131,7 @@
     col: 0
     width: 12
     height: 8
-    tab_name: Token Consumption
+    tab_name: LLM & Token Economics
   - title: Total Tokens Consumption Over the Time
     name: Total Tokens Consumption Over the Time
     model: agent-analytics
@@ -198,7 +202,7 @@
     col: 9
     width: 15
     height: 5
-    tab_name: Token Consumption
+    tab_name: LLM & Token Economics
   - title: Total Tokens
     name: Total Tokens
     model: agent-analytics
@@ -278,7 +282,7 @@
     col: 0
     width: 9
     height: 5
-    tab_name: Token Consumption
+    tab_name: LLM & Token Economics
   - title: Top 5 users with most Traces
     name: Top 5 users with most Traces
     model: agent-analytics
@@ -914,7 +918,7 @@
     col: 0
     width: 12
     height: 7
-    tab_name: Tool Usage
+    tab_name: Tool Usage & Provenance
   - title: Events By Agent
     name: Events By Agent
     model: agent-analytics
@@ -973,7 +977,7 @@
     col: 12
     width: 12
     height: 7
-    tab_name: Tool Usage
+    tab_name: Tool Usage & Provenance
   - title: Tool Calls Over Time
     name: Tool Calls Over Time
     model: agent-analytics
@@ -1038,7 +1042,7 @@
     col: 0
     width: 24
     height: 6
-    tab_name: Tool Usage
+    tab_name: Tool Usage & Provenance
   - title: Total Calls
     name: Total Calls
     model: agent-analytics
@@ -1110,7 +1114,7 @@
     col: 0
     width: 8
     height: 6
-    tab_name: LLM Interactions
+    tab_name: LLM & Token Economics
   - title: LLM Call Trends
     name: LLM Call Trends
     model: agent-analytics
@@ -1185,7 +1189,7 @@
     col: 8
     width: 16
     height: 6
-    tab_name: LLM Interactions
+    tab_name: LLM & Token Economics
   - title: Top 5 Agents by LLM Calls
     name: Top 5 Agents by LLM Calls
     model: agent-analytics
@@ -1259,7 +1263,7 @@
     col: 1
     width: 21
     height: 8
-    tab_name: LLM Interactions
+    tab_name: LLM & Token Economics
   - title: Total Users
     name: Total Users
     model: agent-analytics
@@ -1332,7 +1336,7 @@
     col: 0
     width: 8
     height: 7
-    tab_name: User Analytics
+    tab_name: Agent & Sessions
   - title: User Growth Over Time
     name: User Growth Over Time
     model: agent-analytics
@@ -1408,7 +1412,7 @@
     col: 8
     width: 16
     height: 7
-    tab_name: User Analytics
+    tab_name: Agent & Sessions
   - title: Top 5 Users by Session
     name: Top 5 Users by Session
     model: agent-analytics
@@ -1481,7 +1485,7 @@
     col: 0
     width: 12
     height: 7
-    tab_name: User Analytics
+    tab_name: Agent & Sessions
   - title: Top 5 Users by Events
     name: Top 5 Users by Events
     model: agent-analytics
@@ -1554,7 +1558,7 @@
     col: 12
     width: 12
     height: 7
-    tab_name: User Analytics
+    tab_name: Agent & Sessions
   - type: button
     name: button_854
     rich_content_json: '{"text":"Performance Report","description":"","newTab":false,"alignment":"center","size":"small","style":"FILLED","color":"#E52592","href":"/dashboards/agent-analytics::agent_analytics_performance"}'
@@ -1562,7 +1566,7 @@
     col: 19
     width: 5
     height: 1
-    tab_name: User Analytics
+    tab_name: Agent & Sessions
   - name: " (2)"
     type: text
     title_text: ''
@@ -1572,7 +1576,7 @@
     col: 0
     width: 21
     height: 1
-    tab_name: User Analytics
+    tab_name: Agent & Sessions
   - name: gcs_multimodal_offload_breakdown
     title: "GCS Multimodal Bucket Offloading & Object Table Content"
     type: looker_column
@@ -1587,7 +1591,7 @@
     col: 0
     width: 24
     height: 7
-    tab_name: Tool Usage
+    tab_name: Tool Usage & Provenance
   - name: conversation_flow_turn_analytics
     title: "Conversation Analytics: Multi-Turn Interaction Flow & Token Latency"
     type: looker_grid
@@ -1632,7 +1636,7 @@
     col: 0
     width: 24
     height: 6
-    tab_name: Real-Time UDFs & Remote Function Analytics
+    tab_name: Real-Time UDFs & Remote Functions
   - title: Interactive SQL-Driven Trace Drilldown (Remote Function 'analyze')
     name: Interactive SQL-Driven Trace Drilldown
     model: agent-analytics
@@ -1645,7 +1649,7 @@
     col: 0
     width: 12
     height: 7
-    tab_name: Real-Time UDFs & Remote Function Analytics
+    tab_name: Real-Time UDFs & Remote Functions
   - title: Production vs Baseline Drift Scorecard (Remote Function 'drift')
     name: Production vs Baseline Drift Scorecard
     model: agent-analytics
@@ -1658,7 +1662,7 @@
     col: 12
     width: 12
     height: 7
-    tab_name: Real-Time UDFs & Remote Function Analytics
+    tab_name: Real-Time UDFs & Remote Functions
   filters:
   - name: Date
     title: Date

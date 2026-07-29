@@ -93,7 +93,7 @@ view: v_agent_evaluation {
     # Cache the derived table for 30 min. The AI-generated recommendations
     # only refresh every 15 min via the scheduled MERGE, so a 30-min PDT
     # cache is safe and eliminates most repeat scans.
-    datagroup_trigger: agent_events_datagroup
+
   }
 
   # =========================================================================
