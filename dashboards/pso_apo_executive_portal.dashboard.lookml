@@ -6,46 +6,46 @@
   description: "Canonical Executive Dashboard for Google Cloud PSO JAPAC APO (Agent Program Office) — Server-Verified Hours Saved, Practice Area Attribution, Pilot Projects, and FTE Value Creation."
 
   filters:
-    - name: date_filter
+  - name: date_filter
       title: "Date Range"
       type: date_filter
       default_value: "last 30 days"
-    - name: practice_area_filter
+  - name: practice_area_filter
       title: "Practice Area"
       type: field_filter
       explore: agent_events
     model: bigquery_agent_analytics_model
       field: agent_events.practice_area
       default_value: ""
-    - name: sub_region_filter
+  - name: sub_region_filter
       title: "JAPAC Sub-Region"
       type: field_filter
       explore: agent_events
     model: bigquery_agent_analytics_model
       field: agent_events.sub_region
       default_value: ""
-    - name: pilot_project_filter
+  - name: pilot_project_filter
       title: "Pilot Project"
       type: field_filter
       explore: agent_events
     model: bigquery_agent_analytics_model
       field: agent_events.pilot_project
       default_value: ""
-    - name: agent_name_filter
+  - name: agent_name_filter
       title: "Canonical Agent Name"
       type: field_filter
       explore: agent_events
     model: bigquery_agent_analytics_model
       field: agent_events.canonical_agent_name
       default_value: ""
-    - name: trace_id_filter
+  - name: trace_id_filter
       title: "Trace ID"
       type: field_filter
       explore: agent_events
     model: bigquery_agent_analytics_model
       field: agent_events.trace_id
       default_value: ""
-    - name: session_id_filter
+  - name: session_id_filter
       title: "Session ID"
       type: field_filter
       explore: agent_events
@@ -54,7 +54,7 @@
       default_value: ""
 
   elements:
-    - name: dashboard_navigation_header
+  - name: dashboard_navigation_header
       type: text
       title_text: ""
       body_text: "### [🏠 APO Executive Portal](/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_usage)"
@@ -63,8 +63,7 @@
       width: 24
       height: 2
     # --- ROW 1: EXECUTIVE HEADLINE SCORECARDS ("Verifiable & Real-Time") ---
-
-    - name: total_hours_saved_card
+  - name: total_hours_saved_card
       title: "CWPM Verifiable Hours Saved"
       type: single_value
       note_state: collapsed
@@ -83,8 +82,7 @@
       col: 0
       width: 4
       height: 3
-
-    - name: fte_weeks_saved_card
+  - name: fte_weeks_saved_card
       title: "FTE Weeks Saved Equivalent"
       type: single_value
       note_state: collapsed
@@ -103,8 +101,7 @@
       col: 4
       width: 4
       height: 3
-
-    - name: consulting_value_usd_card
+  - name: consulting_value_usd_card
       title: "Consulting Value Created ($ USD)"
       type: single_value
       note_state: collapsed
@@ -123,8 +120,7 @@
       col: 8
       width: 4
       height: 3
-
-    - name: resilience_rate_pct_card
+  - name: resilience_rate_pct_card
       title: "Self-Healing Resilience Rate (%)"
       type: single_value
       note_state: collapsed
@@ -143,8 +139,7 @@
       col: 12
       width: 4
       height: 3
-
-    - name: total_pilot_projects_card
+  - name: total_pilot_projects_card
       title: "Pilot Projects"
       type: single_value
       note_state: collapsed
@@ -163,8 +158,7 @@
       col: 16
       width: 4
       height: 3
-
-    - name: total_agents_used_card
+  - name: total_agents_used_card
       title: "Agents Used"
       type: single_value
       note_state: collapsed
@@ -185,8 +179,7 @@
       height: 3
 
     # --- ROW 2: PRACTICE AREA & PILOT PROJECT ATTRIBUTION ---
-
-    - name: hours_saved_by_pilot_project
+  - name: hours_saved_by_pilot_project
       title: "Server-Verified Hours Saved by Pilot Project & Practice Area"
       type: looker_column
       note_state: collapsed
@@ -208,8 +201,7 @@
       col: 0
       width: 14
       height: 7
-
-    - name: hours_saved_by_practice_area
+  - name: hours_saved_by_practice_area
       title: "Hours Saved by Practice Area"
       type: looker_bar
       note_state: collapsed
@@ -232,8 +224,7 @@
       height: 7
 
     # --- ROW 3: TOP AGENTS LEADERBOARD & SUB-REGION ADOPTION VELOCITY ---
-
-    - name: top_agents_by_hours_saved
+  - name: top_agents_by_hours_saved
       title: "Top Agents by Hours Saved and Events"
       type: looker_grid
     truncate_text: no
@@ -257,8 +248,7 @@
       col: 0
       width: 14
       height: 7
-
-    - name: adoption_velocity_by_sub_region
+  - name: adoption_velocity_by_sub_region
       title: "JAPAC Sub-Region Adoption Velocity over Time"
       type: looker_line
       note_state: collapsed
@@ -281,8 +271,7 @@
       height: 7
 
     # --- ROW 4: EXECUTIVE FINOPS & VERIFIABLE ENGINEER TESTIMONIALS ---
-
-    - name: model_tier_spend_breakdown
+  - name: model_tier_spend_breakdown
       title: "Model Tier Spend Breakdown ($ USD)"
       type: looker_pie
       note_state: collapsed
@@ -303,8 +292,7 @@
       col: 0
       width: 8
       height: 7
-
-    - name: verifiable_engineer_wins
+  - name: verifiable_engineer_wins
       title: "Feedback & Wins — Verifiable Engineer Testimonials"
       type: looker_grid
     truncate_text: no
@@ -330,8 +318,7 @@
       height: 7
 
     # --- ROW 5: FINOPS CACHE DISCOUNT, RESILIENCE & GRAPH-DERIVED METRICS ---
-
-    - name: cache_discount_spend_card
+  - name: cache_discount_spend_card
       title: "75% Cache-Discount Actual Spend ($ USD)"
       type: single_value
       note_state: collapsed
@@ -350,8 +337,7 @@
       col: 0
       width: 6
       height: 4
-
-    - name: prompt_cache_hit_ratio_card
+  - name: prompt_cache_hit_ratio_card
       title: "Prompt Cache Hit Ratio (%)"
       type: single_value
       note_state: collapsed
@@ -370,8 +356,7 @@
       col: 6
       width: 6
       height: 4
-
-    - name: tool_productivity_credit_card
+  - name: tool_productivity_credit_card
       title: "Tool Productivity Credit Hours (CWPM)"
       type: single_value
       note_state: collapsed
@@ -390,8 +375,7 @@
       col: 12
       width: 6
       height: 4
-
-    - name: sla_error_rate_gate_card
+  - name: sla_error_rate_gate_card
       title: "CI/CD SLA Gate Assertion"
       type: single_value
       note_state: collapsed
@@ -410,8 +394,7 @@
       col: 18
       width: 6
       height: 4
-
-    - name: graph_trace_dag_and_sla_gate_table
+  - name: graph_trace_dag_and_sla_gate_table
       title: "Trace DAG & CI/CD SLA Gate Performance by Agent"
       type: looker_grid
     truncate_text: no
@@ -437,8 +420,7 @@
       height: 7
 
     # --- ROW 6: DIVERSE STACKED AREA & SCATTER PLOT ANALYTICS ---
-
-    - name: finops_cache_savings_over_time
+  - name: finops_cache_savings_over_time
       title: "75% Gemini Prompt Cache Savings vs. Actual Spend over Time ($ USD)"
       type: looker_area
       note_state: collapsed
@@ -460,8 +442,7 @@
       col: 0
       width: 12
       height: 8
-
-    - name: agent_roi_complexity_scatter
+  - name: agent_roi_complexity_scatter
       title: "Agent Complexity & ROI Scatter Plot (Invocations vs. Verifiable Hours Saved)"
       type: looker_scatter
       note_state: collapsed
@@ -484,8 +465,7 @@
       height: 8
 
     # --- ROW 7: DIVERSE DONUT & RESILIENCE COLUMN BREAKDOWN ---
-
-    - name: consulting_value_by_practice_area_donut
+  - name: consulting_value_by_practice_area_donut
       title: "Consulting Value Created by Practice Area ($ USD Donut)"
       type: looker_pie
       note_state: collapsed
@@ -506,8 +486,7 @@
       col: 0
       width: 12
       height: 7
-
-    - name: resilience_sla_by_practice_area_column
+  - name: resilience_sla_by_practice_area_column
       title: "Tool Execution Volume & Self-Healing Resilience SLA by Practice Area"
       type: looker_column
       note_state: collapsed
@@ -528,8 +507,7 @@
       col: 12
       width: 12
       height: 7
-
-    - name: bqml_roi_30day_forecast_chart
+  - name: bqml_roi_30day_forecast_chart
       title: "BigQuery AI: 30-Day Predictive ROI & Consulting Value Forecast"
       type: looker_area
       note_state: collapsed
@@ -550,8 +528,7 @@
       col: 0
       width: 12
       height: 7
-
-    - name: session_trace_dag_lineage_graph
+  - name: session_trace_dag_lineage_graph
       title: "Multi-Agent Session DAG & Trace Delegation Lineage Graph"
       type: looker_column
       note_state: collapsed

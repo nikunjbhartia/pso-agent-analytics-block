@@ -117,7 +117,8 @@
     col: 12
     width: 12
     height: 8
-    tab_name: LLM & Token Economics  - title: Top 5 users with most Tokens consumption
+    tab_name: LLM & Token Economics
+  - title: Top 5 users with most Tokens consumption
     name: Top 5 users with most Tokens consumption
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -172,7 +173,8 @@
     col: 0
     width: 12
     height: 8
-    tab_name: LLM & Token Economics  - title: Total Tokens Consumption Over the Time
+    tab_name: LLM & Token Economics
+  - title: Total Tokens Consumption Over the Time
     name: Total Tokens Consumption Over the Time
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -243,7 +245,8 @@
     col: 9
     width: 15
     height: 5
-    tab_name: LLM & Token Economics  - title: Total Tokens
+    tab_name: LLM & Token Economics
+  - title: Total Tokens
     name: Total Tokens
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -323,7 +326,8 @@
     col: 0
     width: 9
     height: 5
-    tab_name: LLM & Token Economics  - title: Top 5 users with most Traces
+    tab_name: LLM & Token Economics
+  - title: Top 5 users with most Traces
     name: Top 5 users with most Traces
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -379,7 +383,8 @@
     col: 0
     width: 12
     height: 8
-    tab_name: Agent & Sessions  - title: Total Traces
+    tab_name: Agent & Sessions
+  - title: Total Traces
     name: Total Traces
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -459,7 +464,8 @@
     col: 0
     width: 9
     height: 5
-    tab_name: Agent & Sessions  - title: Traces split by Agent
+    tab_name: Agent & Sessions
+  - title: Traces split by Agent
     name: Traces split by Agent
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -523,7 +529,8 @@
     col: 12
     width: 12
     height: 8
-    tab_name: Agent & Sessions  - title: Total Traces Generation Over the Time
+    tab_name: Agent & Sessions
+  - title: Total Traces Generation Over the Time
     name: Total Traces Generation Over the Time
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -595,7 +602,8 @@
     col: 9
     width: 15
     height: 5
-    tab_name: Agent & Sessions  - title: Total Sessions
+    tab_name: Agent & Sessions
+  - title: Total Sessions
     name: Total Sessions
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -662,7 +670,8 @@
     col: 0
     width: 8
     height: 7
-    tab_name: Agent & Sessions  - title: Number of Sessions Trend
+    tab_name: Agent & Sessions
+  - title: Number of Sessions Trend
     name: Number of Sessions Trend
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -738,7 +747,8 @@
     col: 8
     width: 16
     height: 7
-    tab_name: Agent & Sessions  - title: Top 5 Agents Split by Session Count
+    tab_name: Agent & Sessions
+  - title: Top 5 Agents Split by Session Count
     name: Top 5 Agents Split by Session Count
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -813,7 +823,8 @@
     col: 1
     width: 22
     height: 9
-    tab_name: Agent & Sessions  - title: Total Agent Transfers
+    tab_name: Agent & Sessions
+  - title: Total Agent Transfers
     name: Total Agent Transfers
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -836,7 +847,8 @@
     col: 0
     width: 8
     height: 4
-    tab_name: Agent & Sessions  - title: Total A2A Interactions
+    tab_name: Agent & Sessions
+  - title: Total A2A Interactions
     name: Total A2A Interactions
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -859,7 +871,8 @@
     col: 8
     width: 8
     height: 4
-    tab_name: Agent & Sessions  - title: Total HITL Confirmation Requests
+    tab_name: Agent & Sessions
+  - title: Total HITL Confirmation Requests
     name: Total HITL Confirmation Requests
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -904,7 +917,8 @@
     col: 0
     width: 24
     height: 2
-    tab_name: Agent & Sessions  - title: Tool Invocations
+    tab_name: Agent & Sessions
+  - title: Tool Invocations
     name: Tool Invocations
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -961,7 +975,8 @@
     col: 0
     width: 12
     height: 7
-    tab_name: Tool Usage & Provenance  - title: Events By Agent
+    tab_name: Tool Usage & Provenance
+  - title: Events By Agent
     name: Events By Agent
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1020,7 +1035,8 @@
     col: 12
     width: 12
     height: 7
-    tab_name: Tool Usage & Provenance  - title: Tool Calls Over Time
+    tab_name: Tool Usage & Provenance
+  - title: Tool Calls Over Time
     name: Tool Calls Over Time
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1085,7 +1101,8 @@
     col: 0
     width: 24
     height: 6
-    tab_name: Tool Usage & Provenance  - title: Total Calls
+    tab_name: Tool Usage & Provenance
+  - title: Total Calls
     name: Total Calls
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1157,7 +1174,8 @@
     col: 0
     width: 8
     height: 6
-    tab_name: LLM & Token Economics  - title: LLM Call Trends
+    tab_name: LLM & Token Economics
+  - title: LLM Call Trends
     name: LLM Call Trends
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1232,7 +1250,8 @@
     col: 8
     width: 16
     height: 6
-    tab_name: LLM & Token Economics  - title: Top 5 Agents by LLM Calls
+    tab_name: LLM & Token Economics
+  - title: Top 5 Agents by LLM Calls
     name: Top 5 Agents by LLM Calls
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1306,7 +1325,8 @@
     col: 1
     width: 21
     height: 8
-    tab_name: LLM & Token Economics  - title: Total Users
+    tab_name: LLM & Token Economics
+  - title: Total Users
     name: Total Users
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1379,7 +1399,8 @@
     col: 0
     width: 8
     height: 7
-    tab_name: Agent & Sessions  - title: User Growth Over Time
+    tab_name: Agent & Sessions
+  - title: User Growth Over Time
     name: User Growth Over Time
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1455,7 +1476,8 @@
     col: 8
     width: 16
     height: 7
-    tab_name: Agent & Sessions  - title: Top 5 Users by Session
+    tab_name: Agent & Sessions
+  - title: Top 5 Users by Session
     name: Top 5 Users by Session
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1528,7 +1550,8 @@
     col: 0
     width: 12
     height: 7
-    tab_name: Agent & Sessions  - title: Top 5 Users by Events
+    tab_name: Agent & Sessions
+  - title: Top 5 Users by Events
     name: Top 5 Users by Events
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1670,7 +1693,8 @@
     col: 0
     width: 24
     height: 8
-    tab_name: Conversation & Lineage  - title: Real-Time UDF Evaluation Scorecard (Zero-Batch Latency, TTFT & Cost Scores)
+    tab_name: Conversation & Lineage
+  - title: Real-Time UDF Evaluation Scorecard (Zero-Batch Latency, TTFT & Cost Scores)
     name: Real-Time UDF Evaluation Scorecard
     model: bigquery_agent_analytics_model
     explore: udf_realtime_scorecard

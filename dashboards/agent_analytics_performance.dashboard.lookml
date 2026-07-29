@@ -102,7 +102,8 @@
     col: 0
     width: 7
     height: 6
-    tab_name: Latency  - title: Tool Latency Trend
+    tab_name: Latency
+  - title: Tool Latency Trend
     name: Tool Latency Trend
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -172,7 +173,8 @@
     col: 7
     width: 17
     height: 6
-    tab_name: Latency  - title: Average LLM Latency (in ms)
+    tab_name: Latency
+  - title: Average LLM Latency (in ms)
     name: Average LLM Latency (in ms)
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -250,7 +252,8 @@
     col: 0
     width: 8
     height: 6
-    tab_name: Latency  - title: LLM Latency Trend
+    tab_name: Latency
+  - title: LLM Latency Trend
     name: LLM Latency Trend
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -363,7 +366,8 @@
     col: 19
     width: 5
     height: 2
-    tab_name: Latency  - title: P50 Tool Latency
+    tab_name: Latency
+  - title: P50 Tool Latency
     name: P50 Tool Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -490,7 +494,8 @@
     col: 0
     width: 6
     height: 3
-    tab_name: Latency  - title: P75 Tool Latency
+    tab_name: Latency
+  - title: P75 Tool Latency
     name: P75 Tool Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -617,7 +622,8 @@
     col: 6
     width: 6
     height: 3
-    tab_name: Latency  - title: P90 Tool Latency
+    tab_name: Latency
+  - title: P90 Tool Latency
     name: P90 Tool Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -744,7 +750,8 @@
     col: 12
     width: 6
     height: 3
-    tab_name: Latency  - title: P99 Tool Latency
+    tab_name: Latency
+  - title: P99 Tool Latency
     name: P99 Tool Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -884,7 +891,8 @@
     col: 0
     width: 24
     height: 2
-    tab_name: Latency  - title: P50 Llm Latency
+    tab_name: Latency
+  - title: P50 Llm Latency
     name: P50 Llm Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -970,7 +978,8 @@
     col: 0
     width: 6
     height: 3
-    tab_name: Latency  - title: P75 Llm Latency
+    tab_name: Latency
+  - title: P75 Llm Latency
     name: P75 Llm Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1056,7 +1065,8 @@
     col: 12
     width: 6
     height: 3
-    tab_name: Latency  - title: P90 Llm Latency
+    tab_name: Latency
+  - title: P90 Llm Latency
     name: P90 Llm Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1142,7 +1152,8 @@
     col: 18
     width: 6
     height: 3
-    tab_name: Latency  - title: P99 Llm Latency
+    tab_name: Latency
+  - title: P99 Llm Latency
     name: P99 Llm Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1241,7 +1252,8 @@
     col: 0
     width: 24
     height: 2
-    tab_name: Latency  - title: Total Errors
+    tab_name: Latency
+  - title: Total Errors
     name: Total Errors
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1305,7 +1317,8 @@
     col: 0
     width: 8
     height: 7
-    tab_name: Errors  - title: Tool Errors Trend
+    tab_name: Errors
+  - title: Tool Errors Trend
     name: Tool Errors Trend
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1374,7 +1387,8 @@
     col: 8
     width: 16
     height: 7
-    tab_name: Errors  - title: Top 5 Agents By Errors
+    tab_name: Errors
+  - title: Top 5 Agents By Errors
     name: Top 5 Agents By Errors
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1444,7 +1458,8 @@
     col: 0
     width: 12
     height: 7
-    tab_name: Errors  - title: Top 5 Tools by Errors
+    tab_name: Errors
+  - title: Top 5 Tools by Errors
     name: Top 5 Tools by Errors
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1514,7 +1529,8 @@
     col: 12
     width: 12
     height: 7
-    tab_name: Errors  - title: Total Agent Errors
+    tab_name: Errors
+  - title: Total Agent Errors
     name: Total Agent Errors
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1538,7 +1554,8 @@
     col: 0
     width: 12
     height: 4
-    tab_name: Errors  - title: Self-Healing Resilience Rate (%)
+    tab_name: Errors
+  - title: Self-Healing Resilience Rate (%)
     name: Self-Healing Resilience Rate (%)
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1562,7 +1579,8 @@
     col: 12
     width: 12
     height: 4
-    tab_name: Errors  - title: LLM-as-a-Judge Avg Quality Score (%)
+    tab_name: Errors
+  - title: LLM-as-a-Judge Avg Quality Score (%)
     name: LLM-as-a-Judge Avg Quality Score (%)
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1586,7 +1604,8 @@
     col: 0
     width: 8
     height: 4
-    tab_name: Errors  - title: User Feedback Satisfaction Rate (%)
+    tab_name: Errors
+  - title: User Feedback Satisfaction Rate (%)
     name: User Feedback Satisfaction Rate (%)
     model: bigquery_agent_analytics_model
     explore: agent_events
@@ -1610,7 +1629,8 @@
     col: 8
     width: 8
     height: 4
-    tab_name: Errors  - title: Self-Correction Loop Success Rate (%)
+    tab_name: Errors
+  - title: Self-Correction Loop Success Rate (%)
     name: Self-Correction Loop Success Rate (%)
     model: bigquery_agent_analytics_model
     explore: agent_events
