@@ -59,20 +59,16 @@
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 0
-    width: 5
+    width: 4
     height: 1
   - type: button
     name: nav_btn_usage
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 6
-    width: 5
+    col: 5
+    width: 4
     height: 1
 
-
-
-
-  # --- ROW 1: EXECUTIVE HEADLINE SCORECARDS ("Verifiable & Real-Time") ---
   - name: total_hours_saved_card
     title: "CWPM Verifiable Hours Saved"
     type: single_value

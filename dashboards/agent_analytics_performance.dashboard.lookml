@@ -20,15 +20,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 5
+    width: 4
     height: 1
     tab_name: Latency
   - type: button
     name: nav_btn_usage_Latency
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 6
-    width: 5
+    col: 5
+    width: 4
     height: 1
     tab_name: Latency
 
@@ -37,15 +37,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 5
+    width: 4
     height: 1
     tab_name: Errors
   - type: button
     name: nav_btn_usage_Errors
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 6
-    width: 5
+    col: 5
+    width: 4
     height: 1
     tab_name: Errors
 
@@ -54,26 +54,17 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 5
+    width: 4
     height: 1
     tab_name: AI Recommendations
   - type: button
     name: nav_btn_usage_AI_Recommendations
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 6
-    width: 5
+    col: 5
+    width: 4
     height: 1
     tab_name: AI Recommendations
-
-
-
-
-
-
-
-
-
 
   - title: Average Tool Latency (ms)
     name: Average Tool Latency (ms)
@@ -369,28 +360,6 @@
     col: 8
     width: 16
     height: 6
-    tab_name: Latency
-  - name: ''
-    type: text
-    title_text: ''
-    subtitle_text: ''
-    body_text: '[{"type":"h1","children":[{"text":"Tool Latency"}],"align":"center"}]'
-    rich_content_json: '{"format":"slate"}'
-    row: 2
-    col: 0
-    width: 16
-    height: 2
-    tab_name: Latency
-  - name: " (Copy)"
-    type: text
-    title_text: " (Copy)"
-    subtitle_text: ''
-    body_text: '[{"type":"h1","children":[{"text":"LLM Latency"}],"align":"center"}]'
-    rich_content_json: '{"format":"slate"}'
-    row: 13
-    col: 0
-    width: 16
-    height: 2
     tab_name: Latency
   - title: P50 Tool Latency
     name: P50 Tool Latency
@@ -904,19 +873,6 @@
     width: 6
     height: 3
     tab_name: Latency
-  - name: " (2)"
-    type: text
-    title_text: ''
-    subtitle_text: ''
-    body_text: '[{"type":"h2","children":[{"text":"Tool Latency (in ms)"}],"align":"center"},{"type":"p","children":[{"text":"The
-      P50, P75, P90, and P99 latency distributions for tool executions. Focus on P99
-      to identify the worst-case timeouts."}],"id":"nj8zb","align":"center"}]'
-    rich_content_json: '{"format":"slate"}'
-    row: 8
-    col: 0
-    width: 24
-    height: 2
-    tab_name: Latency
   - title: P50 Llm Latency
     name: P50 Llm Latency
     model: bigquery_agent_analytics_model
@@ -1264,19 +1220,6 @@
     col: 6
     width: 6
     height: 3
-    tab_name: Latency
-  - name: " (Copy 2)"
-    type: text
-    title_text: " (Copy 2)"
-    subtitle_text: ''
-    body_text: '[{"type":"h2","children":[{"text":"LLM Latency (in ms)"}],"align":"center"},{"type":"p","children":[{"text":"The
-      P50, P75, P90, and P99 latency distributions for LLM calls. Crucial for understanding
-      the true user experience delay."}],"id":"nj8zb","align":"center"}]'
-    rich_content_json: '{"format":"slate"}'
-    row: 21
-    col: 0
-    width: 24
-    height: 2
     tab_name: Latency
   - title: Total Errors
     name: Total Errors

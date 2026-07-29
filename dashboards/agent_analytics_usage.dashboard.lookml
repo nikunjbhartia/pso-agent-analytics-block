@@ -23,15 +23,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 5
+    width: 4
     height: 1
     tab_name: Agent & Sessions
   - type: button
     name: nav_btn_perf_Agent_&_Sessions
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 6
-    width: 5
+    col: 5
+    width: 4
     height: 1
     tab_name: Agent & Sessions
 
@@ -40,15 +40,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 5
+    width: 4
     height: 1
     tab_name: LLM & Token Economics
   - type: button
     name: nav_btn_perf_LLM_&_Token_Economics
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 6
-    width: 5
+    col: 5
+    width: 4
     height: 1
     tab_name: LLM & Token Economics
 
@@ -57,15 +57,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 5
+    width: 4
     height: 1
     tab_name: Tool Usage & Provenance
   - type: button
     name: nav_btn_perf_Tool_Usage_&_Provenance
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 6
-    width: 5
+    col: 5
+    width: 4
     height: 1
     tab_name: Tool Usage & Provenance
 
@@ -74,29 +74,17 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 5
+    width: 4
     height: 1
     tab_name: Conversation & Lineage
   - type: button
     name: nav_btn_perf_Conversation_&_Lineage
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 6
-    width: 5
+    col: 5
+    width: 4
     height: 1
     tab_name: Conversation & Lineage
-
-
-
-
-
-
-
-
-
-
-
-
 
   - title: Token Usage split by Agent
     name: Token Usage split by Agent
@@ -940,28 +928,6 @@
     width: 8
     height: 4
     tab_name: Agent & Sessions
-  - name: ''
-    type: text
-    title_text: ''
-    subtitle_text: ''
-    body_text: '[{"type":"h1","children":[{"text":"Agent"}],"align":"center"}]'
-    rich_content_json: '{"format":"slate"}'
-    row: 2
-    col: 0
-    width: 16
-    height: 2
-    tab_name: Agent & Sessions
-  - name: " (Copy)"
-    type: text
-    title_text: " (Copy)"
-    subtitle_text: ''
-    body_text: '[{"type":"h1","children":[{"text":"Sessions"}],"align":"center"}]'
-    rich_content_json: '{"format":"slate"}'
-    row: 15
-    col: 0
-    width: 16
-    height: 2
-    tab_name: Agent & Sessions
   - title: Tool Invocations
     name: Tool Invocations
     model: bigquery_agent_analytics_model
@@ -1668,16 +1634,6 @@
     col: 12
     width: 12
     height: 7
-    tab_name: Agent & Sessions
-  - name: " (2)"
-    type: text
-    title_text: ''
-    subtitle_text: ''
-    body_text: ''
-    row: 2
-    col: 0
-    width: 16
-    height: 1
     tab_name: Agent & Sessions
   - name: gcs_multimodal_offload_breakdown
     title: "GCS Multimodal Bucket Offloading & Object Table Content"
