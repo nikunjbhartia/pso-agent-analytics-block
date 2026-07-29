@@ -21,6 +21,14 @@
     label: Real-Time UDFs & Remote Functions
     title: Real-Time UDFs & Remote Functions
   elements:
+  - name: dashboard_navigation_header
+    type: text
+    title_text: ""
+    body_text: "### [🏠 APO Executive Portal](/projects/japac_pso_agent_analytics_model/dashboards/pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/projects/japac_pso_agent_analytics_model/dashboards/agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/projects/japac_pso_agent_analytics_model/dashboards/agent_analytics_usage)"
+    row: 0
+    col: 0
+    width: 24
+    height: 2
   - title: Token Usage split by Agent
     name: Token Usage split by Agent
     model: agent-analytics
@@ -78,7 +86,7 @@
       Agent: agent_events.agent
       Span ID: agent_events.span_id
       Date: agent_events.timestamp_date
-    row: 5
+    row: 13
     col: 12
     width: 12
     height: 8
@@ -132,7 +140,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       Date: agent_events.timestamp_date
-    row: 5
+    row: 20
     col: 0
     width: 12
     height: 8
@@ -203,7 +211,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 0
+    row: 8
     col: 9
     width: 15
     height: 5
@@ -283,7 +291,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.pop_date_filter
-    row: 0
+    row: 8
     col: 0
     width: 9
     height: 5
@@ -338,7 +346,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       Date: agent_events.timestamp_date
-    row: 7
+    row: 20
     col: 0
     width: 12
     height: 8
@@ -418,7 +426,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.pop_date_filter
-    row: 2
+    row: 8
     col: 0
     width: 9
     height: 5
@@ -481,7 +489,7 @@
       Agent: agent_events.agent
       Span ID: agent_events.span_id
       Date: agent_events.timestamp_date
-    row: 7
+    row: 20
     col: 12
     width: 12
     height: 8
@@ -553,7 +561,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 2
+    row: 8
     col: 9
     width: 15
     height: 5
@@ -620,7 +628,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 17
+    row: 2
     col: 0
     width: 8
     height: 7
@@ -696,7 +704,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 17
+    row: 2
     col: 8
     width: 16
     height: 7
@@ -771,7 +779,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 24
+    row: 20
     col: 1
     width: 22
     height: 9
@@ -794,7 +802,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 33
+    row: 34
     col: 0
     width: 8
     height: 4
@@ -817,7 +825,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 33
+    row: 34
     col: 8
     width: 8
     height: 4
@@ -840,7 +848,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 33
+    row: 34
     col: 16
     width: 8
     height: 4
@@ -919,7 +927,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 6
+    row: 8
     col: 0
     width: 12
     height: 7
@@ -978,7 +986,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 6
+    row: 8
     col: 12
     width: 12
     height: 7
@@ -1043,7 +1051,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 0
+    row: 2
     col: 0
     width: 24
     height: 6
@@ -1115,7 +1123,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.pop_date_filter
-    row: 0
+    row: 2
     col: 0
     width: 8
     height: 6
@@ -1190,7 +1198,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 0
+    row: 2
     col: 8
     width: 16
     height: 6
@@ -1264,7 +1272,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 6
+    row: 13
     col: 1
     width: 21
     height: 8
@@ -1337,7 +1345,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.pop_date_filter
-    row: 2
+    row: 13
     col: 0
     width: 8
     height: 7
@@ -1413,7 +1421,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 2
+    row: 13
     col: 8
     width: 16
     height: 7
@@ -1486,7 +1494,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 9
+    row: 27
     col: 0
     width: 12
     height: 7
@@ -1559,7 +1567,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 9
+    row: 27
     col: 12
     width: 12
     height: 7
@@ -1637,7 +1645,7 @@
     fields: [udf_realtime_scorecard.practice_area, udf_realtime_scorecard.agent, udf_realtime_scorecard.total_sessions, udf_realtime_scorecard.total_spans, udf_realtime_scorecard.avg_latency_score, udf_realtime_scorecard.avg_ttft_score, udf_realtime_scorecard.avg_token_efficiency_score, udf_realtime_scorecard.avg_cost_score, udf_realtime_scorecard.avg_error_rate_score]
     sorts: [udf_realtime_scorecard.total_sessions desc]
     limit: 50
-    row: 0
+    row: 2
     col: 0
     width: 24
     height: 6
@@ -1650,7 +1658,7 @@
     fields: [remote_function_trace_drilldown.session_id, remote_function_trace_drilldown.agent, remote_function_trace_drilldown.session_start_time, remote_function_trace_drilldown.span_count, remote_function_trace_drilldown.error_count, remote_function_trace_drilldown.sdk_version, remote_function_trace_drilldown.analyzed_session_id]
     sorts: [remote_function_trace_drilldown.session_start_time desc]
     limit: 50
-    row: 6
+    row: 8
     col: 0
     width: 12
     height: 7
@@ -1663,7 +1671,7 @@
     fields: [remote_function_drift_scorecard.comparison_tier, remote_function_drift_scorecard.drift_metric, remote_function_drift_scorecard.kolmogorov_smirnov_stat, remote_function_drift_scorecard.p_value, remote_function_drift_scorecard.drift_status, remote_function_drift_scorecard.last_evaluated_date]
     sorts: [remote_function_drift_scorecard.drift_metric]
     limit: 50
-    row: 6
+    row: 8
     col: 12
     width: 12
     height: 7

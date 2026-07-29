@@ -48,6 +48,14 @@
       default_value: ""
 
   elements:
+  - name: dashboard_navigation_header
+    type: text
+    title_text: ""
+    body_text: "### [🏠 APO Executive Portal](/projects/japac_pso_agent_analytics_model/dashboards/pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/projects/japac_pso_agent_analytics_model/dashboards/agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/projects/japac_pso_agent_analytics_model/dashboards/agent_analytics_usage)"
+    row: 0
+    col: 0
+    width: 24
+    height: 2
     # --- ROW 1: EXECUTIVE HEADLINE SCORECARDS ("Verifiable & Real-Time") ---
 
     - name: total_hours_saved_card

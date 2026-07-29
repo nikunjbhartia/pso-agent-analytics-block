@@ -15,6 +15,14 @@
     label: AI Recommendations
     title: AI Recommendations
   elements:
+  - name: dashboard_navigation_header
+    type: text
+    title_text: ""
+    body_text: "### [🏠 APO Executive Portal](/projects/japac_pso_agent_analytics_model/dashboards/pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/projects/japac_pso_agent_analytics_model/dashboards/agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/projects/japac_pso_agent_analytics_model/dashboards/agent_analytics_usage)"
+    row: 0
+    col: 0
+    width: 24
+    height: 2
   - title: Average Tool Latency (ms)
     name: Average Tool Latency (ms)
     model: agent-analytics
@@ -216,7 +224,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 15
+    row: 11
     col: 0
     width: 8
     height: 6
@@ -298,7 +306,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 15
+    row: 11
     col: 8
     width: 16
     height: 6
@@ -454,7 +462,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 10
+    row: 8
     col: 0
     width: 6
     height: 3
@@ -580,7 +588,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 10
+    row: 8
     col: 6
     width: 6
     height: 3
@@ -706,7 +714,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 10
+    row: 8
     col: 12
     width: 6
     height: 3
@@ -832,7 +840,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 10
+    row: 8
     col: 18
     width: 6
     height: 3
@@ -930,7 +938,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 23
+    row: 17
     col: 0
     width: 6
     height: 3
@@ -1015,7 +1023,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 23
+    row: 17
     col: 12
     width: 6
     height: 3
@@ -1100,7 +1108,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 23
+    row: 17
     col: 18
     width: 6
     height: 3
@@ -1185,7 +1193,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 23
+    row: 17
     col: 6
     width: 6
     height: 3
@@ -1261,7 +1269,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.pop_date_filter
-    row: 0
+    row: 2
     col: 0
     width: 8
     height: 7
@@ -1329,7 +1337,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 0
+    row: 2
     col: 8
     width: 16
     height: 7
@@ -1398,7 +1406,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 7
+    row: 9
     col: 0
     width: 12
     height: 7
@@ -1467,7 +1475,7 @@
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
       Date: agent_events.timestamp_date
-    row: 7
+    row: 9
     col: 12
     width: 12
     height: 7
@@ -1490,7 +1498,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 14
+    row: 16
     col: 0
     width: 12
     height: 4
@@ -1513,7 +1521,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 14
+    row: 16
     col: 12
     width: 12
     height: 4
@@ -1536,7 +1544,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 18
+    row: 20
     col: 0
     width: 8
     height: 4
@@ -1559,7 +1567,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 18
+    row: 20
     col: 8
     width: 8
     height: 4
@@ -1582,7 +1590,7 @@
       Span ID: agent_events.span_id
       Trace ID: agent_events.trace_id
       User ID: agent_events.user_id
-    row: 18
+    row: 20
     col: 16
     width: 8
     height: 4
