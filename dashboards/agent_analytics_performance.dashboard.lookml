@@ -19,52 +19,55 @@
     name: nav_btn_portal_Latency
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
-    col: 16
-    width: 4
-    height: 2
+    col: 7
+    width: 5
+    height: 1
     tab_name: Latency
   - type: button
     name: nav_btn_usage_Latency
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 20
-    width: 4
-    height: 2
+    col: 12
+    width: 5
+    height: 1
     tab_name: Latency
 
   - type: button
     name: nav_btn_portal_Errors
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
-    col: 16
-    width: 4
-    height: 2
+    col: 7
+    width: 5
+    height: 1
     tab_name: Errors
   - type: button
     name: nav_btn_usage_Errors
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 20
-    width: 4
-    height: 2
+    col: 12
+    width: 5
+    height: 1
     tab_name: Errors
 
   - type: button
     name: nav_btn_portal_AI_Recommendations
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
-    col: 16
-    width: 4
-    height: 2
+    col: 7
+    width: 5
+    height: 1
     tab_name: AI Recommendations
   - type: button
     name: nav_btn_usage_AI_Recommendations
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 20
-    width: 4
-    height: 2
+    col: 12
+    width: 5
+    height: 1
     tab_name: AI Recommendations
+
+
+
 
 
 
@@ -83,7 +86,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Average time in milliseconds for tools to execute. <br>How: Average of total_ms across all TOOL_COMPLETED events. <br>Why it matters: Monitors backend API performance and user wait time. <br>Drill: Click tile to see tool latency breakdown."
+    note_text: "<div style=\"text-align: left;\">What: Average time in milliseconds for tools to execute. <br>How: Average of total_ms across all TOOL_COMPLETED events. <br>Why it matters: Monitors backend API performance and user wait time. <br>Drill: Click tile to see tool latency breakdown.</div>"
     fields: [v_tool_completed.average_tool_latency]
     limit: 500
     column_limit: 50
@@ -144,7 +147,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: Historical trend of tool execution latency over time. <br>How: Average of total_ms aggregated by timestamp_date. <br>Why it matters: Identifies performance degradation or API slowdowns over time. <br>Drill: Click date to inspect daily latency."
+    note_text: "<div style=\"text-align: left;\">What: Historical trend of tool execution latency over time. <br>How: Average of total_ms aggregated by timestamp_date. <br>Why it matters: Identifies performance degradation or API slowdowns over time. <br>Drill: Click date to inspect daily latency.</div>"
     fields: [v_tool_completed.timestamp_date, v_tool_completed.average_tool_latency]
     fill_fields: [v_tool_completed.timestamp_date]
     sorts: [v_tool_completed.timestamp_date desc]
@@ -215,7 +218,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Average round-trip time in milliseconds for LLM requests. <br>How: Average of total_ms across all LLM_RESPONSE events. <br>Why it matters: Tracks model responsiveness and generation speed. <br>Drill: Click tile to see LLM latency trend."
+    note_text: "<div style=\"text-align: left;\">What: Average round-trip time in milliseconds for LLM requests. <br>How: Average of total_ms across all LLM_RESPONSE events. <br>Why it matters: Tracks model responsiveness and generation speed. <br>Drill: Click tile to see LLM latency trend.</div>"
     fields: [v_llm_response.average_llm_latency]
     limit: 500
     column_limit: 50
@@ -294,7 +297,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: Historical trend of LLM response times over time. <br>How: Average of total_ms aggregated by timestamp_date. <br>Why it matters: Monitors API latency anomalies across Gemini model versions. <br>Drill: Click date to inspect LLM latency."
+    note_text: "<div style=\"text-align: left;\">What: Historical trend of LLM response times over time. <br>How: Average of total_ms aggregated by timestamp_date. <br>Why it matters: Monitors API latency anomalies across Gemini model versions. <br>Drill: Click date to inspect LLM latency.</div>"
     fields: [v_llm_response.average_llm_latency, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     sorts: [agent_events.timestamp_date desc]
@@ -370,7 +373,7 @@
     subtitle_text: ''
     body_text: '[{"type":"h1","children":[{"text":"Tool Latency"}],"align":"center"}]'
     rich_content_json: '{"format":"slate"}'
-    row: 0
+    row: 2
     col: 0
     width: 16
     height: 2
@@ -400,7 +403,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Median (50th percentile) tool execution latency in milliseconds. <br>How: 50th percentile of total_ms across TOOL_COMPLETED events. <br>Why it matters: Reflects typical user experience for tool executions. <br>Drill: Click tile to inspect median tool latency."
+    note_text: "<div style=\"text-align: left;\">What: Median (50th percentile) tool execution latency in milliseconds. <br>How: 50th percentile of total_ms across TOOL_COMPLETED events. <br>Why it matters: Reflects typical user experience for tool executions. <br>Drill: Click tile to inspect median tool latency.</div>"
     fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
       v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
@@ -528,7 +531,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: 75th percentile tool execution latency in milliseconds. <br>How: 75th percentile of total_ms across TOOL_COMPLETED events. <br>Why it matters: Reflects latency for the slower quartile of tool executions. <br>Drill: Click tile to view P75 breakdown."
+    note_text: "<div style=\"text-align: left;\">What: 75th percentile tool execution latency in milliseconds. <br>How: 75th percentile of total_ms across TOOL_COMPLETED events. <br>Why it matters: Reflects latency for the slower quartile of tool executions. <br>Drill: Click tile to view P75 breakdown.</div>"
     fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
       v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
@@ -656,7 +659,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: 90th percentile tool execution latency in milliseconds. <br>How: 90th percentile of total_ms across TOOL_COMPLETED events. <br>Why it matters: Identifies tail latency affecting the 10% slowest tool calls. <br>Drill: Click tile to inspect P90 latency."
+    note_text: "<div style=\"text-align: left;\">What: 90th percentile tool execution latency in milliseconds. <br>How: 90th percentile of total_ms across TOOL_COMPLETED events. <br>Why it matters: Identifies tail latency affecting the 10% slowest tool calls. <br>Drill: Click tile to inspect P90 latency.</div>"
     fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
       v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
@@ -784,7 +787,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: 99th percentile (tail latency) tool execution latency in milliseconds. <br>How: 99th percentile of total_ms across TOOL_COMPLETED events. <br>Why it matters: Critical SRE metric for worst-case API timeouts and delays. <br>Drill: Click tile to inspect P99 tail latency."
+    note_text: "<div style=\"text-align: left;\">What: 99th percentile (tail latency) tool execution latency in milliseconds. <br>How: 99th percentile of total_ms across TOOL_COMPLETED events. <br>Why it matters: Critical SRE metric for worst-case API timeouts and delays. <br>Drill: Click tile to inspect P99 tail latency.</div>"
     fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
       v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
@@ -925,7 +928,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Median (50th percentile) LLM response latency in milliseconds. <br>How: 50th percentile of total_ms across LLM_RESPONSE events. <br>Why it matters: Core responsiveness KPI for conversational agents. <br>Drill: Click tile to see P50 trend."
+    note_text: "<div style=\"text-align: left;\">What: Median (50th percentile) LLM response latency in milliseconds. <br>How: 50th percentile of total_ms across LLM_RESPONSE events. <br>Why it matters: Core responsiveness KPI for conversational agents. <br>Drill: Click tile to see P50 trend.</div>"
     fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
       v_llm_response.p99_llm_latency]
     filters:
@@ -1012,7 +1015,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: 75th percentile LLM response latency in milliseconds. <br>How: 75th percentile of total_ms across LLM_RESPONSE events. <br>Why it matters: Tracks generation speed for longer context prompts. <br>Drill: Click tile to inspect P75 latency."
+    note_text: "<div style=\"text-align: left;\">What: 75th percentile LLM response latency in milliseconds. <br>How: 75th percentile of total_ms across LLM_RESPONSE events. <br>Why it matters: Tracks generation speed for longer context prompts. <br>Drill: Click tile to inspect P75 latency.</div>"
     fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
       v_llm_response.p99_llm_latency]
     filters:
@@ -1099,7 +1102,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: 90th percentile LLM response latency in milliseconds. <br>How: 90th percentile of total_ms across LLM_RESPONSE events. <br>Why it matters: Identifies slow LLM responses impacting user experience. <br>Drill: Click tile to see P90 trend."
+    note_text: "<div style=\"text-align: left;\">What: 90th percentile LLM response latency in milliseconds. <br>How: 90th percentile of total_ms across LLM_RESPONSE events. <br>Why it matters: Identifies slow LLM responses impacting user experience. <br>Drill: Click tile to see P90 trend.</div>"
     fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
       v_llm_response.p99_llm_latency]
     filters:
@@ -1186,7 +1189,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: 99th percentile (tail latency) LLM response latency in milliseconds. <br>How: 99th percentile of total_ms across LLM_RESPONSE events. <br>Why it matters: Critical SLA metric for tail LLM response delays. <br>Drill: Click tile to inspect P99 tail latency."
+    note_text: "<div style=\"text-align: left;\">What: 99th percentile (tail latency) LLM response latency in milliseconds. <br>How: 99th percentile of total_ms across LLM_RESPONSE events. <br>Why it matters: Critical SLA metric for tail LLM response delays. <br>Drill: Click tile to inspect P99 tail latency.</div>"
     fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
       v_llm_response.p99_llm_latency]
     filters:
@@ -1286,7 +1289,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Total count of backend tool execution errors. <br>How: COUNT of TOOL_ERROR events. <br>Why it matters: Identifies API failures and integration instability. <br>Drill: Click tile to inspect error logs."
+    note_text: "<div style=\"text-align: left;\">What: Total count of backend tool execution errors. <br>How: COUNT of TOOL_ERROR events. <br>Why it matters: Identifies API failures and integration instability. <br>Drill: Click tile to inspect error logs.</div>"
     fields: [v_tool_error.pop_tool_errors_current, v_tool_error.pop_tool_errors_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -1351,7 +1354,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: Daily time-series tracking volume of tool failures. <br>How: COUNT of TOOL_ERROR events aggregated by timestamp_date. <br>Why it matters: Reveals error spikes and system instability over time. <br>Drill: Click date spike to view failing tools."
+    note_text: "<div style=\"text-align: left;\">What: Daily time-series tracking volume of tool failures. <br>How: COUNT of TOOL_ERROR events aggregated by timestamp_date. <br>Why it matters: Reveals error spikes and system instability over time. <br>Drill: Click date spike to view failing tools.</div>"
     fields: [agent_events.timestamp_date, v_tool_error.total_tool_errors]
     fill_fields: [agent_events.timestamp_date]
     sorts: [agent_events.timestamp_date desc]
@@ -1421,7 +1424,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Ranking of agents by number of tool errors encountered. <br>How: COUNT of TOOL_ERROR events grouped by agent. <br>Why it matters: Shows which agents experience the most tool failures. <br>Drill: Click agent to filter error logs."
+    note_text: "<div style=\"text-align: left;\">What: Ranking of agents by number of tool errors encountered. <br>How: COUNT of TOOL_ERROR events grouped by agent. <br>Why it matters: Shows which agents experience the most tool failures. <br>Drill: Click agent to filter error logs.</div>"
     fields: [v_tool_error.total_tool_errors, agent_events.agent]
     sorts: [v_tool_error.total_tool_errors desc 0]
     limit: 5
@@ -1492,7 +1495,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Leaderboard of the most unstable backend tools. <br>How: COUNT of TOOL_ERROR events grouped by tool_name. <br>Why it matters: Focuses debugging efforts on the most error-prone APIs. <br>Drill: Click tool to inspect error tracebacks."
+    note_text: "<div style=\"text-align: left;\">What: Leaderboard of the most unstable backend tools. <br>How: COUNT of TOOL_ERROR events grouped by tool_name. <br>Why it matters: Focuses debugging efforts on the most error-prone APIs. <br>Drill: Click tool to inspect error tracebacks.</div>"
     fields: [v_tool_error.total_tool_errors, v_tool_error.tool_name]
     sorts: [v_tool_error.total_tool_errors desc 0]
     limit: 5
@@ -1563,7 +1566,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Total count of agent-level execution errors and crashes. <br>How: COUNT of AGENT_ERROR events from v_agent_error. <br>Why it matters: Core measure of overall agent execution stability. <br>Drill: Click tile to inspect error tracebacks."
+    note_text: "<div style=\"text-align: left;\">What: Total count of agent-level execution errors and crashes. <br>How: COUNT of AGENT_ERROR events from v_agent_error. <br>Why it matters: Core measure of overall agent execution stability. <br>Drill: Click tile to inspect error tracebacks.</div>"
     fields: [v_agent_error.total_agent_errors]
     limit: 500
     custom_color_enabled: true
@@ -1588,7 +1591,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Reliability SLA metric measuring ratio of SUCCESS outcomes vs total executions. <br>How: COUNTIF(status = SUCCESS) / COUNT(1). <br>Why it matters: Asserts production stability and CI/CD deployment readiness. <br>Drill: Click tile to inspect failing traces."
+    note_text: "<div style=\"text-align: left;\">What: Reliability SLA metric measuring ratio of SUCCESS outcomes vs total executions. <br>How: COUNTIF(status = SUCCESS) / COUNT(1). <br>Why it matters: Asserts production stability and CI/CD deployment readiness. <br>Drill: Click tile to inspect failing traces.</div>"
     fields: [agent_events.self_healing_resilience_rate_pct]
     limit: 500
     custom_color_enabled: true
@@ -1613,7 +1616,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Qualitative LLM-as-a-Judge evaluation score (0-100%). <br>How: Evaluates response accuracy, relevance, and tool faithfulness. <br>Why it matters: Assures high conversational quality and correctness. <br>Drill: Click tile to inspect evaluation scorecards."
+    note_text: "<div style=\"text-align: left;\">What: Qualitative LLM-as-a-Judge evaluation score (0-100%). <br>How: Evaluates response accuracy, relevance, and tool faithfulness. <br>Why it matters: Assures high conversational quality and correctness. <br>Drill: Click tile to inspect evaluation scorecards.</div>"
     fields: [v_agent_evaluation.avg_judge_quality_score]
     limit: 500
     custom_color_enabled: true
@@ -1638,7 +1641,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Percentage of positive user feedback ratings. <br>How: COUNTIF(user_feedback_rating = 'THUMBS_UP') / COUNT(1) * 100.0. <br>Why it matters: Directly measures customer happiness and satisfaction. <br>Drill: Click tile to view user feedback records."
+    note_text: "<div style=\"text-align: left;\">What: Percentage of positive user feedback ratings. <br>How: COUNTIF(user_feedback_rating = 'THUMBS_UP') / COUNT(1) * 100.0. <br>Why it matters: Directly measures customer happiness and satisfaction. <br>Drill: Click tile to view user feedback records.</div>"
     fields: [v_agent_evaluation.feedback_satisfaction_rate_pct]
     limit: 500
     custom_color_enabled: true
@@ -1663,7 +1666,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Rate at which agents successfully self-correct and recover after encountering an error. <br>How: Percentage of recovered SUCCESS sessions that followed an ERROR event. <br>Why it matters: Demonstrates autonomous self-healing and error recovery. <br>Drill: Click tile to view recovered sessions."
+    note_text: "<div style=\"text-align: left;\">What: Rate at which agents successfully self-correct and recover after encountering an error. <br>How: Percentage of recovered SUCCESS sessions that followed an ERROR event. <br>Why it matters: Demonstrates autonomous self-healing and error recovery. <br>Drill: Click tile to view recovered sessions.</div>"
     fields: [v_agent_evaluation.self_correction_success_rate_pct]
     limit: 500
     custom_color_enabled: true
@@ -1681,7 +1684,7 @@
     wrap_text: yes
     note_state: collapsed
     note_display: hover
-    note_text: "What: Highlights recursive A2A delegation loops between agents. <br>How: Filters where from_agent equals to_target. <br>Why it matters: Detects infinite orchestration ping-pong loops that bloat token consumption. <br>Drill: Filter by Session ID to inspect full trace stack."
+    note_text: "<div style=\"text-align: left;\">What: Highlights recursive A2A delegation loops between agents. <br>How: Filters where from_agent equals to_target. <br>Why it matters: Detects infinite orchestration ping-pong loops that bloat token consumption. <br>Drill: Filter by Session ID to inspect full trace stack.</div>"
     explore: agent_events
     dimensions: [v_session_trace_dag.session_id, v_session_trace_dag.from_agent, v_session_trace_dag.to_target, v_session_trace_dag.is_circular_delegation]
     measures: [v_session_trace_dag.circular_loop_count, v_session_trace_dag.avg_dag_hop_latency_ms]
@@ -1698,7 +1701,7 @@
     type: looker_column
     note_state: collapsed
     note_display: hover
-    note_text: "What: Tracks Human-In-The-Loop confirmation request volume and latency. <br>How: Aggregates HITL_CONFIRMATION_REQUEST events by tool_name and date. <br>Why it matters: Identifies where workflows pause awaiting human sign-off. <br>Drill: Filter by Date or Tool Name."
+    note_text: "<div style=\"text-align: left;\">What: Tracks Human-In-The-Loop confirmation request volume and latency. <br>How: Aggregates HITL_CONFIRMATION_REQUEST events by tool_name and date. <br>Why it matters: Identifies where workflows pause awaiting human sign-off. <br>Drill: Filter by Date or Tool Name.</div>"
     explore: agent_events
     dimensions: [agent_events.timestamp_date, v_hitl_confirmation_request.tool_name]
     measures: [v_hitl_confirmation_request.total_hitl_confirmation_requests]
@@ -1713,7 +1716,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Breakdown of failing backend tools and error counts. <br>How: Aggregates TOOL_ERROR occurrences by tool_name. <br>Why it matters: Focuses SRE remediation on the most unstable API integrations. <br>Drill: Filter by Tool Name."
+    note_text: "<div style=\"text-align: left;\">What: Breakdown of failing backend tools and error counts. <br>How: Aggregates TOOL_ERROR occurrences by tool_name. <br>Why it matters: Focuses SRE remediation on the most unstable API integrations. <br>Drill: Filter by Tool Name.</div>"
     explore: agent_events
     dimensions: [v_tool_error.tool_name]
     measures: [v_tool_error.total_tool_errors]
@@ -1730,7 +1733,7 @@
     wrap_text: yes
     note_state: collapsed
     note_display: hover
-    note_text: "What: Diagnostic recommendations on how to improve model performance based on LLM-as-a-Judge evaluation and user interactions. <br>How: Aggregated from LLM-as-a-Judge recommendation metadata and error diagnostics. <br>Why it matters: Converts qualitative scores into actionable prompt engineering and tool optimization steps. <br>Drill: Filter by Agent Name to inspect specific interaction recommendations."
+    note_text: "<div style=\"text-align: left;\">What: Diagnostic recommendations on how to improve model performance based on LLM-as-a-Judge evaluation and user interactions. <br>How: Aggregated from LLM-as-a-Judge recommendation metadata and error diagnostics. <br>Why it matters: Converts qualitative scores into actionable prompt engineering and tool optimization steps. <br>Drill: Filter by Agent Name to inspect specific interaction recommendations.</div>"
     explore: agent_events
     dimensions: [agent_events.canonical_agent_name, v_agent_evaluation.judge_improvement_recommendation]
     measures: [v_agent_evaluation.avg_judge_quality_score, v_agent_evaluation.feedback_satisfaction_rate_pct]
@@ -1745,7 +1748,7 @@
     type: looker_pie
     note_state: collapsed
     note_display: hover
-    note_text: "What: Breakdown of where model improvement recommendations originated. <br>How: Aggregated by recommendation_source (gemini-2.5-flash, gemini-2.5-pro, sdk_evaluator, static_case_fallback). <br>Why it matters: Monitors share of recommendations backed by real BigQuery AI.GENERATE calls vs. SDK and empirical error diagnostics. <br>Drill: Click slice to filter recommendations."
+    note_text: "<div style=\"text-align: left;\">What: Breakdown of where model improvement recommendations originated. <br>How: Aggregated by recommendation_source (gemini-2.5-flash, gemini-2.5-pro, sdk_evaluator, static_case_fallback). <br>Why it matters: Monitors share of recommendations backed by real BigQuery AI.GENERATE calls vs. SDK and empirical error diagnostics. <br>Drill: Click slice to filter recommendations.</div>"
     explore: agent_events
     dimensions: [v_agent_evaluation.recommendation_source]
     measures: [agent_events.total_events]
