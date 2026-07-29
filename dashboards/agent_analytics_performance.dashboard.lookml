@@ -6,9 +6,13 @@
   layout: newspaper
   tabs:
   - name: Latency
+    title: Latency
   - name: Errors
+    title: Errors
   - name: AI Recommendations
+    title: AI Recommendations
   - name: Token Consumption
+    title: Token Consumption
   elements:
   - title: Average Tool Latency (ms)
     name: Average Tool Latency (ms)
