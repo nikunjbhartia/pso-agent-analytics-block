@@ -99,7 +99,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Breakdown of total token consumption across agents. <br><br>How: SUM(usage_total_tokens) grouped by agent. <br><br>Why it matters: Identifies token-heavy agents for optimization. <br><br>Drill: Click agent bar to inspect token split.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.agent, v_llm_response.total_tokens_consumed]
     filters:
       v_llm_response.total_tokens_consumed: NOT NULL
@@ -163,7 +163,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Leaderboard of top 5 users by token usage. <br><br>How: SUM(usage_total_tokens) grouped by user_id. <br><br>Why it matters: Highlights power users and token distribution. <br><br>Drill: Click user bar to view user session history.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.user_id, v_llm_response.total_tokens_consumed]
     filters:
       agent_events.timestamp_date: 7 days
@@ -219,7 +219,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Daily time-series area chart tracking token consumption over time. <br><br>How: SUM(usage_total_tokens) aggregated by timestamp_date. <br><br>Why it matters: Monitors platform adoption and API quota utilization. <br><br>Drill: Click date point to inspect daily traffic.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [v_llm_response.total_tokens_consumed, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     sorts: [agent_events.timestamp_date desc]
@@ -291,7 +291,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Total aggregate number of tokens consumed across all sessions. <br><br>How: SUM(usage_prompt_tokens + usage_completion_tokens). <br><br>Why it matters: Core top-line consumption metric. <br><br>Drill: Click tile to see token trend.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [v_llm_response.pop_total_tokens_current, v_llm_response.pop_total_tokens_change]
     filters:
       agent_events.pop_date_filter: 14 days
@@ -372,7 +372,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Leaderboard of top 5 power users by trace volume. <br><br>How: COUNT DISTINCT of trace_id grouped by user_id. <br><br>Why it matters: Shows which users execute the deepest multi-turn workflows. <br><br>Drill: Click user to inspect trace logs.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.user_id, agent_events.total_traces]
     filters:
       agent_events.timestamp_date: 7 days
@@ -429,7 +429,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Total number of execution traces recorded. <br><br>How: COUNT DISTINCT of trace_id across all sessions. <br><br>Why it matters: Measures overall end-to-end workflow invocations. <br><br>Drill: Click tile to filter by agent.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.pop_total_traces_current, agent_events.pop_total_traces_change]
     filters:
       agent_events.pop_date_filter: 14 days
@@ -510,7 +510,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Distribution of trace volume across agents. <br><br>How: COUNT DISTINCT of trace_id grouped by agent. <br><br>Why it matters: Reveals traffic distribution across agent workloads. <br><br>Drill: Click agent to filter dashboard.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.agent, agent_events.total_traces]
     filters:
       v_llm_response.total_tokens_consumed: NOT NULL
@@ -575,7 +575,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Daily trend of trace volume generated over time. <br><br>How: COUNT DISTINCT of trace_id aggregated by timestamp_date. <br><br>Why it matters: Tracks platform engagement growth over time. <br><br>Drill: Click date to inspect daily traces.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.timestamp_date, agent_events.total_traces]
     fill_fields: [agent_events.timestamp_date]
     sorts: [agent_events.timestamp_date desc]
@@ -648,7 +648,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Total count of end-to-end user sessions. <br><br>How: COUNT DISTINCT of session_id. <br><br>Why it matters: Primary measure of active customer conversations. <br><br>Drill: Click tile to view session breakdown.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.pop_total_sessions_current, agent_events.pop_total_sessions_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -716,7 +716,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Daily time-series trend of user session volume over time. <br><br>How: COUNT DISTINCT of session_id aggregated by timestamp_date. <br><br>Why it matters: Shows daily conversational adoption. <br><br>Drill: Click date to inspect sessions.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.total_sessions, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     filters:
@@ -793,7 +793,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Leaderboard of top 5 agents by number of sessions. <br><br>How: COUNT DISTINCT of session_id grouped by agent. <br><br>Why it matters: Identifies the most popular conversational agents. <br><br>Drill: Click agent to filter sessions.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.total_sessions, agent_events.agent]
     filters:
       agent_events.agent: ''
@@ -869,7 +869,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Total count of multi-agent delegation and handoff events. <br><br>How: COUNT of AGENT_TRANSFER events from v_agent_transfer. <br><br>Why it matters: Tracks multi-agent supervisor-worker collaboration. <br><br>Drill: Click tile to view transfer matrix.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [v_agent_transfer.total_agent_transfers]
     limit: 500
     custom_color_enabled: true
@@ -893,7 +893,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Total count of Agent-to-Agent protocol communication events. <br><br>How: COUNT of A2A_INTERACTION events from v_a2a_interaction. <br><br>Why it matters: Measures decentralized agent-to-agent protocol traffic. <br><br>Drill: Click tile to view A2A tasks.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [v_a2a_interaction.total_a2a_interactions]
     limit: 500
     custom_color_enabled: true
@@ -917,7 +917,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Total count of Human-In-The-Loop confirmation requests. <br><br>How: COUNT of HITL_CONFIRMATION_REQUEST events from v_hitl_confirmation_request. <br><br>Why it matters: Measures where human governance and sign-off occur. <br><br>Drill: Click tile to view HITL tools.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [v_hitl_confirmation_request.total_hitl_confirmation_requests]
     limit: 500
     custom_color_enabled: true
@@ -941,7 +941,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Ranking of backend tools by invocation frequency. <br><br>How: COUNT of TOOL_COMPLETED events grouped by tool_name. <br><br>Why it matters: Highlights which APIs and integrations are relied upon most. <br><br>Drill: Click tool to view latency and error rate.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.total_invocations, v_tool_completed.tool_name]
     filters:
       v_tool_completed.tool_name: "-NULL"
@@ -999,7 +999,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Breakdown of total lifecycle events across agents. <br><br>How: COUNT of raw event rows grouped by agent. <br><br>Why it matters: Shows raw telemetry volume per agent. <br><br>Drill: Click agent to filter events.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.total_events, agent_events.agent]
     filters:
       agent_events.event_type: '"TOOL_COMPLETED"'
@@ -1059,7 +1059,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Daily execution trend of specific tools over time. <br><br>How: COUNT of TOOL_COMPLETED events aggregated by timestamp_date and tool_name. <br><br>Why it matters: Reveals evolving tool usage patterns over time. <br><br>Drill: Click date/tool to inspect executions.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.total_events, v_tool_completed.tool_name, agent_events.timestamp_date]
     pivots: [v_tool_completed.tool_name]
     fill_fields: [agent_events.timestamp_date]
@@ -1125,7 +1125,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Absolute count of requests sent to backend tools. <br><br>How: COUNT of TOOL_COMPLETED events. <br><br>Why it matters: Overall volume of external tool and API executions. <br><br>Drill: Click tile to inspect tools.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [v_llm_response.pop_llm_calls_current, v_llm_response.pop_llm_calls_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -1198,7 +1198,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Granular scatter plot showing frequency and clustering of LLM requests. <br><br>How: Plots individual LLM_RESPONSE events over time. <br><br>Why it matters: Identifies peak usage periods and request density. <br><br>Drill: Select time range to filter LLM calls.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [v_llm_response.total_llm_calls, agent_events.timestamp_minute]
     fill_fields: [agent_events.timestamp_minute]
     filters:
@@ -1274,7 +1274,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Ranking of agents triggering the most LLM calls. <br><br>How: COUNT of LLM_RESPONSE events grouped by agent. <br><br>Why it matters: Identifies agents driving backend LLM load. <br><br>Drill: Click agent to inspect LLM calls.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [v_llm_response.total_llm_calls, agent_events.agent]
     filters:
       agent_events.timestamp_date: 7 days
@@ -1349,7 +1349,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Count of unique end users who interacted with agents. <br><br>How: COUNT DISTINCT of user_id. <br><br>Why it matters: Primary user adoption and penetration metric. <br><br>Drill: Click tile to see user growth.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.pop_total_users_current, agent_events.pop_total_users_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -1423,7 +1423,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Daily count of active unique users over time. <br><br>How: COUNT DISTINCT of user_id aggregated by timestamp_date. <br><br>Why it matters: Measures DAU retention and adoption velocity. <br><br>Drill: Click date to inspect active users.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.total_users, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     filters:
@@ -1500,7 +1500,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Leaderboard of power users by session count. <br><br>How: COUNT DISTINCT of session_id grouped by user_id. <br><br>Why it matters: Highlights champions and power users. <br><br>Drill: Click user to inspect sessions.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.user_id, agent_events.total_sessions]
     sorts: [agent_events.total_sessions desc 0]
     limit: 5
@@ -1574,7 +1574,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Ranking of users by raw volume of lifecycle events generated. <br><br>How: COUNT of event rows grouped by user_id. <br><br>Why it matters: Identifies users running the most intensive agent workflows. <br><br>Drill: Click user to inspect event logs.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     fields: [agent_events.user_id, agent_events.total_events]
     sorts: [agent_events.total_events desc 0]
     limit: 5
@@ -1640,7 +1640,7 @@
     type: looker_column
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Breakdown of multimodal payloads and large objects offloaded to GCS bucket japac-pso-agent-analytics. <br><br>How: Aggregates offloaded GCS URIs by asset_type (IMAGE, DOCUMENT, AUDIO, VIDEO, LARGE_PAYLOAD_JSON) and event_type. <br><br>Why it matters: Monitors multimodal storage footprint and BigQuery object table ingestion. <br><br>Drill: Click asset type bar to inspect specific GCS URIs and traces.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     explore: agent_events
     dimensions: [v_gcs_multimodal_offload.asset_type, gcs_multimodal_object_table.content_type]
     measures: [v_gcs_multimodal_offload.total_gcs_offloaded_assets, gcs_multimodal_object_table.total_size_bytes]
@@ -1657,7 +1657,7 @@
     wrap_text: yes
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Turn-by-turn breakdown of user prompts, agent responses, tool calls, and token/latency metrics. <br><br>How: Queries agent_events joined with v_llm_response, v_tool_completed, and v_agent_evaluation. <br><br>Why it matters: Enables granular conversational analytics and turn debugging across sessions. <br><br>Drill: Click Session ID to inspect full conversation history.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     explore: agent_events
     dimensions: [agent_events.session_id, agent_events.event_type, agent_events.agent, v_tool_completed.tool_name, agent_events.status]
     measures: [v_llm_response.total_tokens_consumed, agent_events.total_events]
@@ -1675,7 +1675,7 @@
     wrap_text: yes
     note_state: collapsed
     note_display: hover
-    note_text: "<div style=\"text-align: left;\">What: Maps agent-to-agent delegation sequence and session lineage across supervisor and worker agents. <br><br>How: Queries v_agent_transfer and v_a2a_interaction joined with agent_events. <br><br>Why it matters: Provides complete DAG visibility and decision lineage tracking for multi-agent architectures. <br><br>Drill: Click Source or Target Agent to trace delegation graph.</div>"
+    note_text: "<div style=\"text-align: left;\">What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     explore: agent_events
     dimensions: [agent_events.session_id, v_agent_transfer.from_agent, v_agent_transfer.to_agent]
     measures: [agent_events.total_events]
