@@ -304,14 +304,29 @@ You can execute all steps automatically via `./scripts/setup_all.sh` or run them
       --lookback-hours=24
     ```
 
-#### Step 7: Looker BI Dashboard Deployment & Conversational Lineage
-*   **What it does**: Connects Looker to BigQuery via LookML views and exposes 6 interactive dashboard tabs:
+*   **What it does**: Connects Looker to BigQuery via LookML views and exposes 7 interactive dashboard tabs:
     1.  `Executive Summary` (Server-Verified Hours Saved, Consulting Value USD, P50/P90 Latency)
     2.  `Session Trace Inspector` (Trace-level breakdown and tool sequences)
     3.  `AI Error Analysis & Recommendations` (AI.GENERATE recommendation catalog and empirical fix diffs)
     4.  `FinOps & Model Analytics` (75% prompt cache discount savings and token consumption)
     5.  `Looker BI Block Usage & Provenance` (Dashboard adoption and query latency by user)
     6.  **`Conversation & Lineage`** (Turn-by-turn interaction flows, token latency, and multi-agent DAG delegation decision paths)
+    7.  **`Real-Time UDFs & Remote Function Analytics`** (Zero-batch UDF quality scoring across practice areas, interactive trace drilldowns via `agent_analytics('analyze')`, and golden vs. production drift monitoring via `agent_analytics('drift')`)
+
+#### Canonical Executable Jupyter Notebook Suite (`notebooks/`)
+The repository includes 10 executable Jupyter notebooks covering every lifecycle stage of the Google Cloud PSO JAPAC Agent Analytics architecture:
+| Notebook Path | Purpose & Key Analytics Demonstrated |
+| :--- | :--- |
+| `notebooks/00_enterprise_agent_observability_poc.ipynb` | End-to-end architecture validation and LookML block verification. |
+| `notebooks/01_graph_trace_inspection_and_dag_analysis.ipynb` | Property graph traversals, session traces, and DAG lineage. |
+| `notebooks/02_finops_token_economics_and_latency_leaderboard.ipynb` | FinOps caching discounts (75% savings) and model cost attribution. |
+| `notebooks/03_llm_as_a_judge_and_automated_evaluations.ipynb` | LLM-as-a-judge scoring and automated recommendation tables. |
+| `notebooks/04_cicd_regression_testing_and_drift_detection.ipynb` | Automated regression testing and behavioral drift monitoring. |
+| `notebooks/05_closed_loop_insights_and_conversational_analytics.ipynb` | Multi-turn conversational flow and intent analytics. |
+| `notebooks/06_multimodal_gcs_offloading_and_looker_bi_integration.ipynb` | GCS multimodal offloading and Looker BI block integration. |
+| `notebooks/07_master_consolidated_bq_agent_analytics_queries_and_metrics.ipynb` | Master catalog of 60+ PSO analytics SQL queries and LookML blocks. |
+| `notebooks/08_sql_remote_function_and_udf_evaluations.ipynb` | SQL-driven evaluation using all 11 Python UDFs and `agent_analytics(...)` Remote Function. |
+| `notebooks/09_continuous_agent_improvement_cycle.ipynb` | Closed-loop improvement cycle: mining failures, remote function eval, and few-shot training generation. |
 
 ---
 

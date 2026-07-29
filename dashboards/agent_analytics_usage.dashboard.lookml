@@ -1614,6 +1614,45 @@
     width: 24
     height: 8
     tab_name: Conversation & Lineage
+  - title: Real-Time UDF Evaluation Scorecard (Zero-Batch Latency, TTFT & Cost Scores)
+    name: Real-Time UDF Evaluation Scorecard
+    model: agent-analytics
+    explore: udf_realtime_scorecard
+    type: looker_grid
+    fields: [udf_realtime_scorecard.practice_area, udf_realtime_scorecard.agent, udf_realtime_scorecard.total_sessions, udf_realtime_scorecard.total_spans, udf_realtime_scorecard.avg_latency_score, udf_realtime_scorecard.avg_ttft_score, udf_realtime_scorecard.avg_token_efficiency_score, udf_realtime_scorecard.avg_cost_score, udf_realtime_scorecard.avg_error_rate_score]
+    sorts: [udf_realtime_scorecard.total_sessions desc]
+    limit: 50
+    row: 0
+    col: 0
+    width: 24
+    height: 6
+    tab_name: Real-Time UDFs & Remote Function Analytics
+  - title: Interactive SQL-Driven Trace Drilldown (Remote Function 'analyze')
+    name: Interactive SQL-Driven Trace Drilldown
+    model: agent-analytics
+    explore: remote_function_trace_drilldown
+    type: looker_grid
+    fields: [remote_function_trace_drilldown.session_id, remote_function_trace_drilldown.agent, remote_function_trace_drilldown.session_start_time, remote_function_trace_drilldown.span_count, remote_function_trace_drilldown.error_count, remote_function_trace_drilldown.sdk_version, remote_function_trace_drilldown.analyzed_session_id]
+    sorts: [remote_function_trace_drilldown.session_start_time desc]
+    limit: 50
+    row: 6
+    col: 0
+    width: 12
+    height: 7
+    tab_name: Real-Time UDFs & Remote Function Analytics
+  - title: Production vs Baseline Drift Scorecard (Remote Function 'drift')
+    name: Production vs Baseline Drift Scorecard
+    model: agent-analytics
+    explore: remote_function_drift_scorecard
+    type: looker_grid
+    fields: [remote_function_drift_scorecard.comparison_tier, remote_function_drift_scorecard.drift_metric, remote_function_drift_scorecard.kolmogorov_smirnov_stat, remote_function_drift_scorecard.p_value, remote_function_drift_scorecard.drift_status, remote_function_drift_scorecard.last_evaluated_date]
+    sorts: [remote_function_drift_scorecard.drift_metric]
+    limit: 50
+    row: 6
+    col: 12
+    width: 12
+    height: 7
+    tab_name: Real-Time UDFs & Remote Function Analytics
   filters:
   - name: Date
     title: Date

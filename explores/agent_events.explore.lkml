@@ -76,9 +76,24 @@ explore: agent_events {
     relationship: one_to_one
   }
 
-  join: gcs_multimodal_object_table {
-    type: left_outer
-    sql_on: ${v_gcs_multimodal_offload.gcs_uri} = ${gcs_multimodal_object_table.uri} ;;
-    relationship: many_to_one
+    join: gcs_multimodal_object_table {
+      type: left_outer
+      sql_on: ${v_gcs_multimodal_offload.gcs_uri} = ${gcs_multimodal_object_table.uri} ;;
+      relationship: many_to_one
+    }
   }
+
+explore: udf_realtime_scorecard {
+  label: "Real-Time UDF Evaluation Scorecard"
+  description: "Real-time evaluation scorecard using bqaa_score_* Python UDFs directly over agent_events."
+}
+
+explore: remote_function_trace_drilldown {
+  label: "Remote Function Trace Drilldown"
+  description: "Interactive trace inspection drill-down table powered by agent_analytics('analyze') remote function."
+}
+
+explore: remote_function_drift_scorecard {
+  label: "Production vs Baseline Drift Scorecard"
+  description: "Production vs baseline benchmark drift detection scorecard powered by agent_analytics('drift') remote function."
 }
