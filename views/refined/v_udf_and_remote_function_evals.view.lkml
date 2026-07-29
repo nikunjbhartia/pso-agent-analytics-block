@@ -1,5 +1,5 @@
 view: udf_realtime_scorecard {
-  sql_table_name: `@{PROJECT_ID}.@{DATASET_NAME}.@{TABLE_NAME}` ;;
+  sql_table_name: `nikunjbhartia-test-clients.agent_analytics.agent_events` ;;
 
   dimension: practice_area {
     type: string
@@ -44,7 +44,7 @@ view: udf_realtime_scorecard {
 
   measure: avg_latency_score {
     type: average
-    sql: `@{PROJECT_ID}.@{DATASET_NAME}.bqaa_score_latency`(
+    sql: `nikunjbhartia-test-clients.agent_analytics.bqaa_score_latency`(
       COALESCE(SAFE_CAST(JSON_EXTRACT_SCALAR(${TABLE}.latency_ms, '$.total') AS FLOAT64), 120.0), 200.0
     ) ;;
     value_format_name: percent_2
@@ -53,7 +53,7 @@ view: udf_realtime_scorecard {
 
   measure: avg_ttft_score {
     type: average
-    sql: `@{PROJECT_ID}.@{DATASET_NAME}.bqaa_score_ttft`(
+    sql: `nikunjbhartia-test-clients.agent_analytics.bqaa_score_ttft`(
       COALESCE(SAFE_CAST(JSON_EXTRACT_SCALAR(${TABLE}.latency_ms, '$.time_to_first_token') AS FLOAT64), 150.0), 500.0
     ) ;;
     value_format_name: percent_2
@@ -62,21 +62,21 @@ view: udf_realtime_scorecard {
 
   measure: avg_token_efficiency_score {
     type: average
-    sql: `@{PROJECT_ID}.@{DATASET_NAME}.bqaa_score_token_efficiency`(1000, 2000) ;;
+    sql: `nikunjbhartia-test-clients.agent_analytics.bqaa_score_token_efficiency`(1000, 2000) ;;
     value_format_name: percent_2
     description: "What: Row-level UDF prompt-to-completion token efficiency score (0-100%).  | How: Evaluated via bqaa_score_token_efficiency(prompt_tokens, completion_tokens); penalizes excessive prompt bloat or overly verbose completion output.  | Why: Encourages concise prompt engineering and optimizes token consumption."
   }
 
   measure: avg_cost_score {
     type: average
-    sql: `@{PROJECT_ID}.@{DATASET_NAME}.bqaa_score_cost`(1000, 500, 0.10, 0.00015, 0.0006) ;;
+    sql: `nikunjbhartia-test-clients.agent_analytics.bqaa_score_cost`(1000, 500, 0.10, 0.00015, 0.0006) ;;
     value_format_name: percent_2
     description: "What: Row-level UDF FinOps cost efficiency score (0-100%).  | How: Evaluated via bqaa_score_cost(prompt, completion, budget, pricing_rates); applies Gemini 2.5 Pro 75% prompt caching discounts ($0.3125/M cached vs $1.25/M standard input) against budget benchmarks.  | Why: Rewards agents that maximize cache hit ratios to minimize cloud API spend."
   }
 
   measure: avg_error_rate_score {
     type: average
-    sql: `@{PROJECT_ID}.@{DATASET_NAME}.bqaa_score_error_rate`(10, IF(${TABLE}.status = 'ERROR', 1, 0), 0.20) ;;
+    sql: `nikunjbhartia-test-clients.agent_analytics.bqaa_score_error_rate`(10, IF(${TABLE}.status = 'ERROR', 1, 0), 0.20) ;;
     value_format_name: percent_2
     description: "What: Row-level UDF reliability and self-healing score (0-100%).  | How: Evaluated via bqaa_score_error_rate(events, error_count, threshold=20%); assigns 100% to error-free executions and penalizes unhandled fatal crashes.  | Why: Asserts production CI/CD SLA readiness and monitors automated resilience."
   }
@@ -92,15 +92,15 @@ view: remote_function_trace_drilldown {
         COUNT(1) AS span_count,
         COUNTIF(status = 'ERROR' OR error_message IS NOT NULL) AS error_count,
         -- SQL Remote Function Call for Trace Inspection
-        STRING(JSON_EXTRACT(`@{PROJECT_ID}.@{DATASET_NAME}.agent_analytics`(
+        STRING(JSON_EXTRACT(`nikunjbhartia-test-clients.agent_analytics.agent_analytics`(
           'analyze',
           JSON_OBJECT('session_id', session_id, 'allow_mixed_scope', TRUE)
         ), '$._version')) AS sdk_version,
-        STRING(JSON_EXTRACT(`@{PROJECT_ID}.@{DATASET_NAME}.agent_analytics`(
+        STRING(JSON_EXTRACT(`nikunjbhartia-test-clients.agent_analytics.agent_analytics`(
           'analyze',
           JSON_OBJECT('session_id', session_id, 'allow_mixed_scope', TRUE)
         ), '$.session_id')) AS analyzed_session_id
-      FROM `@{PROJECT_ID}.@{DATASET_NAME}.@{TABLE_NAME}`
+      FROM `nikunjbhartia-test-clients.agent_analytics.agent_events`
       WHERE session_id IS NOT NULL
       GROUP BY 1, 2
       LIMIT 100

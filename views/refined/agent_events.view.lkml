@@ -1,5 +1,5 @@
 view: agent_events {
-  sql_table_name: `@{PROJECT_ID}.@{DATASET_NAME}.@{TABLE_NAME}` ;;
+  sql_table_name: `nikunjbhartia-test-clients.agent_analytics.agent_events` ;;
 
   dimension: pk {
     primary_key: yes

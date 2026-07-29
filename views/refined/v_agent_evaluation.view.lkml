@@ -77,14 +77,14 @@ view: v_agent_evaluation {
 
         CASE
           WHEN e1.status = 'SUCCESS' AND EXISTS (
-            SELECT 1 FROM `@{PROJECT_ID}.@{DATASET_NAME}.agent_events` e2
+            SELECT 1 FROM `nikunjbhartia-test-clients.agent_analytics.agent_events` e2
             WHERE e2.session_id = e1.session_id
               AND e2.status = 'ERROR'
               AND e2.timestamp < e1.timestamp
           ) THEN 1 ELSE 0
         END AS is_successful_self_correction
-      FROM `@{PROJECT_ID}.@{DATASET_NAME}.agent_events` e1
-      LEFT JOIN `@{PROJECT_ID}.@{DATASET_NAME}.agent_judge_recommendations` r
+      FROM `nikunjbhartia-test-clients.agent_analytics.agent_events` e1
+      LEFT JOIN `nikunjbhartia-test-clients.agent_analytics.agent_judge_recommendations` r
         ON  r.trace_id = e1.trace_id
         AND r.span_id  = e1.span_id
       WHERE e1.event_type IN ('AGENT_COMPLETED', 'INVOCATION_COMPLETED', 'USER_MESSAGE_RECEIVED')
@@ -128,7 +128,7 @@ view: v_agent_evaluation {
             endpoint      => 'gemini-2.5-flash',
             model_params  => JSON '{"generation_config":{"temperature":0.2,"max_output_tokens":512}}'
           ).result
-          FROM `@{PROJECT_ID}.@{DATASET_NAME}.agent_events` x
+          FROM `nikunjbhartia-test-clients.agent_analytics.agent_events` x
           WHERE x.trace_id = ${TABLE}.trace_id AND x.span_id = ${TABLE}.span_id
           LIMIT 1
         )

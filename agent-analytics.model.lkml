@@ -1,8 +1,8 @@
-connection: "@{CONNECTION_NAME}"
+connection: "japac_pso_agent_analytics"
 
 datagroup: agent_events_datagroup {
   max_cache_age: "30 minutes"
-  sql_trigger: SELECT MAX(timestamp) FROM `@{PROJECT_ID}.@{DATASET_NAME}.agent_events` ;;
+  sql_trigger: SELECT MAX(timestamp) FROM `nikunjbhartia-test-clients.agent_analytics.agent_events` ;;
 }
 
 

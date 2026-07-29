@@ -1,5 +1,5 @@
 view: v_llm_response {
-  sql_table_name: `@{PROJECT_ID}.@{DATASET_NAME}.v_llm_response` ;;
+  sql_table_name: `nikunjbhartia-test-clients.agent_analytics.v_llm_response` ;;
 
   dimension_group: timestamp {
     group_label: "IDs & Tracing"

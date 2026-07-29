@@ -1,5 +1,5 @@
 view: v_tool_error {
-  sql_table_name: `@{PROJECT_ID}.@{DATASET_NAME}.v_tool_error` ;;
+  sql_table_name: `nikunjbhartia-test-clients.agent_analytics.v_tool_error` ;;
 
   dimension_group: timestamp {
     group_label: "IDs & Tracing"

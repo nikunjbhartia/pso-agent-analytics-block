@@ -16,7 +16,7 @@ view: v_agent_error {
         is_truncated,
         total_ms,
         error_traceback
-      FROM `@{PROJECT_ID}.@{DATASET_NAME}.v_agent_error`
+      FROM `nikunjbhartia-test-clients.agent_analytics.v_agent_error`
     ;;
   }
 

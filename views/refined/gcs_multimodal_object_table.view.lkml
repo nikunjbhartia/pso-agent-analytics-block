@@ -1,5 +1,5 @@
 view: gcs_multimodal_object_table {
-  sql_table_name: `@{PROJECT_ID}.@{DATASET_NAME}.gcs_multimodal_object_table` ;;
+  sql_table_name: `nikunjbhartia-test-clients.agent_analytics.gcs_multimodal_object_table` ;;
 
   dimension: uri {
     primary_key: yes

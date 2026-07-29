@@ -17,7 +17,7 @@ view: v_agent_transfer {
         from_agent,
         to_agent,
         source_event_id
-      FROM `@{PROJECT_ID}.@{DATASET_NAME}.v_agent_transfer`
+      FROM `nikunjbhartia-test-clients.agent_analytics.v_agent_transfer`
     ;;
   }
 

@@ -12,7 +12,7 @@ view: v_session_trace_dag {
         COALESCE(JSON_VALUE(content, '$.to_agent'), JSON_VALUE(content, '$.tool'), event_type) AS to_target,
         CAST(JSON_VALUE(latency_ms, '$.total_ms') AS INT64) AS total_ms,
         status
-      FROM `@{PROJECT_ID}.@{DATASET_NAME}.agent_events`
+      FROM `nikunjbhartia-test-clients.agent_analytics.agent_events`
       WHERE event_type IN ('AGENT_TRANSFER', 'A2A_INTERACTION', 'TOOL_COMPLETED', 'LLM_RESPONSE')
     ;;
   }

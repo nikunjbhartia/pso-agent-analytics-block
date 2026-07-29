@@ -21,7 +21,7 @@ view: v_gcs_multimodal_offload {
           WHEN TO_JSON_STRING(content) LIKE "%.mp4%" OR TO_JSON_STRING(content) LIKE "%.webm%" THEN "VIDEO"
           ELSE "LARGE_PAYLOAD_JSON"
         END AS asset_type
-      FROM `@{PROJECT_ID}.@{DATASET_NAME}.agent_events`
+      FROM `nikunjbhartia-test-clients.agent_analytics.agent_events`
       WHERE TO_JSON_STRING(content) LIKE "%gs://%" OR TO_JSON_STRING(attributes) LIKE "%gs://%"
     ;;
   }

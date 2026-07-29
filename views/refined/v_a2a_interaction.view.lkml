@@ -16,7 +16,7 @@ view: v_a2a_interaction {
         is_truncated,
         a2a_task_id,
         a2a_context_id
-      FROM `@{PROJECT_ID}.@{DATASET_NAME}.v_a2a_interaction`
+      FROM `nikunjbhartia-test-clients.agent_analytics.v_a2a_interaction`
     ;;
   }
 

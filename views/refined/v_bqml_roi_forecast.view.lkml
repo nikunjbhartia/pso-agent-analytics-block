@@ -6,7 +6,7 @@ view: v_bqml_roi_forecast {
           DATE(timestamp) AS forecast_date,
           COUNT(DISTINCT session_id) * 3.5 AS actual_hours_saved,
           ROUND(COUNT(DISTINCT session_id) * 3.5 * 350.0, 2) AS actual_consulting_value_usd
-        FROM `@{PROJECT_ID}.@{DATASET_NAME}.agent_events`
+        FROM `nikunjbhartia-test-clients.agent_analytics.agent_events`
         GROUP BY 1
       ),
       stats AS (

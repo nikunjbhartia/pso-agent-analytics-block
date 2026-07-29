@@ -15,7 +15,7 @@ view: v_hitl_confirmation_request {
         error_message,
         is_truncated,
         tool_name
-      FROM `@{PROJECT_ID}.@{DATASET_NAME}.v_hitl_confirmation_request`
+      FROM `nikunjbhartia-test-clients.agent_analytics.v_hitl_confirmation_request`
     ;;
   }
 
