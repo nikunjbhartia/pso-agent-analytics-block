@@ -6,14 +6,19 @@
   layout: newspaper
   tabs:
   - name: Agent & Sessions
+    label: Agent & Sessions
     title: Agent & Sessions
   - name: LLM & Token Economics
+    label: LLM & Token Economics
     title: LLM & Token Economics
   - name: Tool Usage & Provenance
+    label: Tool Usage & Provenance
     title: Tool Usage & Provenance
   - name: Conversation & Lineage
+    label: Conversation & Lineage
     title: Conversation & Lineage
   - name: Real-Time UDFs & Remote Functions
+    label: Real-Time UDFs & Remote Functions
     title: Real-Time UDFs & Remote Functions
   elements:
   - title: Token Usage split by Agent
