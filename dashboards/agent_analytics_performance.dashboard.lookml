@@ -4,6 +4,11 @@
   crossfilter_enabled: yes
   description: ''
   layout: newspaper
+  tabs:
+  - name: Latency
+  - name: Errors
+  - name: AI Recommendations
+  - name: Token Consumption
   elements:
   - title: Average Tool Latency (ms)
     name: Average Tool Latency (ms)
@@ -1617,8 +1622,8 @@
     note_text: "What: Breakdown of failing backend tools and error counts. | How: Aggregates TOOL_ERROR occurrences by tool_name. | Why it matters: Focuses SRE remediation on the most unstable API integrations. | Drill: Filter by Tool Name."
     explore: agent_events
     dimensions: [v_tool_error.tool_name]
-    measures: [agent_events.total_tool_errors]
-    sorts: [agent_events.total_tool_errors desc]
+    measures: [v_tool_error.total_tool_errors]
+    sorts: [v_tool_error.total_tool_errors desc]
     row: 29
     col: 0
     width: 24

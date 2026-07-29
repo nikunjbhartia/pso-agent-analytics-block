@@ -4,6 +4,13 @@
   crossfilter_enabled: yes
   description: ''
   layout: newspaper
+  tabs:
+  - name: Agent & Sessions
+  - name: LLM Interactions
+  - name: Tool Usage
+  - name: User Analytics
+  - name: Conversation & Lineage
+  - name: Real-Time UDFs & Remote Function Analytics
   elements:
   - title: Token Usage split by Agent
     name: Token Usage split by Agent
@@ -1589,8 +1596,8 @@
     note_text: "What: Turn-by-turn breakdown of user prompts, agent responses, tool calls, and token/latency metrics. | How: Queries agent_events joined with v_llm_response, v_tool_completed, and v_agent_evaluation. | Why it matters: Enables granular conversational analytics and turn debugging across sessions. | Drill: Click Session ID to inspect full conversation history."
     explore: agent_events
     dimensions: [agent_events.session_id, agent_events.event_type, agent_events.agent, v_tool_completed.tool_name, agent_events.status]
-    measures: [v_llm_response.total_tokens_consumed, agent_events.count]
-    sorts: [agent_events.session_id desc, agent_events.count desc]
+    measures: [v_llm_response.total_tokens_consumed, agent_events.total_events]
+    sorts: [agent_events.session_id desc, agent_events.total_events desc]
     limit: 50
     row: 0
     col: 0
@@ -1604,9 +1611,9 @@
     note_display: hover
     note_text: "What: Maps agent-to-agent delegation sequence and session lineage across supervisor and worker agents. | How: Queries v_agent_transfer and v_a2a_interaction joined with agent_events. | Why it matters: Provides complete DAG visibility and decision lineage tracking for multi-agent architectures. | Drill: Click Source or Target Agent to trace delegation graph."
     explore: agent_events
-    dimensions: [agent_events.session_id, v_agent_transfer.source_agent, v_agent_transfer.target_agent, v_agent_transfer.transfer_reason]
-    measures: [agent_events.count]
-    sorts: [agent_events.count desc]
+    dimensions: [agent_events.session_id, v_agent_transfer.from_agent, v_agent_transfer.to_agent]
+    measures: [agent_events.total_events]
+    sorts: [agent_events.total_events desc]
     limit: 50
     row: 9
     col: 0
