@@ -1,9 +1,9 @@
 - dashboard: pso_apo_executive_portal
-title: "APO Portal: Google Cloud PSO JAPAC Agent Program Office"
-layout: newspaper
-preferred_viewer: dashboards-next
-crossfilter_enabled: yes
-description: "Canonical Executive Dashboard for Google Cloud PSO JAPAC APO (Agent Program Office) — Server-Verified Hours Saved, Practice Area Attribution, Pilot Projects, and FTE Value Creation."
+  title: "APO Portal: Google Cloud PSO JAPAC Agent Program Office"
+  layout: newspaper
+  preferred_viewer: dashboards-next
+  crossfilter_enabled: yes
+  description: "Canonical Executive Dashboard for Google Cloud PSO JAPAC APO (Agent Program Office) — Server-Verified Hours Saved, Practice Area Attribution, Pilot Projects, and FTE Value Creation."
 
   filters:
   - name: date_filter
