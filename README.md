@@ -30,11 +30,14 @@ This Looker Block includes three canonical dashboards capturing a total of **74 
 > [!IMPORTANT]
 > For the complete, authoritative catalog of all 74 metrics across all three dashboards—including BigQuery source fields, formulas, and derivation logic—see **[METRICS.md](METRICS.md)**.
 
-### Enterprise BI Capabilities
-*   **Looker Next-Gen Canvas**: All dashboards use Looker's responsive Next-Gen canvas (`preferred_viewer: dashboards-next`).
-*   **Dynamic Cross-Filtering**: Enable interactive drill-downs across charts (`crossfilter_enabled: yes`).
-*   **Universal Interactive Filters**: Standardized controls across all dashboards for **`Date Range`**, **`Practice Area`**, **`Sub-Region`**, **`Pilot Project`**, **`Agent Name`**, **`Trace ID`**, and **`Session ID`**.
-*   **Standardized Executive 4-Part Hover Notes**: Every visual data tile features a plain-English hover explanation (`What | How | Why it matters | Drill`).
+### Enterprise BI Capabilities & Architectural Deep-Dives
+*   **100% Row-Level UDF Quality Evaluation (`bqaa_score_*`)**: LookML view `v_udf_and_remote_function_evals` invokes 5 scalar Python UDFs (`bqaa_score_latency`, `bqaa_score_ttft`, `bqaa_score_token_efficiency`, `bqaa_score_cost`, `bqaa_score_error_rate`) row-level over `agent_events`. There are no intermediate aggregated tables, preserving full row-level drill-down from any leaderboard tile back to individual session and span records.
+*   **BigQuery Remote Functions (`agent_analytics`)**: Integrates `agent_analytics('analyze', ...)` for live SDK session metadata inspection and `agent_analytics('drift', ...)` for statistical behavioral drift evaluation directly in SQL derived tables.
+*   **Where AI Recommendations Come From**: AI recommendations originate from a closed-loop LLM-as-a-Judge pipeline (default: `gemini-2.5-flash`) that evaluates prompt accuracy and tool selection errors, logging structured JSON prompt fixes into `agent_events`. LookML view `v_agent_evaluation` parses these recommendations row-level (see **[METRICS.md Section 4](METRICS.md#4-deep-dive-ai-recommendation-provenance--llm-as-a-judge-architecture)**).
+*   **Behavioral Drift Detection (Kolmogorov-Smirnov Test)**: Uses the two-sample K-S statistical test to detect whether production latency, tool selection, or error distributions have significantly diverged from golden tested baselines ($p \le 0.05$ flags `DRIFT_DETECTED`) (see **[METRICS.md Section 5](METRICS.md#5-deep-dive-behavioral-drift-detection--kolmogorov-smirnov-statistical-testing)**).
+*   **Universal 3-Dashboard Navigation Banner**: Every dashboard includes a standardized Markdown header at `row: 0` (`height: 2`), enabling single-click transitions between the Executive Portal, Usage, and Performance dashboards.
+*   **Structured What/How/Why Tooltips with Newline Breaks (`\n`)**: All 214 view descriptions and 76 dashboard hover tooltips use explicit newline breaks (`\n`) so that `What:`, `How:`, `Why:`, and `Drill:` appear on clean, separate lines on hover.
+*   **Looker Next-Gen Canvas**: All dashboards use Looker's responsive Next-Gen canvas (`preferred_viewer: dashboards-next`) with dynamic cross-filtering (`crossfilter_enabled: yes`) and universal interactive filters.
 
 ---
 
