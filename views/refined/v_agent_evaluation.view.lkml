@@ -94,7 +94,6 @@ view: v_agent_evaluation {
     # only refresh every 15 min via the scheduled MERGE, so a 30-min PDT
     # cache is safe and eliminates most repeat scans.
     datagroup_trigger: agent_events_datagroup
-    persist_for: "30 minutes"
   }
 
   # =========================================================================
