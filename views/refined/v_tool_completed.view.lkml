@@ -151,11 +151,11 @@ view: v_tool_completed {
     
     link: {
       label: "Latency Distribution by Tool (Area Chart)"
-      url: "@{VIZ_STACKED_AREA}{{ link }}&fields=agent_events.timestamp_date,{{ _view._name }}.tool_name,{{ _view._name }}.average_tool_latency&pivots={{ _view._name }}.tool_name&sorts=agent_events.timestamp_date+desc&limit=500&column_limit=10&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis"
+      url: "{% assign vis_config = '{ \"x_axis_gridlines\": false, \"y_axis_gridlines\": true, \"show_view_names\": false, \"show_y_axis_labels\": true, \"show_y_axis_ticks\": true, \"y_axis_tick_density\": \"default\", \"show_x_axis_label\": true, \"show_x_axis_ticks\": true, \"y_axis_scale_mode\": \"linear\", \"x_axis_reversed\": false, \"y_axis_reversed\": false, \"trellis\": \"\", \"stacking\": \"normal\", \"legend_position\": \"center\", \"point_style\": \"circle\", \"show_value_labels\": false, \"x_axis_scale\": \"auto\", \"y_axis_combined\": true, \"show_null_points\": true, \"interpolation\": \"monotone\", \"x_axis_zoom\": true, \"y_axis_zoom\": true, \"type\": \"looker_area\", \"defaults_version\": 1 }' %}{{ link }}&fields=agent_events.timestamp_date,{{ _view._name }}.tool_name,{{ _view._name }}.average_tool_latency&pivots={{ _view._name }}.tool_name&sorts=agent_events.timestamp_date+desc&limit=500&column_limit=10&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis"
     }
     link: {
       label: "Inspect Slowest Tools (Data Table)"
-      url: "@{VIZ_GRID_TABLE}{{ link }}&fields=agent_events.timestamp_time,agent_events.trace_id,agent_events.agent,{{ _view._name }}.tool_name,{{ _view._name }}.total_ms&sorts={{ _view._name }}.total_ms+desc&limit=50&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis"
+      url: "{% assign vis_config = '{ \"show_view_names\": false, \"show_row_numbers\": true, \"transpose\": false, \"truncate_text\": false, \"hide_totals\": false, \"hide_row_totals\": false, \"size_to_fit\": true, \"table_theme\": \"white\", \"limit_displayed_rows\": false, \"enable_conditional_formatting\": false, \"header_text_alignment\": \"left\", \"header_font_size\": \"12\", \"rows_font_size\": \"12\", \"conditional_formatting_include_totals\": false, \"conditional_formatting_include_nulls\": false, \"show_sql_query_menu_options\": false, \"show_totals\": true, \"show_row_totals\": true, \"truncate_header\": false, \"minimum_column_width\": 75, \"series_cell_visualizations\": {\"v_llm_response.usage_total_tokens\": {\"is_active\": true}}, \"table_show_footer\": false, \"table_enable_pagination\": false, \"table_show_headers\": true, \"type\": \"looker_grid\", \"defaults_version\": 1 }' %}{{ link }}&fields=agent_events.timestamp_time,agent_events.trace_id,agent_events.agent,{{ _view._name }}.tool_name,{{ _view._name }}.total_ms&sorts={{ _view._name }}.total_ms+desc&limit=50&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis"
     }
   }
 
@@ -169,7 +169,7 @@ view: v_tool_completed {
     
     link: {
       label: "Inspect Slowest Tools (Data Table)"
-      url: "@{VIZ_GRID_TABLE}{{ link }}&fields=agent_events.timestamp_time,agent_events.trace_id,agent_events.agent,{{ _view._name }}.tool_name,{{ _view._name }}.total_ms&sorts={{ _view._name }}.total_ms+desc&limit=50&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis"
+      url: "{% assign vis_config = '{ \"show_view_names\": false, \"show_row_numbers\": true, \"transpose\": false, \"truncate_text\": false, \"hide_totals\": false, \"hide_row_totals\": false, \"size_to_fit\": true, \"table_theme\": \"white\", \"limit_displayed_rows\": false, \"enable_conditional_formatting\": false, \"header_text_alignment\": \"left\", \"header_font_size\": \"12\", \"rows_font_size\": \"12\", \"conditional_formatting_include_totals\": false, \"conditional_formatting_include_nulls\": false, \"show_sql_query_menu_options\": false, \"show_totals\": true, \"show_row_totals\": true, \"truncate_header\": false, \"minimum_column_width\": 75, \"series_cell_visualizations\": {\"v_llm_response.usage_total_tokens\": {\"is_active\": true}}, \"table_show_footer\": false, \"table_enable_pagination\": false, \"table_show_headers\": true, \"type\": \"looker_grid\", \"defaults_version\": 1 }' %}{{ link }}&fields=agent_events.timestamp_time,agent_events.trace_id,agent_events.agent,{{ _view._name }}.tool_name,{{ _view._name }}.total_ms&sorts={{ _view._name }}.total_ms+desc&limit=50&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis"
     }
   }
 
@@ -192,7 +192,7 @@ view: v_tool_completed {
     
     link: {
       label: "Inspect Slowest Tools (Data Table)"
-      url: "@{VIZ_GRID_TABLE}{{ link }}&fields=agent_events.timestamp_time,agent_events.trace_id,agent_events.agent,{{ _view._name }}.tool_name,{{ _view._name }}.total_ms&sorts={{ _view._name }}.total_ms+desc&limit=50&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis"
+      url: "{% assign vis_config = '{ \"show_view_names\": false, \"show_row_numbers\": true, \"transpose\": false, \"truncate_text\": false, \"hide_totals\": false, \"hide_row_totals\": false, \"size_to_fit\": true, \"table_theme\": \"white\", \"limit_displayed_rows\": false, \"enable_conditional_formatting\": false, \"header_text_alignment\": \"left\", \"header_font_size\": \"12\", \"rows_font_size\": \"12\", \"conditional_formatting_include_totals\": false, \"conditional_formatting_include_nulls\": false, \"show_sql_query_menu_options\": false, \"show_totals\": true, \"show_row_totals\": true, \"truncate_header\": false, \"minimum_column_width\": 75, \"series_cell_visualizations\": {\"v_llm_response.usage_total_tokens\": {\"is_active\": true}}, \"table_show_footer\": false, \"table_enable_pagination\": false, \"table_show_headers\": true, \"type\": \"looker_grid\", \"defaults_version\": 1 }' %}{{ link }}&fields=agent_events.timestamp_time,agent_events.trace_id,agent_events.agent,{{ _view._name }}.tool_name,{{ _view._name }}.total_ms&sorts={{ _view._name }}.total_ms+desc&limit=50&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis"
     }
   }
   
@@ -206,7 +206,7 @@ view: v_tool_completed {
     
     link: {
       label: "Inspect Slowest Tools (Data Table)"
-      url: "@{VIZ_GRID_TABLE}{{ link }}&fields=agent_events.timestamp_time,agent_events.trace_id,agent_events.agent,{{ _view._name }}.tool_name,{{ _view._name }}.total_ms&sorts={{ _view._name }}.total_ms+desc&limit=50&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis"
+      url: "{% assign vis_config = '{ \"show_view_names\": false, \"show_row_numbers\": true, \"transpose\": false, \"truncate_text\": false, \"hide_totals\": false, \"hide_row_totals\": false, \"size_to_fit\": true, \"table_theme\": \"white\", \"limit_displayed_rows\": false, \"enable_conditional_formatting\": false, \"header_text_alignment\": \"left\", \"header_font_size\": \"12\", \"rows_font_size\": \"12\", \"conditional_formatting_include_totals\": false, \"conditional_formatting_include_nulls\": false, \"show_sql_query_menu_options\": false, \"show_totals\": true, \"show_row_totals\": true, \"truncate_header\": false, \"minimum_column_width\": 75, \"series_cell_visualizations\": {\"v_llm_response.usage_total_tokens\": {\"is_active\": true}}, \"table_show_footer\": false, \"table_enable_pagination\": false, \"table_show_headers\": true, \"type\": \"looker_grid\", \"defaults_version\": 1 }' %}{{ link }}&fields=agent_events.timestamp_time,agent_events.trace_id,agent_events.agent,{{ _view._name }}.tool_name,{{ _view._name }}.total_ms&sorts={{ _view._name }}.total_ms+desc&limit=50&vis_config={{ vis_config | encode_uri }}&toggle=dat,pik,vis"
     }
   }
 
