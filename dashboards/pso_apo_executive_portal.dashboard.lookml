@@ -54,21 +54,28 @@
     default_value: ""
 
   elements:
-  - name: dashboard_navigation_header
-    type: text
-      title_text: ""
-    body_text: "### [🏠 APO Executive Portal](/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_usage)"
+  - type: button
+    name: nav_btn_perf
+    rich_content_json: '{"text":"📈 Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#E52592","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 0
-    width: 24
+    col: 14
+    width: 5
     height: 2
+  - type: button
+    name: nav_btn_usage
+    rich_content_json: '{"text":"📊 Usage Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
+    row: 0
+    col: 19
+    width: 5
+    height: 2
+
     # --- ROW 1: EXECUTIVE HEADLINE SCORECARDS ("Verifiable & Real-Time") ---
   - name: total_hours_saved_card
     title: "CWPM Verifiable Hours Saved"
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Estimated productivity hours saved by automated tool calls.  | How: Count of completed tool executions * 1.5 hours baseline * 1.2 complexity multiplier.  | Why it matters: Evaluates automated engineering leverage.  | Drill: Click tile to filter by practice area."
+    note_text: "What: Estimated productivity hours saved by automated tool calls. \nHow: Count of completed tool executions * 1.5 hours baseline * 1.2 complexity multiplier. \nWhy it matters: Evaluates automated engineering leverage. \nDrill: Click tile to filter by practice area."
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.cwpm_verifiable_hours_saved]
@@ -77,7 +84,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Equivalent Full-Time Equivalent engineering weeks saved.  | How: CWPM Verifiable Hours Saved / 40.0 hours per standard engineering work week.  | Why it matters: Anchors workforce capacity planning.  | Drill: Click tile to inspect pilot project contribution."
+    note_text: "What: Equivalent Full-Time Equivalent engineering weeks saved. \nHow: CWPM Verifiable Hours Saved / 40.0 hours per standard engineering work week. \nWhy it matters: Anchors workforce capacity planning. \nDrill: Click tile to inspect pilot project contribution."
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.fte_weeks_saved_equivalent]
@@ -86,7 +93,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Estimated dollar value of automated engineering work.  | How: Estimated Manual Hours Saved (total_sessions * 3.5 hrs, PSO pilot benchmark) * $350/hr Google Cloud PSO billable rate ($2,800/day Consultant rate).  | Why it matters: Quantifies executive ROI and billable consulting creation ($1,225/session).  | Drill: Click tile to break down by practice area."
+    note_text: "What: Estimated dollar value of automated engineering work. \nHow: Estimated Manual Hours Saved (total_sessions * 3.5 hrs, PSO pilot benchmark) * $350/hr Google Cloud PSO billable rate ($2,800/day Consultant rate). \nWhy it matters: Quantifies executive ROI and billable consulting creation ($1,225/session). \nDrill: Click tile to break down by practice area."
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.consulting_value_usd]
@@ -95,7 +102,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Reliability SLA metric measuring system stability.  | How: Ratio of SUCCESS outcomes vs total executions (COUNTIF(status = SUCCESS) / COUNT(1)).  | Why it matters: Asserts production stability and CI/CD readiness.  | Drill: Click tile to inspect failing tool tracebacks."
+    note_text: "What: Reliability SLA metric measuring system stability. \nHow: Ratio of SUCCESS outcomes vs total executions (COUNTIF(status = SUCCESS) / COUNT(1)). \nWhy it matters: Asserts production stability and CI/CD readiness. \nDrill: Click tile to inspect failing tool tracebacks."
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.self_healing_resilience_rate_pct]
@@ -104,7 +111,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Count of distinct Google Cloud PSO JAPAC customer pilot engagements.  | How: COUNT DISTINCT of pilot_project attribute (DBS Bank, Dyson, Myntra, etc.).  | Why it matters: Tracks regional customer penetration.  | Drill: Click tile to view active pilots."
+    note_text: "What: Count of distinct Google Cloud PSO JAPAC customer pilot engagements. \nHow: COUNT DISTINCT of pilot_project attribute (DBS Bank, Dyson, Myntra, etc.). \nWhy it matters: Tracks regional customer penetration. \nDrill: Click tile to view active pilots."
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.total_pilot_projects]
@@ -113,7 +120,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Total number of distinct AI agents deployed across JAPAC engagements.  | How: COUNT DISTINCT of canonical_agent_name.  | Why it matters: Measures reuse of canonical agent templates.  | Drill: Click tile to see agent leaderboard."
+    note_text: "What: Total number of distinct AI agents deployed across JAPAC engagements. \nHow: COUNT DISTINCT of canonical_agent_name. \nWhy it matters: Measures reuse of canonical agent templates. \nDrill: Click tile to see agent leaderboard."
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.total_invocations]
@@ -124,7 +131,7 @@
     type: looker_column
     note_state: collapsed
     note_display: hover
-    note_text: "What: Estimated manual engineering hours saved broken down by pilot project and practice area.  | How: total_sessions * 3.5 hours per session (empirical PSO pilot benchmark).  | Why it matters: Demonstrates which pilot engagements generate the highest automation savings.  | Drill: Filter by Pilot Project or Practice Area."
+    note_text: "What: Estimated manual engineering hours saved broken down by pilot project and practice area. \nHow: total_sessions * 3.5 hours per session (empirical PSO pilot benchmark). \nWhy it matters: Demonstrates which pilot engagements generate the highest automation savings. \nDrill: Filter by Pilot Project or Practice Area."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.pilot_project, agent_events.practice_area]
@@ -136,7 +143,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Estimated manual engineering hours saved aggregated by practice area.  | How: total_sessions * 3.5 hours per session (empirical PSO pilot benchmark).  | Why it matters: Guides practice leadership on where AI automation delivers the most leverage.  | Drill: Click any bar to cross-filter dashboard."
+    note_text: "What: Estimated manual engineering hours saved aggregated by practice area. \nHow: total_sessions * 3.5 hours per session (empirical PSO pilot benchmark). \nWhy it matters: Guides practice leadership on where AI automation delivers the most leverage. \nDrill: Click any bar to cross-filter dashboard."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.practice_area]
@@ -151,7 +158,7 @@
       wrap_text: yes
     note_state: collapsed
     note_display: hover
-    note_text: "What: Comprehensive leaderboard of agent ROI and volume.  | How: Hours = total_sessions * 3.5 hrs, FTE Weeks = Hours / 40.0, Consulting Value = Hours * $350/hr ($2,800/day PSO rate).  | Why it matters: Ranks top-performing agents for executive funding and promotion.  | Drill: Click any row to inspect agent traces."
+    note_text: "What: Comprehensive leaderboard of agent ROI and volume. \nHow: Hours = total_sessions * 3.5 hrs, FTE Weeks = Hours / 40.0, Consulting Value = Hours * $350/hr ($2,800/day PSO rate). \nWhy it matters: Ranks top-performing agents for executive funding and promotion. \nDrill: Click any row to inspect agent traces."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.canonical_agent_name, agent_events.practice_area]
@@ -163,7 +170,7 @@
     type: looker_line
     note_state: collapsed
     note_display: hover
-    note_text: "What: Time-series trend of automation adoption across JAPAC sub-regions.  | How: Estimated manual hours saved (total_sessions * 3.5 hrs) over timestamp_date.  | Why it matters: Reveals sub-region velocity (ANZ, SEA, India, Japan, Korea).  | Drill: Click any date/region to filter time series."
+    note_text: "What: Time-series trend of automation adoption across JAPAC sub-regions. \nHow: Estimated manual hours saved (total_sessions * 3.5 hrs) over timestamp_date. \nWhy it matters: Reveals sub-region velocity (ANZ, SEA, India, Japan, Korea). \nDrill: Click any date/region to filter time series."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.timestamp_date, agent_events.sub_region]
@@ -176,7 +183,7 @@
     type: looker_pie
     note_state: collapsed
     note_display: hover
-    note_text: "What: Actual LLM API spend in USD by Gemini model version.  | How: Applies Google Cloud Gemini 2.5 Pro 75 percent cache discount ($1.25/M standard input, $0.3125/M cached input, $5.00/M completion).  | Why it matters: Tracks FinOps economics across model tiers.  | Drill: Click model bar to inspect token breakdown."
+    note_text: "What: Actual LLM API spend in USD by Gemini model version. \nHow: Applies Google Cloud Gemini 2.5 Pro 75 percent cache discount ($1.25/M standard input, $0.3125/M cached input, $5.00/M completion). \nWhy it matters: Tracks FinOps economics across model tiers. \nDrill: Click model bar to inspect token breakdown."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [v_llm_response.model_version]
@@ -189,7 +196,7 @@
       wrap_text: yes
     note_state: collapsed
     note_display: hover
-    note_text: "What: Qualitative engineering feedback and verified savings testimonials.  | How: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs).  | Why it matters: Provides peer-verified qualitative proof of automation impact.  | Drill: Inspect specific win feedback records."
+    note_text: "What: Qualitative engineering feedback and verified savings testimonials. \nHow: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs). \nWhy it matters: Provides peer-verified qualitative proof of automation impact. \nDrill: Inspect specific win feedback records."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.pilot_project, agent_events.canonical_agent_name, agent_events.win_feedback]
@@ -203,7 +210,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Total actual LLM API dollar spend USD.  | How: Applies 75 percent discount for cached input tokens ($0.3125/M cached vs $1.25/M standard input for Gemini 2.5 Pro).  | Why it matters: Monitors net FinOps expenditure.  | Drill: Click tile to view cost by agent."
+    note_text: "What: Total actual LLM API dollar spend USD. \nHow: Applies 75 percent discount for cached input tokens ($0.3125/M cached vs $1.25/M standard input for Gemini 2.5 Pro). \nWhy it matters: Monitors net FinOps expenditure. \nDrill: Click tile to view cost by agent."
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_llm_response.cache_discounted_actual_cost_usd]
@@ -212,7 +219,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Percentage of input prompt tokens served from prompt cache.  | How: SUM(cached_tokens) / SUM(prompt_tokens).  | Why it matters: High cache hit ratio maximizes the 75% pricing discount and reduces TTFT latency.  | Drill: Click tile to see cache hit rate by agent."
+    note_text: "What: Percentage of input prompt tokens served from prompt cache. \nHow: SUM(cached_tokens) / SUM(prompt_tokens). \nWhy it matters: High cache hit ratio maximizes the 75% pricing discount and reduces TTFT latency. \nDrill: Click tile to see cache hit rate by agent."
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_llm_response.prompt_cache_hit_ratio]
@@ -221,7 +228,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Estimated manual engineering hours saved by automated tool calls.  | How: SUM of 1.5 base hours * latency complexity weight (1.0x standard, 1.5x over 2s, 2.5x over 5s).  | Why it matters: Rewards agents executing complex, high-latency tool workflows.  | Drill: Click tile to inspect tool calls."
+    note_text: "What: Estimated manual engineering hours saved by automated tool calls. \nHow: SUM of 1.5 base hours * latency complexity weight (1.0x standard, 1.5x over 2s, 2.5x over 5s). \nWhy it matters: Rewards agents executing complex, high-latency tool workflows. \nDrill: Click tile to inspect tool calls."
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_tool_completed.tool_productivity_credit_hours]
@@ -230,7 +237,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: CI/CD SLA Gate asserting deployment readiness.  | How: Evaluates error rate; PASS if error rate is 5.0 percent or lower, otherwise FAIL.  | Why it matters: Protects customer production environments from unstable agent builds.  | Drill: Click tile to inspect error logs."
+    note_text: "What: CI/CD SLA Gate asserting deployment readiness. \nHow: Evaluates error rate; PASS if error rate is 5.0 percent or lower, otherwise FAIL. \nWhy it matters: Protects customer production environments from unstable agent builds. \nDrill: Click tile to inspect error logs."
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.sla_error_rate_gating]
@@ -241,7 +248,7 @@
       wrap_text: yes
     note_state: collapsed
     note_display: hover
-    note_text: "What: Combined ROI leaderboard and CI/CD SLA Gate status table.  | How: CWPM Hours = tool calls * 1.5 * 1.2, SLA Gate = PASS if error rate <= 5 percent.  | Why it matters: Unifies financial ROI with technical deployment readiness.  | Drill: Click any agent to drill into DAG lineage."
+    note_text: "What: Combined ROI leaderboard and CI/CD SLA Gate status table. \nHow: CWPM Hours = tool calls * 1.5 * 1.2, SLA Gate = PASS if error rate <= 5 percent. \nWhy it matters: Unifies financial ROI with technical deployment readiness. \nDrill: Click any agent to drill into DAG lineage."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.canonical_agent_name, agent_events.sla_error_rate_gating]
@@ -255,7 +262,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: Comparison of dollar savings from prompt caching vs actual spend over time.  | How: Savings = cached_tokens * $0.9375/M ($1.25 - $0.3125).  | Why it matters: Demonstrates compounding FinOps savings over time.  | Drill: Click date point to see daily token usage."
+    note_text: "What: Comparison of dollar savings from prompt caching vs actual spend over time. \nHow: Savings = cached_tokens * $0.9375/M ($1.25 - $0.3125). \nWhy it matters: Demonstrates compounding FinOps savings over time. \nDrill: Click date point to see daily token usage."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.timestamp_date]
@@ -267,7 +274,7 @@
     type: looker_scatter
     note_state: collapsed
     note_display: hover
-    note_text: "What: Multi-dimensional scatter plot comparing agent volume against ROI.  | How: X-axis = invocations, Y-axis = hours saved (sessions * 3.5 hrs), size = consulting value ($350/hr PSO rate).  | Why it matters: Highlights high-value outlier agents.  | Drill: Click any bubble to filter by agent."
+    note_text: "What: Multi-dimensional scatter plot comparing agent volume against ROI. \nHow: X-axis = invocations, Y-axis = hours saved (sessions * 3.5 hrs), size = consulting value ($350/hr PSO rate). \nWhy it matters: Highlights high-value outlier agents. \nDrill: Click any bubble to filter by agent."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.canonical_agent_name]
@@ -280,7 +287,7 @@
     type: looker_pie
     note_state: collapsed
     note_display: hover
-    note_text: "What: Distribution of estimated consulting dollar value across practice areas.  | How: Hours saved (sessions * 3.5 hrs) * $350 per hour ($2,800/day PSO Consultant rate).  | Why it matters: Visualizes share of consulting value by practice area.  | Drill: Click slice to filter practice area."
+    note_text: "What: Distribution of estimated consulting dollar value across practice areas. \nHow: Hours saved (sessions * 3.5 hrs) * $350 per hour ($2,800/day PSO Consultant rate). \nWhy it matters: Visualizes share of consulting value by practice area. \nDrill: Click slice to filter practice area."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.practice_area]
@@ -291,7 +298,7 @@
     type: looker_column
     note_state: collapsed
     note_display: hover
-    note_text: "What: Overlay of event volume and reliability SLA across practice areas.  | How: Columns = total_events, Line = self-healing resilience rate (SUCCESS / Total).  | Why it matters: Ensures high-traffic practices maintain >=95% SLA.  | Drill: Click practice column to inspect reliability."
+    note_text: "What: Overlay of event volume and reliability SLA across practice areas. \nHow: Columns = total_events, Line = self-healing resilience rate (SUCCESS / Total). \nWhy it matters: Ensures high-traffic practices maintain >=95% SLA. \nDrill: Click practice column to inspect reliability."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.practice_area]
@@ -302,7 +309,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: 30-day predictive forecast of automation hours saved and consulting dollar value.  | How: Historical actuals use total_sessions * 3.5h ($350/hr PSO rate); future 30-day predictions use linear growth trend projection with 90%/110% confidence bounds.  | Why it matters: Anchors quarterly capacity planning and financial projections.  | Drill: Filter by Practice Area or Date Range."
+    note_text: "What: 30-day predictive forecast of automation hours saved and consulting dollar value. \nHow: Historical actuals use total_sessions * 3.5h ($350/hr PSO rate); future 30-day predictions use linear growth trend projection with 90%/110% confidence bounds. \nWhy it matters: Anchors quarterly capacity planning and financial projections. \nDrill: Filter by Practice Area or Date Range."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [v_bqml_roi_forecast.forecast_date, v_bqml_roi_forecast.data_type]
@@ -313,7 +320,7 @@
     type: looker_column
     note_state: collapsed
     note_display: hover
-    note_text: "What: Hierarchical DAG execution flow across session IDs and trace hops.  | How: Extracts from_agent -> to_target delegation hops from agent_events where event_type is AGENT_TRANSFER, A2A_INTERACTION, or TOOL_COMPLETED.  | Why it matters: Maps multi-agent orchestration paths and latency bottlenecks.  | Drill: Filter by Session ID or Trace ID to inspect specific DAGs."
+    note_text: "What: Hierarchical DAG execution flow across session IDs and trace hops. \nHow: Extracts from_agent -> to_target delegation hops from agent_events where event_type is AGENT_TRANSFER, A2A_INTERACTION, or TOOL_COMPLETED. \nWhy it matters: Maps multi-agent orchestration paths and latency bottlenecks. \nDrill: Filter by Session ID or Trace ID to inspect specific DAGs."
     explore: agent_events
     model: bigquery_agent_analytics_model
       dimensions: [v_session_trace_dag.session_id, v_session_trace_dag.from_agent, v_session_trace_dag.to_target]
