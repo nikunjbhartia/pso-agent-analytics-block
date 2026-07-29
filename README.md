@@ -313,26 +313,10 @@ You can execute all steps automatically via `./scripts/setup_all.sh` or run them
     6.  **`Conversation & Lineage`** (Turn-by-turn interaction flows, token latency, and multi-agent DAG delegation decision paths)
     7.  **`Real-Time UDFs & Remote Function Analytics`** (Zero-batch UDF quality scoring across practice areas, interactive trace drilldowns via `agent_analytics('analyze')`, and golden vs. production drift monitoring via `agent_analytics('drift')`)
 
-#### Canonical Executable Jupyter Notebook Suite (`notebooks/`)
-The repository includes 10 executable Jupyter notebooks covering every lifecycle stage of the Google Cloud PSO JAPAC Agent Analytics architecture:
-| Notebook Path | Purpose & Key Analytics Demonstrated |
-| :--- | :--- |
-| `notebooks/00_enterprise_agent_observability_poc.ipynb` | End-to-end architecture validation and LookML block verification. |
-| `notebooks/01_graph_trace_inspection_and_dag_analysis.ipynb` | Property graph traversals, session traces, and DAG lineage. |
-| `notebooks/02_finops_token_economics_and_latency_leaderboard.ipynb` | FinOps caching discounts (75% savings) and model cost attribution. |
-| `notebooks/03_llm_as_a_judge_and_automated_evaluations.ipynb` | LLM-as-a-judge scoring and automated recommendation tables. |
-| `notebooks/04_cicd_regression_testing_and_drift_detection.ipynb` | Automated regression testing and behavioral drift monitoring. |
-| `notebooks/05_closed_loop_insights_and_conversational_analytics.ipynb` | Multi-turn conversational flow and intent analytics. |
-| `notebooks/06_multimodal_gcs_offloading_and_looker_bi_integration.ipynb` | GCS multimodal offloading and Looker BI block integration. |
-| `notebooks/07_master_consolidated_bq_agent_analytics_queries_and_metrics.ipynb` | Master catalog of 60+ PSO analytics SQL queries and LookML blocks. |
-| `notebooks/08_sql_remote_function_and_udf_evaluations.ipynb` | SQL-driven evaluation using all 11 Python UDFs and `agent_analytics(...)` Remote Function. |
-| `notebooks/09_continuous_agent_improvement_cycle.ipynb` | Closed-loop improvement cycle: mining failures, remote function eval, and few-shot training generation. |
-
 #### Sub-100ms Persistent UDF Evaluation Scorecard & 3-Dashboard Navigation Banner
 *   **Persistent UDF Evaluation Table (`udf_scorecard_metrics`)**: To prevent real-time UDF scoring queries from causing dashboard latency, `scripts/08_create_udf_scorecard_table.sql` creates a persistent, partitioned BigQuery table (`udf_scorecard_metrics`) that pre-computes UDF quality scores across practice areas. LookML view `v_udf_and_remote_function_evals` reads directly from this table, reducing query latency from seconds to **under 100 milliseconds**.
 *   **Universal 3-Dashboard Navigation Header**: Every dashboard (`pso_apo_executive_portal`, `agent_analytics_usage`, and `agent_analytics_performance`) includes a standardized Markdown navigation banner at `row: 0` (`height: 2`), enabling single-click transitions between the Executive Portal, Usage, and Performance dashboards.
 *   **Tight Vertical Grid Layout**: All analytical charts across every tab start immediately at `row: 2` below the navigation banner, eliminating empty vertical space and chart overlaps.
-
 
 ---
 
