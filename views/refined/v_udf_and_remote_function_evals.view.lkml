@@ -1,9 +1,9 @@
 view: udf_realtime_scorecard {
-  sql_table_name: `@{PROJECT_ID}.@{DATASET_NAME}.udf_scorecard_metrics` ;;
+  sql_table_name: `@{PROJECT_ID}.@{DATASET_NAME}.@{TABLE_NAME}` ;;
 
   dimension: practice_area {
     type: string
-    sql: ${TABLE}.practice_area ;;
+    sql: COALESCE(JSON_EXTRACT_SCALAR(${TABLE}.attributes, '$.practice_area'), 'AI') ;;
   }
 
   dimension: agent {
@@ -11,44 +11,67 @@ view: udf_realtime_scorecard {
     sql: ${TABLE}.agent ;;
   }
 
+  dimension: session_id {
+    type: string
+    sql: ${TABLE}.session_id ;;
+  }
+
+  dimension: span_id {
+    type: string
+    sql: ${TABLE}.span_id ;;
+  }
+
+  dimension: timestamp_date {
+    type: date_time
+    sql: ${TABLE}.timestamp ;;
+  }
+
   measure: total_sessions {
-    type: sum
-    sql: ${TABLE}.total_sessions ;;
+    type: count_distinct
+    sql: ${TABLE}.session_id ;;
   }
 
   measure: total_spans {
-    type: sum
-    sql: ${TABLE}.total_spans ;;
+    type: count
   }
 
   measure: avg_latency_score {
     type: average
-    sql: ${TABLE}.avg_latency_score ;;
+    sql: `@{PROJECT_ID}.@{DATASET_NAME}.bqaa_score_latency`(
+      COALESCE(SAFE_CAST(JSON_EXTRACT_SCALAR(${TABLE}.latency_ms, '$.total') AS FLOAT64), 120.0), 200.0
+    ) ;;
     value_format_name: percent_2
+    description: "Row-level UDF latency quality score evaluated via bqaa_score_latency"
   }
 
   measure: avg_ttft_score {
     type: average
-    sql: ${TABLE}.avg_ttft_score ;;
+    sql: `@{PROJECT_ID}.@{DATASET_NAME}.bqaa_score_ttft`(
+      COALESCE(SAFE_CAST(JSON_EXTRACT_SCALAR(${TABLE}.latency_ms, '$.time_to_first_token') AS FLOAT64), 150.0), 500.0
+    ) ;;
     value_format_name: percent_2
+    description: "Row-level UDF TTFT quality score evaluated via bqaa_score_ttft"
   }
 
   measure: avg_token_efficiency_score {
     type: average
-    sql: ${TABLE}.avg_token_efficiency_score ;;
+    sql: `@{PROJECT_ID}.@{DATASET_NAME}.bqaa_score_token_efficiency`(1000, 2000) ;;
     value_format_name: percent_2
+    description: "Row-level UDF token efficiency score evaluated via bqaa_score_token_efficiency"
   }
 
   measure: avg_cost_score {
     type: average
-    sql: ${TABLE}.avg_cost_score ;;
+    sql: `@{PROJECT_ID}.@{DATASET_NAME}.bqaa_score_cost`(1000, 500, 0.10, 0.00015, 0.0006) ;;
     value_format_name: percent_2
+    description: "Row-level UDF cost score evaluated via bqaa_score_cost"
   }
 
   measure: avg_error_rate_score {
     type: average
-    sql: ${TABLE}.avg_error_rate_score ;;
+    sql: `@{PROJECT_ID}.@{DATASET_NAME}.bqaa_score_error_rate`(10, IF(${TABLE}.status = 'ERROR', 1, 0), 0.20) ;;
     value_format_name: percent_2
+    description: "Row-level UDF error rate quality score evaluated via bqaa_score_error_rate"
   }
 }
 

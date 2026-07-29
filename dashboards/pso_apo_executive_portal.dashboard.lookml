@@ -229,7 +229,7 @@
       note_text: "What: Comprehensive leaderboard of agent ROI and volume. | How: Hours = total_sessions * 3.5 hrs, FTE Weeks = Hours / 40.0, Consulting Value = Hours * $350/hr ($2,800/day PSO rate). | Why it matters: Ranks top-performing agents for executive funding and promotion. | Drill: Click any row to inspect agent traces."
       explore: agent_events
       dimensions: [agent_events.canonical_agent_name, agent_events.practice_area]
-      measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved, agent_events.consulting_value_usd]
+      measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved, agent_events.consulting_value_usd, udf_realtime_scorecard.avg_latency_score, udf_realtime_scorecard.avg_ttft_score]
       sorts: [agent_events.server_verified_hours_saved desc]
       limit: 15
       listen:

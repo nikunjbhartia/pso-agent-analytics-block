@@ -84,17 +84,12 @@
     show_null_points: true
     interpolation: linear
     defaults_version: 1
-    listen:
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Date: agent_events.timestamp_date
+
     row: 13
     col: 12
     width: 12
     height: 8
-    tab_name: LLM & Token Economics
-  - title: Top 5 users with most Tokens consumption
+    tab_name: LLM & Token Economics  - title: Top 5 users with most Tokens consumption
     name: Top 5 users with most Tokens consumption
     model: agent-analytics
     explore: agent_events
@@ -144,17 +139,12 @@
     interpolation: linear
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      Date: agent_events.timestamp_date
+
     row: 20
     col: 0
     width: 12
     height: 8
-    tab_name: LLM & Token Economics
-  - title: Total Tokens Consumption Over the Time
+    tab_name: LLM & Token Economics  - title: Total Tokens Consumption Over the Time
     name: Total Tokens Consumption Over the Time
     model: agent-analytics
     explore: agent_events
@@ -220,18 +210,12 @@
     conditional_formatting_include_nulls: false
     ordering: none
     show_null_labels: false
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.timestamp_date
+
     row: 8
     col: 9
     width: 15
     height: 5
-    tab_name: LLM & Token Economics
-  - title: Total Tokens
+    tab_name: LLM & Token Economics  - title: Total Tokens
     name: Total Tokens
     model: agent-analytics
     explore: agent_events
@@ -306,18 +290,12 @@
     ordering: none
     show_null_labels: false
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.pop_date_filter
+
     row: 8
     col: 0
     width: 9
     height: 5
-    tab_name: LLM & Token Economics
-  - title: Top 5 users with most Traces
+    tab_name: LLM & Token Economics  - title: Top 5 users with most Traces
     name: Top 5 users with most Traces
     model: agent-analytics
     explore: agent_events
@@ -368,17 +346,12 @@
     interpolation: linear
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      Date: agent_events.timestamp_date
+
     row: 20
     col: 0
     width: 12
     height: 8
-    tab_name: Agent & Sessions
-  - title: Total Traces
+    tab_name: Agent & Sessions  - title: Total Traces
     name: Total Traces
     model: agent-analytics
     explore: agent_events
@@ -453,18 +426,12 @@
     ordering: none
     show_null_labels: false
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.pop_date_filter
+
     row: 8
     col: 0
     width: 9
     height: 5
-    tab_name: Agent & Sessions
-  - title: Traces split by Agent
+    tab_name: Agent & Sessions  - title: Traces split by Agent
     name: Traces split by Agent
     model: agent-analytics
     explore: agent_events
@@ -523,17 +490,12 @@
     show_null_points: true
     interpolation: linear
     defaults_version: 1
-    listen:
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Date: agent_events.timestamp_date
+
     row: 20
     col: 12
     width: 12
     height: 8
-    tab_name: Agent & Sessions
-  - title: Total Traces Generation Over the Time
+    tab_name: Agent & Sessions  - title: Total Traces Generation Over the Time
     name: Total Traces Generation Over the Time
     model: agent-analytics
     explore: agent_events
@@ -600,18 +562,12 @@
     ordering: none
     show_null_labels: false
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.timestamp_date
+
     row: 8
     col: 9
     width: 15
     height: 5
-    tab_name: Agent & Sessions
-  - title: Total Sessions
+    tab_name: Agent & Sessions  - title: Total Sessions
     name: Total Sessions
     model: agent-analytics
     explore: agent_events
@@ -673,18 +629,12 @@
     show_silhouette: false
     totals_color: "#808080"
     defaults_version: 1
-    listen:
-      Date: agent_events.timestamp_date
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
+
     row: 2
     col: 0
     width: 8
     height: 7
-    tab_name: Agent & Sessions
-  - title: Number of Sessions Trend
+    tab_name: Agent & Sessions  - title: Number of Sessions Trend
     name: Number of Sessions Trend
     model: agent-analytics
     explore: agent_events
@@ -755,18 +705,12 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Date: agent_events.timestamp_date
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
+
     row: 2
     col: 8
     width: 16
     height: 7
-    tab_name: Agent & Sessions
-  - title: Top 5 Agents Split by Session Count
+    tab_name: Agent & Sessions  - title: Top 5 Agents Split by Session Count
     name: Top 5 Agents Split by Session Count
     model: agent-analytics
     explore: agent_events
@@ -836,18 +780,12 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Date: agent_events.timestamp_date
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
+
     row: 20
     col: 1
     width: 22
     height: 9
-    tab_name: Agent & Sessions
-  - title: Total Agent Transfers
+    tab_name: Agent & Sessions  - title: Total Agent Transfers
     name: Total Agent Transfers
     model: agent-analytics
     explore: agent_events
@@ -865,18 +803,12 @@
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
-    listen:
-      Date: agent_events.timestamp_date
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
+
     row: 34
     col: 0
     width: 8
     height: 4
-    tab_name: Agent & Sessions
-  - title: Total A2A Interactions
+    tab_name: Agent & Sessions  - title: Total A2A Interactions
     name: Total A2A Interactions
     model: agent-analytics
     explore: agent_events
@@ -894,18 +826,12 @@
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
-    listen:
-      Date: agent_events.timestamp_date
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
+
     row: 34
     col: 8
     width: 8
     height: 4
-    tab_name: Agent & Sessions
-  - title: Total HITL Confirmation Requests
+    tab_name: Agent & Sessions  - title: Total HITL Confirmation Requests
     name: Total HITL Confirmation Requests
     model: agent-analytics
     explore: agent_events
@@ -923,12 +849,7 @@
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
-    listen:
-      Date: agent_events.timestamp_date
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
+
     row: 34
     col: 16
     width: 8
@@ -955,8 +876,7 @@
     col: 0
     width: 24
     height: 2
-    tab_name: Agent & Sessions
-  - title: Tool Invocations
+    tab_name: Agent & Sessions  - title: Tool Invocations
     name: Tool Invocations
     model: agent-analytics
     explore: agent_events
@@ -1008,18 +928,12 @@
     series_colors:
       agent_events.total_invocations: "#1e8e3e"
     defaults_version: 1
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.timestamp_date
+
     row: 8
     col: 0
     width: 12
     height: 7
-    tab_name: Tool Usage & Provenance
-  - title: Events By Agent
+    tab_name: Tool Usage & Provenance  - title: Events By Agent
     name: Events By Agent
     model: agent-analytics
     explore: agent_events
@@ -1073,18 +987,12 @@
       agent_events.total_events: "#e8710a"
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.timestamp_date
+
     row: 8
     col: 12
     width: 12
     height: 7
-    tab_name: Tool Usage & Provenance
-  - title: Tool Calls Over Time
+    tab_name: Tool Usage & Provenance  - title: Tool Calls Over Time
     name: Tool Calls Over Time
     model: agent-analytics
     explore: agent_events
@@ -1144,18 +1052,12 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.timestamp_date
+
     row: 2
     col: 0
     width: 24
     height: 6
-    tab_name: Tool Usage & Provenance
-  - title: Total Calls
+    tab_name: Tool Usage & Provenance  - title: Total Calls
     name: Total Calls
     model: agent-analytics
     explore: agent_events
@@ -1222,18 +1124,12 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.pop_date_filter
+
     row: 2
     col: 0
     width: 8
     height: 6
-    tab_name: LLM & Token Economics
-  - title: LLM Call Trends
+    tab_name: LLM & Token Economics  - title: LLM Call Trends
     name: LLM Call Trends
     model: agent-analytics
     explore: agent_events
@@ -1303,18 +1199,12 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.timestamp_date
+
     row: 2
     col: 8
     width: 16
     height: 6
-    tab_name: LLM & Token Economics
-  - title: Top 5 Agents by LLM Calls
+    tab_name: LLM & Token Economics  - title: Top 5 Agents by LLM Calls
     name: Top 5 Agents by LLM Calls
     model: agent-analytics
     explore: agent_events
@@ -1383,18 +1273,12 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.timestamp_date
+
     row: 13
     col: 1
     width: 21
     height: 8
-    tab_name: LLM & Token Economics
-  - title: Total Users
+    tab_name: LLM & Token Economics  - title: Total Users
     name: Total Users
     model: agent-analytics
     explore: agent_events
@@ -1462,18 +1346,12 @@
     comparison_label: V Previous Period
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.pop_date_filter
+
     row: 13
     col: 0
     width: 8
     height: 7
-    tab_name: Agent & Sessions
-  - title: User Growth Over Time
+    tab_name: Agent & Sessions  - title: User Growth Over Time
     name: User Growth Over Time
     model: agent-analytics
     explore: agent_events
@@ -1544,18 +1422,12 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
-      Date: agent_events.timestamp_date
+
     row: 13
     col: 8
     width: 16
     height: 7
-    tab_name: Agent & Sessions
-  - title: Top 5 Users by Session
+    tab_name: Agent & Sessions  - title: Top 5 Users by Session
     name: Top 5 Users by Session
     model: agent-analytics
     explore: agent_events
@@ -1623,18 +1495,12 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Date: agent_events.timestamp_date
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
+
     row: 27
     col: 0
     width: 12
     height: 7
-    tab_name: Agent & Sessions
-  - title: Top 5 Users by Events
+    tab_name: Agent & Sessions  - title: Top 5 Users by Events
     name: Top 5 Users by Events
     model: agent-analytics
     explore: agent_events
@@ -1702,12 +1568,7 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
-    listen:
-      Date: agent_events.timestamp_date
-      Agent: agent_events.agent
-      Span ID: agent_events.span_id
-      Trace ID: agent_events.trace_id
-      User ID: agent_events.user_id
+
     row: 27
     col: 12
     width: 12
@@ -1738,12 +1599,6 @@
     note_display: hover
     note_text: "What: Breakdown of multimodal payloads and large objects offloaded to GCS bucket japac-pso-agent-analytics. | How: Aggregates offloaded GCS URIs by asset_type (IMAGE, DOCUMENT, AUDIO, VIDEO, LARGE_PAYLOAD_JSON) and event_type. | Why it matters: Monitors multimodal storage footprint and BigQuery object table ingestion. | Drill: Click asset type bar to inspect specific GCS URIs and traces."
     explore: agent_events
-    listen:
-      Date: agent_events.timestamp_date
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      User ID: agent_events.user_id
-      Span ID: agent_events.span_id
     dimensions: [v_gcs_multimodal_offload.asset_type, gcs_multimodal_object_table.content_type]
     measures: [v_gcs_multimodal_offload.total_gcs_offloaded_assets, gcs_multimodal_object_table.total_size_bytes]
     sorts: [v_gcs_multimodal_offload.total_gcs_offloaded_assets desc]
@@ -1761,12 +1616,6 @@
     note_display: hover
     note_text: "What: Turn-by-turn breakdown of user prompts, agent responses, tool calls, and token/latency metrics. | How: Queries agent_events joined with v_llm_response, v_tool_completed, and v_agent_evaluation. | Why it matters: Enables granular conversational analytics and turn debugging across sessions. | Drill: Click Session ID to inspect full conversation history."
     explore: agent_events
-    listen:
-      Date: agent_events.timestamp_date
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      User ID: agent_events.user_id
-      Span ID: agent_events.span_id
     dimensions: [agent_events.session_id, agent_events.event_type, agent_events.agent, v_tool_completed.tool_name, agent_events.status]
     measures: [v_llm_response.total_tokens_consumed, agent_events.total_events]
     sorts: [agent_events.session_id desc, agent_events.total_events desc]
@@ -1785,12 +1634,6 @@
     note_display: hover
     note_text: "What: Maps agent-to-agent delegation sequence and session lineage across supervisor and worker agents. | How: Queries v_agent_transfer and v_a2a_interaction joined with agent_events. | Why it matters: Provides complete DAG visibility and decision lineage tracking for multi-agent architectures. | Drill: Click Source or Target Agent to trace delegation graph."
     explore: agent_events
-    listen:
-      Date: agent_events.timestamp_date
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      User ID: agent_events.user_id
-      Span ID: agent_events.span_id
     dimensions: [agent_events.session_id, v_agent_transfer.from_agent, v_agent_transfer.to_agent]
     measures: [agent_events.total_events]
     sorts: [agent_events.total_events desc]
@@ -1799,8 +1642,7 @@
     col: 0
     width: 24
     height: 8
-    tab_name: Conversation & Lineage
-  - title: Real-Time UDF Evaluation Scorecard (Zero-Batch Latency, TTFT & Cost Scores)
+    tab_name: Conversation & Lineage  - title: Real-Time UDF Evaluation Scorecard (Zero-Batch Latency, TTFT & Cost Scores)
     name: Real-Time UDF Evaluation Scorecard
     model: agent-analytics
     explore: udf_realtime_scorecard
@@ -1876,12 +1718,7 @@
       display: popover
     model: agent-analytics
     explore: agent_events
-    listen:
-      Date: agent_events.timestamp_date
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      User ID: agent_events.user_id
-      Span ID: agent_events.span_id
+
     listens_to_filters: []
     field: agent_events.trace_id
   - name: Agent
@@ -1895,12 +1732,6 @@
       display: popover
     model: agent-analytics
     explore: agent_events
-    listen:
-      Date: agent_events.timestamp_date
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      User ID: agent_events.user_id
-      Span ID: agent_events.span_id
     listens_to_filters: []
     field: agent_events.agent
   - name: User ID
@@ -1914,12 +1745,6 @@
       display: popover
     model: agent-analytics
     explore: agent_events
-    listen:
-      Date: agent_events.timestamp_date
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      User ID: agent_events.user_id
-      Span ID: agent_events.span_id
     listens_to_filters: []
     field: agent_events.user_id
   - name: Span ID
@@ -1933,11 +1758,5 @@
       display: popover
     model: agent-analytics
     explore: agent_events
-    listen:
-      Date: agent_events.timestamp_date
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      User ID: agent_events.user_id
-      Span ID: agent_events.span_id
     listens_to_filters: []
     field: agent_events.span_id
