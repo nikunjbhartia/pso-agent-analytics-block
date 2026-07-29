@@ -1,4 +1,4 @@
-project_name: "bigquery_agent_analytics_model"
+project_name: "japac_pso_agent_analytics"
 
 constant: CONNECTION_NAME {
   value: "japac_pso_agent_analytics"

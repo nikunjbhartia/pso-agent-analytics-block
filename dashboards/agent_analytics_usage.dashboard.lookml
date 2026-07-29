@@ -21,7 +21,7 @@
   - name: nav_header_sessions
     type: text
     title_text: ""
-    body_text: "### [🏠 APO Executive Portal](/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_usage)"
+    body_text: "### [🏠 APO Executive Portal](/dashboards/japac_pso_agent_analytics::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_usage)"
     row: 0
     col: 0
     width: 24
@@ -30,7 +30,7 @@
   - name: nav_header_llm
     type: text
     title_text: ""
-    body_text: "### [🏠 APO Executive Portal](/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_usage)"
+    body_text: "### [🏠 APO Executive Portal](/dashboards/japac_pso_agent_analytics::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_usage)"
     row: 0
     col: 0
     width: 24
@@ -39,7 +39,7 @@
   - name: nav_header_tools
     type: text
     title_text: ""
-    body_text: "### [🏠 APO Executive Portal](/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_usage)"
+    body_text: "### [🏠 APO Executive Portal](/dashboards/japac_pso_agent_analytics::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_usage)"
     row: 0
     col: 0
     width: 24
@@ -48,7 +48,7 @@
   - name: nav_header_lineage
     type: text
     title_text: ""
-    body_text: "### [🏠 APO Executive Portal](/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/bigquery_agent_analytics_model::agent_analytics_usage)"
+    body_text: "### [🏠 APO Executive Portal](/dashboards/japac_pso_agent_analytics::pso_apo_executive_portal) &nbsp;&nbsp;|&nbsp;&nbsp; [📈 Performance Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_performance) &nbsp;&nbsp;|&nbsp;&nbsp; [📊 Usage Dashboard](/dashboards/japac_pso_agent_analytics::agent_analytics_usage)"
     row: 0
     col: 0
     width: 24
@@ -56,7 +56,7 @@
     tab_name: Conversation & Lineage
   - title: Token Usage split by Agent
     name: Token Usage split by Agent
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -119,7 +119,7 @@
     height: 8
     tab_name: LLM & Token Economics  - title: Top 5 users with most Tokens consumption
     name: Top 5 users with most Tokens consumption
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -174,7 +174,7 @@
     height: 8
     tab_name: LLM & Token Economics  - title: Total Tokens Consumption Over the Time
     name: Total Tokens Consumption Over the Time
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -245,7 +245,7 @@
     height: 5
     tab_name: LLM & Token Economics  - title: Total Tokens
     name: Total Tokens
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -325,7 +325,7 @@
     height: 5
     tab_name: LLM & Token Economics  - title: Top 5 users with most Traces
     name: Top 5 users with most Traces
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -381,7 +381,7 @@
     height: 8
     tab_name: Agent & Sessions  - title: Total Traces
     name: Total Traces
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -461,7 +461,7 @@
     height: 5
     tab_name: Agent & Sessions  - title: Traces split by Agent
     name: Traces split by Agent
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -525,7 +525,7 @@
     height: 8
     tab_name: Agent & Sessions  - title: Total Traces Generation Over the Time
     name: Total Traces Generation Over the Time
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -597,7 +597,7 @@
     height: 5
     tab_name: Agent & Sessions  - title: Total Sessions
     name: Total Sessions
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -664,7 +664,7 @@
     height: 7
     tab_name: Agent & Sessions  - title: Number of Sessions Trend
     name: Number of Sessions Trend
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -740,7 +740,7 @@
     height: 7
     tab_name: Agent & Sessions  - title: Top 5 Agents Split by Session Count
     name: Top 5 Agents Split by Session Count
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -815,7 +815,7 @@
     height: 9
     tab_name: Agent & Sessions  - title: Total Agent Transfers
     name: Total Agent Transfers
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -838,7 +838,7 @@
     height: 4
     tab_name: Agent & Sessions  - title: Total A2A Interactions
     name: Total A2A Interactions
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -861,7 +861,7 @@
     height: 4
     tab_name: Agent & Sessions  - title: Total HITL Confirmation Requests
     name: Total HITL Confirmation Requests
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -906,7 +906,7 @@
     height: 2
     tab_name: Agent & Sessions  - title: Tool Invocations
     name: Tool Invocations
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -963,7 +963,7 @@
     height: 7
     tab_name: Tool Usage & Provenance  - title: Events By Agent
     name: Events By Agent
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1022,7 +1022,7 @@
     height: 7
     tab_name: Tool Usage & Provenance  - title: Tool Calls Over Time
     name: Tool Calls Over Time
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1087,7 +1087,7 @@
     height: 6
     tab_name: Tool Usage & Provenance  - title: Total Calls
     name: Total Calls
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1159,7 +1159,7 @@
     height: 6
     tab_name: LLM & Token Economics  - title: LLM Call Trends
     name: LLM Call Trends
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1234,7 +1234,7 @@
     height: 6
     tab_name: LLM & Token Economics  - title: Top 5 Agents by LLM Calls
     name: Top 5 Agents by LLM Calls
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1308,7 +1308,7 @@
     height: 8
     tab_name: LLM & Token Economics  - title: Total Users
     name: Total Users
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1381,7 +1381,7 @@
     height: 7
     tab_name: Agent & Sessions  - title: User Growth Over Time
     name: User Growth Over Time
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1457,7 +1457,7 @@
     height: 7
     tab_name: Agent & Sessions  - title: Top 5 Users by Session
     name: Top 5 Users by Session
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1530,7 +1530,7 @@
     height: 7
     tab_name: Agent & Sessions  - title: Top 5 Users by Events
     name: Top 5 Users by Events
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1604,7 +1604,7 @@
     tab_name: Agent & Sessions
   - type: button
     name: button_854
-    rich_content_json: '{"text":"Performance Report","description":"","newTab":false,"alignment":"center","size":"small","style":"FILLED","color":"#E52592","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
+    rich_content_json: '{"text":"Performance Report","description":"","newTab":false,"alignment":"center","size":"small","style":"FILLED","color":"#E52592","href":"/dashboards/japac_pso_agent_analytics::agent_analytics_performance"}'
     row: 0
     col: 19
     width: 5
@@ -1672,7 +1672,7 @@
     height: 8
     tab_name: Conversation & Lineage  - title: Real-Time UDF Evaluation Scorecard (Zero-Batch Latency, TTFT & Cost Scores)
     name: Real-Time UDF Evaluation Scorecard
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: udf_realtime_scorecard
     type: looker_grid
     truncate_text: no
@@ -1687,7 +1687,7 @@
     tab_name: Agent & Sessions
   - title: Interactive SQL-Driven Trace Drilldown (Remote Function 'analyze')
     name: Interactive SQL-Driven Trace Drilldown
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: remote_function_trace_drilldown
     type: looker_grid
     truncate_text: no
@@ -1702,7 +1702,7 @@
     tab_name: Agent & Sessions
   - title: Production vs Baseline Drift Scorecard (Remote Function 'drift')
     name: Production vs Baseline Drift Scorecard
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: remote_function_drift_scorecard
     type: looker_grid
     truncate_text: no
@@ -1725,7 +1725,7 @@
     ui_config:
       type: relative_timeframes
       display: inline
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listen:
       Date: agent_events.timestamp_date
@@ -1744,7 +1744,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
 
     listens_to_filters: []
@@ -1758,7 +1758,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listens_to_filters: []
     field: agent_events.agent
@@ -1771,7 +1771,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listens_to_filters: []
     field: agent_events.user_id
@@ -1784,7 +1784,7 @@
     ui_config:
       type: tag_list
       display: popover
-    model: bigquery_agent_analytics_model
+    model: japac_pso_agent_analytics
     explore: agent_events
     listens_to_filters: []
     field: agent_events.span_id
