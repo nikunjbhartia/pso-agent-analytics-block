@@ -53,7 +53,7 @@ view: v_bqml_roi_forecast {
   dimension: data_type {
     label: "Data Type (Actual vs Forecast)"
     group_label: "BigQuery AI Forecast"
-    description: "Indicates whether the data point is a historical ACTUAL or a 30-DAY FORECAST prediction."
+    description: "What: Indicates whether the data point is a historical ACTUAL or a 30-DAY FORECAST prediction.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: string
     sql: ${TABLE}.data_type ;;
   }
@@ -61,7 +61,7 @@ view: v_bqml_roi_forecast {
   measure: predicted_hours_saved {
     label: "Predicted Hours Saved (3.5h Benchmark)"
     group_label: "BigQuery AI Forecast"
-    description: "Estimated manual engineering hours saved. Rationale: Historical actuals use total_sessions * 3.5 hrs (PSO pilot benchmark). Future 30-day predictions use linear growth projection."
+    description: "What: Estimated manual engineering hours saved. Rationale: Historical actuals use total_sessions * 3.5 hrs (PSO pilot benchmark). Future 30-day predictions use linear growth projection.\nHow: Empirically calculated using Google Cloud PSO pilot benchmarks (sessions * 3.5 hrs, $350/hr billable rate).\nWhy: Quantifies executive ROI, workforce FTE capacity creation, and billable consulting value."
     type: sum
     value_format_name: decimal_1
     sql: ${TABLE}.hours_saved ;;
@@ -70,7 +70,7 @@ view: v_bqml_roi_forecast {
   measure: predicted_consulting_value_usd {
     label: "Predicted Consulting Value ($ USD)"
     group_label: "BigQuery AI Forecast"
-    description: "Predicted dollar consulting value created. Rationale: Values each predicted hour saved at the standard Google Cloud PSO JAPAC billable rate of $350/hr ($2,800/day Consultant rate)."
+    description: "What: Predicted dollar consulting value created. Rationale: Values each predicted hour saved at the standard Google Cloud PSO JAPAC billable rate of $350/hr ($2,800/day Consultant rate).\nHow: Empirically calculated using Google Cloud PSO pilot benchmarks (sessions * 3.5 hrs, $350/hr billable rate).\nWhy: Quantifies executive ROI, workforce FTE capacity creation, and billable consulting value."
     type: sum
     value_format_name: usd
     sql: ${TABLE}.consulting_value_usd ;;
@@ -79,7 +79,7 @@ view: v_bqml_roi_forecast {
   measure: confidence_lower_bound_hours {
     label: "90% Confidence Lower Bound (Hours)"
     group_label: "BigQuery AI Forecast"
-    description: "Lower confidence interval bound for predicted engineering hours saved."
+    description: "What: Lower confidence interval bound for predicted engineering hours saved.\nHow: Empirically calculated using Google Cloud PSO pilot benchmarks (sessions * 3.5 hrs, $350/hr billable rate).\nWhy: Quantifies executive ROI, workforce FTE capacity creation, and billable consulting value."
     type: sum
     value_format_name: decimal_1
     sql: ${TABLE}.confidence_lower_hours ;;
@@ -88,7 +88,7 @@ view: v_bqml_roi_forecast {
   measure: confidence_upper_bound_hours {
     label: "110% Confidence Upper Bound (Hours)"
     group_label: "BigQuery AI Forecast"
-    description: "Upper confidence interval bound for predicted engineering hours saved."
+    description: "What: Upper confidence interval bound for predicted engineering hours saved.\nHow: Empirically calculated using Google Cloud PSO pilot benchmarks (sessions * 3.5 hrs, $350/hr billable rate).\nWhy: Quantifies executive ROI, workforce FTE capacity creation, and billable consulting value."
     type: sum
     value_format_name: decimal_1
     sql: ${TABLE}.confidence_upper_hours ;;

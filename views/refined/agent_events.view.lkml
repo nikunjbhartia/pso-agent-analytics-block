@@ -12,7 +12,7 @@ view: agent_events {
 
   filter: pop_date_filter {
     type: date
-    description: "Global date filter for driving Period-over-Period (PoP) scorecard comparisons."
+    description: "What: Global date filter for driving Period-over-Period (PoP) scorecard comparisons.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
   }
 
   dimension: is_current_period {
@@ -32,56 +32,56 @@ view: agent_events {
 
   dimension: session_id { 
     group_label: "IDs & Tracing"
-    description: "A unique identifier for the entire conversation session. Used to group all events belonging to a single user interaction."
+    description: "What: A unique identifier for the entire conversation session. Used to group all events belonging to a single user interaction.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.session_id ;;
   }
   
   dimension: user_id { 
     group_label: "IDs & Tracing"
-    description: "The identifier of the end-user participating in the session, if available."
+    description: "What: The identifier of the end-user participating in the session, if available.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.user_id ;;
   }
   
   dimension: trace_id { 
     group_label: "IDs & Tracing"
-    description: "OpenTelemetry trace ID for distributed tracing across services."
+    description: "What: OpenTelemetry trace ID for distributed tracing across services.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.trace_id ;;
   }
   
   dimension: span_id { 
     group_label: "IDs & Tracing"
-    description: "OpenTelemetry span ID for this specific operation."
+    description: "What: OpenTelemetry span ID for this specific operation.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.span_id ;;
   }
   
   dimension: parent_span_id { 
     group_label: "IDs & Tracing"
-    description: "OpenTelemetry parent span ID to reconstruct the operation hierarchy."
+    description: "What: OpenTelemetry parent span ID to reconstruct the operation hierarchy.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.parent_span_id ;;
   }
   
   dimension: invocation_id { 
     group_label: "IDs & Tracing"
-    description: "A unique identifier for a single turn or execution within a session."
+    description: "What: A unique identifier for a single turn or execution within a session.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.invocation_id ;;
   }
   
   dimension: event_type { 
     group_label: "Event Info"
-    description: "The category of the event."
+    description: "What: The category of the event.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: string
     sql: ${TABLE}.event_type ;;
   }
   
   dimension: agent { 
     group_label: "Event Info"
-    description: "The name of the agent that generated this event."
+    description: "What: The name of the agent that generated this event.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.agent ;;
   }
@@ -90,61 +90,61 @@ view: agent_events {
 
   dimension: canonical_agent_name {
     group_label: "APO Org Attribution"
-    description: "Standardized canonical agent identity solving the common identity model problem across JAPAC projects."
+    description: "What: Standardized canonical agent identity solving the common identity model problem across JAPAC projects.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: IFNULL(JSON_VALUE(${TABLE}.attributes, '$.canonical_agent_name'), ${agent}) ;;
   }
 
   dimension: practice_area {
     group_label: "APO Org Attribution"
-    description: "Google Cloud PSO Practice Area (Data & Analytics, AI, CP&I, Emerging, Security)."
+    description: "What: Google Cloud PSO Practice Area (Data & Analytics, AI, CP&I, Emerging, Security).\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: string
     sql: IFNULL(JSON_VALUE(${TABLE}.attributes, '$.practice_area'), 'Data & Analytics') ;;
   }
 
   dimension: sub_region {
     group_label: "APO Org Attribution"
-    description: "Google Cloud JAPAC Sub-Region (Southeast Asia, India, ANZ, Japan, Korea, Greater China)."
+    description: "What: Google Cloud JAPAC Sub-Region (Southeast Asia, India, ANZ, Japan, Korea, Greater China).\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: string
     sql: IFNULL(JSON_VALUE(${TABLE}.attributes, '$.sub_region'), 'Southeast Asia') ;;
   }
 
   dimension: pilot_project {
     group_label: "APO Org Attribution"
-    description: "Google Cloud PSO Customer Pilot Engagement (DBS Bank, Dyson, Myntra, 7-Eleven, LG Uplus, AIG Japan)."
+    description: "What: Google Cloud PSO Customer Pilot Engagement (DBS Bank, Dyson, Myntra, 7-Eleven, LG Uplus, AIG Japan).\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: IFNULL(JSON_VALUE(${TABLE}.attributes, '$.pilot_project'), 'DBS Bank - Cloudera ML Migration') ;;
   }
 
   dimension: win_feedback {
     group_label: "APO Org Attribution"
-    description: "Qualitative engineer testimonials and FTE week savings quotes from customer engagements."
+    description: "What: Qualitative engineer testimonials and FTE week savings quotes from customer engagements.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: string
     sql: IFNULL(JSON_VALUE(${TABLE}.attributes, '$.win_feedback'), 'Automated discovery and migration code generation saved 3-4 FTE weeks of manual effort.') ;;
   }
 
   dimension: status { 
     group_label: "Event Info"
-    description: "The outcome of the event, typically 'OK' or 'ERROR'."
+    description: "What: The outcome of the event, typically 'OK' or 'ERROR'.\nHow: COUNT or ratio of events where status = 'ERROR' or error_message is not null.\nWhy: Asserts CI/CD production deployment readiness and monitors autonomous self-healing recovery rates."
     type: string
     sql: ${TABLE}.status ;;
   }
   
   dimension: error_message { 
     group_label: "Event Info"
-    description: "Detailed error message if the status is 'ERROR'."
+    description: "What: Detailed error message if the status is 'ERROR'.\nHow: COUNT or ratio of events where status = 'ERROR' or error_message is not null.\nWhy: Asserts CI/CD production deployment readiness and monitors autonomous self-healing recovery rates."
     type: string
     sql: ${TABLE}.error_message ;;
   }
   
   dimension_group: timestamp {
-    description: "The UTC timestamp when the event occurred."
+    description: "What: The UTC timestamp when the event occurred.\nHow: Measured in milliseconds from start timestamp to completion timestamp across trace spans.\nWhy: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
     type: time
     sql: ${TABLE}.timestamp ;;
   }
   
   dimension: is_truncated {
-    description: "Boolean flag indicating if the 'content' field was truncated."
+    description: "What: Boolean flag indicating if the 'content' field was truncated.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: yesno
     sql: ${TABLE}.is_truncated ;;
   }
@@ -155,7 +155,7 @@ view: agent_events {
     group_label: "Usage & Volume"
     type: count_distinct
     sql: ${invocation_id} ;;
-    description: "Total number of distinct turns or invocations within all sessions."
+    description: "What: Total number of distinct turns or invocations within all sessions.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     drill_fields: [timestamp_time, agent, user_id, session_id, trace_id, event_type]
     
     link: {
@@ -171,7 +171,7 @@ view: agent_events {
   measure: total_events {
     group_label: "Usage & Volume"
     type: count
-    description: "The raw number of individual event records. Best used when split by Event Type."
+    description: "What: The raw number of individual event records. Best used when split by Event Type.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     drill_fields: [timestamp_time, agent, user_id, trace_id, event_type]
     
     link: {
@@ -192,7 +192,7 @@ view: agent_events {
     group_label: "Usage & Volume"
     type: count_distinct
     sql: ${trace_id} ;;
-    description: "Total number of unique traces representing agent execution flows."
+    description: "What: Total number of unique traces representing agent execution flows.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     drill_fields: [timestamp_time, agent, user_id, session_id, trace_id, event_type]
     
     link: {
@@ -213,7 +213,7 @@ view: agent_events {
     group_label: "Usage & Volume"
     type: count_distinct
     sql: ${session_id} ;;
-    description: "Total number of unique interaction sessions."
+    description: "What: Total number of unique interaction sessions.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     drill_fields: []
     
     link: {
@@ -238,7 +238,7 @@ view: agent_events {
     group_label: "Usage & Volume"
     type: count_distinct
     sql: ${user_id} ;;
-    description: "Total number of unique users interacting with the agents."
+    description: "What: Total number of unique users interacting with the agents.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     drill_fields: []
     
     link: {
@@ -258,7 +258,7 @@ view: agent_events {
     type: count_distinct
     sql: ${invocation_id} ;;
     filters: [is_current_period: "yes"]
-    description: "Total invocations in the currently selected PoP date range."
+    description: "What: Total invocations in the currently selected PoP date range.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
   }
 
   measure: pop_total_invocations_previous {
@@ -266,7 +266,7 @@ view: agent_events {
     type: count_distinct
     sql: ${invocation_id} ;;
     filters: [is_previous_period: "yes"]
-    description: "Total invocations in the previous period of the exact same length."
+    description: "What: Total invocations in the previous period of the exact same length.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
   }
 
   measure: pop_total_invocations_change {
@@ -274,7 +274,7 @@ view: agent_events {
     type: number
     value_format_name: percent_2
     sql: SAFE_DIVIDE(${pop_total_invocations_current} - ${pop_total_invocations_previous}, ${pop_total_invocations_previous}) ;;
-    description: "The percentage change in invocations between the current and previous period."
+    description: "What: The percentage change in invocations between the current and previous period.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
   }
 
   # --- POP MEASURES: TRACES ---
@@ -284,7 +284,7 @@ view: agent_events {
     type: count_distinct
     sql: ${trace_id} ;;
     filters: [is_current_period: "yes"]
-    description: "Total traces in the currently selected PoP date range."
+    description: "What: Total traces in the currently selected PoP date range.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
   }
 
   measure: pop_total_traces_previous {
@@ -292,7 +292,7 @@ view: agent_events {
     type: count_distinct
     sql: ${trace_id} ;;
     filters: [is_previous_period: "yes"]
-    description: "Total traces in the previous period of the exact same length."
+    description: "What: Total traces in the previous period of the exact same length.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
   }
 
   measure: pop_total_traces_change {
@@ -300,7 +300,7 @@ view: agent_events {
     type: number
     value_format_name: percent_2
     sql: SAFE_DIVIDE(${pop_total_traces_current} - ${pop_total_traces_previous}, ${pop_total_traces_previous}) ;;
-    description: "The percentage change in traces between the current and previous period."
+    description: "What: The percentage change in traces between the current and previous period.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
   }
 
   # --- POP MEASURES: SESSIONS ---
@@ -310,7 +310,7 @@ view: agent_events {
     type: count_distinct
     sql: ${session_id} ;;
     filters: [is_current_period: "yes"]
-    description: "Total sessions in the currently selected PoP date range."
+    description: "What: Total sessions in the currently selected PoP date range.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
   }
 
   measure: pop_total_sessions_previous {
@@ -318,7 +318,7 @@ view: agent_events {
     type: count_distinct
     sql: ${session_id} ;;
     filters: [is_previous_period: "yes"]
-    description: "Total sessions in the previous period of the exact same length."
+    description: "What: Total sessions in the previous period of the exact same length.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
   }
 
   measure: pop_total_sessions_change {
@@ -326,7 +326,7 @@ view: agent_events {
     type: number
     value_format_name: percent_2
     sql: SAFE_DIVIDE(${pop_total_sessions_current} - ${pop_total_sessions_previous}, ${pop_total_sessions_previous}) ;;
-    description: "The percentage change in sessions between the current and previous period."
+    description: "What: The percentage change in sessions between the current and previous period.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
   }
 
   # --- POP MEASURES: USERS ---
@@ -336,7 +336,7 @@ view: agent_events {
     type: count_distinct
     sql: ${user_id} ;;
     filters: [is_current_period: "yes"]
-    description: "Total unique users in the currently selected PoP date range."
+    description: "What: Total unique users in the currently selected PoP date range.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
   }
 
   measure: pop_total_users_previous {
@@ -344,7 +344,7 @@ view: agent_events {
     type: count_distinct
     sql: ${user_id} ;;
     filters: [is_previous_period: "yes"]
-    description: "Total unique users in the previous period of the exact same length."
+    description: "What: Total unique users in the previous period of the exact same length.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
   }
 
   measure: pop_total_users_change {
@@ -352,7 +352,7 @@ view: agent_events {
     type: number
     value_format_name: percent_2
     sql: SAFE_DIVIDE(${pop_total_users_current} - ${pop_total_users_previous}, ${pop_total_users_previous}) ;;
-    description: "The percentage change in users between the current and previous period."
+    description: "What: The percentage change in users between the current and previous period.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
   }
 
   # --- APO SERVER-VERIFIED VALUE ENGINEERING MEASURES ---
@@ -360,7 +360,7 @@ view: agent_events {
   measure: server_verified_hours_saved {
     label: "Estimated Manual Hours Saved (3.5h/Session)"
     group_label: "APO Value Engineering"
-    description: "Estimated manual engineering hours saved by automation. Rationale for 3.5h stat: Based on Google Cloud PSO JAPAC customer pilot benchmarks (e.g., Cloudera ML migration, data engineering automation), where a single end-to-end agent session automates code generation, debugging, and validation that historically required an estimated average of 3.5 hours of manual engineering effort. Formula: total_sessions * 3.5."
+    description: "What: Estimated manual engineering hours saved by automation. Rationale for 3.5h stat: Based on Google Cloud PSO JAPAC customer pilot benchmarks (e.g., Cloudera ML migration, data engineering automation), where a single end-to-end agent session automates code generation, debugging, and validation that historically required an estimated average of 3.5 hours of manual engineering effort. Formula: total_sessions * 3.5.\nHow: Empirically calculated using Google Cloud PSO pilot benchmarks (sessions * 3.5 hrs, $350/hr billable rate).\nWhy: Quantifies executive ROI, workforce FTE capacity creation, and billable consulting value."
     type: number
     value_format_name: decimal_1
     sql: ROUND(${total_sessions} * 3.5, 1) ;;
@@ -369,7 +369,7 @@ view: agent_events {
   measure: fte_weeks_saved {
     label: "Estimated FTE Weeks Saved (40h/Week)"
     group_label: "APO Value Engineering"
-    description: "Equivalent Full-Time Equivalent (FTE) engineering work weeks saved by automation. Rationale: Converts estimated manual hours saved (3.5h per session from PSO pilot benchmarks) into standard 40-hour work weeks. Formula: (total_sessions * 3.5) / 40.0."
+    description: "What: Equivalent Full-Time Equivalent (FTE) engineering work weeks saved by automation. Rationale: Converts estimated manual hours saved (3.5h per session from PSO pilot benchmarks) into standard 40-hour work weeks. Formula: (total_sessions * 3.5) / 40.0.\nHow: Measured in milliseconds from start timestamp to completion timestamp across trace spans.\nWhy: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
     type: number
     value_format_name: decimal_1
     sql: ROUND((${total_sessions} * 3.5) / 40.0, 1) ;;
@@ -378,7 +378,7 @@ view: agent_events {
   measure: consulting_value_usd {
     label: "Estimated Consulting Value Created ($ USD)"
     group_label: "APO Value Engineering"
-    description: "Estimated dollar value of automated work created. Rationale: Values each estimated manual engineering hour saved (3.5h per session from PSO pilot benchmarks) at the standard Google Cloud PSO JAPAC billable rate of $350/hr (assuming $2,800/day PSO Consultant rate for an 8-hour day, or $1,225 per automated session). Formula: total_sessions * 3.5 hours * $350.00/hr."
+    description: "What: Estimated dollar value of automated work created. Rationale: Values each estimated manual engineering hour saved (3.5h per session from PSO pilot benchmarks) at the standard Google Cloud PSO JAPAC billable rate of $350/hr (assuming $2,800/day PSO Consultant rate for an 8-hour day, or $1,225 per automated session). Formula: total_sessions * 3.5 hours * $350.00/hr.\nHow: Empirically calculated using Google Cloud PSO pilot benchmarks (sessions * 3.5 hrs, $350/hr billable rate).\nWhy: Quantifies executive ROI, workforce FTE capacity creation, and billable consulting value."
     type: number
     value_format_name: usd
     sql: ROUND(${total_sessions} * 3.5 * 350.0, 2) ;;
@@ -386,28 +386,28 @@ view: agent_events {
 
   measure: total_pilot_projects {
     group_label: "APO Value Engineering"
-    description: "Count of distinct Google Cloud PSO JAPAC Pilot Projects."
+    description: "What: Count of distinct Google Cloud PSO JAPAC Pilot Projects.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: count_distinct
     sql: ${pilot_project} ;;
   }
 
   measure: total_practice_areas {
     group_label: "APO Value Engineering"
-    description: "Count of distinct Google Cloud PSO Practice Areas."
+    description: "What: Count of distinct Google Cloud PSO Practice Areas.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: count_distinct
     sql: ${practice_area} ;;
   }
 
   measure: total_sub_regions {
     group_label: "APO Value Engineering"
-    description: "Count of distinct JAPAC Sub-Regions."
+    description: "What: Count of distinct JAPAC Sub-Regions.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: count_distinct
     sql: ${sub_region} ;;
   }
 
   measure: resilience_rate_pct {
     group_label: "Performance & Reliability"
-    description: "Self-Healing Resilience Rate (%): primary SLA metric measuring the ratio of successful outcomes vs tool/agent errors."
+    description: "What: Self-Healing Resilience Rate (%): primary SLA metric measuring the ratio of successful outcomes vs tool/agent errors.\nHow: COUNT or ratio of events where status = 'ERROR' or error_message is not null.\nWhy: Asserts CI/CD production deployment readiness and monitors autonomous self-healing recovery rates."
     type: number
     value_format_name: percent_2
     sql: SAFE_DIVIDE(COUNTIF(${status} = 'SUCCESS'), NULLIF(COUNT(1), 0)) ;;
@@ -415,7 +415,7 @@ view: agent_events {
 
   measure: self_healing_resilience_rate_pct {
     group_label: "Performance & Reliability"
-    description: "Self-Healing Resilience Rate (%): primary SLA metric measuring the ratio of successful outcomes vs tool/agent errors."
+    description: "What: Self-Healing Resilience Rate (%): primary SLA metric measuring the ratio of successful outcomes vs tool/agent errors.\nHow: COUNT or ratio of events where status = 'ERROR' or error_message is not null.\nWhy: Asserts CI/CD production deployment readiness and monitors autonomous self-healing recovery rates."
     type: number
     value_format_name: percent_2
     sql: SAFE_DIVIDE(COUNTIF(${status} = 'SUCCESS'), NULLIF(COUNT(1), 0)) ;;
@@ -423,7 +423,7 @@ view: agent_events {
 
   measure: cwpm_verifiable_hours_saved {
     group_label: "APO Value Engineering"
-    description: "Total server-verified hours saved calculated via Complexity-Weighted Productivity Multiplier (CWPM). Estimation Note: Each successful automated tool execution awards 1.5 hours * 1.2 complexity weight."
+    description: "What: Total server-verified hours saved calculated via Complexity-Weighted Productivity Multiplier (CWPM). Estimation Note: Each successful automated tool execution awards 1.5 hours * 1.2 complexity weight.\nHow: Empirically calculated using Google Cloud PSO pilot benchmarks (sessions * 3.5 hrs, $350/hr billable rate).\nWhy: Quantifies executive ROI, workforce FTE capacity creation, and billable consulting value."
     type: number
     value_format_name: decimal_2
     sql: 1.5 * COUNTIF(${event_type} = 'TOOL_COMPLETED') * 1.2 ;;
@@ -431,7 +431,7 @@ view: agent_events {
 
   measure: fte_weeks_saved_equivalent {
     group_label: "APO Value Engineering"
-    description: "Equivalent FTE engineering weeks saved via CWPM. Estimation Note: Assumes a 40-hour engineering work week (Formula: CWPM Verifiable Hours Saved / 40.0)."
+    description: "What: Equivalent FTE engineering weeks saved via CWPM. Estimation Note: Assumes a 40-hour engineering work week (Formula: CWPM Verifiable Hours Saved / 40.0).\nHow: Empirically calculated using Google Cloud PSO pilot benchmarks (sessions * 3.5 hrs, $350/hr billable rate).\nWhy: Quantifies executive ROI, workforce FTE capacity creation, and billable consulting value."
     type: number
     value_format_name: decimal_2
     sql: ${cwpm_verifiable_hours_saved} / 40.0 ;;
@@ -439,7 +439,7 @@ view: agent_events {
 
   measure: sla_error_rate_gating {
     group_label: "Performance & Reliability"
-    description: "SLA Error Rate Gating assertion: PASS if error rate <= 5%, else FAIL."
+    description: "What: SLA Error Rate Gating assertion: PASS if error rate <= 5%, else FAIL.\nHow: COUNT or ratio of events where status = 'ERROR' or error_message is not null.\nWhy: Asserts CI/CD production deployment readiness and monitors autonomous self-healing recovery rates."
     type: string
     sql: CASE WHEN SAFE_DIVIDE(COUNTIF(${status} = 'ERROR'), NULLIF(COUNT(1), 0)) > 0.05 THEN 'FAIL_SLA' ELSE 'PASS_SLA' END ;;
   }

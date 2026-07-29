@@ -40,7 +40,7 @@ view: v_hitl_confirmation_request {
 
   dimension: tool_name {
     group_label: "Human-In-The-Loop"
-    description: "Tool requiring human-in-the-loop (HITL) confirmation."
+    description: "What: Tool requiring human-in-the-loop (HITL) confirmation.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: string
     sql: ${TABLE}.tool_name ;;
   }
@@ -48,7 +48,7 @@ view: v_hitl_confirmation_request {
   measure: total_hitl_confirmation_requests {
     label: "Total HITL Confirmation Requests"
     group_label: "Human-In-The-Loop"
-    description: "Total number of Human-In-The-Loop confirmation requests triggered."
+    description: "What: Total number of Human-In-The-Loop confirmation requests triggered.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: count
   }
 }

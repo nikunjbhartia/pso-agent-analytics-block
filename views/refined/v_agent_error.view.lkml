@@ -41,7 +41,7 @@ view: v_agent_error {
 
   dimension: error_traceback {
     group_label: "Performance & Reliability"
-    description: "Full Python traceback string for agent execution errors."
+    description: "What: Full Python traceback string for agent execution errors.\nHow: COUNT or ratio of events where status = 'ERROR' or error_message is not null.\nWhy: Asserts CI/CD production deployment readiness and monitors autonomous self-healing recovery rates."
     type: string
     sql: ${TABLE}.error_traceback ;;
   }
@@ -49,7 +49,7 @@ view: v_agent_error {
   measure: total_agent_errors {
     label: "Total Agent Errors"
     group_label: "Performance & Reliability"
-    description: "Total number of agent-level execution errors."
+    description: "What: Total number of agent-level execution errors.\nHow: COUNT or ratio of events where status = 'ERROR' or error_message is not null.\nWhy: Asserts CI/CD production deployment readiness and monitors autonomous self-healing recovery rates."
     type: count
   }
 }

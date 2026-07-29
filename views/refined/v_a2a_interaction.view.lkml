@@ -41,14 +41,14 @@ view: v_a2a_interaction {
 
   dimension: a2a_task_id {
     group_label: "Multi-Agent Delegation"
-    description: "Task identifier for Agent-to-Agent (A2A) interactions."
+    description: "What: Task identifier for Agent-to-Agent (A2A) interactions.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.a2a_task_id ;;
   }
 
   dimension: a2a_context_id {
     group_label: "Multi-Agent Delegation"
-    description: "Shared context identifier across A2A agent delegations."
+    description: "What: Shared context identifier across A2A agent delegations.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.a2a_context_id ;;
   }
@@ -56,7 +56,7 @@ view: v_a2a_interaction {
   measure: total_a2a_interactions {
     label: "Total A2A Interactions"
     group_label: "Multi-Agent Delegation"
-    description: "Total number of Agent-to-Agent (A2A) protocol interactions."
+    description: "What: Total number of Agent-to-Agent (A2A) protocol interactions.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: count
   }
 }
