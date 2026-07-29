@@ -27,4 +27,73 @@ explore: agent_events {
     sql_on: ${agent_events.trace_id} = ${v_tool_error.trace_id} AND ${agent_events.span_id} = ${v_tool_error.span_id} AND ${agent_events.event_type} = ${v_tool_error.event_type} ;;
     relationship: one_to_one
   }
+
+  join: v_agent_transfer {
+    type: left_outer
+    sql_on: ${agent_events.trace_id} = ${v_agent_transfer.trace_id} AND ${agent_events.span_id} = ${v_agent_transfer.span_id} AND ${agent_events.event_type} = ${v_agent_transfer.event_type} ;;
+    relationship: one_to_one
+  }
+
+  join: v_a2a_interaction {
+    type: left_outer
+    sql_on: ${agent_events.trace_id} = ${v_a2a_interaction.trace_id} AND ${agent_events.span_id} = ${v_a2a_interaction.span_id} AND ${agent_events.event_type} = ${v_a2a_interaction.event_type} ;;
+    relationship: one_to_one
+  }
+
+  join: v_hitl_confirmation_request {
+    type: left_outer
+    sql_on: ${agent_events.trace_id} = ${v_hitl_confirmation_request.trace_id} AND ${agent_events.span_id} = ${v_hitl_confirmation_request.span_id} AND ${agent_events.event_type} = ${v_hitl_confirmation_request.event_type} ;;
+    relationship: one_to_one
+  }
+
+  join: v_agent_error {
+    type: left_outer
+    sql_on: ${agent_events.trace_id} = ${v_agent_error.trace_id} AND ${agent_events.span_id} = ${v_agent_error.span_id} AND ${agent_events.event_type} = ${v_agent_error.event_type} ;;
+    relationship: one_to_one
+  }
+
+  join: v_bqml_roi_forecast {
+    type: left_outer
+    sql_on: ${agent_events.timestamp_date} = ${v_bqml_roi_forecast.forecast_date} ;;
+    relationship: many_to_one
+  }
+
+  join: v_session_trace_dag {
+    type: left_outer
+    sql_on: ${agent_events.trace_id} = ${v_session_trace_dag.trace_id} ;;
+    relationship: one_to_one
+  }
+
+  join: v_agent_evaluation {
+    type: left_outer
+    sql_on: ${agent_events.trace_id} = ${v_agent_evaluation.trace_id} ;;
+    relationship: one_to_one
+  }
+
+  join: v_gcs_multimodal_offload {
+    type: left_outer
+    sql_on: ${agent_events.trace_id} = ${v_gcs_multimodal_offload.trace_id} ;;
+    relationship: one_to_one
+  }
+
+    join: gcs_multimodal_object_table {
+      type: left_outer
+      sql_on: ${v_gcs_multimodal_offload.gcs_uri} = ${gcs_multimodal_object_table.uri} ;;
+      relationship: many_to_one
+    }
+  }
+
+explore: udf_realtime_scorecard {
+  label: "Real-Time UDF Evaluation Scorecard"
+  description: "Real-time evaluation scorecard using bqaa_score_* Python UDFs directly over agent_events."
+}
+
+explore: remote_function_trace_drilldown {
+  label: "Remote Function Trace Drilldown"
+  description: "Interactive trace inspection drill-down table powered by agent_analytics('analyze') remote function."
+}
+
+explore: remote_function_drift_scorecard {
+  label: "Production vs Baseline Drift Scorecard"
+  description: "Production vs baseline benchmark drift detection scorecard powered by agent_analytics('drift') remote function."
 }

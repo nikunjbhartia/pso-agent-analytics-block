@@ -358,27 +358,30 @@ view: agent_events {
   # --- APO SERVER-VERIFIED VALUE ENGINEERING MEASURES ---
 
   measure: server_verified_hours_saved {
+    label: "Estimated Manual Hours Saved (3.5h/Session)"
     group_label: "APO Value Engineering"
-    description: "Total automated server-verified hours saved across pilot projects (e.g., 393.5 Hours Saved)."
+    description: "Estimated manual engineering hours saved by automation. Rationale for 3.5h stat: Based on Google Cloud PSO JAPAC customer pilot benchmarks (e.g., Cloudera ML migration, data engineering automation), where a single end-to-end agent session automates code generation, debugging, and validation that historically required an estimated average of 3.5 hours of manual engineering effort. Formula: total_sessions * 3.5."
     type: number
     value_format_name: decimal_1
     sql: ROUND(${total_sessions} * 3.5, 1) ;;
   }
 
   measure: fte_weeks_saved {
+    label: "Estimated FTE Weeks Saved (40h/Week)"
     group_label: "APO Value Engineering"
-    description: "Equivalent Full-Time Equivalent (FTE) engineering weeks saved (40 hours/week)."
+    description: "Equivalent Full-Time Equivalent (FTE) engineering work weeks saved by automation. Rationale: Converts estimated manual hours saved (3.5h per session from PSO pilot benchmarks) into standard 40-hour work weeks. Formula: (total_sessions * 3.5) / 40.0."
     type: number
     value_format_name: decimal_1
     sql: ROUND((${total_sessions} * 3.5) / 40.0, 1) ;;
   }
 
   measure: consulting_value_usd {
+    label: "Estimated Consulting Value Created ($ USD)"
     group_label: "APO Value Engineering"
-    description: "Dollarized consulting value created based on $150/hr engineering rate."
+    description: "Estimated dollar value of automated work created. Rationale: Values each estimated manual engineering hour saved (3.5h per session from PSO pilot benchmarks) at the standard Google Cloud PSO JAPAC billable rate of $350/hr (assuming $2,800/day PSO Consultant rate for an 8-hour day, or $1,225 per automated session). Formula: total_sessions * 3.5 hours * $350.00/hr."
     type: number
     value_format_name: usd
-    sql: ROUND(${total_sessions} * 3.5 * 150.0, 2) ;;
+    sql: ROUND(${total_sessions} * 3.5 * 350.0, 2) ;;
   }
 
   measure: total_pilot_projects {
@@ -420,7 +423,7 @@ view: agent_events {
 
   measure: cwpm_verifiable_hours_saved {
     group_label: "APO Value Engineering"
-    description: "Total server-verified hours saved calculated via Complexity-Weighted Productivity Multiplier (CWPM)."
+    description: "Total server-verified hours saved calculated via Complexity-Weighted Productivity Multiplier (CWPM). Estimation Note: Each successful automated tool execution awards 1.5 hours * 1.2 complexity weight."
     type: number
     value_format_name: decimal_2
     sql: 1.5 * COUNTIF(${event_type} = 'TOOL_COMPLETED') * 1.2 ;;
@@ -428,7 +431,7 @@ view: agent_events {
 
   measure: fte_weeks_saved_equivalent {
     group_label: "APO Value Engineering"
-    description: "Equivalent Full-Time Equivalent (FTE) engineering weeks saved (40 hours/week) via CWPM."
+    description: "Equivalent FTE engineering weeks saved via CWPM. Estimation Note: Assumes a 40-hour engineering work week (Formula: CWPM Verifiable Hours Saved / 40.0)."
     type: number
     value_format_name: decimal_2
     sql: ${cwpm_verifiable_hours_saved} / 40.0 ;;

@@ -1,27 +1,5 @@
 view: v_tool_error {
-  derived_table: {
-    sql:
-      SELECT
-        timestamp,
-        event_type,
-        agent,
-        session_id,
-        invocation_id,
-        user_id,
-        trace_id,
-        span_id,
-        parent_span_id,
-        status,
-        error_message,
-        is_truncated,
-        JSON_VALUE(content, '$.tool') AS tool_name,
-        JSON_QUERY(content, '$.args') AS tool_args,
-        JSON_VALUE(content, '$.tool_origin') AS tool_origin,
-        CAST(JSON_VALUE(latency_ms, '$.total_ms') AS INT64) AS total_ms
-      FROM `@{PROJECT_ID}.@{DATASET_NAME}.@{TABLE_NAME}`
-      WHERE event_type = 'TOOL_ERROR'
-    ;;
-  }
+  sql_table_name: `@{PROJECT_ID}.@{DATASET_NAME}.v_tool_error` ;;
 
   dimension_group: timestamp {
     group_label: "IDs & Tracing"

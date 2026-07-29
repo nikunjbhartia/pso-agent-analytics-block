@@ -1,34 +1,5 @@
 view: v_llm_response {
-  derived_table: {
-    sql:
-      SELECT
-        timestamp,
-        event_type,
-        agent,
-        session_id,
-        invocation_id,
-        user_id,
-        trace_id,
-        span_id,
-        parent_span_id,
-        status,
-        error_message,
-        is_truncated,
-        JSON_QUERY(content, '$.response') AS response,
-        COALESCE(CAST(JSON_VALUE(attributes, '$.usage_metadata.prompt_token_count') AS INT64), CAST(JSON_VALUE(content, '$.usage.prompt') AS INT64)) AS usage_prompt_tokens,
-        COALESCE(CAST(JSON_VALUE(attributes, '$.usage_metadata.candidates_token_count') AS INT64), CAST(JSON_VALUE(content, '$.usage.completion') AS INT64)) AS usage_completion_tokens,
-        COALESCE(CAST(JSON_VALUE(attributes, '$.usage_metadata.total_token_count') AS INT64), CAST(JSON_VALUE(content, '$.usage.total') AS INT64)) AS usage_total_tokens,
-        CAST(JSON_VALUE(attributes, '$.usage_metadata.cached_content_token_count') AS INT64) AS usage_cached_tokens,
-        SAFE_DIVIDE(CAST(JSON_VALUE(attributes, '$.usage_metadata.cached_content_token_count') AS INT64), COALESCE(CAST(JSON_VALUE(attributes, '$.usage_metadata.prompt_token_count') AS INT64), CAST(JSON_VALUE(content, '$.usage.prompt') AS INT64))) AS context_cache_hit_rate,
-        CAST(JSON_VALUE(latency_ms, '$.total_ms') AS INT64) AS total_ms,
-        CAST(JSON_VALUE(latency_ms, '$.time_to_first_token_ms') AS INT64) AS ttft_ms,
-        JSON_VALUE(attributes, '$.model_version') AS model_version,
-        JSON_QUERY(attributes, '$.usage_metadata') AS usage_metadata,
-        JSON_QUERY(attributes, '$.cache_metadata') AS cache_metadata
-      FROM `@{PROJECT_ID}.@{DATASET_NAME}.@{TABLE_NAME}`
-      WHERE event_type = 'LLM_RESPONSE'
-    ;;
-  }
+  sql_table_name: `@{PROJECT_ID}.@{DATASET_NAME}.v_llm_response` ;;
 
   dimension_group: timestamp {
     group_label: "IDs & Tracing"
