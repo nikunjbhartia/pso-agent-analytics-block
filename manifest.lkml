@@ -1,4 +1,4 @@
-project_name: "agent-analytics-v2"
+project_name: "agent-analytics"
 
 constant: CONNECTION_NAME {
   value: "japac_pso_agent_analytics"
