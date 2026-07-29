@@ -17,9 +17,6 @@
   - name: Conversation & Lineage
     label: Conversation & Lineage
     title: Conversation & Lineage
-  - name: Real-Time UDFs & Remote Functions
-    label: Real-Time UDFs & Remote Functions
-    title: Real-Time UDFs & Remote Functions
   elements:
   - name: dashboard_navigation_header
     type: text
@@ -33,6 +30,12 @@
     name: Token Usage split by Agent
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -95,6 +98,12 @@
     name: Top 5 users with most Tokens consumption
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -149,6 +158,12 @@
     name: Total Tokens Consumption Over the Time
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -220,6 +235,12 @@
     name: Total Tokens
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -300,6 +321,12 @@
     name: Top 5 users with most Traces
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -355,6 +382,12 @@
     name: Total Traces
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -435,6 +468,12 @@
     name: Traces split by Agent
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -498,6 +537,12 @@
     name: Total Traces Generation Over the Time
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -570,6 +615,12 @@
     name: Total Sessions
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -637,6 +688,12 @@
     name: Number of Sessions Trend
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -713,6 +770,12 @@
     name: Top 5 Agents Split by Session Count
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -788,6 +851,12 @@
     name: Total Agent Transfers
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -811,6 +880,12 @@
     name: Total A2A Interactions
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -834,6 +909,12 @@
     name: Total HITL Confirmation Requests
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -879,6 +960,12 @@
     name: Tool Invocations
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -936,6 +1023,12 @@
     name: Events By Agent
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -995,6 +1088,12 @@
     name: Tool Calls Over Time
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -1060,6 +1159,12 @@
     name: Total Calls
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1132,6 +1237,12 @@
     name: LLM Call Trends
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -1207,6 +1318,12 @@
     name: Top 5 Agents by LLM Calls
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -1281,6 +1398,12 @@
     name: Total Users
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1354,6 +1477,12 @@
     name: User Growth Over Time
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -1430,6 +1559,12 @@
     name: Top 5 Users by Session
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -1503,6 +1638,12 @@
     name: Top 5 Users by Events
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -1597,6 +1738,12 @@
     note_display: hover
     note_text: "What: Breakdown of multimodal payloads and large objects offloaded to GCS bucket japac-pso-agent-analytics. | How: Aggregates offloaded GCS URIs by asset_type (IMAGE, DOCUMENT, AUDIO, VIDEO, LARGE_PAYLOAD_JSON) and event_type. | Why it matters: Monitors multimodal storage footprint and BigQuery object table ingestion. | Drill: Click asset type bar to inspect specific GCS URIs and traces."
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     dimensions: [v_gcs_multimodal_offload.asset_type, gcs_multimodal_object_table.content_type]
     measures: [v_gcs_multimodal_offload.total_gcs_offloaded_assets, gcs_multimodal_object_table.total_size_bytes]
     sorts: [v_gcs_multimodal_offload.total_gcs_offloaded_assets desc]
@@ -1608,10 +1755,18 @@
   - name: conversation_flow_turn_analytics
     title: "Conversation Analytics: Multi-Turn Interaction Flow & Token Latency"
     type: looker_grid
+    truncate_text: no
+    wrap_text: yes
     note_state: collapsed
     note_display: hover
     note_text: "What: Turn-by-turn breakdown of user prompts, agent responses, tool calls, and token/latency metrics. | How: Queries agent_events joined with v_llm_response, v_tool_completed, and v_agent_evaluation. | Why it matters: Enables granular conversational analytics and turn debugging across sessions. | Drill: Click Session ID to inspect full conversation history."
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     dimensions: [agent_events.session_id, agent_events.event_type, agent_events.agent, v_tool_completed.tool_name, agent_events.status]
     measures: [v_llm_response.total_tokens_consumed, agent_events.total_events]
     sorts: [agent_events.session_id desc, agent_events.total_events desc]
@@ -1624,10 +1779,18 @@
   - name: multi_agent_dag_decision_lineage
     title: "Multi-Agent DAG Delegation & Decision Paths"
     type: looker_grid
+    truncate_text: no
+    wrap_text: yes
     note_state: collapsed
     note_display: hover
     note_text: "What: Maps agent-to-agent delegation sequence and session lineage across supervisor and worker agents. | How: Queries v_agent_transfer and v_a2a_interaction joined with agent_events. | Why it matters: Provides complete DAG visibility and decision lineage tracking for multi-agent architectures. | Drill: Click Source or Target Agent to trace delegation graph."
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     dimensions: [agent_events.session_id, v_agent_transfer.from_agent, v_agent_transfer.to_agent]
     measures: [agent_events.total_events]
     sorts: [agent_events.total_events desc]
@@ -1642,6 +1805,8 @@
     model: agent-analytics
     explore: udf_realtime_scorecard
     type: looker_grid
+    truncate_text: no
+    wrap_text: yes
     fields: [udf_realtime_scorecard.practice_area, udf_realtime_scorecard.agent, udf_realtime_scorecard.total_sessions, udf_realtime_scorecard.total_spans, udf_realtime_scorecard.avg_latency_score, udf_realtime_scorecard.avg_ttft_score, udf_realtime_scorecard.avg_token_efficiency_score, udf_realtime_scorecard.avg_cost_score, udf_realtime_scorecard.avg_error_rate_score]
     sorts: [udf_realtime_scorecard.total_sessions desc]
     limit: 50
@@ -1649,12 +1814,14 @@
     col: 0
     width: 24
     height: 6
-    tab_name: Real-Time UDFs & Remote Functions
+    tab_name: Agent & Sessions
   - title: Interactive SQL-Driven Trace Drilldown (Remote Function 'analyze')
     name: Interactive SQL-Driven Trace Drilldown
     model: agent-analytics
     explore: remote_function_trace_drilldown
     type: looker_grid
+    truncate_text: no
+    wrap_text: yes
     fields: [remote_function_trace_drilldown.session_id, remote_function_trace_drilldown.agent, remote_function_trace_drilldown.session_start_time, remote_function_trace_drilldown.span_count, remote_function_trace_drilldown.error_count, remote_function_trace_drilldown.sdk_version, remote_function_trace_drilldown.analyzed_session_id]
     sorts: [remote_function_trace_drilldown.session_start_time desc]
     limit: 50
@@ -1662,12 +1829,14 @@
     col: 0
     width: 12
     height: 7
-    tab_name: Real-Time UDFs & Remote Functions
+    tab_name: Agent & Sessions
   - title: Production vs Baseline Drift Scorecard (Remote Function 'drift')
     name: Production vs Baseline Drift Scorecard
     model: agent-analytics
     explore: remote_function_drift_scorecard
     type: looker_grid
+    truncate_text: no
+    wrap_text: yes
     fields: [remote_function_drift_scorecard.comparison_tier, remote_function_drift_scorecard.drift_metric, remote_function_drift_scorecard.kolmogorov_smirnov_stat, remote_function_drift_scorecard.p_value, remote_function_drift_scorecard.drift_status, remote_function_drift_scorecard.last_evaluated_date]
     sorts: [remote_function_drift_scorecard.drift_metric]
     limit: 50
@@ -1675,7 +1844,7 @@
     col: 12
     width: 12
     height: 7
-    tab_name: Real-Time UDFs & Remote Functions
+    tab_name: Agent & Sessions
   filters:
   - name: Date
     title: Date
@@ -1688,6 +1857,12 @@
       display: inline
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     listens_to_filters: []
     field: agent_events.timestamp_date
   - name: Trace ID
@@ -1701,6 +1876,12 @@
       display: popover
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     listens_to_filters: []
     field: agent_events.trace_id
   - name: Agent
@@ -1714,6 +1895,12 @@
       display: popover
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     listens_to_filters: []
     field: agent_events.agent
   - name: User ID
@@ -1727,6 +1914,12 @@
       display: popover
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     listens_to_filters: []
     field: agent_events.user_id
   - name: Span ID
@@ -1740,5 +1933,11 @@
       display: popover
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
     listens_to_filters: []
     field: agent_events.span_id

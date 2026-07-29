@@ -27,6 +27,13 @@
     name: Average Tool Latency (ms)
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -87,6 +94,13 @@
     name: Tool Latency Trend
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -156,6 +170,13 @@
     name: Average LLM Latency (in ms)
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -233,6 +254,13 @@
     name: LLM Latency Trend
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -345,6 +373,13 @@
     name: P50 Tool Latency
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -471,6 +506,13 @@
     name: P75 Tool Latency
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -597,6 +639,13 @@
     name: P90 Tool Latency
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -723,6 +772,13 @@
     name: P99 Tool Latency
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -862,6 +918,13 @@
     name: P50 Llm Latency
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -947,6 +1010,13 @@
     name: P75 Llm Latency
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1032,6 +1102,13 @@
     name: P90 Llm Latency
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1117,6 +1194,13 @@
     name: P99 Llm Latency
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1215,6 +1299,13 @@
     name: Total Errors
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1278,6 +1369,13 @@
     name: Tool Errors Trend
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -1346,6 +1444,13 @@
     name: Top 5 Agents By Errors
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -1415,6 +1520,13 @@
     name: Top 5 Tools by Errors
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -1484,6 +1596,13 @@
     name: Total Agent Errors
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1507,6 +1626,13 @@
     name: Self-Healing Resilience Rate (%)
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1530,6 +1656,13 @@
     name: LLM-as-a-Judge Avg Quality Score (%)
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1553,6 +1686,13 @@
     name: User Feedback Satisfaction Rate (%)
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1576,6 +1716,13 @@
     name: Self-Correction Loop Success Rate (%)
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -1598,10 +1745,19 @@
   - name: a2a_circular_ping_pong_loop_table
     title: "Enterprise Edge-Case: A2A Circular Delegation Ping-Pong Loops"
     type: looker_grid
+    truncate_text: no
+    wrap_text: yes
     note_state: collapsed
     note_display: hover
     note_text: "What: Highlights recursive A2A delegation loops between agents. | How: Filters where from_agent equals to_target. | Why it matters: Detects infinite orchestration ping-pong loops that bloat token consumption. | Drill: Filter by Session ID to inspect full trace stack."
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     dimensions: [v_session_trace_dag.session_id, v_session_trace_dag.from_agent, v_session_trace_dag.to_target, v_session_trace_dag.is_circular_delegation]
     measures: [v_session_trace_dag.circular_loop_count, v_session_trace_dag.avg_dag_hop_latency_ms]
     filters:
@@ -1619,6 +1775,13 @@
     note_display: hover
     note_text: "What: Tracks Human-In-The-Loop confirmation request volume and latency. | How: Aggregates HITL_CONFIRMATION_REQUEST events by tool_name and date. | Why it matters: Identifies where workflows pause awaiting human sign-off. | Drill: Filter by Date or Tool Name."
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     dimensions: [agent_events.timestamp_date, v_hitl_confirmation_request.tool_name]
     measures: [v_hitl_confirmation_request.total_hitl_confirmation_requests]
     sorts: [agent_events.timestamp_date asc]
@@ -1634,6 +1797,13 @@
     note_display: hover
     note_text: "What: Breakdown of failing backend tools and error counts. | How: Aggregates TOOL_ERROR occurrences by tool_name. | Why it matters: Focuses SRE remediation on the most unstable API integrations. | Drill: Filter by Tool Name."
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     dimensions: [v_tool_error.tool_name]
     measures: [v_tool_error.total_tool_errors]
     sorts: [v_tool_error.total_tool_errors desc]
@@ -1645,10 +1815,19 @@
   - name: judge_improvement_recommendations_table
     title: "LLM-as-a-Judge: Actionable Model Improvement Recommendations"
     type: looker_grid
+    truncate_text: no
+    wrap_text: yes
     note_state: collapsed
     note_display: hover
     note_text: "What: Diagnostic recommendations on how to improve model performance based on LLM-as-a-Judge evaluation and user interactions. | How: Aggregated from LLM-as-a-Judge recommendation metadata and error diagnostics. | Why it matters: Converts qualitative scores into actionable prompt engineering and tool optimization steps. | Drill: Filter by Agent Name to inspect specific interaction recommendations."
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     dimensions: [agent_events.canonical_agent_name, v_agent_evaluation.judge_improvement_recommendation]
     measures: [v_agent_evaluation.avg_judge_quality_score, v_agent_evaluation.feedback_satisfaction_rate_pct]
     sorts: [v_agent_evaluation.avg_judge_quality_score asc]
@@ -1664,6 +1843,13 @@
     note_display: hover
     note_text: "What: Breakdown of where model improvement recommendations originated. | How: Aggregated by recommendation_source (gemini-2.5-flash, gemini-2.5-pro, sdk_evaluator, static_case_fallback). | Why it matters: Monitors share of recommendations backed by real BigQuery AI.GENERATE calls vs. SDK and empirical error diagnostics. | Drill: Click slice to filter recommendations."
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     dimensions: [v_agent_evaluation.recommendation_source]
     measures: [agent_events.total_events]
     sorts: [agent_events.total_events desc]
@@ -1684,6 +1870,13 @@
       display: inline
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     listens_to_filters: []
     field: agent_events.timestamp_date
   - name: Trace ID
@@ -1697,6 +1890,13 @@
       display: popover
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     listens_to_filters: []
     field: agent_events.trace_id
   - name: Agent
@@ -1710,6 +1910,13 @@
       display: popover
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     listens_to_filters: []
     field: agent_events.agent
   - name: User ID
@@ -1723,6 +1930,13 @@
       display: popover
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     listens_to_filters: []
     field: agent_events.user_id
   - name: Span ID
@@ -1736,6 +1950,13 @@
       display: popover
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     listens_to_filters: []
     field: agent_events.span_id
   - name: Tool Name
@@ -1749,5 +1970,12 @@
       display: popover
     model: agent-analytics
     explore: agent_events
+    listen:
+      Date: agent_events.timestamp_date
+      Trace ID: agent_events.trace_id
+      Agent: agent_events.agent
+      User ID: agent_events.user_id
+      Span ID: agent_events.span_id
+      Tool Name: v_tool_completed.tool_name
     listens_to_filters: []
     field: v_tool_completed.tool_name
