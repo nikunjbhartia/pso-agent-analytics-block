@@ -20,71 +20,75 @@
   elements:
   - type: button
     name: nav_btn_portal_Agent_&_Sessions
-    rich_content_json: '{"text":"🏠 Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#137333","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
+    rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
-    col: 14
-    width: 5
+    col: 16
+    width: 4
     height: 2
     tab_name: Agent & Sessions
   - type: button
     name: nav_btn_perf_Agent_&_Sessions
-    rich_content_json: '{"text":"📈 Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#E52592","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
+    rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 19
-    width: 5
+    col: 20
+    width: 4
     height: 2
     tab_name: Agent & Sessions
 
   - type: button
     name: nav_btn_portal_LLM_&_Token_Economics
-    rich_content_json: '{"text":"🏠 Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#137333","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
+    rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
-    col: 14
-    width: 5
+    col: 16
+    width: 4
     height: 2
     tab_name: LLM & Token Economics
   - type: button
     name: nav_btn_perf_LLM_&_Token_Economics
-    rich_content_json: '{"text":"📈 Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#E52592","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
+    rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 19
-    width: 5
+    col: 20
+    width: 4
     height: 2
     tab_name: LLM & Token Economics
 
   - type: button
     name: nav_btn_portal_Tool_Usage_&_Provenance
-    rich_content_json: '{"text":"🏠 Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#137333","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
+    rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
-    col: 14
-    width: 5
+    col: 16
+    width: 4
     height: 2
     tab_name: Tool Usage & Provenance
   - type: button
     name: nav_btn_perf_Tool_Usage_&_Provenance
-    rich_content_json: '{"text":"📈 Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#E52592","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
+    rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 19
-    width: 5
+    col: 20
+    width: 4
     height: 2
     tab_name: Tool Usage & Provenance
 
   - type: button
     name: nav_btn_portal_Conversation_&_Lineage
-    rich_content_json: '{"text":"🏠 Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#137333","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
+    rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
-    col: 14
-    width: 5
+    col: 16
+    width: 4
     height: 2
     tab_name: Conversation & Lineage
   - type: button
     name: nav_btn_perf_Conversation_&_Lineage
-    rich_content_json: '{"text":"📈 Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#E52592","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
+    rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"center","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 19
-    width: 5
+    col: 20
+    width: 4
     height: 2
     tab_name: Conversation & Lineage
+
+
+
+
 
   - title: Token Usage split by Agent
     name: Token Usage split by Agent
@@ -99,7 +103,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Breakdown of total token consumption across agents. \nHow: SUM(usage_total_tokens) grouped by agent. \nWhy it matters: Identifies token-heavy agents for optimization. \nDrill: Click agent bar to inspect token split."
+    note_text: "What: Breakdown of total token consumption across agents. <br>How: SUM(usage_total_tokens) grouped by agent. <br>Why it matters: Identifies token-heavy agents for optimization. <br>Drill: Click agent bar to inspect token split."
     fields: [agent_events.agent, v_llm_response.total_tokens_consumed]
     filters:
       v_llm_response.total_tokens_consumed: NOT NULL
@@ -163,7 +167,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Leaderboard of top 5 users by token usage. \nHow: SUM(usage_total_tokens) grouped by user_id. \nWhy it matters: Highlights power users and token distribution. \nDrill: Click user bar to view user session history."
+    note_text: "What: Leaderboard of top 5 users by token usage. <br>How: SUM(usage_total_tokens) grouped by user_id. <br>Why it matters: Highlights power users and token distribution. <br>Drill: Click user bar to view user session history."
     fields: [agent_events.user_id, v_llm_response.total_tokens_consumed]
     filters:
       agent_events.timestamp_date: 7 days
@@ -219,7 +223,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: Daily time-series area chart tracking token consumption over time. \nHow: SUM(usage_total_tokens) aggregated by timestamp_date. \nWhy it matters: Monitors platform adoption and API quota utilization. \nDrill: Click date point to inspect daily traffic."
+    note_text: "What: Daily time-series area chart tracking token consumption over time. <br>How: SUM(usage_total_tokens) aggregated by timestamp_date. <br>Why it matters: Monitors platform adoption and API quota utilization. <br>Drill: Click date point to inspect daily traffic."
     fields: [v_llm_response.total_tokens_consumed, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     sorts: [agent_events.timestamp_date desc]
@@ -291,7 +295,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Total aggregate number of tokens consumed across all sessions. \nHow: SUM(usage_prompt_tokens + usage_completion_tokens). \nWhy it matters: Core top-line consumption metric. \nDrill: Click tile to see token trend."
+    note_text: "What: Total aggregate number of tokens consumed across all sessions. <br>How: SUM(usage_prompt_tokens + usage_completion_tokens). <br>Why it matters: Core top-line consumption metric. <br>Drill: Click tile to see token trend."
     fields: [v_llm_response.pop_total_tokens_current, v_llm_response.pop_total_tokens_change]
     filters:
       agent_events.pop_date_filter: 14 days
@@ -372,7 +376,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Leaderboard of top 5 power users by trace volume. \nHow: COUNT DISTINCT of trace_id grouped by user_id. \nWhy it matters: Shows which users execute the deepest multi-turn workflows. \nDrill: Click user to inspect trace logs."
+    note_text: "What: Leaderboard of top 5 power users by trace volume. <br>How: COUNT DISTINCT of trace_id grouped by user_id. <br>Why it matters: Shows which users execute the deepest multi-turn workflows. <br>Drill: Click user to inspect trace logs."
     fields: [agent_events.user_id, agent_events.total_traces]
     filters:
       agent_events.timestamp_date: 7 days
@@ -429,7 +433,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Total number of execution traces recorded. \nHow: COUNT DISTINCT of trace_id across all sessions. \nWhy it matters: Measures overall end-to-end workflow invocations. \nDrill: Click tile to filter by agent."
+    note_text: "What: Total number of execution traces recorded. <br>How: COUNT DISTINCT of trace_id across all sessions. <br>Why it matters: Measures overall end-to-end workflow invocations. <br>Drill: Click tile to filter by agent."
     fields: [agent_events.pop_total_traces_current, agent_events.pop_total_traces_change]
     filters:
       agent_events.pop_date_filter: 14 days
@@ -510,7 +514,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Distribution of trace volume across agents. \nHow: COUNT DISTINCT of trace_id grouped by agent. \nWhy it matters: Reveals traffic distribution across agent workloads. \nDrill: Click agent to filter dashboard."
+    note_text: "What: Distribution of trace volume across agents. <br>How: COUNT DISTINCT of trace_id grouped by agent. <br>Why it matters: Reveals traffic distribution across agent workloads. <br>Drill: Click agent to filter dashboard."
     fields: [agent_events.agent, agent_events.total_traces]
     filters:
       v_llm_response.total_tokens_consumed: NOT NULL
@@ -575,7 +579,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: Daily trend of trace volume generated over time. \nHow: COUNT DISTINCT of trace_id aggregated by timestamp_date. \nWhy it matters: Tracks platform engagement growth over time. \nDrill: Click date to inspect daily traces."
+    note_text: "What: Daily trend of trace volume generated over time. <br>How: COUNT DISTINCT of trace_id aggregated by timestamp_date. <br>Why it matters: Tracks platform engagement growth over time. <br>Drill: Click date to inspect daily traces."
     fields: [agent_events.timestamp_date, agent_events.total_traces]
     fill_fields: [agent_events.timestamp_date]
     sorts: [agent_events.timestamp_date desc]
@@ -648,7 +652,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Total count of end-to-end user sessions. \nHow: COUNT DISTINCT of session_id. \nWhy it matters: Primary measure of active customer conversations. \nDrill: Click tile to view session breakdown."
+    note_text: "What: Total count of end-to-end user sessions. <br>How: COUNT DISTINCT of session_id. <br>Why it matters: Primary measure of active customer conversations. <br>Drill: Click tile to view session breakdown."
     fields: [agent_events.pop_total_sessions_current, agent_events.pop_total_sessions_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -716,7 +720,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: Daily time-series trend of user session volume over time. \nHow: COUNT DISTINCT of session_id aggregated by timestamp_date. \nWhy it matters: Shows daily conversational adoption. \nDrill: Click date to inspect sessions."
+    note_text: "What: Daily time-series trend of user session volume over time. <br>How: COUNT DISTINCT of session_id aggregated by timestamp_date. <br>Why it matters: Shows daily conversational adoption. <br>Drill: Click date to inspect sessions."
     fields: [agent_events.total_sessions, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     filters:
@@ -793,7 +797,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Leaderboard of top 5 agents by number of sessions. \nHow: COUNT DISTINCT of session_id grouped by agent. \nWhy it matters: Identifies the most popular conversational agents. \nDrill: Click agent to filter sessions."
+    note_text: "What: Leaderboard of top 5 agents by number of sessions. <br>How: COUNT DISTINCT of session_id grouped by agent. <br>Why it matters: Identifies the most popular conversational agents. <br>Drill: Click agent to filter sessions."
     fields: [agent_events.total_sessions, agent_events.agent]
     filters:
       agent_events.agent: ''
@@ -869,7 +873,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Total count of multi-agent delegation and handoff events. \nHow: COUNT of AGENT_TRANSFER events from v_agent_transfer. \nWhy it matters: Tracks multi-agent supervisor-worker collaboration. \nDrill: Click tile to view transfer matrix."
+    note_text: "What: Total count of multi-agent delegation and handoff events. <br>How: COUNT of AGENT_TRANSFER events from v_agent_transfer. <br>Why it matters: Tracks multi-agent supervisor-worker collaboration. <br>Drill: Click tile to view transfer matrix."
     fields: [v_agent_transfer.total_agent_transfers]
     limit: 500
     custom_color_enabled: true
@@ -893,7 +897,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Total count of Agent-to-Agent protocol communication events. \nHow: COUNT of A2A_INTERACTION events from v_a2a_interaction. \nWhy it matters: Measures decentralized agent-to-agent protocol traffic. \nDrill: Click tile to view A2A tasks."
+    note_text: "What: Total count of Agent-to-Agent protocol communication events. <br>How: COUNT of A2A_INTERACTION events from v_a2a_interaction. <br>Why it matters: Measures decentralized agent-to-agent protocol traffic. <br>Drill: Click tile to view A2A tasks."
     fields: [v_a2a_interaction.total_a2a_interactions]
     limit: 500
     custom_color_enabled: true
@@ -917,7 +921,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Total count of Human-In-The-Loop confirmation requests. \nHow: COUNT of HITL_CONFIRMATION_REQUEST events from v_hitl_confirmation_request. \nWhy it matters: Measures where human governance and sign-off occur. \nDrill: Click tile to view HITL tools."
+    note_text: "What: Total count of Human-In-The-Loop confirmation requests. <br>How: COUNT of HITL_CONFIRMATION_REQUEST events from v_hitl_confirmation_request. <br>Why it matters: Measures where human governance and sign-off occur. <br>Drill: Click tile to view HITL tools."
     fields: [v_hitl_confirmation_request.total_hitl_confirmation_requests]
     limit: 500
     custom_color_enabled: true
@@ -936,7 +940,7 @@
     rich_content_json: '{"format":"slate"}'
     row: 0
     col: 0
-    width: 24
+    width: 16
     height: 2
     tab_name: Agent & Sessions
   - name: " (Copy)"
@@ -947,7 +951,7 @@
     rich_content_json: '{"format":"slate"}'
     row: 15
     col: 0
-    width: 24
+    width: 16
     height: 2
     tab_name: Agent & Sessions
   - title: Tool Invocations
@@ -963,7 +967,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Ranking of backend tools by invocation frequency. \nHow: COUNT of TOOL_COMPLETED events grouped by tool_name. \nWhy it matters: Highlights which APIs and integrations are relied upon most. \nDrill: Click tool to view latency and error rate."
+    note_text: "What: Ranking of backend tools by invocation frequency. <br>How: COUNT of TOOL_COMPLETED events grouped by tool_name. <br>Why it matters: Highlights which APIs and integrations are relied upon most. <br>Drill: Click tool to view latency and error rate."
     fields: [agent_events.total_invocations, v_tool_completed.tool_name]
     filters:
       v_tool_completed.tool_name: "-NULL"
@@ -1021,7 +1025,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Breakdown of total lifecycle events across agents. \nHow: COUNT of raw event rows grouped by agent. \nWhy it matters: Shows raw telemetry volume per agent. \nDrill: Click agent to filter events."
+    note_text: "What: Breakdown of total lifecycle events across agents. <br>How: COUNT of raw event rows grouped by agent. <br>Why it matters: Shows raw telemetry volume per agent. <br>Drill: Click agent to filter events."
     fields: [agent_events.total_events, agent_events.agent]
     filters:
       agent_events.event_type: '"TOOL_COMPLETED"'
@@ -1081,7 +1085,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: Daily execution trend of specific tools over time. \nHow: COUNT of TOOL_COMPLETED events aggregated by timestamp_date and tool_name. \nWhy it matters: Reveals evolving tool usage patterns over time. \nDrill: Click date/tool to inspect executions."
+    note_text: "What: Daily execution trend of specific tools over time. <br>How: COUNT of TOOL_COMPLETED events aggregated by timestamp_date and tool_name. <br>Why it matters: Reveals evolving tool usage patterns over time. <br>Drill: Click date/tool to inspect executions."
     fields: [agent_events.total_events, v_tool_completed.tool_name, agent_events.timestamp_date]
     pivots: [v_tool_completed.tool_name]
     fill_fields: [agent_events.timestamp_date]
@@ -1147,7 +1151,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Absolute count of requests sent to backend tools. \nHow: COUNT of TOOL_COMPLETED events. \nWhy it matters: Overall volume of external tool and API executions. \nDrill: Click tile to inspect tools."
+    note_text: "What: Absolute count of requests sent to backend tools. <br>How: COUNT of TOOL_COMPLETED events. <br>Why it matters: Overall volume of external tool and API executions. <br>Drill: Click tile to inspect tools."
     fields: [v_llm_response.pop_llm_calls_current, v_llm_response.pop_llm_calls_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -1220,7 +1224,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: Granular scatter plot showing frequency and clustering of LLM requests. \nHow: Plots individual LLM_RESPONSE events over time. \nWhy it matters: Identifies peak usage periods and request density. \nDrill: Select time range to filter LLM calls."
+    note_text: "What: Granular scatter plot showing frequency and clustering of LLM requests. <br>How: Plots individual LLM_RESPONSE events over time. <br>Why it matters: Identifies peak usage periods and request density. <br>Drill: Select time range to filter LLM calls."
     fields: [v_llm_response.total_llm_calls, agent_events.timestamp_minute]
     fill_fields: [agent_events.timestamp_minute]
     filters:
@@ -1296,7 +1300,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Ranking of agents triggering the most LLM calls. \nHow: COUNT of LLM_RESPONSE events grouped by agent. \nWhy it matters: Identifies agents driving backend LLM load. \nDrill: Click agent to inspect LLM calls."
+    note_text: "What: Ranking of agents triggering the most LLM calls. <br>How: COUNT of LLM_RESPONSE events grouped by agent. <br>Why it matters: Identifies agents driving backend LLM load. <br>Drill: Click agent to inspect LLM calls."
     fields: [v_llm_response.total_llm_calls, agent_events.agent]
     filters:
       agent_events.timestamp_date: 7 days
@@ -1371,7 +1375,7 @@
     type: single_value
     note_state: collapsed
     note_display: hover
-    note_text: "What: Count of unique end users who interacted with agents. \nHow: COUNT DISTINCT of user_id. \nWhy it matters: Primary user adoption and penetration metric. \nDrill: Click tile to see user growth."
+    note_text: "What: Count of unique end users who interacted with agents. <br>How: COUNT DISTINCT of user_id. <br>Why it matters: Primary user adoption and penetration metric. <br>Drill: Click tile to see user growth."
     fields: [agent_events.pop_total_users_current, agent_events.pop_total_users_change]
     filters:
       agent_events.pop_date_filter: 7 days
@@ -1445,7 +1449,7 @@
     type: looker_area
     note_state: collapsed
     note_display: hover
-    note_text: "What: Daily count of active unique users over time. \nHow: COUNT DISTINCT of user_id aggregated by timestamp_date. \nWhy it matters: Measures DAU retention and adoption velocity. \nDrill: Click date to inspect active users."
+    note_text: "What: Daily count of active unique users over time. <br>How: COUNT DISTINCT of user_id aggregated by timestamp_date. <br>Why it matters: Measures DAU retention and adoption velocity. <br>Drill: Click date to inspect active users."
     fields: [agent_events.total_users, agent_events.timestamp_date]
     fill_fields: [agent_events.timestamp_date]
     filters:
@@ -1522,7 +1526,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Leaderboard of power users by session count. \nHow: COUNT DISTINCT of session_id grouped by user_id. \nWhy it matters: Highlights champions and power users. \nDrill: Click user to inspect sessions."
+    note_text: "What: Leaderboard of power users by session count. <br>How: COUNT DISTINCT of session_id grouped by user_id. <br>Why it matters: Highlights champions and power users. <br>Drill: Click user to inspect sessions."
     fields: [agent_events.user_id, agent_events.total_sessions]
     sorts: [agent_events.total_sessions desc 0]
     limit: 5
@@ -1596,7 +1600,7 @@
     type: looker_bar
     note_state: collapsed
     note_display: hover
-    note_text: "What: Ranking of users by raw volume of lifecycle events generated. \nHow: COUNT of event rows grouped by user_id. \nWhy it matters: Identifies users running the most intensive agent workflows. \nDrill: Click user to inspect event logs."
+    note_text: "What: Ranking of users by raw volume of lifecycle events generated. <br>How: COUNT of event rows grouped by user_id. <br>Why it matters: Identifies users running the most intensive agent workflows. <br>Drill: Click user to inspect event logs."
     fields: [agent_events.user_id, agent_events.total_events]
     sorts: [agent_events.total_events desc 0]
     limit: 5
@@ -1672,7 +1676,7 @@
     body_text: ''
     row: 1
     col: 0
-    width: 21
+    width: 16
     height: 1
     tab_name: Agent & Sessions
   - name: gcs_multimodal_offload_breakdown
@@ -1680,14 +1684,14 @@
     type: looker_column
     note_state: collapsed
     note_display: hover
-    note_text: "What: Breakdown of multimodal payloads and large objects offloaded to GCS bucket japac-pso-agent-analytics. \nHow: Aggregates offloaded GCS URIs by asset_type (IMAGE, DOCUMENT, AUDIO, VIDEO, LARGE_PAYLOAD_JSON) and event_type. \nWhy it matters: Monitors multimodal storage footprint and BigQuery object table ingestion. \nDrill: Click asset type bar to inspect specific GCS URIs and traces."
+    note_text: "What: Breakdown of multimodal payloads and large objects offloaded to GCS bucket japac-pso-agent-analytics. <br>How: Aggregates offloaded GCS URIs by asset_type (IMAGE, DOCUMENT, AUDIO, VIDEO, LARGE_PAYLOAD_JSON) and event_type. <br>Why it matters: Monitors multimodal storage footprint and BigQuery object table ingestion. <br>Drill: Click asset type bar to inspect specific GCS URIs and traces."
     explore: agent_events
     dimensions: [v_gcs_multimodal_offload.asset_type, gcs_multimodal_object_table.content_type]
     measures: [v_gcs_multimodal_offload.total_gcs_offloaded_assets, gcs_multimodal_object_table.total_size_bytes]
     sorts: [v_gcs_multimodal_offload.total_gcs_offloaded_assets desc]
     row: 17
     col: 0
-    width: 24
+    width: 16
     height: 7
     tab_name: Tool Usage & Provenance
   - name: conversation_flow_turn_analytics
@@ -1697,7 +1701,7 @@
     wrap_text: yes
     note_state: collapsed
     note_display: hover
-    note_text: "What: Turn-by-turn breakdown of user prompts, agent responses, tool calls, and token/latency metrics. \nHow: Queries agent_events joined with v_llm_response, v_tool_completed, and v_agent_evaluation. \nWhy it matters: Enables granular conversational analytics and turn debugging across sessions. \nDrill: Click Session ID to inspect full conversation history."
+    note_text: "What: Turn-by-turn breakdown of user prompts, agent responses, tool calls, and token/latency metrics. <br>How: Queries agent_events joined with v_llm_response, v_tool_completed, and v_agent_evaluation. <br>Why it matters: Enables granular conversational analytics and turn debugging across sessions. <br>Drill: Click Session ID to inspect full conversation history."
     explore: agent_events
     dimensions: [agent_events.session_id, agent_events.event_type, agent_events.agent, v_tool_completed.tool_name, agent_events.status]
     measures: [v_llm_response.total_tokens_consumed, agent_events.total_events]
@@ -1705,7 +1709,7 @@
     limit: 50
     row: 0
     col: 0
-    width: 24
+    width: 16
     height: 9
     tab_name: Conversation & Lineage
   - name: multi_agent_dag_decision_lineage
@@ -1715,7 +1719,7 @@
     wrap_text: yes
     note_state: collapsed
     note_display: hover
-    note_text: "What: Maps agent-to-agent delegation sequence and session lineage across supervisor and worker agents. \nHow: Queries v_agent_transfer and v_a2a_interaction joined with agent_events. \nWhy it matters: Provides complete DAG visibility and decision lineage tracking for multi-agent architectures. \nDrill: Click Source or Target Agent to trace delegation graph."
+    note_text: "What: Maps agent-to-agent delegation sequence and session lineage across supervisor and worker agents. <br>How: Queries v_agent_transfer and v_a2a_interaction joined with agent_events. <br>Why it matters: Provides complete DAG visibility and decision lineage tracking for multi-agent architectures. <br>Drill: Click Source or Target Agent to trace delegation graph."
     explore: agent_events
     dimensions: [agent_events.session_id, v_agent_transfer.from_agent, v_agent_transfer.to_agent]
     measures: [agent_events.total_events]
@@ -1723,7 +1727,7 @@
     limit: 50
     row: 9
     col: 0
-    width: 24
+    width: 16
     height: 8
     tab_name: Conversation & Lineage
   - title: Real-Time UDF Evaluation Scorecard (Zero-Batch Latency, TTFT & Cost Scores)
@@ -1738,7 +1742,7 @@
     limit: 50
     row: 2
     col: 0
-    width: 24
+    width: 16
     height: 6
     tab_name: Agent & Sessions
   - title: Interactive SQL-Driven Trace Drilldown (Remote Function 'analyze')
@@ -1753,7 +1757,7 @@
     limit: 50
     row: 8
     col: 0
-    width: 12
+    width: 16
     height: 7
     tab_name: Agent & Sessions
   - title: Production vs Baseline Drift Scorecard (Remote Function 'drift')
@@ -1767,8 +1771,8 @@
     sorts: [remote_function_drift_scorecard.drift_metric]
     limit: 50
     row: 8
-    col: 12
-    width: 12
+    col: 0
+    width: 16
     height: 7
     tab_name: Agent & Sessions
   filters:
