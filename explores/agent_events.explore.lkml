@@ -81,7 +81,23 @@ explore: agent_events {
       sql_on: ${v_gcs_multimodal_offload.gcs_uri} = ${gcs_multimodal_object_table.uri} ;;
       relationship: many_to_one
     }
+  join: udf_realtime_scorecard {
+    type: left_outer
+    sql_on: ${agent_events.session_id} = ${udf_realtime_scorecard.session_id} AND ${agent_events.span_id} = ${udf_realtime_scorecard.span_id} ;;
+    relationship: one_to_one
   }
+
+  join: remote_function_trace_drilldown {
+    type: left_outer
+    sql_on: ${agent_events.session_id} = ${remote_function_trace_drilldown.session_id} ;;
+    relationship: many_to_one
+  }
+
+  join: remote_function_drift_scorecard {
+    type: cross
+    relationship: many_to_one
+  }
+}
 
 explore: udf_realtime_scorecard {
   label: "Real-Time UDF Evaluation Scorecard"

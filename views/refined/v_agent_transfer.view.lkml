@@ -42,14 +42,14 @@ view: v_agent_transfer {
 
   dimension: from_agent {
     group_label: "Multi-Agent Delegation"
-    description: "What: The originating agent in a multi-agent transfer.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: The originating agent in a multi-agent transfer. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.from_agent ;;
   }
 
   dimension: to_agent {
     group_label: "Multi-Agent Delegation"
-    description: "What: The target receiving agent in a multi-agent transfer.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: The target receiving agent in a multi-agent transfer. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.to_agent ;;
   }
@@ -57,7 +57,7 @@ view: v_agent_transfer {
   measure: total_agent_transfers {
     label: "Total Agent Transfers"
     group_label: "Multi-Agent Delegation"
-    description: "What: Total number of multi-agent handoffs or delegation events.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Total number of multi-agent handoffs or delegation events. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: count
   }
 }

@@ -27,7 +27,7 @@ view: v_session_trace_dag {
   dimension: session_id {
     label: "Session ID"
     group_label: "Session & Trace DAG Lineage"
-    description: "What: Unique conversation session identifier linking multi-agent DAG execution flows.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Unique conversation session identifier linking multi-agent DAG execution flows. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.session_id ;;
   }
@@ -41,7 +41,7 @@ view: v_session_trace_dag {
   dimension: parent_span_id {
     label: "Parent Span ID"
     group_label: "Session & Trace DAG Lineage"
-    description: "What: Parent span identifier representing hierarchical DAG parent-child execution relationship.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Parent span identifier representing hierarchical DAG parent-child execution relationship. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.parent_span_id ;;
   }
@@ -49,7 +49,7 @@ view: v_session_trace_dag {
   dimension: from_agent {
     label: "DAG Source Node (From Agent)"
     group_label: "Session & Trace DAG Lineage"
-    description: "What: Originating agent or supervisor node in the multi-agent DAG execution graph.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Originating agent or supervisor node in the multi-agent DAG execution graph. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.from_agent ;;
   }
@@ -57,7 +57,7 @@ view: v_session_trace_dag {
   dimension: to_target {
     label: "DAG Target Node (To Agent / Tool)"
     group_label: "Session & Trace DAG Lineage"
-    description: "What: Target receiving node in the DAG execution graph (delegated agent, backend tool, or LLM).\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Target receiving node in the DAG execution graph (delegated agent, backend tool, or LLM). | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.to_target ;;
   }
@@ -65,14 +65,14 @@ view: v_session_trace_dag {
   measure: total_dag_hops {
     label: "Total DAG Lineage Hops"
     group_label: "Session & Trace DAG Lineage"
-    description: "What: Total number of edges/hops in the multi-agent trace DAG execution graph.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Total number of edges/hops in the multi-agent trace DAG execution graph. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: count
   }
 
   measure: avg_dag_hop_latency_ms {
     label: "Average DAG Hop Latency (ms)"
     group_label: "Session & Trace DAG Lineage"
-    description: "What: What: Average execution latency per DAG hop. How: AVG(total_ms). Why: Identifies slow orchestration hops.\nHow: Measured in milliseconds from start timestamp to completion timestamp across trace spans.\nWhy: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
+    description: "What: What: Average execution latency per DAG hop. How: AVG(total_ms). Why: Identifies slow orchestration hops. | How: Measured in milliseconds from start timestamp to completion timestamp across trace spans. | Why: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
     type: average
     value_format_name: decimal_1
     sql: ${TABLE}.total_ms ;;
@@ -81,7 +81,7 @@ view: v_session_trace_dag {
   dimension: is_circular_delegation {
     label: "Is Circular A2A Delegation Loop (Ping-Pong)"
     group_label: "Session & Trace DAG Lineage"
-    description: "What: What: Flags circular ping-pong delegation loops between agents. How: Evaluates if from_agent equals to_target. Why: Detects infinite orchestration loops and wasted token spend.\nHow: Calculated using Gemini 2.5 Pro pricing rates with 75% prompt cache discount ($0.3125/M cached vs $1.25/M standard input).\nWhy: Monitors net FinOps API expenditure and identifies opportunities for prompt cache optimization."
+    description: "What: What: Flags circular ping-pong delegation loops between agents. How: Evaluates if from_agent equals to_target. Why: Detects infinite orchestration loops and wasted token spend. | How: Calculated using Gemini 2.5 Pro pricing rates with 75% prompt cache discount ($0.3125/M cached vs $1.25/M standard input). | Why: Monitors net FinOps API expenditure and identifies opportunities for prompt cache optimization."
     type: string
     sql: CASE WHEN ${TABLE}.from_agent = ${TABLE}.to_target THEN 'YES - CIRCULAR LOOP' ELSE 'NO' END ;;
   }
@@ -89,7 +89,7 @@ view: v_session_trace_dag {
   measure: circular_loop_count {
     label: "Circular A2A Delegation Loop Count"
     group_label: "Session & Trace DAG Lineage"
-    description: "What: What: Total count of circular delegation ping-pong hops detected. How: SUM of is_circular_delegation flags. Why: Prioritizes debugging of recursive agent loops.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: What: Total count of circular delegation ping-pong hops detected. How: SUM of is_circular_delegation flags. Why: Prioritizes debugging of recursive agent loops. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: sum
     sql: CASE WHEN ${TABLE}.from_agent = ${TABLE}.to_target THEN 1 ELSE 0 END ;;
   }

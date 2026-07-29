@@ -36,7 +36,7 @@ view: v_gcs_multimodal_offload {
   dimension: session_id {
     label: "Session ID"
     group_label: "Multimodal GCS Offloading"
-    description: "What: Conversation session identifier associated with the GCS offloaded object.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Conversation session identifier associated with the GCS offloaded object. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.session_id ;;
   }
@@ -44,7 +44,7 @@ view: v_gcs_multimodal_offload {
   dimension: gcs_uri {
     label: "GCS Object URI (gs://...)"
     group_label: "Multimodal GCS Offloading"
-    description: "What: What: Google Cloud Storage object URI where multimodal content or large payload (>1MB) was offloaded. How: Extracted from agent_events content/attributes JSON. Why: Enables tracking and auditing of external GCS storage objects.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: What: Google Cloud Storage object URI where multimodal content or large payload (>1MB) was offloaded. How: Extracted from agent_events content/attributes JSON. Why: Enables tracking and auditing of external GCS storage objects. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.gcs_uri ;;
   }
@@ -52,7 +52,7 @@ view: v_gcs_multimodal_offload {
   dimension: asset_type {
     label: "Multimodal Asset Type"
     group_label: "Multimodal GCS Offloading"
-    description: "What: What: Categorization of the GCS offloaded object (IMAGE, DOCUMENT, AUDIO, VIDEO, or LARGE_PAYLOAD_JSON). How: Evaluates file extension and JSON schema in offloaded content. Why: Monitors storage footprint by modality.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
+    description: "What: What: Categorization of the GCS offloaded object (IMAGE, DOCUMENT, AUDIO, VIDEO, or LARGE_PAYLOAD_JSON). How: Evaluates file extension and JSON schema in offloaded content. Why: Monitors storage footprint by modality. | How: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry. | Why: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: string
     sql: ${TABLE}.asset_type ;;
   }
@@ -60,7 +60,7 @@ view: v_gcs_multimodal_offload {
   measure: total_gcs_offloaded_assets {
     label: "Total GCS Offloaded Assets"
     group_label: "Multimodal GCS Offloading"
-    description: "What: What: Total count of large payloads and multimodal assets offloaded to GCS bucket japac-pso-agent-analytics. How: COUNT of offloaded rows. Why: Tracks GCS bucket object table volume and storage utilization.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: What: Total count of large payloads and multimodal assets offloaded to GCS bucket japac-pso-agent-analytics. How: COUNT of offloaded rows. Why: Tracks GCS bucket object table volume and storage utilization. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: count
   }
 }

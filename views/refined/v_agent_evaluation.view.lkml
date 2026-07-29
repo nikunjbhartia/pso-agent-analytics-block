@@ -111,7 +111,7 @@ view: v_agent_evaluation {
   dimension: on_demand_gemini_explanation {
     label: "On-Demand Gemini Explanation"
     group_label: "LLM-as-a-Judge & Feedback Loop"
-    description: "What: Runs AI.GENERATE against the selected trace_id on click. Returns NULL unless a trace_id is supplied via the 'explain_trace_id' filter. Bounded to 1 row.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Runs AI.GENERATE against the selected trace_id on click. Returns NULL unless a trace_id is supplied via the 'explain_trace_id' filter. Bounded to 1 row. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql:
       CASE WHEN ${TABLE}.trace_id = {% parameter explain_trace_id %}
@@ -143,7 +143,7 @@ view: v_agent_evaluation {
   dimension: session_id {
     label: "Session ID"
     group_label: "LLM-as-a-Judge & Feedback Loop"
-    description: "What: Conversation session identifier for evaluating qualitative outcomes.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Conversation session identifier for evaluating qualitative outcomes. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.session_id ;;
   }
@@ -151,7 +151,7 @@ view: v_agent_evaluation {
   dimension: user_feedback_rating {
     label: "User Feedback Rating (Thumbs Up / Down)"
     group_label: "LLM-as-a-Judge & Feedback Loop"
-    description: "What: Qualitative user feedback rating (THUMBS_UP or THUMBS_DOWN) recorded for the session.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Qualitative user feedback rating (THUMBS_UP or THUMBS_DOWN) recorded for the session. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.user_feedback_rating ;;
   }
@@ -159,7 +159,7 @@ view: v_agent_evaluation {
   dimension: judge_improvement_recommendation {
     label: "LLM-as-a-Judge Improvement Recommendation"
     group_label: "LLM-as-a-Judge & Feedback Loop"
-    description: "What: Actionable engineering recommendation. Resolution order: (1) SDK evaluator metadata, (2) Gemini pre-computed via scheduled AI.GENERATE MERGE keyed by trace_id, (3) static CASE fallback. See recommendation_source to know which tier answered.\nHow: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements.\nWhy: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
+    description: "What: Actionable engineering recommendation. Resolution order: (1) SDK evaluator metadata, (2) Gemini pre-computed via scheduled AI.GENERATE MERGE keyed by trace_id, (3) static CASE fallback. See recommendation_source to know which tier answered. | How: Extracted from canonical telemetry attribution metadata across Google Cloud PSO JAPAC engagements. | Why: Enables granular multi-dimensional filtering, cohort comparison, and adoption leaderboards."
     type: string
     sql: ${TABLE}.judge_improvement_recommendation ;;
   }
@@ -167,7 +167,7 @@ view: v_agent_evaluation {
   dimension: recommendation_source {
     label: "Recommendation Source (provenance)"
     group_label: "LLM-as-a-Judge & Feedback Loop"
-    description: "What: sdk_evaluator | gemini:<model> | static_case_fallback.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
+    description: "What: sdk_evaluator | gemini:<model> | static_case_fallback. | How: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry. | Why: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: string
     sql: ${TABLE}.recommendation_source ;;
   }
@@ -182,7 +182,7 @@ view: v_agent_evaluation {
   dimension: rec_prompt_fix {
     label: "Rec – Prompt Fix"
     group_label: "LLM-as-a-Judge & Feedback Loop"
-    description: "What: Structured prompt-engineering recommendation extracted from Gemini JSON output.\nHow: SUM of token count fields extracted from LLM usage metadata.\nWhy: Tracks context window consumption and prompt engineering efficiency across agent workflows."
+    description: "What: Structured prompt-engineering recommendation extracted from Gemini JSON output. | How: SUM of token count fields extracted from LLM usage metadata. | Why: Tracks context window consumption and prompt engineering efficiency across agent workflows."
     type: string
     sql: JSON_VALUE(${TABLE}.recommendation_json, '$.prompt_fix') ;;
   }
@@ -219,7 +219,7 @@ view: v_agent_evaluation {
   measure: avg_judge_quality_score {
     label: "LLM-as-a-Judge Avg Quality Score (%)"
     group_label: "LLM-as-a-Judge & Feedback Loop"
-    description: "What: Qualitative LLM-as-a-Judge evaluation score (0-100%).\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
+    description: "What: Qualitative LLM-as-a-Judge evaluation score (0-100%). | How: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry. | Why: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: average
     value_format_name: decimal_1
     sql: ${TABLE}.judge_quality_score ;;
@@ -244,7 +244,7 @@ view: v_agent_evaluation {
   measure: pct_ai_generated_recommendations {
     label: "% Recommendations from Gemini (vs static fallback)"
     group_label: "LLM-as-a-Judge & Feedback Loop"
-    description: "What: Observability KPI: what share of dashboard rows are backed by a real AI-generated recommendation vs the static CASE fallback. Target >= 95%.\nHow: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry.\nWhy: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
+    description: "What: Observability KPI: what share of dashboard rows are backed by a real AI-generated recommendation vs the static CASE fallback. Target >= 95%. | How: Evaluated via LookML SQL extraction or aggregation over BigQuery agent_events telemetry. | Why: Essential for JAPAC PSO agent performance monitoring, FinOps cost attribution, and reliability SLA gating."
     type: number
     value_format_name: decimal_1
     sql: ROUND(COUNTIF(${TABLE}.recommendation_source LIKE 'gemini:%')

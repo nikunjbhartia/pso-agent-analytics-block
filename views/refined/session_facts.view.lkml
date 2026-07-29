@@ -38,26 +38,26 @@ view: session_facts {
     type: percentile
     percentile: 50
     sql: ${session_duration_ms} ;;
-    description: "What: Median (P50) session duration in milliseconds.\nHow: Measured in milliseconds from start timestamp to completion timestamp across trace spans.\nWhy: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
+    description: "What: Median (P50) session duration in milliseconds. | How: Measured in milliseconds from start timestamp to completion timestamp across trace spans. | Why: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
   }
 
   measure: p90_session_duration {
     type: percentile
     percentile: 90
     sql: ${session_duration_ms} ;;
-    description: "What: 90th percentile session duration in milliseconds.\nHow: Measured in milliseconds from start timestamp to completion timestamp across trace spans.\nWhy: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
+    description: "What: 90th percentile session duration in milliseconds. | How: Measured in milliseconds from start timestamp to completion timestamp across trace spans. | Why: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
   }
 
   measure: p99_session_duration {
     type: percentile
     percentile: 99
     sql: ${session_duration_ms} ;;
-    description: "What: 99th percentile session duration in milliseconds.\nHow: Measured in milliseconds from start timestamp to completion timestamp across trace spans.\nWhy: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
+    description: "What: 99th percentile session duration in milliseconds. | How: Measured in milliseconds from start timestamp to completion timestamp across trace spans. | Why: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
   }
 
   measure: average_session_duration {
     type: average
     sql: ${session_duration_ms} ;;
-    description: "What: Average session duration in milliseconds.\nHow: Measured in milliseconds from start timestamp to completion timestamp across trace spans.\nWhy: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
+    description: "What: Average session duration in milliseconds. | How: Measured in milliseconds from start timestamp to completion timestamp across trace spans. | Why: Identifies slow tool execution bottlenecks and ensures end-user conversational responsiveness."
   }
 }
