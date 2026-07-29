@@ -1,9 +1,9 @@
 - dashboard: pso_apo_executive_portal
-  title: "APO Portal: Google Cloud PSO JAPAC Agent Program Office"
-  layout: newspaper
-  preferred_viewer: dashboards-next
-  crossfilter_enabled: yes
-  description: "Canonical Executive Dashboard for Google Cloud PSO JAPAC APO (Agent Program Office) — Server-Verified Hours Saved, Practice Area Attribution, Pilot Projects, and FTE Value Creation."
+title: "APO Portal: Google Cloud PSO JAPAC Agent Program Office"
+layout: newspaper
+preferred_viewer: dashboards-next
+crossfilter_enabled: yes
+description: "Canonical Executive Dashboard for Google Cloud PSO JAPAC APO (Agent Program Office) — Server-Verified Hours Saved, Practice Area Attribution, Pilot Projects, and FTE Value Creation."
 
   filters:
   - name: date_filter
@@ -70,7 +70,7 @@
     height: 2
 
 
-    # --- ROW 1: EXECUTIVE HEADLINE SCORECARDS ("Verifiable & Real-Time") ---
+  # --- ROW 1: EXECUTIVE HEADLINE SCORECARDS ("Verifiable & Real-Time") ---
   - name: total_hours_saved_card
     title: "CWPM Verifiable Hours Saved"
     type: single_value
@@ -80,7 +80,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.cwpm_verifiable_hours_saved]
-      - name: fte_weeks_saved_card
+  - name: fte_weeks_saved_card
     title: "FTE Weeks Saved Equivalent"
     type: single_value
     note_state: collapsed
@@ -89,7 +89,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.fte_weeks_saved_equivalent]
-      - name: consulting_value_usd_card
+  - name: consulting_value_usd_card
     title: "Consulting Value Created ($ USD)"
     type: single_value
     note_state: collapsed
@@ -98,7 +98,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.consulting_value_usd]
-      - name: resilience_rate_pct_card
+  - name: resilience_rate_pct_card
     title: "Self-Healing Resilience Rate (%)"
     type: single_value
     note_state: collapsed
@@ -107,7 +107,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.self_healing_resilience_rate_pct]
-      - name: total_pilot_projects_card
+  - name: total_pilot_projects_card
     title: "Pilot Projects"
     type: single_value
     note_state: collapsed
@@ -116,7 +116,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.total_pilot_projects]
-      - name: total_agents_used_card
+  - name: total_agents_used_card
     title: "Agents Used"
     type: single_value
     note_state: collapsed
@@ -125,8 +125,8 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.total_invocations]
-  
-    # --- ROW 2: PRACTICE AREA & PILOT PROJECT ATTRIBUTION ---
+
+  # --- ROW 2: PRACTICE AREA & PILOT PROJECT ATTRIBUTION ---
   - name: hours_saved_by_pilot_project
     title: "Server-Verified Hours Saved by Pilot Project & Practice Area"
     type: looker_column
@@ -137,9 +137,9 @@
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.pilot_project, agent_events.practice_area]
     measures: [agent_events.server_verified_hours_saved]
-      sorts: [agent_events.server_verified_hours_saved desc]
-      stacking: normal
-      - name: hours_saved_by_practice_area
+    sorts: [agent_events.server_verified_hours_saved desc]
+    stacking: normal
+  - name: hours_saved_by_practice_area
     title: "Hours Saved by Practice Area"
     type: looker_bar
     note_state: collapsed
@@ -149,14 +149,14 @@
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.practice_area]
     measures: [agent_events.server_verified_hours_saved]
-      sorts: [agent_events.server_verified_hours_saved desc]
-  
-    # --- ROW 3: TOP AGENTS LEADERBOARD & SUB-REGION ADOPTION VELOCITY ---
+    sorts: [agent_events.server_verified_hours_saved desc]
+
+  # --- ROW 3: TOP AGENTS LEADERBOARD & SUB-REGION ADOPTION VELOCITY ---
   - name: top_agents_by_hours_saved
     title: "Top Agents by Hours Saved and Events"
     type: looker_grid
-      truncate_text: no
-      wrap_text: yes
+    truncate_text: no
+    wrap_text: yes
     note_state: collapsed
     note_display: hover
     note_text: "What: Comprehensive leaderboard of agent ROI and volume. <br>How: Hours = total_sessions * 3.5 hrs, FTE Weeks = Hours / 40.0, Consulting Value = Hours * $350/hr ($2,800/day PSO rate). <br>Why it matters: Ranks top-performing agents for executive funding and promotion. <br>Drill: Click any row to inspect agent traces."
@@ -164,9 +164,9 @@
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.canonical_agent_name, agent_events.practice_area]
     measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved, agent_events.consulting_value_usd, udf_realtime_scorecard.avg_latency_score, udf_realtime_scorecard.avg_ttft_score]
-      sorts: [agent_events.server_verified_hours_saved desc]
-      limit: 15
-      - name: adoption_velocity_by_sub_region
+    sorts: [agent_events.server_verified_hours_saved desc]
+    limit: 15
+  - name: adoption_velocity_by_sub_region
     title: "JAPAC Sub-Region Adoption Velocity over Time"
     type: looker_line
     note_state: collapsed
@@ -176,9 +176,9 @@
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.timestamp_date, agent_events.sub_region]
     measures: [agent_events.server_verified_hours_saved]
-      sorts: [agent_events.timestamp_date desc]
-  
-    # --- ROW 4: EXECUTIVE FINOPS & VERIFIABLE ENGINEER TESTIMONIALS ---
+    sorts: [agent_events.timestamp_date desc]
+
+  # --- ROW 4: EXECUTIVE FINOPS & VERIFIABLE ENGINEER TESTIMONIALS ---
   - name: model_tier_spend_breakdown
     title: "Model Tier Spend Breakdown ($ USD)"
     type: looker_pie
@@ -189,12 +189,12 @@
     model: bigquery_agent_analytics_model
       dimensions: [v_llm_response.model_version]
     measures: [v_llm_response.total_spend_usd]
-      sorts: [v_llm_response.total_spend_usd desc]
-      - name: verifiable_engineer_wins
+    sorts: [v_llm_response.total_spend_usd desc]
+  - name: verifiable_engineer_wins
     title: "Feedback & Wins — Verifiable Engineer Testimonials"
     type: looker_grid
-      truncate_text: no
-      wrap_text: yes
+    truncate_text: no
+    wrap_text: yes
     note_state: collapsed
     note_display: hover
     note_text: "What: Qualitative engineering feedback and verified savings testimonials. <br>How: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs). <br>Why it matters: Provides peer-verified qualitative proof of automation impact. <br>Drill: Inspect specific win feedback records."
@@ -202,10 +202,10 @@
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.pilot_project, agent_events.canonical_agent_name, agent_events.win_feedback]
     measures: [agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved]
-      sorts: [agent_events.server_verified_hours_saved desc]
-      limit: 10
-  
-    # --- ROW 5: FINOPS CACHE DISCOUNT, RESILIENCE & GRAPH-DERIVED METRICS ---
+    sorts: [agent_events.server_verified_hours_saved desc]
+    limit: 10
+
+  # --- ROW 5: FINOPS CACHE DISCOUNT, RESILIENCE & GRAPH-DERIVED METRICS ---
   - name: cache_discount_spend_card
     title: "75% Cache-Discount Actual Spend ($ USD)"
     type: single_value
@@ -215,7 +215,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_llm_response.cache_discounted_actual_cost_usd]
-      - name: prompt_cache_hit_ratio_card
+  - name: prompt_cache_hit_ratio_card
     title: "Prompt Cache Hit Ratio (%)"
     type: single_value
     note_state: collapsed
@@ -224,7 +224,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_llm_response.prompt_cache_hit_ratio]
-      - name: tool_productivity_credit_card
+  - name: tool_productivity_credit_card
     title: "Tool Productivity Credit Hours (CWPM)"
     type: single_value
     note_state: collapsed
@@ -233,7 +233,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_tool_completed.tool_productivity_credit_hours]
-      - name: sla_error_rate_gate_card
+  - name: sla_error_rate_gate_card
     title: "CI/CD SLA Gate Assertion"
     type: single_value
     note_state: collapsed
@@ -242,11 +242,11 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.sla_error_rate_gating]
-      - name: graph_trace_dag_and_sla_gate_table
+  - name: graph_trace_dag_and_sla_gate_table
     title: "Trace DAG & CI/CD SLA Gate Performance by Agent"
     type: looker_grid
-      truncate_text: no
-      wrap_text: yes
+    truncate_text: no
+    wrap_text: yes
     note_state: collapsed
     note_display: hover
     note_text: "What: Combined ROI leaderboard and CI/CD SLA Gate status table. <br>How: CWPM Hours = tool calls * 1.5 * 1.2, SLA Gate = PASS if error rate <= 5 percent. <br>Why it matters: Unifies financial ROI with technical deployment readiness. <br>Drill: Click any agent to drill into DAG lineage."
@@ -254,10 +254,10 @@
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.canonical_agent_name, agent_events.sla_error_rate_gating]
     measures: [agent_events.total_invocations, agent_events.self_healing_resilience_rate_pct, agent_events.cwpm_verifiable_hours_saved, v_llm_response.cache_discounted_actual_cost_usd]
-      sorts: [agent_events.cwpm_verifiable_hours_saved desc]
-      limit: 15
-  
-    # --- ROW 6: DIVERSE STACKED AREA & SCATTER PLOT ANALYTICS ---
+    sorts: [agent_events.cwpm_verifiable_hours_saved desc]
+    limit: 15
+
+  # --- ROW 6: DIVERSE STACKED AREA & SCATTER PLOT ANALYTICS ---
   - name: finops_cache_savings_over_time
     title: "75% Gemini Prompt Cache Savings vs. Actual Spend over Time ($ USD)"
     type: looker_area
@@ -268,9 +268,9 @@
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.timestamp_date]
     measures: [v_llm_response.cache_savings_usd, v_llm_response.cache_discounted_actual_cost_usd]
-      sorts: [agent_events.timestamp_date desc]
-      stacking: normal
-      - name: agent_roi_complexity_scatter
+    sorts: [agent_events.timestamp_date desc]
+    stacking: normal
+  - name: agent_roi_complexity_scatter
     title: "Agent Complexity & ROI Scatter Plot (Invocations vs. Verifiable Hours Saved)"
     type: looker_scatter
     note_state: collapsed
@@ -280,9 +280,9 @@
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.canonical_agent_name]
     measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.consulting_value_usd]
-      sorts: [agent_events.server_verified_hours_saved desc]
-  
-    # --- ROW 7: DIVERSE DONUT & RESILIENCE COLUMN BREAKDOWN ---
+    sorts: [agent_events.server_verified_hours_saved desc]
+
+  # --- ROW 7: DIVERSE DONUT & RESILIENCE COLUMN BREAKDOWN ---
   - name: consulting_value_by_practice_area_donut
     title: "Consulting Value Created by Practice Area ($ USD Donut)"
     type: looker_pie
@@ -293,8 +293,8 @@
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.practice_area]
     measures: [agent_events.consulting_value_usd]
-      sorts: [agent_events.consulting_value_usd desc]
-      - name: resilience_sla_by_practice_area_column
+    sorts: [agent_events.consulting_value_usd desc]
+  - name: resilience_sla_by_practice_area_column
     title: "Tool Execution Volume & Self-Healing Resilience SLA by Practice Area"
     type: looker_column
     note_state: collapsed
@@ -304,8 +304,8 @@
     model: bigquery_agent_analytics_model
       dimensions: [agent_events.practice_area]
     measures: [agent_events.total_events, agent_events.self_healing_resilience_rate_pct]
-      sorts: [agent_events.total_events desc]
-      - name: bqml_roi_30day_forecast_chart
+    sorts: [agent_events.total_events desc]
+  - name: bqml_roi_30day_forecast_chart
     title: "BigQuery AI: 30-Day Predictive ROI & Consulting Value Forecast"
     type: looker_area
     note_state: collapsed
@@ -315,8 +315,8 @@
     model: bigquery_agent_analytics_model
       dimensions: [v_bqml_roi_forecast.forecast_date, v_bqml_roi_forecast.data_type]
     measures: [v_bqml_roi_forecast.predicted_hours_saved, v_bqml_roi_forecast.confidence_lower_bound_hours, v_bqml_roi_forecast.confidence_upper_bound_hours]
-      sorts: [v_bqml_roi_forecast.forecast_date asc]
-      - name: session_trace_dag_lineage_graph
+    sorts: [v_bqml_roi_forecast.forecast_date asc]
+  - name: session_trace_dag_lineage_graph
     title: "Multi-Agent Session DAG & Trace Delegation Lineage Graph"
     type: looker_column
     note_state: collapsed
@@ -326,5 +326,5 @@
     model: bigquery_agent_analytics_model
       dimensions: [v_session_trace_dag.session_id, v_session_trace_dag.from_agent, v_session_trace_dag.to_target]
     measures: [v_session_trace_dag.total_dag_hops, v_session_trace_dag.avg_dag_hop_latency_ms]
-      sorts: [v_session_trace_dag.total_dag_hops desc]
-  
+    sorts: [v_session_trace_dag.total_dag_hops desc]
+
