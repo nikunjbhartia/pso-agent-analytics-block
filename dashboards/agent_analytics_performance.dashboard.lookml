@@ -407,7 +407,7 @@
     explore: agent_events
     note_state: collapsed
     note_display: hover
-    fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
+    fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency, v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
       agent_events.agent: ''
       agent_events.span_id: ''
@@ -484,7 +484,7 @@
     explore: agent_events
     note_state: collapsed
     note_display: hover
-    fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
+    fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency, v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
       agent_events.agent: ''
       agent_events.span_id: ''
@@ -561,7 +561,7 @@
     explore: agent_events
     note_state: collapsed
     note_display: hover
-    fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
+    fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency, v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
       agent_events.agent: ''
       agent_events.span_id: ''
@@ -638,7 +638,7 @@
     explore: agent_events
     note_state: collapsed
     note_display: hover
-    fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency,
+    fields: [v_tool_completed.p50_tool_latency, v_tool_completed.p75_tool_latency, v_tool_completed.p90_tool_latency, v_tool_completed.p99_tool_latency]
     filters:
       agent_events.agent: ''
       agent_events.span_id: ''
@@ -715,7 +715,7 @@
     explore: agent_events
     note_state: collapsed
     note_display: hover
-    fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
+    fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency, v_llm_response.p99_llm_latency]
     filters:
       agent_events.agent: ''
       agent_events.span_id: ''
@@ -788,7 +788,7 @@
     explore: agent_events
     note_state: collapsed
     note_display: hover
-    fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
+    fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency, v_llm_response.p99_llm_latency]
     filters:
       agent_events.agent: ''
       agent_events.span_id: ''
@@ -861,7 +861,7 @@
     explore: agent_events
     note_state: collapsed
     note_display: hover
-    fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
+    fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency, v_llm_response.p99_llm_latency]
     filters:
       agent_events.agent: ''
       agent_events.span_id: ''
@@ -934,7 +934,7 @@
     explore: agent_events
     note_state: collapsed
     note_display: hover
-    fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency,
+    fields: [v_llm_response.p50_llm_latency, v_llm_response.p75_llm_latency, v_llm_response.p90_llm_latency, v_llm_response.p99_llm_latency]
     filters:
       agent_events.agent: ''
       agent_events.span_id: ''
