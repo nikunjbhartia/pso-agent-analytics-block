@@ -86,15 +86,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "Agent & Sessions"
   - type: button
     name: "nav_btn_perf_Agent_and_Sessions"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "Agent & Sessions"
   - type: button
@@ -102,15 +102,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "LLM & Token Economics"
   - type: button
     name: "nav_btn_perf_LLM_and_Token_Economics"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "LLM & Token Economics"
   - type: button
@@ -118,15 +118,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "Tool Usage & Provenance"
   - type: button
     name: "nav_btn_perf_Tool_Usage_and_Provenance"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "Tool Usage & Provenance"
   - type: button
@@ -134,15 +134,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "Conversation & Lineage"
   - type: button
     name: "nav_btn_perf_Conversation_and_Lineage"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "Conversation & Lineage"
   - name: "Token Usage split by Agent"
@@ -197,7 +197,7 @@
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
     tab_name: "LLM & Token Economics"
-    row: 6
+    row: 9
     col: 12
     width: 12
     height: 7
@@ -257,9 +257,9 @@
     row: 2
     col: 12
     width: 12
-    height: 4
+    height: 7
   - name: "Total Tokens Consumption Over the Time"
-    type: single_value
+    type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -298,7 +298,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     v_llm_response.total_tokens_consumed: "#e8710a"
     defaults_version: 1
     show_row_numbers: true
@@ -381,7 +380,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     v_llm_response.total_tokens_consumed: "#e8710a"
     defaults_version: 1
     show_row_numbers: true
@@ -517,7 +515,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     v_llm_response.total_tokens_consumed: "#e8710a"
     defaults_version: 1
     show_row_numbers: true
@@ -638,7 +635,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     v_llm_response.total_tokens_consumed: "#1e8e3e"
     defaults_version: 1
     show_row_numbers: true
@@ -780,7 +776,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_sessions: "#e52592"
     custom_color_enabled: true
     show_single_value_title: true
@@ -853,7 +848,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_sessions: "#e8710a"
     show_null_points: true
     interpolation: linear
@@ -988,7 +982,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     defaults_version: 1
     series_colors:
@@ -1005,7 +998,7 @@
     row: 2
     col: 12
     width: 12
-    height: 4
+    height: 7
   - name: "Events By Agent"
     type: looker_column
     model: bigquery_agent_analytics_model
@@ -1047,7 +1040,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     defaults_version: 1
@@ -1060,7 +1052,7 @@
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
     tab_name: "Tool Usage & Provenance"
-    row: 13
+    row: 17
     col: 12
     width: 12
     height: 7
@@ -1108,7 +1100,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1181,7 +1172,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1243,7 +1233,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1318,7 +1307,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1348,7 +1336,7 @@
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
     tab_name: "LLM & Token Economics"
-    row: 13
+    row: 16
     col: 12
     width: 12
     height: 7
@@ -1392,7 +1380,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1465,7 +1452,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1538,7 +1524,6 @@
     interpolation: monotone
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1607,7 +1592,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#f9ab00"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1658,10 +1642,10 @@
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
     tab_name: "Tool Usage & Provenance"
-    row: 6
+    row: 9
     col: 0
     width: 24
-    height: 7
+    height: 8
   - name: "Conversation Analytics: Multi-Turn Interaction Flow & Token Latency"
     type: looker_grid
     truncate_text: no
@@ -1722,7 +1706,7 @@
     limit: 50
     note_text: "<div style='text-align: left;'>What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     tab_name: "LLM & Token Economics"
-    row: 20
+    row: 23
     col: 0
     width: 24
     height: 8
@@ -1752,7 +1736,7 @@
     limit: 50
     note_text: "<div style='text-align: left;'>What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
     tab_name: "LLM & Token Economics"
-    row: 28
+    row: 31
     col: 0
     width: 24
     height: 7

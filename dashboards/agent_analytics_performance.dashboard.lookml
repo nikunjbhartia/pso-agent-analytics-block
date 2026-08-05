@@ -95,15 +95,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "Latency"
   - type: button
     name: "nav_btn_usage_Latency"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "Latency"
   - type: button
@@ -111,15 +111,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "Errors"
   - type: button
     name: "nav_btn_usage_Errors"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "Errors"
   - type: button
@@ -127,15 +127,15 @@
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "AI Recommendations"
   - type: button
     name: "nav_btn_usage_AI_Recommendations"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "AI Recommendations"
   - name: "Average Tool Latency (ms)"
@@ -240,7 +240,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     v_tool_completed.average_tool_latency: "#f9ab00"
     ordering: none
@@ -311,7 +310,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -383,7 +381,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     v_llm_response.average_llm_latency: "#e8710a"
     font_size_main: '14'
@@ -464,7 +461,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -545,7 +541,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -626,7 +621,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -707,7 +701,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -786,7 +779,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -863,7 +855,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -940,7 +931,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -1017,7 +1007,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -1153,7 +1142,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     v_tool_error.total_tool_errors: "#a50e0e"
     custom_color_enabled: true
     show_single_value_title: true
@@ -1222,7 +1210,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     v_tool_error.total_tool_errors: "#e8710a"
     show_null_points: false
     interpolation: linear
@@ -1293,7 +1280,6 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
-    series_colors:
     v_tool_error.total_tool_errors: "#f9ab00"
     show_null_points: false
     interpolation: linear

@@ -86,15 +86,15 @@
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "Executive ROI & Value"
   - type: button
     name: "nav_btn_usage_Executive_ROI_and_Value"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "Executive ROI & Value"
   - type: button
@@ -102,15 +102,15 @@
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "Pilot Projects & Practice Areas"
   - type: button
     name: "nav_btn_usage_Pilot_Projects_and_Practice_Areas"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "Pilot Projects & Practice Areas"
   - type: button
@@ -118,15 +118,15 @@
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "Model Tier & FinOps Economics"
   - type: button
     name: "nav_btn_usage_Model_Tier_and_FinOps_Economics"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "Model Tier & FinOps Economics"
   - type: button
@@ -134,15 +134,15 @@
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 0
-    width: 3
+    width: 4
     height: 1
     tab_name: "SLA Governance & Testimonials"
   - type: button
     name: "nav_btn_usage_SLA_Governance_and_Testimonials"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
-    col: 3
-    width: 3
+    col: 4
+    width: 4
     height: 1
     tab_name: "SLA Governance & Testimonials"
   - name: "CWPM Verifiable Hours Saved"
