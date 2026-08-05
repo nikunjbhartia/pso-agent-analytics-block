@@ -205,14 +205,6 @@
   - name: P50 Tool Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
-    style: 
-    font_size: 12
-    font_family: Roboto, 'Noto Sans', 'Noto Sans JP', 'Noto Sans CJK KR', 'Noto
-    font_color: "#FFFFFF"
-    background_color: "#262D33"
-    border_radius: 4
-    border_color: transparent
-    box_shadow: none
     align: left
     single_value_title: P50 Tool Latency
     smart_single_value_size: false
@@ -245,7 +237,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors: 
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -286,14 +277,6 @@
   - name: P75 Tool Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
-    style: 
-    font_size: 12
-    font_family: Roboto, 'Noto Sans', 'Noto Sans JP', 'Noto Sans CJK KR', 'Noto
-    font_color: "#FFFFFF"
-    background_color: "#262D33"
-    border_radius: 4
-    border_color: transparent
-    box_shadow: none
     align: left
     single_value_title: P75 Tool Latency
     smart_single_value_size: false
@@ -326,7 +309,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors: 
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -367,14 +349,6 @@
   - name: P90 Tool Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
-    style: 
-    font_size: 12
-    font_family: Roboto, 'Noto Sans', 'Noto Sans JP', 'Noto Sans CJK KR', 'Noto
-    font_color: "#FFFFFF"
-    background_color: "#262D33"
-    border_radius: 4
-    border_color: transparent
-    box_shadow: none
     align: left
     single_value_title: P90 Tool Latency
     smart_single_value_size: false
@@ -407,7 +381,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors: 
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -448,14 +421,6 @@
   - name: P99 Tool Latency
     model: bigquery_agent_analytics_model
     explore: agent_events
-    style: 
-    font_size: 12
-    font_family: Roboto, 'Noto Sans', 'Noto Sans JP', 'Noto Sans CJK KR', 'Noto
-    font_color: "#FFFFFF"
-    background_color: "#262D33"
-    border_radius: 4
-    border_color: transparent
-    box_shadow: none
     align: left
     single_value_title: P99 Tool Latency
     smart_single_value_size: false
@@ -488,7 +453,6 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
-    series_colors: 
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
