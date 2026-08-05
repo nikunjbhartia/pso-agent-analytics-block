@@ -146,7 +146,7 @@
     height: 1
     tab_name: "SLA Governance & Testimonials"
   - name: "CWPM Verifiable Hours Saved"
-    type: single_value
+    type: looker_column
     note_state: collapsed
     note_display: hover
     explore: agent_events
@@ -167,7 +167,7 @@
     width: 8
     height: 4
   - name: "FTE Weeks Saved Equivalent"
-    type: single_value
+    type: looker_column
     note_state: collapsed
     note_display: hover
     explore: agent_events
@@ -188,7 +188,7 @@
     width: 8
     height: 4
   - name: "Consulting Value Created ($ USD)"
-    type: single_value
+    type: looker_column
     note_state: collapsed
     note_display: hover
     explore: agent_events
@@ -230,7 +230,7 @@
     width: 8
     height: 4
   - name: "Pilot Projects"
-    type: single_value
+    type: looker_column
     note_state: collapsed
     note_display: hover
     explore: agent_events
@@ -251,7 +251,7 @@
     width: 8
     height: 4
   - name: "Agents Used"
-    type: single_value
+    type: looker_column
     note_state: collapsed
     note_display: hover
     explore: agent_events
@@ -296,7 +296,7 @@
     width: 12
     height: 7
   - name: "Hours Saved by Practice Area"
-    type: looker_bar
+    type: looker_column
     note_state: collapsed
     note_display: hover
     explore: agent_events
@@ -319,7 +319,7 @@
     width: 12
     height: 7
   - name: "Top Agents by Hours Saved and Events"
-    type: looker_grid
+    type: looker_column
     truncate_text: no
     wrap_text: yes
     note_state: collapsed
@@ -402,6 +402,9 @@
     measures: [agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved]
     sorts: [agent_events.server_verified_hours_saved desc]
     limit: 10
+    series_colors:
+      agent_events.cwpm_verifiable_hours_saved: "#137333"
+      agent_events.consulting_value_usd: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Qualitative engineering feedback and verified savings testimonials.  <br><br>How: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs).  <br><br>Why it matters: Provides peer-verified qualitative proof of automation impact.  <br><br>Drill: Inspect specific win feedback records.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -417,12 +420,15 @@
     width: 24
     height: 8
   - name: "75% Cache-Discount Actual Spend ($ USD)"
-    type: single_value
+    type: looker_pie
     note_state: collapsed
     note_display: hover
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_llm_response.cache_discounted_actual_cost_usd]
+    series_colors:
+      agent_events.cwpm_verifiable_hours_saved: "#137333"
+      agent_events.consulting_value_usd: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Total actual LLM API dollar spend USD.  <br><br>How: Applies 75 percent discount for cached input tokens ($0.3125/M cached vs $1.25/M standard input for Gemini 2.5 Pro).  <br><br>Why it matters: Monitors net FinOps expenditure.  <br><br>Drill: Click tile to view cost by agent.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -444,6 +450,9 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_llm_response.prompt_cache_hit_ratio]
+    series_colors:
+      agent_events.cwpm_verifiable_hours_saved: "#137333"
+      agent_events.consulting_value_usd: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Percentage of input prompt tokens served from prompt cache.  <br><br>How: SUM(cached_tokens) / SUM(prompt_tokens).  <br><br>Why it matters: High cache hit ratio maximizes the 75% pricing discount and reduces TTFT latency.  <br><br>Drill: Click tile to see cache hit rate by agent.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -459,12 +468,15 @@
     width: 12
     height: 4
   - name: "Tool Productivity Credit Hours (CWPM)"
-    type: single_value
+    type: looker_column
     note_state: collapsed
     note_display: hover
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_tool_completed.tool_productivity_credit_hours]
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Estimated manual engineering hours saved by automated tool calls.  <br><br>How: SUM of 1.5 base hours * latency complexity weight (1.0x standard, 1.5x over 2s, 2.5x over 5s).  <br><br>Why it matters: Rewards agents executing complex, high-latency tool workflows.  <br><br>Drill: Click tile to inspect tool calls.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -480,7 +492,7 @@
     width: 12
     height: 4
   - name: "CI/CD SLA Gate Assertion"
-    type: single_value
+    type: looker_column
     note_state: collapsed
     note_display: hover
     explore: agent_events
@@ -528,7 +540,7 @@
     height: 8
   - name: "75% Gemini Prompt Cache Savings vs Actual Spend over Time ($ USD)"
     title: "75% Gemini Prompt Cache Savings vs. Actual Spend over Time ($ USD)"
-    type: looker_area
+    type: looker_pie
     note_state: collapsed
     note_display: hover
     explore: agent_events
@@ -537,6 +549,9 @@
     measures: [v_llm_response.cache_savings_usd, v_llm_response.cache_discounted_actual_cost_usd]
     sorts: [agent_events.timestamp_date desc]
     stacking: normal
+    series_colors:
+      agent_events.cwpm_verifiable_hours_saved: "#137333"
+      agent_events.consulting_value_usd: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Comparison of dollar savings from prompt caching vs actual spend over time.  <br><br>How: Savings = cached_tokens * $0.9375/M ($1.25 - $0.3125).  <br><br>Why it matters: Demonstrates compounding FinOps savings over time.  <br><br>Drill: Click date point to see daily token usage.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -561,6 +576,9 @@
     dimensions: [agent_events.canonical_agent_name]
     measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.consulting_value_usd]
     sorts: [agent_events.server_verified_hours_saved desc]
+    series_colors:
+      agent_events.cwpm_verifiable_hours_saved: "#137333"
+      agent_events.consulting_value_usd: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Multi-dimensional scatter plot comparing agent volume against ROI.  <br><br>How: X-axis = invocations, Y-axis = hours saved (sessions * 3.5 hrs), size = consulting value ($350/hr PSO rate).  <br><br>Why it matters: Highlights high-value outlier agents.  <br><br>Drill: Click any bubble to filter by agent.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -607,6 +625,9 @@
     dimensions: [agent_events.practice_area]
     measures: [agent_events.total_events, agent_events.self_healing_resilience_rate_pct]
     sorts: [agent_events.total_events desc]
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What it is: The percentage of agent tool errors that were automatically self-corrected and resolved by the AI agent without human intervention. <br><br>How it is calculated: Automatically recovered tool errors divided by total tool errors. <br><br>Why it matters: Measures how resilient and self-reliant our AI agents are when encountering temporary API or network glitches. <br><br>Drill down: Click this tile to see resilience performance across individual agents.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -622,7 +643,7 @@
     width: 12
     height: 7
   - name: "BigQuery AI: 30-Day Predictive ROI & Consulting Value Forecast"
-    type: looker_area
+    type: looker_line
     note_state: collapsed
     note_display: hover
     explore: agent_events
@@ -630,6 +651,9 @@
     dimensions: [v_bqml_roi_forecast.forecast_date, v_bqml_roi_forecast.data_type]
     measures: [v_bqml_roi_forecast.predicted_hours_saved, v_bqml_roi_forecast.confidence_lower_bound_hours, v_bqml_roi_forecast.confidence_upper_bound_hours]
     sorts: [v_bqml_roi_forecast.forecast_date asc]
+    series_colors:
+      agent_events.cwpm_verifiable_hours_saved: "#137333"
+      agent_events.consulting_value_usd: "#1A73E8"
     note_text: "<div style='text-align: left;'>What it is: Predictive 30-day ROI and hours-saved forecast generated using BigQuery ML. <br><br>How it is calculated: ARIMA time-series model trained on historical verified hours saved. <br><br>Why it matters: Gives leadership forward-looking visibility into future engineering capacity savings. <br><br>Drill down: Click a data point to inspect forecast confidence intervals.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -645,7 +669,7 @@
     width: 24
     height: 7
   - name: "Multi-Agent Session DAG & Trace Delegation Lineage Graph"
-    type: looker_column
+    type: looker_grid
     note_state: collapsed
     note_display: hover
     explore: agent_events

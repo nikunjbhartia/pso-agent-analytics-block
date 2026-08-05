@@ -184,6 +184,9 @@
     show_silhouette: false
     totals_color: "#808080"
     defaults_version: 1
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Average time in milliseconds for tools to execute.  <br><br>How: Average of total_ms across all TOOL_COMPLETED events.  <br><br>Why it matters: Monitors backend API performance and user wait time.  <br><br>Drill: Click tile to see tool latency breakdown.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -198,7 +201,7 @@
     width: 8
     height: 4
   - name: "Tool Latency Trend"
-    type: looker_area
+    type: looker_line
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -237,6 +240,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     v_tool_completed.average_tool_latency: "#f9ab00"
     ordering: none
@@ -252,6 +256,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     hidden_pivots: {}
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Historical trend of tool execution latency over time.  <br><br>How: Average of total_ms aggregated by timestamp_date.  <br><br>Why it matters: Identifies performance degradation or API slowdowns over time.  <br><br>Drill: Click date to inspect daily latency.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -304,6 +311,7 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -319,6 +327,9 @@
     defaults_version: 1
     hidden_pivots: {}
     title_hidden: true
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Average round-trip time in milliseconds for LLM requests.  <br><br>How: Average of total_ms across all LLM_RESPONSE events.  <br><br>Why it matters: Tracks model responsiveness and generation speed.  <br><br>Drill: Click tile to see LLM latency trend.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -333,7 +344,7 @@
     width: 8
     height: 4
   - name: "LLM Latency Trend"
-    type: looker_area
+    type: looker_line
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -372,6 +383,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     v_llm_response.average_llm_latency: "#e8710a"
     font_size_main: '14'
@@ -388,6 +400,9 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     hidden_pivots: {}
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Historical trend of LLM response times over time.  <br><br>How: Average of total_ms aggregated by timestamp_date.  <br><br>Why it matters: Monitors API latency anomalies across Gemini model versions.  <br><br>Drill: Click date to inspect LLM latency.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -449,6 +464,7 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -465,6 +481,9 @@
     hidden_pivots: {}
     show_comparison_v_tool_completed.p90_tool_latency: false
     show_comparison_v_tool_completed.p99_tool_latency: false
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Median (50th percentile) tool execution latency in milliseconds.  <br><br>How: 50th percentile of total_ms across TOOL_COMPLETED events.  <br><br>Why it matters: Reflects typical user experience for tool executions.  <br><br>Drill: Click tile to inspect median tool latency.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -526,6 +545,7 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -542,6 +562,9 @@
     hidden_pivots: {}
     show_comparison_v_tool_completed.p90_tool_latency: false
     show_comparison_v_tool_completed.p99_tool_latency: false
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: 75th percentile tool execution latency in milliseconds.  <br><br>How: 75th percentile of total_ms across TOOL_COMPLETED events.  <br><br>Why it matters: Reflects latency for the slower quartile of tool executions.  <br><br>Drill: Click tile to view P75 breakdown.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -603,6 +626,7 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -619,6 +643,9 @@
     hidden_pivots: {}
     show_comparison_v_tool_completed.p90_tool_latency: false
     show_comparison_v_tool_completed.p99_tool_latency: false
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: 90th percentile tool execution latency in milliseconds.  <br><br>How: 90th percentile of total_ms across TOOL_COMPLETED events.  <br><br>Why it matters: Identifies tail latency affecting the 10% slowest tool calls.  <br><br>Drill: Click tile to inspect P90 latency.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -680,6 +707,7 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -696,6 +724,9 @@
     hidden_pivots: {}
     show_comparison_v_tool_completed.p90_tool_latency: false
     show_comparison_v_tool_completed.p99_tool_latency: false
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: 99th percentile (tail latency) tool execution latency in milliseconds.  <br><br>How: 99th percentile of total_ms across TOOL_COMPLETED events.  <br><br>Why it matters: Critical SRE metric for worst-case API timeouts and delays.  <br><br>Drill: Click tile to inspect P99 tail latency.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -755,6 +786,7 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -769,6 +801,9 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Median (50th percentile) LLM response latency in milliseconds.  <br><br>How: 50th percentile of total_ms across LLM_RESPONSE events.  <br><br>Why it matters: Core responsiveness KPI for conversational agents.  <br><br>Drill: Click tile to see P50 trend.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -828,6 +863,7 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -842,6 +878,9 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: 75th percentile LLM response latency in milliseconds.  <br><br>How: 75th percentile of total_ms across LLM_RESPONSE events.  <br><br>Why it matters: Tracks generation speed for longer context prompts.  <br><br>Drill: Click tile to inspect P75 latency.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -901,6 +940,7 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -915,6 +955,9 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: 90th percentile LLM response latency in milliseconds.  <br><br>How: 90th percentile of total_ms across LLM_RESPONSE events.  <br><br>Why it matters: Identifies slow LLM responses impacting user experience.  <br><br>Drill: Click tile to see P90 trend.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -974,6 +1017,7 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
+    series_colors:
     v_tool_completed.p50_tool_latency: "#f9ab00"
     show_value_labels: false
     label_density: 25
@@ -988,6 +1032,9 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: 99th percentile (tail latency) LLM response latency in milliseconds.  <br><br>How: 99th percentile of total_ms across LLM_RESPONSE events.  <br><br>Why it matters: Critical SLA metric for tail LLM response delays.  <br><br>Drill: Click tile to inspect P99 tail latency.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1050,6 +1097,9 @@
     show_silhouette: false
     totals_color: "#808080"
     defaults_version: 1
+    series_colors:
+      v_tool_error.total_tool_errors: "#D93025"
+      v_agent_error.total_agent_errors: "#E37400"
     note_text: "<div style='text-align: left;'>What: Total count of backend tool execution errors.  <br><br>How: COUNT of TOOL_ERROR events.  <br><br>Why it matters: Identifies API failures and integration instability.  <br><br>Drill: Click tile to inspect error logs.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1064,7 +1114,7 @@
     width: 12
     height: 4
   - name: "Tool Errors Trend"
-    type: looker_area
+    type: looker_line
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -1103,6 +1153,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     v_tool_error.total_tool_errors: "#a50e0e"
     custom_color_enabled: true
     show_single_value_title: true
@@ -1116,6 +1167,9 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_tool_error.total_tool_errors: "#D93025"
+      v_agent_error.total_agent_errors: "#E37400"
     note_text: "<div style='text-align: left;'>What: Daily time-series tracking volume of tool failures.  <br><br>How: COUNT of TOOL_ERROR events aggregated by timestamp_date.  <br><br>Why it matters: Reveals error spikes and system instability over time.  <br><br>Drill: Click date spike to view failing tools.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1130,7 +1184,7 @@
     width: 24
     height: 7
   - name: "Top 5 Agents By Errors"
-    type: looker_bar
+    type: looker_column
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -1168,6 +1222,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     v_tool_error.total_tool_errors: "#e8710a"
     show_null_points: false
     interpolation: linear
@@ -1183,6 +1238,9 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_tool_error.total_tool_errors: "#D93025"
+      v_agent_error.total_agent_errors: "#E37400"
     note_text: "<div style='text-align: left;'>What: Ranking of agents by number of tool errors encountered.  <br><br>How: COUNT of TOOL_ERROR events grouped by agent.  <br><br>Why it matters: Shows which agents experience the most tool failures.  <br><br>Drill: Click agent to filter error logs.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1235,6 +1293,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     v_tool_error.total_tool_errors: "#f9ab00"
     show_null_points: false
     interpolation: linear
@@ -1250,6 +1309,9 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_tool_error.total_tool_errors: "#D93025"
+      v_agent_error.total_agent_errors: "#E37400"
     note_text: "<div style='text-align: left;'>What: Leaderboard of the most unstable backend tools.  <br><br>How: COUNT of TOOL_ERROR events grouped by tool_name.  <br><br>Why it matters: Focuses debugging efforts on the most error-prone APIs.  <br><br>Drill: Click tool to inspect error tracebacks.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1273,6 +1335,9 @@
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
+    series_colors:
+      v_tool_error.total_tool_errors: "#D93025"
+      v_agent_error.total_agent_errors: "#E37400"
     note_text: "<div style='text-align: left;'>What: Total count of agent-level execution errors and crashes.  <br><br>How: COUNT of AGENT_ERROR events from v_agent_error.  <br><br>Why it matters: Core measure of overall agent execution stability.  <br><br>Drill: Click tile to inspect error tracebacks.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1310,7 +1375,7 @@
     width: 12
     height: 4
   - name: "LLM-as-a-Judge Avg Quality Score (%)"
-    type: single_value
+    type: looker_column
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -1319,6 +1384,9 @@
     limit: 500
     custom_color_enabled: true
     show_single_value_title: true
+    series_colors:
+      agent_events.cwpm_verifiable_hours_saved: "#137333"
+      agent_events.consulting_value_usd: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Qualitative LLM-as-a-Judge evaluation score (0-100%).  <br><br>How: Evaluates response accuracy, relevance, and tool faithfulness.  <br><br>Why it matters: Assures high conversational quality and correctness.  <br><br>Drill: Click tile to inspect evaluation scorecards.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1379,7 +1447,7 @@
     width: 8
     height: 4
   - name: "Enterprise Edge-Case: A2A Circular Delegation Ping-Pong Loops"
-    type: looker_grid
+    type: looker_column
     truncate_text: no
     wrap_text: yes
     note_state: collapsed
@@ -1411,6 +1479,9 @@
     dimensions: [agent_events.timestamp_date, v_hitl_confirmation_request.tool_name]
     measures: [v_hitl_confirmation_request.total_hitl_confirmation_requests]
     sorts: [agent_events.timestamp_date asc]
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Tracks Human-In-The-Loop confirmation request volume and latency.  <br><br>How: Aggregates HITL_CONFIRMATION_REQUEST events by tool_name and date.  <br><br>Why it matters: Identifies where workflows pause awaiting human sign-off.  <br><br>Drill: Filter by Date or Tool Name.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1425,13 +1496,16 @@
     width: 24
     height: 8
   - name: "Enterprise Edge-Case: Tool Error Breakdown by Failing Function"
-    type: looker_bar
+    type: looker_pie
     note_state: collapsed
     note_display: hover
     explore: agent_events
     dimensions: [v_tool_error.tool_name]
     measures: [v_tool_error.total_tool_errors]
     sorts: [v_tool_error.total_tool_errors desc]
+    series_colors:
+      v_tool_error.total_tool_errors: "#D93025"
+      v_agent_error.total_agent_errors: "#E37400"
     note_text: "<div style='text-align: left;'>What: Breakdown of failing backend tools and error counts.  <br><br>How: Aggregates TOOL_ERROR occurrences by tool_name.  <br><br>Why it matters: Focuses SRE remediation on the most unstable API integrations.  <br><br>Drill: Filter by Tool Name.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1446,7 +1520,7 @@
     width: 24
     height: 8
   - name: "LLM-as-a-Judge: Actionable Model Improvement Recommendations"
-    type: looker_grid
+    type: looker_column
     truncate_text: no
     wrap_text: yes
     note_state: collapsed
@@ -1455,6 +1529,9 @@
     dimensions: [agent_events.canonical_agent_name, v_agent_evaluation.judge_improvement_recommendation]
     measures: [v_agent_evaluation.avg_judge_quality_score, v_agent_evaluation.feedback_satisfaction_rate_pct]
     sorts: [v_agent_evaluation.avg_judge_quality_score asc]
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Diagnostic recommendations on how to improve model performance based on LLM-as-a-Judge evaluation and user interactions.  <br><br>How: Aggregated from LLM-as-a-Judge recommendation metadata and error diagnostics.  <br><br>Why it matters: Converts qualitative scores into actionable prompt engineering and tool optimization steps.  <br><br>Drill: Filter by Agent Name to inspect specific interaction recommendations.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1470,7 +1547,7 @@
     height: 8
   - name: "AI Recommendation Provenance: Gemini vs SDK vs Diagnostics"
     title: "AI Recommendation Provenance: Gemini vs. SDK vs. Diagnostics"
-    type: looker_pie
+    type: looker_column
     note_state: collapsed
     note_display: hover
     explore: agent_events

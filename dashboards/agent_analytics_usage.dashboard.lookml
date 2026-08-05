@@ -146,7 +146,7 @@
     height: 1
     tab_name: "Conversation & Lineage"
   - name: "Token Usage split by Agent"
-    type: looker_bar
+    type: looker_pie
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -186,6 +186,9 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Breakdown of total token consumption across agents.  <br><br>How: SUM(usage_total_tokens) grouped by agent.  <br><br>Why it matters: Identifies token-heavy agents for optimization.  <br><br>Drill: Click agent bar to inspect token split.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -240,6 +243,9 @@
     interpolation: linear
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Leaderboard of top 5 users by token usage.  <br><br>How: SUM(usage_total_tokens) grouped by user_id.  <br><br>Why it matters: Highlights power users and token distribution.  <br><br>Drill: Click user bar to view user session history.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -253,7 +259,7 @@
     width: 12
     height: 4
   - name: "Total Tokens Consumption Over the Time"
-    type: looker_area
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -292,6 +298,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     v_llm_response.total_tokens_consumed: "#e8710a"
     defaults_version: 1
     show_row_numbers: true
@@ -309,6 +316,9 @@
     conditional_formatting_include_nulls: false
     ordering: none
     show_null_labels: false
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Daily time-series area chart tracking token consumption over time.  <br><br>How: SUM(usage_total_tokens) aggregated by timestamp_date.  <br><br>Why it matters: Monitors platform adoption and API quota utilization.  <br><br>Drill: Click date point to inspect daily traffic.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -371,6 +381,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     v_llm_response.total_tokens_consumed: "#e8710a"
     defaults_version: 1
     show_row_numbers: true
@@ -386,6 +397,9 @@
     ordering: none
     show_null_labels: false
     hidden_pivots: {}
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Total aggregate number of tokens consumed across all sessions.  <br><br>How: SUM(usage_prompt_tokens + usage_completion_tokens).  <br><br>Why it matters: Core top-line consumption metric.  <br><br>Drill: Click tile to see token trend.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -503,6 +517,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     v_llm_response.total_tokens_consumed: "#e8710a"
     defaults_version: 1
     show_row_numbers: true
@@ -531,7 +546,7 @@
     width: 8
     height: 4
   - name: "Traces split by Agent"
-    type: looker_bar
+    type: looker_column
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -584,7 +599,7 @@
     width: 24
     height: 7
   - name: "Total Traces Generation Over the Time"
-    type: looker_area
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -623,6 +638,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     v_llm_response.total_tokens_consumed: "#1e8e3e"
     defaults_version: 1
     show_row_numbers: true
@@ -764,6 +780,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_sessions: "#e52592"
     custom_color_enabled: true
     show_single_value_title: true
@@ -792,7 +809,7 @@
     width: 12
     height: 7
   - name: "Top 5 Agents Split by Session Count"
-    type: looker_bar
+    type: looker_column
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -836,6 +853,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_sessions: "#e8710a"
     show_null_points: true
     interpolation: linear
@@ -970,8 +988,12 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     defaults_version: 1
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Ranking of backend tools by invocation frequency.  <br><br>How: COUNT of TOOL_COMPLETED events grouped by tool_name.  <br><br>Why it matters: Highlights which APIs and integrations are relied upon most.  <br><br>Drill: Click tool to view latency and error rate.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -985,7 +1007,7 @@
     width: 12
     height: 4
   - name: "Events By Agent"
-    type: looker_bar
+    type: looker_column
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -1025,6 +1047,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     defaults_version: 1
@@ -1042,7 +1065,7 @@
     width: 12
     height: 7
   - name: "Tool Calls Over Time"
-    type: looker_area
+    type: looker_column
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -1085,6 +1108,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1092,6 +1116,9 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Daily execution trend of specific tools over time.  <br><br>How: COUNT of TOOL_COMPLETED events aggregated by timestamp_date and tool_name.  <br><br>Why it matters: Reveals evolving tool usage patterns over time.  <br><br>Drill: Click date/tool to inspect executions.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1154,6 +1181,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1174,7 +1202,7 @@
     width: 12
     height: 4
   - name: "LLM Call Trends"
-    type: looker_area
+    type: looker_line
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -1215,6 +1243,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1233,6 +1262,9 @@
     show_null_labels: false
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Granular scatter plot showing frequency and clustering of LLM requests.  <br><br>How: Plots individual LLM_RESPONSE events over time.  <br><br>Why it matters: Identifies peak usage periods and request density.  <br><br>Drill: Select time range to filter LLM calls.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1246,7 +1278,7 @@
     width: 12
     height: 7
   - name: "Top 5 Agents by LLM Calls"
-    type: looker_bar
+    type: looker_column
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -1286,6 +1318,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1304,6 +1337,9 @@
     conditional_formatting_include_nulls: false
     defaults_version: 1
     hidden_pivots: {}
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Ranking of agents triggering the most LLM calls.  <br><br>How: COUNT of LLM_RESPONSE events grouped by agent.  <br><br>Why it matters: Identifies agents driving backend LLM load.  <br><br>Drill: Click agent to inspect LLM calls.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1356,6 +1392,7 @@
     limit_displayed_rows: false
     legend_position: center
     point_style: circle
+    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1387,7 +1424,7 @@
     width: 8
     height: 4
   - name: "User Growth Over Time"
-    type: looker_area
+    type: looker_line
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_state: collapsed
@@ -1428,6 +1465,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1500,6 +1538,7 @@
     interpolation: monotone
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#e8710a"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1568,6 +1607,7 @@
     totals_color: "#808080"
     x_axis_zoom: true
     y_axis_zoom: true
+    series_colors:
     agent_events.total_invocations: "#1e8e3e"
     agent_events.total_events: "#f9ab00"
     execute_sql - agent_events.total_events: "#e8710a"
@@ -1600,13 +1640,16 @@
     width: 12
     height: 7
   - name: "GCS Multimodal Bucket Offloading & Object Table Content"
-    type: looker_column
+    type: looker_grid
     note_state: collapsed
     note_display: hover
     explore: agent_events
     dimensions: [v_gcs_multimodal_offload.asset_type, gcs_multimodal_object_table.content_type]
     measures: [v_gcs_multimodal_offload.total_gcs_offloaded_assets, gcs_multimodal_object_table.total_size_bytes]
     sorts: [v_gcs_multimodal_offload.total_gcs_offloaded_assets desc]
+    series_colors:
+      v_tool_completed.p50_tool_latency: "#12B5CB"
+      v_tool_completed.p75_tool_latency: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Breakdown of multimodal payloads and large objects offloaded to GCS bucket japac-pso-agent-analytics.  <br><br>How: Aggregates offloaded GCS URIs by asset_type (IMAGE, DOCUMENT, AUDIO, VIDEO, LARGE_PAYLOAD_JSON) and event_type.  <br><br>Why it matters: Monitors multimodal storage footprint and BigQuery object table ingestion.  <br><br>Drill: Click asset type bar to inspect specific GCS URIs and traces.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1630,6 +1673,9 @@
     measures: [v_llm_response.total_tokens_consumed, agent_events.total_events]
     sorts: [agent_events.session_id desc, agent_events.total_events desc]
     limit: 50
+    series_colors:
+      v_llm_response.total_tokens_consumed: "#A142F4"
+      agent_events.total_llm_calls: "#12B5CB"
     note_text: "<div style='text-align: left;'>What: Turn-by-turn breakdown of user prompts, agent responses, tool calls, and token/latency metrics.  <br><br>How: Queries agent_events joined with v_llm_response, v_tool_completed, and v_agent_evaluation.  <br><br>Why it matters: Enables granular conversational analytics and turn debugging across sessions.  <br><br>Drill: Click Session ID to inspect full conversation history.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -1666,7 +1712,7 @@
     width: 24
     height: 8
   - name: "Real-Time UDF Evaluation Scorecard"
-    type: looker_grid
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: udf_realtime_scorecard
     truncate_text: no
@@ -1696,7 +1742,7 @@
     width: 24
     height: 8
   - name: "Production vs Baseline Drift Scorecard"
-    type: looker_grid
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: remote_function_drift_scorecard
     truncate_text: no
