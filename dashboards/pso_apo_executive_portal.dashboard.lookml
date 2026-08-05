@@ -5,18 +5,18 @@
   crossfilter_enabled: yes
   description: "Canonical Executive Dashboard for Google Cloud PSO JAPAC APO (Agent Program Office) — Server-Verified Hours Saved, Practice Area Attribution, Pilot Projects, and FTE Value Creation."
   tabs:
-  - name: Executive ROI & Value
-    label: Executive ROI & Value
-    title: Executive ROI & Value
-  - name: Pilot Projects & Practice Areas
-    label: Pilot Projects & Practice Areas
-    title: Pilot Projects & Practice Areas
-  - name: Model Tier & FinOps Economics
-    label: Model Tier & FinOps Economics
-    title: Model Tier & FinOps Economics
-  - name: SLA Governance & Testimonials
-    label: SLA Governance & Testimonials
-    title: SLA Governance & Testimonials
+  - name: "Executive ROI & Value"
+    label: "Executive ROI & Value"
+    title: "Executive ROI & Value"
+  - name: "Pilot Projects & Practice Areas"
+    label: "Pilot Projects & Practice Areas"
+    title: "Pilot Projects & Practice Areas"
+  - name: "Model Tier & FinOps Economics"
+    label: "Model Tier & FinOps Economics"
+    title: "Model Tier & FinOps Economics"
+  - name: "SLA Governance & Testimonials"
+    label: "SLA Governance & Testimonials"
+    title: "SLA Governance & Testimonials"
 
   filters:
   - name: date_filter
@@ -82,70 +82,70 @@
 
   elements:
   - type: button
-    name: nav_btn_perf_Executive_ROI_and_Value
+    name: "nav_btn_perf_Executive_ROI_and_Value"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 0
     width: 3
     height: 1
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
   - type: button
-    name: nav_btn_usage_Executive_ROI_and_Value
+    name: "nav_btn_usage_Executive_ROI_and_Value"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
     col: 3
     width: 3
     height: 1
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
   - type: button
-    name: nav_btn_perf_Pilot_Projects_and_Practice_Areas
+    name: "nav_btn_perf_Pilot_Projects_and_Practice_Areas"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 0
     width: 3
     height: 1
-    tab_name: Pilot Projects & Practice Areas
+    tab_name: "Pilot Projects & Practice Areas"
   - type: button
-    name: nav_btn_usage_Pilot_Projects_and_Practice_Areas
+    name: "nav_btn_usage_Pilot_Projects_and_Practice_Areas"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
     col: 3
     width: 3
     height: 1
-    tab_name: Pilot Projects & Practice Areas
+    tab_name: "Pilot Projects & Practice Areas"
   - type: button
-    name: nav_btn_perf_Model_Tier_and_FinOps_Economics
+    name: "nav_btn_perf_Model_Tier_and_FinOps_Economics"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 0
     width: 3
     height: 1
-    tab_name: Model Tier & FinOps Economics
+    tab_name: "Model Tier & FinOps Economics"
   - type: button
-    name: nav_btn_usage_Model_Tier_and_FinOps_Economics
+    name: "nav_btn_usage_Model_Tier_and_FinOps_Economics"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
     col: 3
     width: 3
     height: 1
-    tab_name: Model Tier & FinOps Economics
+    tab_name: "Model Tier & FinOps Economics"
   - type: button
-    name: nav_btn_perf_SLA_Governance_and_Testimonials
+    name: "nav_btn_perf_SLA_Governance_and_Testimonials"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 0
     width: 3
     height: 1
-    tab_name: SLA Governance & Testimonials
+    tab_name: "SLA Governance & Testimonials"
   - type: button
-    name: nav_btn_usage_SLA_Governance_and_Testimonials
+    name: "nav_btn_usage_SLA_Governance_and_Testimonials"
     rich_content_json: '{"text":"Usage Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_usage"}'
     row: 0
     col: 3
     width: 3
     height: 1
-    tab_name: SLA Governance & Testimonials
-  - name: CWPM Verifiable Hours Saved
+    tab_name: "SLA Governance & Testimonials"
+  - name: "CWPM Verifiable Hours Saved"
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -161,12 +161,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
     row: 2
     col: 0
     width: 8
     height: 4
-  - name: FTE Weeks Saved Equivalent
+  - name: "FTE Weeks Saved Equivalent"
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -182,12 +182,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
     row: 2
     col: 8
     width: 8
     height: 4
-  - name: Consulting Value Created ($ USD)
+  - name: "Consulting Value Created ($ USD)"
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -203,12 +203,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
     row: 2
     col: 16
     width: 8
     height: 4
-  - name: Self-Healing Resilience Rate (%)
+  - name: "Self-Healing Resilience Rate (%)"
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -224,12 +224,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
     row: 6
     col: 0
     width: 8
     height: 4
-  - name: Pilot Projects
+  - name: "Pilot Projects"
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -245,12 +245,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
     row: 6
     col: 8
     width: 8
     height: 4
-  - name: Agents Used
+  - name: "Agents Used"
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -267,12 +267,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
     row: 6
     col: 16
     width: 8
     height: 4
-  - name: Server-Verified Hours Saved by Pilot Project & Practice Area
+  - name: "Server-Verified Hours Saved by Pilot Project & Practice Area"
     type: looker_column
     note_state: collapsed
     note_display: hover
@@ -291,12 +291,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Pilot Projects & Practice Areas
+    tab_name: "Pilot Projects & Practice Areas"
     row: 2
     col: 0
     width: 12
     height: 7
-  - name: Hours Saved by Practice Area
+  - name: "Hours Saved by Practice Area"
     type: looker_bar
     note_state: collapsed
     note_display: hover
@@ -315,12 +315,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
     row: 10
     col: 0
     width: 12
     height: 7
-  - name: Top Agents by Hours Saved and Events
+  - name: "Top Agents by Hours Saved and Events"
     type: looker_grid
     truncate_text: no
     wrap_text: yes
@@ -341,12 +341,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Pilot Projects & Practice Areas
+    tab_name: "Pilot Projects & Practice Areas"
     row: 16
     col: 0
     width: 24
     height: 8
-  - name: JAPAC Sub-Region Adoption Velocity over Time
+  - name: "JAPAC Sub-Region Adoption Velocity over Time"
     type: looker_line
     note_state: collapsed
     note_display: hover
@@ -365,12 +365,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
     row: 10
     col: 12
     width: 12
     height: 7
-  - name: Model Tier Spend Breakdown ($ USD)
+  - name: "Model Tier Spend Breakdown ($ USD)"
     type: looker_pie
     note_state: collapsed
     note_display: hover
@@ -388,12 +388,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Model Tier & FinOps Economics
+    tab_name: "Model Tier & FinOps Economics"
     row: 6
     col: 0
     width: 12
     height: 7
-  - name: Feedback & Wins — Verifiable Engineer Testimonials
+  - name: "Feedback & Wins — Verifiable Engineer Testimonials"
     type: looker_grid
     truncate_text: no
     wrap_text: yes
@@ -415,12 +415,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: SLA Governance & Testimonials
+    tab_name: "SLA Governance & Testimonials"
     row: 14
     col: 0
     width: 24
     height: 8
-  - name: 75% Cache-Discount Actual Spend ($ USD)
+  - name: "75% Cache-Discount Actual Spend ($ USD)"
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -436,12 +436,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Model Tier & FinOps Economics
+    tab_name: "Model Tier & FinOps Economics"
     row: 2
     col: 12
     width: 12
     height: 4
-  - name: Prompt Cache Hit Ratio (%)
+  - name: "Prompt Cache Hit Ratio (%)"
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -457,12 +457,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Model Tier & FinOps Economics
+    tab_name: "Model Tier & FinOps Economics"
     row: 2
     col: 0
     width: 12
     height: 4
-  - name: Tool Productivity Credit Hours (CWPM)
+  - name: "Tool Productivity Credit Hours (CWPM)"
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -478,12 +478,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: SLA Governance & Testimonials
+    tab_name: "SLA Governance & Testimonials"
     row: 2
     col: 0
     width: 12
     height: 4
-  - name: CI/CD SLA Gate Assertion
+  - name: "CI/CD SLA Gate Assertion"
     type: single_value
     note_state: collapsed
     note_display: hover
@@ -499,12 +499,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: SLA Governance & Testimonials
+    tab_name: "SLA Governance & Testimonials"
     row: 2
     col: 12
     width: 12
     height: 4
-  - name: Trace DAG & CI/CD SLA Gate Performance by Agent
+  - name: "Trace DAG & CI/CD SLA Gate Performance by Agent"
     type: looker_grid
     truncate_text: no
     wrap_text: yes
@@ -526,12 +526,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: SLA Governance & Testimonials
+    tab_name: "SLA Governance & Testimonials"
     row: 6
     col: 0
     width: 24
     height: 8
-  - name: 75% Gemini Prompt Cache Savings vs. Actual Spend over Time ($ USD)
+  - name: "75% Gemini Prompt Cache Savings vs. Actual Spend over Time ($ USD)"
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -550,12 +550,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Model Tier & FinOps Economics
+    tab_name: "Model Tier & FinOps Economics"
     row: 6
     col: 12
     width: 12
     height: 7
-  - name: Agent Complexity & ROI Scatter Plot (Invocations vs. Verifiable Hours Saved)
+  - name: "Agent Complexity & ROI Scatter Plot (Invocations vs. Verifiable Hours Saved)"
     type: looker_scatter
     note_state: collapsed
     note_display: hover
@@ -574,12 +574,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Pilot Projects & Practice Areas
+    tab_name: "Pilot Projects & Practice Areas"
     row: 9
     col: 12
     width: 12
     height: 7
-  - name: Consulting Value Created by Practice Area ($ USD Donut)
+  - name: "Consulting Value Created by Practice Area ($ USD Donut)"
     type: looker_pie
     note_state: collapsed
     note_display: hover
@@ -597,12 +597,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Pilot Projects & Practice Areas
+    tab_name: "Pilot Projects & Practice Areas"
     row: 2
     col: 12
     width: 12
     height: 7
-  - name: Tool Execution Volume & Self-Healing Resilience SLA by Practice Area
+  - name: "Tool Execution Volume & Self-Healing Resilience SLA by Practice Area"
     type: looker_column
     note_state: collapsed
     note_display: hover
@@ -620,12 +620,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Pilot Projects & Practice Areas
+    tab_name: "Pilot Projects & Practice Areas"
     row: 9
     col: 0
     width: 12
     height: 7
-  - name: BigQuery AI: 30-Day Predictive ROI & Consulting Value Forecast
+  - name: "BigQuery AI: 30-Day Predictive ROI & Consulting Value Forecast"
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -643,12 +643,12 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: Executive ROI & Value
+    tab_name: "Executive ROI & Value"
     row: 17
     col: 0
     width: 24
     height: 7
-  - name: Multi-Agent Session DAG & Trace Delegation Lineage Graph
+  - name: "Multi-Agent Session DAG & Trace Delegation Lineage Graph"
     type: looker_column
     note_state: collapsed
     note_display: hover
@@ -666,7 +666,7 @@
       agent_name_filter: agent_events.canonical_agent_name
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
-    tab_name: SLA Governance & Testimonials
+    tab_name: "SLA Governance & Testimonials"
     row: 22
     col: 0
     width: 24

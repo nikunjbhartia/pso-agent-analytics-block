@@ -1,22 +1,22 @@
 - dashboard: agent_analytics_usage
-  title: Agent Analytics - Usage
+  title: "Agent Analytics - Usage"
   layout: newspaper
   preferred_viewer: dashboards-next
   crossfilter_enabled: yes
-  description: ''
+  description: "''"
   tabs:
-  - name: Agent & Sessions
-    label: Agent & Sessions
-    title: Agent & Sessions
-  - name: LLM & Token Economics
-    label: LLM & Token Economics
-    title: LLM & Token Economics
-  - name: Tool Usage & Provenance
-    label: Tool Usage & Provenance
-    title: Tool Usage & Provenance
-  - name: Conversation & Lineage
-    label: Conversation & Lineage
-    title: Conversation & Lineage
+  - name: "Agent & Sessions"
+    label: "Agent & Sessions"
+    title: "Agent & Sessions"
+  - name: "LLM & Token Economics"
+    label: "LLM & Token Economics"
+    title: "LLM & Token Economics"
+  - name: "Tool Usage & Provenance"
+    label: "Tool Usage & Provenance"
+    title: "Tool Usage & Provenance"
+  - name: "Conversation & Lineage"
+    label: "Conversation & Lineage"
+    title: "Conversation & Lineage"
 
   filters:
   - name: Date
@@ -82,70 +82,70 @@
 
   elements:
   - type: button
-    name: nav_btn_portal_Agent_and_Sessions
+    name: "nav_btn_portal_Agent_and_Sessions"
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
     width: 3
     height: 1
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
   - type: button
-    name: nav_btn_perf_Agent_and_Sessions
+    name: "nav_btn_perf_Agent_and_Sessions"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 3
     width: 3
     height: 1
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
   - type: button
-    name: nav_btn_portal_LLM_and_Token_Economics
+    name: "nav_btn_portal_LLM_and_Token_Economics"
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
     width: 3
     height: 1
-    tab_name: LLM & Token Economics
+    tab_name: "LLM & Token Economics"
   - type: button
-    name: nav_btn_perf_LLM_and_Token_Economics
+    name: "nav_btn_perf_LLM_and_Token_Economics"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 3
     width: 3
     height: 1
-    tab_name: LLM & Token Economics
+    tab_name: "LLM & Token Economics"
   - type: button
-    name: nav_btn_portal_Tool_Usage_and_Provenance
+    name: "nav_btn_portal_Tool_Usage_and_Provenance"
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
     width: 3
     height: 1
-    tab_name: Tool Usage & Provenance
+    tab_name: "Tool Usage & Provenance"
   - type: button
-    name: nav_btn_perf_Tool_Usage_and_Provenance
+    name: "nav_btn_perf_Tool_Usage_and_Provenance"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 3
     width: 3
     height: 1
-    tab_name: Tool Usage & Provenance
+    tab_name: "Tool Usage & Provenance"
   - type: button
-    name: nav_btn_portal_Conversation_and_Lineage
+    name: "nav_btn_portal_Conversation_and_Lineage"
     rich_content_json: '{"text":"Executive Portal","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#5F6368","href":"/dashboards/bigquery_agent_analytics_model::pso_apo_executive_portal"}'
     row: 0
     col: 0
     width: 3
     height: 1
-    tab_name: Conversation & Lineage
+    tab_name: "Conversation & Lineage"
   - type: button
-    name: nav_btn_perf_Conversation_and_Lineage
+    name: "nav_btn_perf_Conversation_and_Lineage"
     rich_content_json: '{"text":"Performance Dashboard","description":"","newTab":false,"alignment":"left","size":"medium","style":"FILLED","color":"#1A73E8","href":"/dashboards/bigquery_agent_analytics_model::agent_analytics_performance"}'
     row: 0
     col: 3
     width: 3
     height: 1
-    tab_name: Conversation & Lineage
-  - name: Token Usage split by Agent
+    tab_name: "Conversation & Lineage"
+  - name: "Token Usage split by Agent"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Breakdown of total token consumption across agents.  <br><br>How: SUM(usage_total_tokens) grouped by agent.  <br><br>Why it matters: Identifies token-heavy agents for optimization.  <br><br>Drill: Click agent bar to inspect token split.</div>"
@@ -155,12 +155,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: LLM & Token Economics
+    tab_name: "LLM & Token Economics"
     row: 6
     col: 12
     width: 12
     height: 7
-  - name: Top 5 users with most Tokens consumption
+  - name: "Top 5 users with most Tokens consumption"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Leaderboard of top 5 users by token usage.  <br><br>How: SUM(usage_total_tokens) grouped by user_id.  <br><br>Why it matters: Highlights power users and token distribution.  <br><br>Drill: Click user bar to view user session history.</div>"
@@ -170,12 +170,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: LLM & Token Economics
+    tab_name: "LLM & Token Economics"
     row: 2
     col: 12
     width: 12
     height: 4
-  - name: Total Tokens Consumption Over the Time
+  - name: "Total Tokens Consumption Over the Time"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily time-series area chart tracking token consumption over time.  <br><br>How: SUM(usage_total_tokens) aggregated by timestamp_date.  <br><br>Why it matters: Monitors platform adoption and API quota utilization.  <br><br>Drill: Click date point to inspect daily traffic.</div>"
@@ -185,12 +185,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: LLM & Token Economics
+    tab_name: "LLM & Token Economics"
     row: 2
     col: 0
     width: 12
     height: 4
-  - name: Total Tokens
+  - name: "Total Tokens"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total aggregate number of tokens consumed across all sessions.  <br><br>How: SUM(usage_prompt_tokens + usage_completion_tokens).  <br><br>Why it matters: Core top-line consumption metric.  <br><br>Drill: Click tile to see token trend.</div>"
@@ -200,12 +200,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: LLM & Token Economics
+    tab_name: "LLM & Token Economics"
     row: 2
     col: 0
     width: 12
     height: 4
-  - name: Top 5 users with most Traces
+  - name: "Top 5 users with most Traces"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Leaderboard of top 5 power users by trace volume.  <br><br>How: COUNT DISTINCT of trace_id grouped by user_id.  <br><br>Why it matters: Shows which users execute the deepest multi-turn workflows.  <br><br>Drill: Click user to inspect trace logs.</div>"
@@ -215,12 +215,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
     row: 13
     col: 0
     width: 12
     height: 7
-  - name: Total Traces
+  - name: "Total Traces"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total number of execution traces recorded.  <br><br>How: COUNT DISTINCT of trace_id across all sessions.  <br><br>Why it matters: Measures overall end-to-end workflow invocations.  <br><br>Drill: Click tile to filter by agent.</div>"
@@ -230,12 +230,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
     row: 2
     col: 8
     width: 8
     height: 4
-  - name: Traces split by Agent
+  - name: "Traces split by Agent"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Distribution of trace volume across agents.  <br><br>How: COUNT DISTINCT of trace_id grouped by agent.  <br><br>Why it matters: Reveals traffic distribution across agent workloads.  <br><br>Drill: Click agent to filter dashboard.</div>"
@@ -245,12 +245,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Conversation & Lineage
+    tab_name: "Conversation & Lineage"
     row: 22
     col: 0
     width: 24
     height: 7
-  - name: Total Traces Generation Over the Time
+  - name: "Total Traces Generation Over the Time"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily trend of trace volume generated over time.  <br><br>How: COUNT DISTINCT of trace_id aggregated by timestamp_date.  <br><br>Why it matters: Tracks platform engagement growth over time.  <br><br>Drill: Click date to inspect daily traces.</div>"
@@ -260,12 +260,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
     row: 2
     col: 8
     width: 8
     height: 4
-  - name: Total Sessions
+  - name: "Total Sessions"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total count of end-to-end user sessions.  <br><br>How: COUNT DISTINCT of session_id.  <br><br>Why it matters: Primary measure of active customer conversations.  <br><br>Drill: Click tile to view session breakdown.</div>"
@@ -275,12 +275,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
     row: 2
     col: 0
     width: 8
     height: 4
-  - name: Number of Sessions Trend
+  - name: "Number of Sessions Trend"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily time-series trend of user session volume over time.  <br><br>How: COUNT DISTINCT of session_id aggregated by timestamp_date.  <br><br>Why it matters: Shows daily conversational adoption.  <br><br>Drill: Click date to inspect sessions.</div>"
@@ -290,12 +290,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
     row: 6
     col: 0
     width: 12
     height: 7
-  - name: Top 5 Agents Split by Session Count
+  - name: "Top 5 Agents Split by Session Count"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Leaderboard of top 5 agents by number of sessions.  <br><br>How: COUNT DISTINCT of session_id grouped by agent.  <br><br>Why it matters: Identifies the most popular conversational agents.  <br><br>Drill: Click agent to filter sessions.</div>"
@@ -305,12 +305,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
     row: 13
     col: 12
     width: 12
     height: 7
-  - name: Total Agent Transfers
+  - name: "Total Agent Transfers"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total count of multi-agent delegation and handoff events.  <br><br>How: COUNT of AGENT_TRANSFER events from v_agent_transfer.  <br><br>Why it matters: Tracks multi-agent supervisor-worker collaboration.  <br><br>Drill: Click tile to view transfer matrix.</div>"
@@ -320,12 +320,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Conversation & Lineage
+    tab_name: "Conversation & Lineage"
     row: 2
     col: 0
     width: 8
     height: 4
-  - name: Total A2A Interactions
+  - name: "Total A2A Interactions"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total count of Agent-to-Agent protocol communication events.  <br><br>How: COUNT of A2A_INTERACTION events from v_a2a_interaction.  <br><br>Why it matters: Measures decentralized agent-to-agent protocol traffic.  <br><br>Drill: Click tile to view A2A tasks.</div>"
@@ -335,12 +335,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Conversation & Lineage
+    tab_name: "Conversation & Lineage"
     row: 2
     col: 8
     width: 8
     height: 4
-  - name: Total HITL Confirmation Requests
+  - name: "Total HITL Confirmation Requests"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total count of Human-In-The-Loop confirmation requests.  <br><br>How: COUNT of HITL_CONFIRMATION_REQUEST events from v_hitl_confirmation_request.  <br><br>Why it matters: Measures where human governance and sign-off occur.  <br><br>Drill: Click tile to view HITL tools.</div>"
@@ -350,12 +350,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Conversation & Lineage
+    tab_name: "Conversation & Lineage"
     row: 2
     col: 16
     width: 8
     height: 4
-  - name: Tool Invocations
+  - name: "Tool Invocations"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Ranking of backend tools by invocation frequency.  <br><br>How: COUNT of TOOL_COMPLETED events grouped by tool_name.  <br><br>Why it matters: Highlights which APIs and integrations are relied upon most.  <br><br>Drill: Click tool to view latency and error rate.</div>"
@@ -365,12 +365,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Tool Usage & Provenance
+    tab_name: "Tool Usage & Provenance"
     row: 2
     col: 12
     width: 12
     height: 4
-  - name: Events By Agent
+  - name: "Events By Agent"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Breakdown of total lifecycle events across agents.  <br><br>How: COUNT of raw event rows grouped by agent.  <br><br>Why it matters: Shows raw telemetry volume per agent.  <br><br>Drill: Click agent to filter events.</div>"
@@ -380,12 +380,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Tool Usage & Provenance
+    tab_name: "Tool Usage & Provenance"
     row: 13
     col: 12
     width: 12
     height: 7
-  - name: Tool Calls Over Time
+  - name: "Tool Calls Over Time"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily execution trend of specific tools over time.  <br><br>How: COUNT of TOOL_COMPLETED events aggregated by timestamp_date and tool_name.  <br><br>Why it matters: Reveals evolving tool usage patterns over time.  <br><br>Drill: Click date/tool to inspect executions.</div>"
@@ -395,12 +395,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Tool Usage & Provenance
+    tab_name: "Tool Usage & Provenance"
     row: 6
     col: 0
     width: 12
     height: 7
-  - name: Total Calls
+  - name: "Total Calls"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Absolute count of requests sent to backend tools.  <br><br>How: COUNT of TOOL_COMPLETED events.  <br><br>Why it matters: Overall volume of external tool and API executions.  <br><br>Drill: Click tile to inspect tools.</div>"
@@ -410,12 +410,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Tool Usage & Provenance
+    tab_name: "Tool Usage & Provenance"
     row: 2
     col: 0
     width: 12
     height: 4
-  - name: LLM Call Trends
+  - name: "LLM Call Trends"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Granular scatter plot showing frequency and clustering of LLM requests.  <br><br>How: Plots individual LLM_RESPONSE events over time.  <br><br>Why it matters: Identifies peak usage periods and request density.  <br><br>Drill: Select time range to filter LLM calls.</div>"
@@ -425,12 +425,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: LLM & Token Economics
+    tab_name: "LLM & Token Economics"
     row: 13
     col: 0
     width: 12
     height: 7
-  - name: Top 5 Agents by LLM Calls
+  - name: "Top 5 Agents by LLM Calls"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Ranking of agents triggering the most LLM calls.  <br><br>How: COUNT of LLM_RESPONSE events grouped by agent.  <br><br>Why it matters: Identifies agents driving backend LLM load.  <br><br>Drill: Click agent to inspect LLM calls.</div>"
@@ -440,12 +440,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: LLM & Token Economics
+    tab_name: "LLM & Token Economics"
     row: 13
     col: 12
     width: 12
     height: 7
-  - name: Total Users
+  - name: "Total Users"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Count of unique end users who interacted with agents.  <br><br>How: COUNT DISTINCT of user_id.  <br><br>Why it matters: Primary user adoption and penetration metric.  <br><br>Drill: Click tile to see user growth.</div>"
@@ -455,12 +455,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
     row: 2
     col: 16
     width: 8
     height: 4
-  - name: User Growth Over Time
+  - name: "User Growth Over Time"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily count of active unique users over time.  <br><br>How: COUNT DISTINCT of user_id aggregated by timestamp_date.  <br><br>Why it matters: Measures DAU retention and adoption velocity.  <br><br>Drill: Click date to inspect active users.</div>"
@@ -470,12 +470,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
     row: 20
     col: 0
     width: 12
     height: 7
-  - name: Top 5 Users by Session
+  - name: "Top 5 Users by Session"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Leaderboard of power users by session count.  <br><br>How: COUNT DISTINCT of session_id grouped by user_id.  <br><br>Why it matters: Highlights champions and power users.  <br><br>Drill: Click user to inspect sessions.</div>"
@@ -485,12 +485,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
     row: 20
     col: 12
     width: 12
     height: 7
-  - name: Top 5 Users by Events
+  - name: "Top 5 Users by Events"
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Ranking of users by raw volume of lifecycle events generated.  <br><br>How: COUNT of event rows grouped by user_id.  <br><br>Why it matters: Identifies users running the most intensive agent workflows.  <br><br>Drill: Click user to inspect event logs.</div>"
@@ -500,12 +500,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Agent & Sessions
+    tab_name: "Agent & Sessions"
     row: 27
     col: 0
     width: 12
     height: 7
-  - name: GCS Multimodal Bucket Offloading & Object Table Content
+  - name: "GCS Multimodal Bucket Offloading & Object Table Content"
     type: looker_column
     note_state: collapsed
     note_display: hover
@@ -520,12 +520,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Tool Usage & Provenance
+    tab_name: "Tool Usage & Provenance"
     row: 6
     col: 0
     width: 24
     height: 7
-  - name: Conversation Analytics: Multi-Turn Interaction Flow & Token Latency
+  - name: "Conversation Analytics: Multi-Turn Interaction Flow & Token Latency"
     type: looker_grid
     truncate_text: no
     wrap_text: yes
@@ -543,12 +543,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Conversation & Lineage
+    tab_name: "Conversation & Lineage"
     row: 6
     col: 0
     width: 24
     height: 8
-  - name: Multi-Agent DAG Delegation & Decision Paths
+  - name: "Multi-Agent DAG Delegation & Decision Paths"
     type: looker_grid
     truncate_text: no
     wrap_text: yes
@@ -566,12 +566,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Conversation & Lineage
+    tab_name: "Conversation & Lineage"
     row: 14
     col: 0
     width: 24
     height: 8
-  - name: Real-Time UDF Evaluation Scorecard
+  - name: "Real-Time UDF Evaluation Scorecard"
     model: bigquery_agent_analytics_model
     explore: udf_realtime_scorecard
     type: looker_grid
@@ -587,12 +587,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: LLM & Token Economics
+    tab_name: "LLM & Token Economics"
     row: 20
     col: 0
     width: 24
     height: 8
-  - name: Interactive SQL-Driven Trace Drilldown
+  - name: "Interactive SQL-Driven Trace Drilldown"
     model: bigquery_agent_analytics_model
     explore: remote_function_trace_drilldown
     type: looker_grid
@@ -608,12 +608,12 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: Tool Usage & Provenance
+    tab_name: "Tool Usage & Provenance"
     row: 20
     col: 0
     width: 24
     height: 8
-  - name: Production vs Baseline Drift Scorecard
+  - name: "Production vs Baseline Drift Scorecard"
     model: bigquery_agent_analytics_model
     explore: remote_function_drift_scorecard
     type: looker_grid
@@ -629,7 +629,7 @@
       Agent: agent_events.agent
       User ID: agent_events.user_id
       Span ID: agent_events.span_id
-    tab_name: LLM & Token Economics
+    tab_name: "LLM & Token Economics"
     row: 28
     col: 0
     width: 24
