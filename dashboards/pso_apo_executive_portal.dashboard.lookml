@@ -531,7 +531,7 @@
     col: 0
     width: 24
     height: 8
-  - name: "75% Gemini Prompt Cache Savings vs. Actual Spend over Time ($ USD)"
+  - name: "75% Gemini Prompt Cache Savings vs Actual Spend over Time ($ USD)"
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -555,7 +555,7 @@
     col: 12
     width: 12
     height: 7
-  - name: "Agent Complexity & ROI Scatter Plot (Invocations vs. Verifiable Hours Saved)"
+  - name: "Agent Complexity & ROI Scatter Plot (Invocations vs Verifiable Hours Saved)"
     type: looker_scatter
     note_state: collapsed
     note_display: hover

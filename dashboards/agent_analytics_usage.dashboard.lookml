@@ -146,6 +146,7 @@
     height: 1
     tab_name: "Conversation & Lineage"
   - name: "Token Usage split by Agent"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Breakdown of total token consumption across agents.  <br><br>How: SUM(usage_total_tokens) grouped by agent.  <br><br>Why it matters: Identifies token-heavy agents for optimization.  <br><br>Drill: Click agent bar to inspect token split.</div>"
@@ -161,6 +162,7 @@
     width: 12
     height: 7
   - name: "Top 5 users with most Tokens consumption"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Leaderboard of top 5 users by token usage.  <br><br>How: SUM(usage_total_tokens) grouped by user_id.  <br><br>Why it matters: Highlights power users and token distribution.  <br><br>Drill: Click user bar to view user session history.</div>"
@@ -176,6 +178,7 @@
     width: 12
     height: 4
   - name: "Total Tokens Consumption Over the Time"
+    type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily time-series area chart tracking token consumption over time.  <br><br>How: SUM(usage_total_tokens) aggregated by timestamp_date.  <br><br>Why it matters: Monitors platform adoption and API quota utilization.  <br><br>Drill: Click date point to inspect daily traffic.</div>"
@@ -191,6 +194,7 @@
     width: 12
     height: 4
   - name: "Total Tokens"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total aggregate number of tokens consumed across all sessions.  <br><br>How: SUM(usage_prompt_tokens + usage_completion_tokens).  <br><br>Why it matters: Core top-line consumption metric.  <br><br>Drill: Click tile to see token trend.</div>"
@@ -206,6 +210,7 @@
     width: 12
     height: 4
   - name: "Top 5 users with most Traces"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Leaderboard of top 5 power users by trace volume.  <br><br>How: COUNT DISTINCT of trace_id grouped by user_id.  <br><br>Why it matters: Shows which users execute the deepest multi-turn workflows.  <br><br>Drill: Click user to inspect trace logs.</div>"
@@ -221,6 +226,7 @@
     width: 12
     height: 7
   - name: "Total Traces"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total number of execution traces recorded.  <br><br>How: COUNT DISTINCT of trace_id across all sessions.  <br><br>Why it matters: Measures overall end-to-end workflow invocations.  <br><br>Drill: Click tile to filter by agent.</div>"
@@ -236,6 +242,7 @@
     width: 8
     height: 4
   - name: "Traces split by Agent"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Distribution of trace volume across agents.  <br><br>How: COUNT DISTINCT of trace_id grouped by agent.  <br><br>Why it matters: Reveals traffic distribution across agent workloads.  <br><br>Drill: Click agent to filter dashboard.</div>"
@@ -251,6 +258,7 @@
     width: 24
     height: 7
   - name: "Total Traces Generation Over the Time"
+    type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily trend of trace volume generated over time.  <br><br>How: COUNT DISTINCT of trace_id aggregated by timestamp_date.  <br><br>Why it matters: Tracks platform engagement growth over time.  <br><br>Drill: Click date to inspect daily traces.</div>"
@@ -266,6 +274,7 @@
     width: 8
     height: 4
   - name: "Total Sessions"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total count of end-to-end user sessions.  <br><br>How: COUNT DISTINCT of session_id.  <br><br>Why it matters: Primary measure of active customer conversations.  <br><br>Drill: Click tile to view session breakdown.</div>"
@@ -281,6 +290,7 @@
     width: 8
     height: 4
   - name: "Number of Sessions Trend"
+    type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily time-series trend of user session volume over time.  <br><br>How: COUNT DISTINCT of session_id aggregated by timestamp_date.  <br><br>Why it matters: Shows daily conversational adoption.  <br><br>Drill: Click date to inspect sessions.</div>"
@@ -296,6 +306,7 @@
     width: 12
     height: 7
   - name: "Top 5 Agents Split by Session Count"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Leaderboard of top 5 agents by number of sessions.  <br><br>How: COUNT DISTINCT of session_id grouped by agent.  <br><br>Why it matters: Identifies the most popular conversational agents.  <br><br>Drill: Click agent to filter sessions.</div>"
@@ -311,6 +322,7 @@
     width: 12
     height: 7
   - name: "Total Agent Transfers"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total count of multi-agent delegation and handoff events.  <br><br>How: COUNT of AGENT_TRANSFER events from v_agent_transfer.  <br><br>Why it matters: Tracks multi-agent supervisor-worker collaboration.  <br><br>Drill: Click tile to view transfer matrix.</div>"
@@ -326,6 +338,7 @@
     width: 8
     height: 4
   - name: "Total A2A Interactions"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total count of Agent-to-Agent protocol communication events.  <br><br>How: COUNT of A2A_INTERACTION events from v_a2a_interaction.  <br><br>Why it matters: Measures decentralized agent-to-agent protocol traffic.  <br><br>Drill: Click tile to view A2A tasks.</div>"
@@ -341,6 +354,7 @@
     width: 8
     height: 4
   - name: "Total HITL Confirmation Requests"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total count of Human-In-The-Loop confirmation requests.  <br><br>How: COUNT of HITL_CONFIRMATION_REQUEST events from v_hitl_confirmation_request.  <br><br>Why it matters: Measures where human governance and sign-off occur.  <br><br>Drill: Click tile to view HITL tools.</div>"
@@ -356,6 +370,7 @@
     width: 8
     height: 4
   - name: "Tool Invocations"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Ranking of backend tools by invocation frequency.  <br><br>How: COUNT of TOOL_COMPLETED events grouped by tool_name.  <br><br>Why it matters: Highlights which APIs and integrations are relied upon most.  <br><br>Drill: Click tool to view latency and error rate.</div>"
@@ -371,6 +386,7 @@
     width: 12
     height: 4
   - name: "Events By Agent"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Breakdown of total lifecycle events across agents.  <br><br>How: COUNT of raw event rows grouped by agent.  <br><br>Why it matters: Shows raw telemetry volume per agent.  <br><br>Drill: Click agent to filter events.</div>"
@@ -386,6 +402,7 @@
     width: 12
     height: 7
   - name: "Tool Calls Over Time"
+    type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily execution trend of specific tools over time.  <br><br>How: COUNT of TOOL_COMPLETED events aggregated by timestamp_date and tool_name.  <br><br>Why it matters: Reveals evolving tool usage patterns over time.  <br><br>Drill: Click date/tool to inspect executions.</div>"
@@ -401,6 +418,7 @@
     width: 12
     height: 7
   - name: "Total Calls"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Absolute count of requests sent to backend tools.  <br><br>How: COUNT of TOOL_COMPLETED events.  <br><br>Why it matters: Overall volume of external tool and API executions.  <br><br>Drill: Click tile to inspect tools.</div>"
@@ -416,6 +434,7 @@
     width: 12
     height: 4
   - name: "LLM Call Trends"
+    type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Granular scatter plot showing frequency and clustering of LLM requests.  <br><br>How: Plots individual LLM_RESPONSE events over time.  <br><br>Why it matters: Identifies peak usage periods and request density.  <br><br>Drill: Select time range to filter LLM calls.</div>"
@@ -431,6 +450,7 @@
     width: 12
     height: 7
   - name: "Top 5 Agents by LLM Calls"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Ranking of agents triggering the most LLM calls.  <br><br>How: COUNT of LLM_RESPONSE events grouped by agent.  <br><br>Why it matters: Identifies agents driving backend LLM load.  <br><br>Drill: Click agent to inspect LLM calls.</div>"
@@ -446,6 +466,7 @@
     width: 12
     height: 7
   - name: "Total Users"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Count of unique end users who interacted with agents.  <br><br>How: COUNT DISTINCT of user_id.  <br><br>Why it matters: Primary user adoption and penetration metric.  <br><br>Drill: Click tile to see user growth.</div>"
@@ -461,6 +482,7 @@
     width: 8
     height: 4
   - name: "User Growth Over Time"
+    type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily count of active unique users over time.  <br><br>How: COUNT DISTINCT of user_id aggregated by timestamp_date.  <br><br>Why it matters: Measures DAU retention and adoption velocity.  <br><br>Drill: Click date to inspect active users.</div>"
@@ -476,6 +498,7 @@
     width: 12
     height: 7
   - name: "Top 5 Users by Session"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Leaderboard of power users by session count.  <br><br>How: COUNT DISTINCT of session_id grouped by user_id.  <br><br>Why it matters: Highlights champions and power users.  <br><br>Drill: Click user to inspect sessions.</div>"
@@ -491,6 +514,7 @@
     width: 12
     height: 7
   - name: "Top 5 Users by Events"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Ranking of users by raw volume of lifecycle events generated.  <br><br>How: COUNT of event rows grouped by user_id.  <br><br>Why it matters: Identifies users running the most intensive agent workflows.  <br><br>Drill: Click user to inspect event logs.</div>"
@@ -572,63 +596,45 @@
     width: 24
     height: 8
   - name: "Real-Time UDF Evaluation Scorecard"
+    type: looker_grid
     model: bigquery_agent_analytics_model
     explore: udf_realtime_scorecard
-    type: looker_grid
     truncate_text: no
     wrap_text: yes
     fields: [udf_realtime_scorecard.practice_area, udf_realtime_scorecard.agent, udf_realtime_scorecard.total_sessions, udf_realtime_scorecard.total_spans, udf_realtime_scorecard.avg_latency_score, udf_realtime_scorecard.avg_ttft_score, udf_realtime_scorecard.avg_token_efficiency_score, udf_realtime_scorecard.avg_cost_score, udf_realtime_scorecard.avg_error_rate_score]
     sorts: [udf_realtime_scorecard.total_sessions desc]
     limit: 50
     note_text: "<div style='text-align: left;'>What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
-    listen:
-      Date: agent_events.timestamp_date
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      User ID: agent_events.user_id
-      Span ID: agent_events.span_id
     tab_name: "LLM & Token Economics"
     row: 20
     col: 0
     width: 24
     height: 8
   - name: "Interactive SQL-Driven Trace Drilldown"
+    type: looker_grid
     model: bigquery_agent_analytics_model
     explore: remote_function_trace_drilldown
-    type: looker_grid
     truncate_text: no
     wrap_text: yes
     fields: [remote_function_trace_drilldown.session_id, remote_function_trace_drilldown.agent, remote_function_trace_drilldown.session_start_time, remote_function_trace_drilldown.span_count, remote_function_trace_drilldown.error_count, remote_function_trace_drilldown.sdk_version, remote_function_trace_drilldown.analyzed_session_id]
     sorts: [remote_function_trace_drilldown.session_start_time desc]
     limit: 50
     note_text: "<div style='text-align: left;'>What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
-    listen:
-      Date: agent_events.timestamp_date
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      User ID: agent_events.user_id
-      Span ID: agent_events.span_id
     tab_name: "Tool Usage & Provenance"
     row: 20
     col: 0
     width: 24
     height: 8
   - name: "Production vs Baseline Drift Scorecard"
+    type: looker_grid
     model: bigquery_agent_analytics_model
     explore: remote_function_drift_scorecard
-    type: looker_grid
     truncate_text: no
     wrap_text: yes
     fields: [remote_function_drift_scorecard.comparison_tier, remote_function_drift_scorecard.drift_metric, remote_function_drift_scorecard.kolmogorov_smirnov_stat, remote_function_drift_scorecard.p_value, remote_function_drift_scorecard.drift_status, remote_function_drift_scorecard.last_evaluated_date]
     sorts: [remote_function_drift_scorecard.drift_metric]
     limit: 50
     note_text: "<div style='text-align: left;'>What it is: Key operational metric derived from automated agent telemetry logs. <br><br>How it is calculated: Calculated from row-level event and session records in BigQuery. <br><br>Why it matters: Provides visibility into agent performance, reliability, and executive ROI. <br><br>Drill down: Click this tile to cross-filter the dashboard or inspect underlying logs.</div>"
-    listen:
-      Date: agent_events.timestamp_date
-      Trace ID: agent_events.trace_id
-      Agent: agent_events.agent
-      User ID: agent_events.user_id
-      Span ID: agent_events.span_id
     tab_name: "LLM & Token Economics"
     row: 28
     col: 0

@@ -139,6 +139,7 @@
     height: 1
     tab_name: "AI Recommendations"
   - name: "Average Tool Latency (ms)"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Average time in milliseconds for tools to execute.  <br><br>How: Average of total_ms across all TOOL_COMPLETED events.  <br><br>Why it matters: Monitors backend API performance and user wait time.  <br><br>Drill: Click tile to see tool latency breakdown.</div>"
@@ -155,6 +156,7 @@
     width: 8
     height: 4
   - name: "Tool Latency Trend"
+    type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Historical trend of tool execution latency over time.  <br><br>How: Average of total_ms aggregated by timestamp_date.  <br><br>Why it matters: Identifies performance degradation or API slowdowns over time.  <br><br>Drill: Click date to inspect daily latency.</div>"
@@ -171,6 +173,7 @@
     width: 24
     height: 7
   - name: "Average LLM Latency (in ms)"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Average round-trip time in milliseconds for LLM requests.  <br><br>How: Average of total_ms across all LLM_RESPONSE events.  <br><br>Why it matters: Tracks model responsiveness and generation speed.  <br><br>Drill: Click tile to see LLM latency trend.</div>"
@@ -187,6 +190,7 @@
     width: 8
     height: 4
   - name: "LLM Latency Trend"
+    type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Historical trend of LLM response times over time.  <br><br>How: Average of total_ms aggregated by timestamp_date.  <br><br>Why it matters: Monitors API latency anomalies across Gemini model versions.  <br><br>Drill: Click date to inspect LLM latency.</div>"
@@ -203,6 +207,7 @@
     width: 24
     height: 7
   - name: "P50 Tool Latency"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     single_value_title: P50 Tool Latency
@@ -257,6 +262,7 @@
     width: 8
     height: 4
   - name: "P75 Tool Latency"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     single_value_title: P75 Tool Latency
@@ -311,6 +317,7 @@
     width: 8
     height: 4
   - name: "P90 Tool Latency"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     single_value_title: P90 Tool Latency
@@ -365,6 +372,7 @@
     width: 12
     height: 4
   - name: "P99 Tool Latency"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     single_value_title: P99 Tool Latency
@@ -419,6 +427,7 @@
     width: 12
     height: 4
   - name: "P50 Llm Latency"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Median (50th percentile) LLM response latency in milliseconds.  <br><br>How: 50th percentile of total_ms across LLM_RESPONSE events.  <br><br>Why it matters: Core responsiveness KPI for conversational agents.  <br><br>Drill: Click tile to see P50 trend.</div>"
@@ -435,6 +444,7 @@
     width: 8
     height: 4
   - name: "P75 Llm Latency"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: 75th percentile LLM response latency in milliseconds.  <br><br>How: 75th percentile of total_ms across LLM_RESPONSE events.  <br><br>Why it matters: Tracks generation speed for longer context prompts.  <br><br>Drill: Click tile to inspect P75 latency.</div>"
@@ -451,6 +461,7 @@
     width: 8
     height: 4
   - name: "P90 Llm Latency"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: 90th percentile LLM response latency in milliseconds.  <br><br>How: 90th percentile of total_ms across LLM_RESPONSE events.  <br><br>Why it matters: Identifies slow LLM responses impacting user experience.  <br><br>Drill: Click tile to see P90 trend.</div>"
@@ -467,6 +478,7 @@
     width: 12
     height: 4
   - name: "P99 Llm Latency"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: 99th percentile (tail latency) LLM response latency in milliseconds.  <br><br>How: 99th percentile of total_ms across LLM_RESPONSE events.  <br><br>Why it matters: Critical SLA metric for tail LLM response delays.  <br><br>Drill: Click tile to inspect P99 tail latency.</div>"
@@ -483,6 +495,7 @@
     width: 12
     height: 4
   - name: "Total Errors"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total count of backend tool execution errors.  <br><br>How: COUNT of TOOL_ERROR events.  <br><br>Why it matters: Identifies API failures and integration instability.  <br><br>Drill: Click tile to inspect error logs.</div>"
@@ -499,6 +512,7 @@
     width: 12
     height: 4
   - name: "Tool Errors Trend"
+    type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Daily time-series tracking volume of tool failures.  <br><br>How: COUNT of TOOL_ERROR events aggregated by timestamp_date.  <br><br>Why it matters: Reveals error spikes and system instability over time.  <br><br>Drill: Click date spike to view failing tools.</div>"
@@ -515,6 +529,7 @@
     width: 24
     height: 7
   - name: "Top 5 Agents By Errors"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Ranking of agents by number of tool errors encountered.  <br><br>How: COUNT of TOOL_ERROR events grouped by agent.  <br><br>Why it matters: Shows which agents experience the most tool failures.  <br><br>Drill: Click agent to filter error logs.</div>"
@@ -531,6 +546,7 @@
     width: 12
     height: 7
   - name: "Top 5 Tools by Errors"
+    type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Leaderboard of the most unstable backend tools.  <br><br>How: COUNT of TOOL_ERROR events grouped by tool_name.  <br><br>Why it matters: Focuses debugging efforts on the most error-prone APIs.  <br><br>Drill: Click tool to inspect error tracebacks.</div>"
@@ -547,6 +563,7 @@
     width: 12
     height: 7
   - name: "Total Agent Errors"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Total count of agent-level execution errors and crashes.  <br><br>How: COUNT of AGENT_ERROR events from v_agent_error.  <br><br>Why it matters: Core measure of overall agent execution stability.  <br><br>Drill: Click tile to inspect error tracebacks.</div>"
@@ -563,6 +580,7 @@
     width: 24
     height: 7
   - name: "Self-Healing Resilience Rate (%)"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What it is: The percentage of agent tool errors that were automatically self-corrected and resolved by the AI agent without human intervention. <br><br>How it is calculated: Automatically recovered tool errors divided by total tool errors. <br><br>Why it matters: Measures how resilient and self-reliant our AI agents are when encountering temporary API or network glitches. <br><br>Drill down: Click this tile to see resilience performance across individual agents.</div>"
@@ -579,6 +597,7 @@
     width: 12
     height: 4
   - name: "LLM-as-a-Judge Avg Quality Score (%)"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Qualitative LLM-as-a-Judge evaluation score (0-100%).  <br><br>How: Evaluates response accuracy, relevance, and tool faithfulness.  <br><br>Why it matters: Assures high conversational quality and correctness.  <br><br>Drill: Click tile to inspect evaluation scorecards.</div>"
@@ -595,6 +614,7 @@
     width: 8
     height: 4
   - name: "User Feedback Satisfaction Rate (%)"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Percentage of positive user feedback ratings.  <br><br>How: COUNTIF(user_feedback_rating = 'THUMBS_UP') / COUNT(1) * 100.0.  <br><br>Why it matters: Directly measures customer happiness and satisfaction.  <br><br>Drill: Click tile to view user feedback records.</div>"
@@ -611,6 +631,7 @@
     width: 8
     height: 4
   - name: "Self-Correction Loop Success Rate (%)"
+    type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
     note_text: "<div style='text-align: left;'>What: Rate at which agents successfully self-correct and recover after encountering an error.  <br><br>How: Percentage of recovered SUCCESS sessions that followed an ERROR event.  <br><br>Why it matters: Demonstrates autonomous self-healing and error recovery.  <br><br>Drill: Click tile to view recovered sessions.</div>"
@@ -716,7 +737,7 @@
     col: 0
     width: 24
     height: 8
-  - name: "AI Recommendation Provenance: Gemini vs. SDK vs. Diagnostics"
+  - name: "AI Recommendation Provenance: Gemini vs SDK vs Diagnostics"
     type: looker_pie
     note_state: collapsed
     note_display: hover
