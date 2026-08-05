@@ -152,6 +152,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.cwpm_verifiable_hours_saved]
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Estimated productivity hours saved by automated tool calls.  <br><br>How: Count of completed tool executions * 1.5 hours baseline * 1.2 complexity multiplier.  <br><br>Why it matters: Evaluates automated engineering leverage.  <br><br>Drill: Click tile to filter by practice area.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -173,6 +174,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.fte_weeks_saved_equivalent]
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Equivalent Full-Time Equivalent engineering weeks saved.  <br><br>How: CWPM Verifiable Hours Saved / 40.0 hours per standard engineering work week.  <br><br>Why it matters: Anchors workforce capacity planning.  <br><br>Drill: Click tile to inspect pilot project contribution.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -194,6 +196,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.consulting_value_usd]
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Estimated dollar value of automated engineering work.  <br><br>How: Estimated Manual Hours Saved (total_sessions * 3.5 hrs, PSO pilot benchmark) * $350/hr Google Cloud PSO billable rate ($2,800/day Consultant rate).  <br><br>Why it matters: Quantifies executive ROI and billable consulting creation ($1,225/session).  <br><br>Drill: Click tile to break down by practice area.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -236,6 +239,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.total_pilot_projects]
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Count of distinct Google Cloud PSO JAPAC customer pilot engagements.  <br><br>How: COUNT DISTINCT of pilot_project attribute (DBS Bank, Dyson, Myntra, etc.).  <br><br>Why it matters: Tracks regional customer penetration.  <br><br>Drill: Click tile to view active pilots.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -257,6 +261,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.total_invocations]
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Total number of distinct AI agents deployed across JAPAC engagements.  <br><br>How: COUNT DISTINCT of canonical_agent_name.  <br><br>Why it matters: Measures reuse of canonical agent templates.  <br><br>Drill: Click tile to see agent leaderboard.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -281,6 +286,7 @@
     measures: [agent_events.server_verified_hours_saved]
     sorts: [agent_events.server_verified_hours_saved desc]
     stacking: normal
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Estimated manual engineering hours saved broken down by pilot project and practice area.  <br><br>How: total_sessions * 3.5 hours per session (empirical PSO pilot benchmark).  <br><br>Why it matters: Demonstrates which pilot engagements generate the highest automation savings.  <br><br>Drill: Filter by Pilot Project or Practice Area.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -294,7 +300,7 @@
     row: 2
     col: 0
     width: 12
-    height: 7
+    height: 6
   - name: "Hours Saved by Practice Area"
     type: looker_column
     note_state: collapsed
@@ -304,6 +310,7 @@
     dimensions: [agent_events.practice_area]
     measures: [agent_events.server_verified_hours_saved]
     sorts: [agent_events.server_verified_hours_saved desc]
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Estimated manual engineering hours saved aggregated by practice area.  <br><br>How: total_sessions * 3.5 hours per session (empirical PSO pilot benchmark).  <br><br>Why it matters: Guides practice leadership on where AI automation delivers the most leverage.  <br><br>Drill: Click any bar to cross-filter dashboard.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -317,7 +324,7 @@
     row: 10
     col: 0
     width: 12
-    height: 7
+    height: 6
   - name: "Top Agents by Hours Saved and Events"
     type: looker_column
     truncate_text: no
@@ -330,6 +337,7 @@
     measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved, agent_events.consulting_value_usd, udf_realtime_scorecard.avg_latency_score, udf_realtime_scorecard.avg_ttft_score]
     sorts: [agent_events.server_verified_hours_saved desc]
     limit: 15
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Comprehensive leaderboard of agent ROI and volume.  <br><br>How: Hours = total_sessions * 3.5 hrs, FTE Weeks = Hours / 40.0, Consulting Value = Hours * $350/hr ($2,800/day PSO rate).  <br><br>Why it matters: Ranks top-performing agents for executive funding and promotion.  <br><br>Drill: Click any row to inspect agent traces.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -340,7 +348,7 @@
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
     tab_name: "Pilot Projects & Practice Areas"
-    row: 16
+    row: 14
     col: 0
     width: 24
     height: 8
@@ -353,6 +361,7 @@
     dimensions: [agent_events.timestamp_date, agent_events.sub_region]
     measures: [agent_events.server_verified_hours_saved]
     sorts: [agent_events.timestamp_date desc]
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Time-series trend of automation adoption across JAPAC sub-regions.  <br><br>How: Estimated manual hours saved (total_sessions * 3.5 hrs) over timestamp_date.  <br><br>Why it matters: Reveals sub-region velocity (ANZ, SEA, India, Japan, Korea).  <br><br>Drill: Click any date/region to filter time series.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -366,7 +375,7 @@
     row: 10
     col: 12
     width: 12
-    height: 7
+    height: 6
   - name: "Model Tier Spend Breakdown ($ USD)"
     type: looker_pie
     note_state: collapsed
@@ -376,6 +385,7 @@
     dimensions: [v_llm_response.model_version]
     measures: [v_llm_response.total_spend_usd]
     sorts: [v_llm_response.total_spend_usd desc]
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Actual LLM API spend in USD by Gemini model version.  <br><br>How: Applies Google Cloud Gemini 2.5 Pro 75 percent cache discount ($1.25/M standard input, $0.3125/M cached input, $5.00/M completion).  <br><br>Why it matters: Tracks FinOps economics across model tiers.  <br><br>Drill: Click model bar to inspect token breakdown.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -389,7 +399,7 @@
     row: 6
     col: 0
     width: 12
-    height: 7
+    height: 6
   - name: "Feedback & Wins — Verifiable Engineer Testimonials"
     type: looker_grid
     truncate_text: no
@@ -402,9 +412,6 @@
     measures: [agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved]
     sorts: [agent_events.server_verified_hours_saved desc]
     limit: 10
-    series_colors:
-      agent_events.cwpm_verifiable_hours_saved: "#137333"
-      agent_events.consulting_value_usd: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Qualitative engineering feedback and verified savings testimonials.  <br><br>How: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs).  <br><br>Why it matters: Provides peer-verified qualitative proof of automation impact.  <br><br>Drill: Inspect specific win feedback records.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -426,9 +433,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_llm_response.cache_discounted_actual_cost_usd]
-    series_colors:
-      agent_events.cwpm_verifiable_hours_saved: "#137333"
-      agent_events.consulting_value_usd: "#1A73E8"
+    colors: ["#137333", "#1A73E8", "#12B5CB", "#A142F4"]
     note_text: "<div style='text-align: left;'>What: Total actual LLM API dollar spend USD.  <br><br>How: Applies 75 percent discount for cached input tokens ($0.3125/M cached vs $1.25/M standard input for Gemini 2.5 Pro).  <br><br>Why it matters: Monitors net FinOps expenditure.  <br><br>Drill: Click tile to view cost by agent.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -450,9 +455,6 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_llm_response.prompt_cache_hit_ratio]
-    series_colors:
-      agent_events.cwpm_verifiable_hours_saved: "#137333"
-      agent_events.consulting_value_usd: "#1A73E8"
     note_text: "<div style='text-align: left;'>What: Percentage of input prompt tokens served from prompt cache.  <br><br>How: SUM(cached_tokens) / SUM(prompt_tokens).  <br><br>Why it matters: High cache hit ratio maximizes the 75% pricing discount and reduces TTFT latency.  <br><br>Drill: Click tile to see cache hit rate by agent.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -474,9 +476,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [v_tool_completed.tool_productivity_credit_hours]
-    series_colors:
-      v_tool_completed.p50_tool_latency: "#12B5CB"
-      v_tool_completed.p75_tool_latency: "#1A73E8"
+    colors: ["#12B5CB", "#1A73E8", "#137333", "#FA7B17"]
     note_text: "<div style='text-align: left;'>What: Estimated manual engineering hours saved by automated tool calls.  <br><br>How: SUM of 1.5 base hours * latency complexity weight (1.0x standard, 1.5x over 2s, 2.5x over 5s).  <br><br>Why it matters: Rewards agents executing complex, high-latency tool workflows.  <br><br>Drill: Click tile to inspect tool calls.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -498,6 +498,7 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.sla_error_rate_gating]
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: CI/CD SLA Gate asserting deployment readiness.  <br><br>How: Evaluates error rate; PASS if error rate is 5.0 percent or lower, otherwise FAIL.  <br><br>Why it matters: Protects customer production environments from unstable agent builds.  <br><br>Drill: Click tile to inspect error logs.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -549,9 +550,7 @@
     measures: [v_llm_response.cache_savings_usd, v_llm_response.cache_discounted_actual_cost_usd]
     sorts: [agent_events.timestamp_date desc]
     stacking: normal
-    series_colors:
-      agent_events.cwpm_verifiable_hours_saved: "#137333"
-      agent_events.consulting_value_usd: "#1A73E8"
+    colors: ["#137333", "#1A73E8", "#12B5CB", "#A142F4"]
     note_text: "<div style='text-align: left;'>What: Comparison of dollar savings from prompt caching vs actual spend over time.  <br><br>How: Savings = cached_tokens * $0.9375/M ($1.25 - $0.3125).  <br><br>Why it matters: Demonstrates compounding FinOps savings over time.  <br><br>Drill: Click date point to see daily token usage.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -565,7 +564,7 @@
     row: 6
     col: 12
     width: 12
-    height: 7
+    height: 6
   - name: "Agent Complexity & ROI Scatter Plot (Invocations vs Verifiable Hours Saved)"
     title: "Agent Complexity & ROI Scatter Plot (Invocations vs. Verifiable Hours Saved)"
     type: looker_scatter
@@ -576,9 +575,7 @@
     dimensions: [agent_events.canonical_agent_name]
     measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.consulting_value_usd]
     sorts: [agent_events.server_verified_hours_saved desc]
-    series_colors:
-      agent_events.cwpm_verifiable_hours_saved: "#137333"
-      agent_events.consulting_value_usd: "#1A73E8"
+    colors: ["#137333", "#1A73E8", "#12B5CB", "#A142F4"]
     note_text: "<div style='text-align: left;'>What: Multi-dimensional scatter plot comparing agent volume against ROI.  <br><br>How: X-axis = invocations, Y-axis = hours saved (sessions * 3.5 hrs), size = consulting value ($350/hr PSO rate).  <br><br>Why it matters: Highlights high-value outlier agents.  <br><br>Drill: Click any bubble to filter by agent.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -589,10 +586,10 @@
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
     tab_name: "Pilot Projects & Practice Areas"
-    row: 9
+    row: 8
     col: 12
     width: 12
-    height: 7
+    height: 6
   - name: "Consulting Value Created by Practice Area ($ USD Donut)"
     type: looker_pie
     note_state: collapsed
@@ -602,6 +599,7 @@
     dimensions: [agent_events.practice_area]
     measures: [agent_events.consulting_value_usd]
     sorts: [agent_events.consulting_value_usd desc]
+    colors: ["#1A73E8", "#137333", "#FA7B17", "#A142F4", "#12B5CB"]
     note_text: "<div style='text-align: left;'>What: Distribution of estimated consulting dollar value across practice areas.  <br><br>How: Hours saved (sessions * 3.5 hrs) * $350 per hour ($2,800/day PSO Consultant rate).  <br><br>Why it matters: Visualizes share of consulting value by practice area.  <br><br>Drill: Click slice to filter practice area.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -615,7 +613,7 @@
     row: 2
     col: 12
     width: 12
-    height: 7
+    height: 6
   - name: "Tool Execution Volume & Self-Healing Resilience SLA by Practice Area"
     type: looker_column
     note_state: collapsed
@@ -625,9 +623,7 @@
     dimensions: [agent_events.practice_area]
     measures: [agent_events.total_events, agent_events.self_healing_resilience_rate_pct]
     sorts: [agent_events.total_events desc]
-    series_colors:
-      v_tool_completed.p50_tool_latency: "#12B5CB"
-      v_tool_completed.p75_tool_latency: "#1A73E8"
+    colors: ["#12B5CB", "#1A73E8", "#137333", "#FA7B17"]
     note_text: "<div style='text-align: left;'>What it is: The percentage of agent tool errors that were automatically self-corrected and resolved by the AI agent without human intervention. <br><br>How it is calculated: Automatically recovered tool errors divided by total tool errors. <br><br>Why it matters: Measures how resilient and self-reliant our AI agents are when encountering temporary API or network glitches. <br><br>Drill down: Click this tile to see resilience performance across individual agents.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -638,10 +634,10 @@
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
     tab_name: "Pilot Projects & Practice Areas"
-    row: 9
+    row: 8
     col: 0
     width: 12
-    height: 7
+    height: 6
   - name: "BigQuery AI: 30-Day Predictive ROI & Consulting Value Forecast"
     type: looker_line
     note_state: collapsed
@@ -651,9 +647,7 @@
     dimensions: [v_bqml_roi_forecast.forecast_date, v_bqml_roi_forecast.data_type]
     measures: [v_bqml_roi_forecast.predicted_hours_saved, v_bqml_roi_forecast.confidence_lower_bound_hours, v_bqml_roi_forecast.confidence_upper_bound_hours]
     sorts: [v_bqml_roi_forecast.forecast_date asc]
-    series_colors:
-      agent_events.cwpm_verifiable_hours_saved: "#137333"
-      agent_events.consulting_value_usd: "#1A73E8"
+    colors: ["#137333", "#1A73E8", "#12B5CB", "#A142F4"]
     note_text: "<div style='text-align: left;'>What it is: Predictive 30-day ROI and hours-saved forecast generated using BigQuery ML. <br><br>How it is calculated: ARIMA time-series model trained on historical verified hours saved. <br><br>Why it matters: Gives leadership forward-looking visibility into future engineering capacity savings. <br><br>Drill down: Click a data point to inspect forecast confidence intervals.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -664,10 +658,10 @@
       trace_id_filter: agent_events.trace_id
       session_id_filter: agent_events.session_id
     tab_name: "Executive ROI & Value"
-    row: 17
+    row: 16
     col: 0
     width: 24
-    height: 7
+    height: 6
   - name: "Multi-Agent Session DAG & Trace Delegation Lineage Graph"
     type: looker_grid
     note_state: collapsed
