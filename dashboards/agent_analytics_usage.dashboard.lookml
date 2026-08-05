@@ -149,6 +149,43 @@
     type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.agent, v_llm_response.total_tokens_consumed]
+    filters:
+      v_llm_response.total_tokens_consumed: NOT NULL
+    sorts: [v_llm_response.total_tokens_consumed desc]
+    limit: 5
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
     note_text: "<div style='text-align: left;'>What: Breakdown of total token consumption across agents.  <br><br>How: SUM(usage_total_tokens) grouped by agent.  <br><br>Why it matters: Identifies token-heavy agents for optimization.  <br><br>Drill: Click agent bar to inspect token split.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -165,6 +202,44 @@
     type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.user_id, v_llm_response.total_tokens_consumed]
+    filters:
+      agent_events.timestamp_date: 7 days
+    limit: 5
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    show_null_points: true
+    interpolation: linear
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Leaderboard of top 5 users by token usage.  <br><br>How: SUM(usage_total_tokens) grouped by user_id.  <br><br>Why it matters: Highlights power users and token distribution.  <br><br>Drill: Click user bar to view user session history.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -181,6 +256,59 @@
     type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [v_llm_response.total_tokens_consumed, agent_events.timestamp_date]
+    fill_fields: [agent_events.timestamp_date]
+    sorts: [agent_events.timestamp_date desc]
+    limit: 500
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: false
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    v_llm_response.total_tokens_consumed: "#e8710a"
+    defaults_version: 1
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    ordering: none
+    show_null_labels: false
     note_text: "<div style='text-align: left;'>What: Daily time-series area chart tracking token consumption over time.  <br><br>How: SUM(usage_total_tokens) aggregated by timestamp_date.  <br><br>Why it matters: Monitors platform adoption and API quota utilization.  <br><br>Drill: Click date point to inspect daily traffic.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -197,6 +325,67 @@
     type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [v_llm_response.pop_total_tokens_current, v_llm_response.pop_total_tokens_change]
+    filters:
+      agent_events.pop_date_filter: 14 days
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: true
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    comparison_label: VS Previous Period
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: false
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    v_llm_response.total_tokens_consumed: "#e8710a"
+    defaults_version: 1
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    ordering: none
+    show_null_labels: false
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Total aggregate number of tokens consumed across all sessions.  <br><br>How: SUM(usage_prompt_tokens + usage_completion_tokens).  <br><br>Why it matters: Core top-line consumption metric.  <br><br>Drill: Click tile to see token trend.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -213,6 +402,45 @@
     type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.user_id, agent_events.total_traces]
+    filters:
+      agent_events.timestamp_date: 7 days
+    sorts: [agent_events.total_traces desc 0]
+    limit: 5
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    show_null_points: true
+    interpolation: linear
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Leaderboard of top 5 power users by trace volume.  <br><br>How: COUNT DISTINCT of trace_id grouped by user_id.  <br><br>Why it matters: Shows which users execute the deepest multi-turn workflows.  <br><br>Drill: Click user to inspect trace logs.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -229,6 +457,67 @@
     type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.pop_total_traces_current, agent_events.pop_total_traces_change]
+    filters:
+      agent_events.pop_date_filter: 14 days
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: true
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    comparison_label: VS Previous Period
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: false
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    v_llm_response.total_tokens_consumed: "#e8710a"
+    defaults_version: 1
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    ordering: none
+    show_null_labels: false
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Total number of execution traces recorded.  <br><br>How: COUNT DISTINCT of trace_id across all sessions.  <br><br>Why it matters: Measures overall end-to-end workflow invocations.  <br><br>Drill: Click tile to filter by agent.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -245,6 +534,43 @@
     type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.agent, agent_events.total_traces]
+    filters:
+      v_llm_response.total_tokens_consumed: NOT NULL
+    sorts: [agent_events.total_traces desc 0]
+    limit: 5
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
     note_text: "<div style='text-align: left;'>What: Distribution of trace volume across agents.  <br><br>How: COUNT DISTINCT of trace_id grouped by agent.  <br><br>Why it matters: Reveals traffic distribution across agent workloads.  <br><br>Drill: Click agent to filter dashboard.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -261,6 +587,60 @@
     type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.timestamp_date, agent_events.total_traces]
+    fill_fields: [agent_events.timestamp_date]
+    sorts: [agent_events.timestamp_date desc]
+    limit: 500
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: false
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    v_llm_response.total_tokens_consumed: "#1e8e3e"
+    defaults_version: 1
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    ordering: none
+    show_null_labels: false
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Daily trend of trace volume generated over time.  <br><br>How: COUNT DISTINCT of trace_id aggregated by timestamp_date.  <br><br>Why it matters: Tracks platform engagement growth over time.  <br><br>Drill: Click date to inspect daily traces.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -277,6 +657,55 @@
     type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.pop_total_sessions_current, agent_events.pop_total_sessions_change]
+    filters:
+      agent_events.pop_date_filter: 7 days
+      agent_events.agent: ''
+      agent_events.span_id: ''
+      agent_events.trace_id: ''
+      agent_events.user_id: ''
+    limit: 500
+    column_limit: 50
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    comparison_label: vs Last Period
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
     note_text: "<div style='text-align: left;'>What: Total count of end-to-end user sessions.  <br><br>How: COUNT DISTINCT of session_id.  <br><br>Why it matters: Primary measure of active customer conversations.  <br><br>Drill: Click tile to view session breakdown.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -293,6 +722,63 @@
     type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.total_sessions, agent_events.timestamp_date]
+    fill_fields: [agent_events.timestamp_date]
+    filters:
+      agent_events.agent: ''
+      agent_events.span_id: ''
+      agent_events.trace_id: ''
+      agent_events.user_id: ''
+      agent_events.timestamp_date: 7 days
+    sorts: [agent_events.timestamp_date desc]
+    limit: 500
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: false
+    interpolation: linear
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_sessions: "#e52592"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    comparison_label: vs Last Period
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    ordering: none
+    show_null_labels: false
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Daily time-series trend of user session volume over time.  <br><br>How: COUNT DISTINCT of session_id aggregated by timestamp_date.  <br><br>Why it matters: Shows daily conversational adoption.  <br><br>Drill: Click date to inspect sessions.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -309,6 +795,62 @@
     type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.total_sessions, agent_events.agent]
+    filters:
+      agent_events.agent: ''
+      agent_events.span_id: ''
+      agent_events.trace_id: ''
+      agent_events.user_id: ''
+      agent_events.timestamp_date: 7 days
+    sorts: [agent_events.total_sessions desc 0]
+    limit: 5
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_sessions: "#e8710a"
+    show_null_points: true
+    interpolation: linear
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    comparison_label: vs Last Period
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Leaderboard of top 5 agents by number of sessions.  <br><br>How: COUNT DISTINCT of session_id grouped by agent.  <br><br>Why it matters: Identifies the most popular conversational agents.  <br><br>Drill: Click agent to filter sessions.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -325,6 +867,12 @@
     type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [v_agent_transfer.total_agent_transfers]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
     note_text: "<div style='text-align: left;'>What: Total count of multi-agent delegation and handoff events.  <br><br>How: COUNT of AGENT_TRANSFER events from v_agent_transfer.  <br><br>Why it matters: Tracks multi-agent supervisor-worker collaboration.  <br><br>Drill: Click tile to view transfer matrix.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -341,6 +889,12 @@
     type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [v_a2a_interaction.total_a2a_interactions]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
     note_text: "<div style='text-align: left;'>What: Total count of Agent-to-Agent protocol communication events.  <br><br>How: COUNT of A2A_INTERACTION events from v_a2a_interaction.  <br><br>Why it matters: Measures decentralized agent-to-agent protocol traffic.  <br><br>Drill: Click tile to view A2A tasks.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -357,6 +911,12 @@
     type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [v_hitl_confirmation_request.total_hitl_confirmation_requests]
+    limit: 500
+    custom_color_enabled: true
+    show_single_value_title: true
     note_text: "<div style='text-align: left;'>What: Total count of Human-In-The-Loop confirmation requests.  <br><br>How: COUNT of HITL_CONFIRMATION_REQUEST events from v_hitl_confirmation_request.  <br><br>Why it matters: Measures where human governance and sign-off occur.  <br><br>Drill: Click tile to view HITL tools.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -373,6 +933,45 @@
     type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.total_invocations, v_tool_completed.tool_name]
+    filters:
+      v_tool_completed.tool_name: "-NULL"
+    sorts: [agent_events.total_invocations desc]
+    limit: 10
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_invocations: "#1e8e3e"
+    defaults_version: 1
     note_text: "<div style='text-align: left;'>What: Ranking of backend tools by invocation frequency.  <br><br>How: COUNT of TOOL_COMPLETED events grouped by tool_name.  <br><br>Why it matters: Highlights which APIs and integrations are relied upon most.  <br><br>Drill: Click tool to view latency and error rate.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -389,6 +988,47 @@
     type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.total_events, agent_events.agent]
+    filters:
+      agent_events.event_type: '"TOOL_COMPLETED"'
+    sorts: [agent_events.total_events desc 0]
+    limit: 10
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_invocations: "#1e8e3e"
+    agent_events.total_events: "#e8710a"
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Breakdown of total lifecycle events across agents.  <br><br>How: COUNT of raw event rows grouped by agent.  <br><br>Why it matters: Shows raw telemetry volume per agent.  <br><br>Drill: Click agent to filter events.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -405,6 +1045,53 @@
     type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.total_events, v_tool_completed.tool_name, agent_events.timestamp_date]
+    pivots: [v_tool_completed.tool_name]
+    fill_fields: [agent_events.timestamp_date]
+    filters:
+      agent_events.event_type: '"TOOL_COMPLETED"'
+      agent_events.timestamp_date: 14 days
+    sorts: [v_tool_completed.tool_name, agent_events.timestamp_date desc]
+    limit: 5000
+    column_limit: 5
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: monotone
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_invocations: "#1e8e3e"
+    agent_events.total_events: "#e8710a"
+    execute_sql - agent_events.total_events: "#e8710a"
+    ordering: none
+    show_null_labels: false
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Daily execution trend of specific tools over time.  <br><br>How: COUNT of TOOL_COMPLETED events aggregated by timestamp_date and tool_name.  <br><br>Why it matters: Reveals evolving tool usage patterns over time.  <br><br>Drill: Click date/tool to inspect executions.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -421,6 +1108,59 @@
     type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [v_llm_response.pop_llm_calls_current, v_llm_response.pop_llm_calls_change]
+    filters:
+      agent_events.pop_date_filter: 7 days
+    limit: 5000
+    column_limit: 5
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    comparison_label: V Previous Period
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: monotone
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_invocations: "#1e8e3e"
+    agent_events.total_events: "#e8710a"
+    execute_sql - agent_events.total_events: "#e8710a"
+    ordering: none
+    show_null_labels: false
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Absolute count of requests sent to backend tools.  <br><br>How: COUNT of TOOL_COMPLETED events.  <br><br>Why it matters: Overall volume of external tool and API executions.  <br><br>Drill: Click tile to inspect tools.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -437,6 +1177,62 @@
     type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [v_llm_response.total_llm_calls, agent_events.timestamp_minute]
+    fill_fields: [agent_events.timestamp_minute]
+    filters:
+      agent_events.timestamp_date: 7 days
+    sorts: [agent_events.timestamp_minute desc]
+    limit: 5000
+    column_limit: 5
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: monotone
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_invocations: "#1e8e3e"
+    agent_events.total_events: "#e8710a"
+    execute_sql - agent_events.total_events: "#e8710a"
+    v_llm_response.total_llm_calls: "#8ab4f8"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    comparison_label: V Previous Period
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    ordering: none
+    show_null_labels: false
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Granular scatter plot showing frequency and clustering of LLM requests.  <br><br>How: Plots individual LLM_RESPONSE events over time.  <br><br>Why it matters: Identifies peak usage periods and request density.  <br><br>Drill: Select time range to filter LLM calls.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -453,6 +1249,61 @@
     type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [v_llm_response.total_llm_calls, agent_events.agent]
+    filters:
+      agent_events.timestamp_date: 7 days
+    sorts: [v_llm_response.total_llm_calls desc 0]
+    limit: 500
+    column_limit: 5
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_invocations: "#1e8e3e"
+    agent_events.total_events: "#e8710a"
+    execute_sql - agent_events.total_events: "#e8710a"
+    v_llm_response.total_llm_calls: "#f28b82"
+    show_null_points: true
+    interpolation: monotone
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    comparison_label: V Previous Period
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Ranking of agents triggering the most LLM calls.  <br><br>How: COUNT of LLM_RESPONSE events grouped by agent.  <br><br>Why it matters: Identifies agents driving backend LLM load.  <br><br>Drill: Click agent to inspect LLM calls.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -469,6 +1320,60 @@
     type: single_value
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.pop_total_users_current, agent_events.pop_total_users_change]
+    filters:
+      agent_events.pop_date_filter: 7 days
+    limit: 500
+    column_limit: 5
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    x_axis_zoom: true
+    y_axis_zoom: true
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    agent_events.total_invocations: "#1e8e3e"
+    agent_events.total_events: "#e8710a"
+    execute_sql - agent_events.total_events: "#e8710a"
+    v_llm_response.total_llm_calls: "#f28b82"
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    show_null_points: true
+    interpolation: monotone
+    comparison_label: V Previous Period
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Count of unique end users who interacted with agents.  <br><br>How: COUNT DISTINCT of user_id.  <br><br>Why it matters: Primary user adoption and penetration metric.  <br><br>Drill: Click tile to see user growth.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -485,6 +1390,63 @@
     type: looker_area
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.total_users, agent_events.timestamp_date]
+    fill_fields: [agent_events.timestamp_date]
+    filters:
+      agent_events.timestamp_date: 7 days
+    sorts: [agent_events.timestamp_date desc]
+    limit: 500
+    column_limit: 5
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: false
+    interpolation: monotone
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_invocations: "#1e8e3e"
+    agent_events.total_events: "#e8710a"
+    execute_sql - agent_events.total_events: "#e8710a"
+    v_llm_response.total_llm_calls: "#f28b82"
+    agent_events.total_users: "#1e8e3e"
+    ordering: none
+    show_null_labels: false
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    comparison_label: V Previous Period
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Daily count of active unique users over time.  <br><br>How: COUNT DISTINCT of user_id aggregated by timestamp_date.  <br><br>Why it matters: Measures DAU retention and adoption velocity.  <br><br>Drill: Click date to inspect active users.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -501,6 +1463,60 @@
     type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.user_id, agent_events.total_sessions]
+    sorts: [agent_events.total_sessions desc 0]
+    limit: 5
+    column_limit: 5
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    show_null_points: false
+    interpolation: monotone
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_invocations: "#1e8e3e"
+    agent_events.total_events: "#e8710a"
+    execute_sql - agent_events.total_events: "#e8710a"
+    v_llm_response.total_llm_calls: "#f28b82"
+    agent_events.total_users: "#1e8e3e"
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    comparison_label: V Previous Period
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Leaderboard of power users by session count.  <br><br>How: COUNT DISTINCT of session_id grouped by user_id.  <br><br>Why it matters: Highlights champions and power users.  <br><br>Drill: Click user to inspect sessions.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -517,6 +1533,60 @@
     type: looker_bar
     model: bigquery_agent_analytics_model
     explore: agent_events
+    note_state: collapsed
+    note_display: hover
+    fields: [agent_events.user_id, agent_events.total_events]
+    sorts: [agent_events.total_events desc 0]
+    limit: 5
+    column_limit: 5
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: circle
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    x_axis_zoom: true
+    y_axis_zoom: true
+    agent_events.total_invocations: "#1e8e3e"
+    agent_events.total_events: "#f9ab00"
+    execute_sql - agent_events.total_events: "#e8710a"
+    v_llm_response.total_llm_calls: "#f28b82"
+    agent_events.total_users: "#1e8e3e"
+    show_null_points: false
+    interpolation: monotone
+    custom_color_enabled: true
+    show_single_value_title: true
+    show_comparison: true
+    comparison_type: change
+    comparison_reverse_colors: false
+    show_comparison_label: true
+    comparison_label: V Previous Period
+    enable_conditional_formatting: false
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    defaults_version: 1
+    hidden_pivots: {}
     note_text: "<div style='text-align: left;'>What: Ranking of users by raw volume of lifecycle events generated.  <br><br>How: COUNT of event rows grouped by user_id.  <br><br>Why it matters: Identifies users running the most intensive agent workflows.  <br><br>Drill: Click user to inspect event logs.</div>"
     listen:
       Date: agent_events.timestamp_date
@@ -534,7 +1604,7 @@
     note_state: collapsed
     note_display: hover
     explore: agent_events
-    dimensions: [v_gcs_multimodal_offload.asset_type, gcs_multimodal_object_table.content_type]
+    dimensions: [v_gcs_multimodal_offload.asset_type]
     measures: [v_gcs_multimodal_offload.total_gcs_offloaded_assets, gcs_multimodal_object_table.total_size_bytes]
     sorts: [v_gcs_multimodal_offload.total_gcs_offloaded_assets desc]
     note_text: "<div style='text-align: left;'>What: Breakdown of multimodal payloads and large objects offloaded to GCS bucket japac-pso-agent-analytics.  <br><br>How: Aggregates offloaded GCS URIs by asset_type (IMAGE, DOCUMENT, AUDIO, VIDEO, LARGE_PAYLOAD_JSON) and event_type.  <br><br>Why it matters: Monitors multimodal storage footprint and BigQuery object table ingestion.  <br><br>Drill: Click asset type bar to inspect specific GCS URIs and traces.</div>"

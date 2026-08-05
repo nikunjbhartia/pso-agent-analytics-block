@@ -257,7 +257,6 @@
     explore: agent_events
     model: bigquery_agent_analytics_model
     measures: [agent_events.total_invocations]
-    # --- ROW 2: PRACTICE AREA & PILOT PROJECT ATTRIBUTION ---
     note_text: "<div style='text-align: left;'>What: Total number of distinct AI agents deployed across JAPAC engagements.  <br><br>How: COUNT DISTINCT of canonical_agent_name.  <br><br>Why it matters: Measures reuse of canonical agent templates.  <br><br>Drill: Click tile to see agent leaderboard.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -305,7 +304,6 @@
     dimensions: [agent_events.practice_area]
     measures: [agent_events.server_verified_hours_saved]
     sorts: [agent_events.server_verified_hours_saved desc]
-    # --- ROW 3: TOP AGENTS LEADERBOARD & SUB-REGION ADOPTION VELOCITY ---
     note_text: "<div style='text-align: left;'>What: Estimated manual engineering hours saved aggregated by practice area.  <br><br>How: total_sessions * 3.5 hours per session (empirical PSO pilot benchmark).  <br><br>Why it matters: Guides practice leadership on where AI automation delivers the most leverage.  <br><br>Drill: Click any bar to cross-filter dashboard.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -355,7 +353,6 @@
     dimensions: [agent_events.timestamp_date, agent_events.sub_region]
     measures: [agent_events.server_verified_hours_saved]
     sorts: [agent_events.timestamp_date desc]
-    # --- ROW 4: EXECUTIVE FINOPS & VERIFIABLE ENGINEER TESTIMONIALS ---
     note_text: "<div style='text-align: left;'>What: Time-series trend of automation adoption across JAPAC sub-regions.  <br><br>How: Estimated manual hours saved (total_sessions * 3.5 hrs) over timestamp_date.  <br><br>Why it matters: Reveals sub-region velocity (ANZ, SEA, India, Japan, Korea).  <br><br>Drill: Click any date/region to filter time series.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -405,7 +402,6 @@
     measures: [agent_events.server_verified_hours_saved, agent_events.fte_weeks_saved]
     sorts: [agent_events.server_verified_hours_saved desc]
     limit: 10
-    # --- ROW 5: FINOPS CACHE DISCOUNT, RESILIENCE & GRAPH-DERIVED METRICS ---
     note_text: "<div style='text-align: left;'>What: Qualitative engineering feedback and verified savings testimonials.  <br><br>How: Extracts win_feedback metadata and displays associated hours saved (sessions * 3.5 hrs).  <br><br>Why it matters: Provides peer-verified qualitative proof of automation impact.  <br><br>Drill: Inspect specific win feedback records.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -516,7 +512,6 @@
     measures: [agent_events.total_invocations, agent_events.self_healing_resilience_rate_pct, agent_events.cwpm_verifiable_hours_saved, v_llm_response.cache_discounted_actual_cost_usd]
     sorts: [agent_events.cwpm_verifiable_hours_saved desc]
     limit: 15
-    # --- ROW 6: DIVERSE STACKED AREA & SCATTER PLOT ANALYTICS ---
     note_text: "<div style='text-align: left;'>What it is: Visual trace DAG and conversation lineage showing how agents delegate tasks to tools and subagents. <br><br>How it is calculated: Hierarchical trace and span ID relationships captured by open-telemetry plugins. <br><br>Why it matters: Allows engineering teams to debug execution paths and verify multi-agent delegation logic. <br><br>Drill down: Click a node to trace full session history.</div>"
     listen:
       date_filter: agent_events.timestamp_date
@@ -532,6 +527,7 @@
     width: 24
     height: 8
   - name: "75% Gemini Prompt Cache Savings vs Actual Spend over Time ($ USD)"
+    title: "75% Gemini Prompt Cache Savings vs. Actual Spend over Time ($ USD)"
     type: looker_area
     note_state: collapsed
     note_display: hover
@@ -556,6 +552,7 @@
     width: 12
     height: 7
   - name: "Agent Complexity & ROI Scatter Plot (Invocations vs Verifiable Hours Saved)"
+    title: "Agent Complexity & ROI Scatter Plot (Invocations vs. Verifiable Hours Saved)"
     type: looker_scatter
     note_state: collapsed
     note_display: hover
@@ -564,7 +561,6 @@
     dimensions: [agent_events.canonical_agent_name]
     measures: [agent_events.total_invocations, agent_events.server_verified_hours_saved, agent_events.consulting_value_usd]
     sorts: [agent_events.server_verified_hours_saved desc]
-    # --- ROW 7: DIVERSE DONUT & RESILIENCE COLUMN BREAKDOWN ---
     note_text: "<div style='text-align: left;'>What: Multi-dimensional scatter plot comparing agent volume against ROI.  <br><br>How: X-axis = invocations, Y-axis = hours saved (sessions * 3.5 hrs), size = consulting value ($350/hr PSO rate).  <br><br>Why it matters: Highlights high-value outlier agents.  <br><br>Drill: Click any bubble to filter by agent.</div>"
     listen:
       date_filter: agent_events.timestamp_date
